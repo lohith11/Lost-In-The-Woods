@@ -488,9 +488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc23111486f14246ac8daf9a2d781fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRB: {fileID: 0}
   playerSpeed: 10
   playerInput: {x: 0, y: 0}
-  playerRB: {fileID: 0}
 --- !u!65 &534096645
 BoxCollider:
   m_ObjectHideFlags: 0
