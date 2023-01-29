@@ -11,6 +11,7 @@ public class PlayerMovingState : PlayerBaseState
     public override void EnterState()
     {
         //Moving Animation
+        Debug.Log("Entered Moving State");
     }
     public override void UpdateState()
     {
@@ -19,18 +20,33 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        moveInput = new Vector3(playerStateMachine.playerInput.x, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y);
-        playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput * playerStateMachine.playerSpeed);
+        moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerSpeed, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerSpeed);
+        playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
     }
     public override void ExitState() 
     {
-        Debug.Log("Exited MovingState");
+        Debug.Log("Exited Moving State");
     }
     public override void CheckChangeState()
     {
         if(playerStateMachine.playerInput.magnitude == 0)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
+        }
+
+        else if(playerStateMachine.isRunning && playerStateMachine.playerInput.y == 1)
+        {
+            playerStateMachine.SwitchState(playerStateMachine.playerRunningState);
+        }
+
+        else if (playerStateMachine.isCrouched)
+        {
+            playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
+        }
+
+        else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
+        {
+            playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
         }
     }
 }
