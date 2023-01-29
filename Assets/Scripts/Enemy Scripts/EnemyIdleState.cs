@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class EnemyIdleState : EnemyBaseState
 {
-    private float _idleTimer = 5f;
+    private float _idleTimer;
+    
+    private void Start() 
+    {
+        _idleTimer = 3f;//Random.Range(2,7);   
+    }
     public override void EnterState(EnemyStateManager Enemy)
     {
-        Debug.Log("Enemy is in Idle state");
         Enemy.enemyAnimController.SetBool("Idle", true);
     }
 
@@ -19,7 +23,6 @@ public class EnemyIdleState : EnemyBaseState
             Enemy.switchState(Enemy.PatrolState);
             _idleTimer = 0;
         }
-        
     }
 
     

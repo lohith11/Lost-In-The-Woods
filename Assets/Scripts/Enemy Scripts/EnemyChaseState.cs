@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyChaseState : EnemyBaseState
 {
     public override void EnterState(EnemyStateManager Enemy)
     {
-        Debug.Log("Chasing!");
+        Debug.Log("Chasing!"); //! delete the debug
     }
 
     public override void UpdateState(EnemyStateManager Enemy)

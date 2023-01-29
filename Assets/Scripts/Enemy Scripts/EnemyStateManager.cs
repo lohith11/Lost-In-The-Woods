@@ -1,27 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
-    /// TODO:  get the animator to play the animations
+    /// TODO:  make the variables private after they start working
+    
+    //* Reference to the enemy animator 
     public Animator enemyAnimController;
-    public SphereCollider _alertRadius;
-    public bool alert;
-    EnemyBaseState currentState; //* this holds the reference to the current state the enemy is in
+
+    //* Nav mesh agent
+    public NavMeshAgent EnemyAgent;
+ 
+    //* this holds the reference to the current state the enemy is in
+    EnemyBaseState currentState; 
+
+    public float sphereRaidus;
+    public Transform centrePoint;
+
+    
+    #region EnemyStates
+
     public EnemyIdleState   IdleState   = new EnemyIdleState();
     public EnemyPatrolState PatrolState = new EnemyPatrolState();
     public EnemyChaseState  chaseState  = new EnemyChaseState();
     public EnemyDieState    dieState    = new EnemyDieState();
     public EnemyAlertState  alertState  = new EnemyAlertState();
+
+    #endregion
+
     void Start()
     {
-        currentState = IdleState; //* Enemy starting state
+        
+        //*This sets the starting state of the enemy
+        currentState = IdleState;  
 
         currentState.EnterState(this);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         currentState.UpdateState(this);
@@ -33,11 +51,5 @@ public class EnemyStateManager : MonoBehaviour
         Enemy.EnterState(this);
     }
 
-    private void OnCollisionEnter(Collision other) 
-    {
-        if(other.gameObject.CompareTag("Player"))
-        {
-            alert = true;
-        }
-    }
+    
 }
