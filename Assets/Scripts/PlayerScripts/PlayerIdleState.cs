@@ -28,7 +28,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if(playerStateMachine.playerInput.magnitude != 0)
+        if(playerStateMachine.playerInput.magnitude != 0 && playerStateMachine.isGrounded)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
         }
