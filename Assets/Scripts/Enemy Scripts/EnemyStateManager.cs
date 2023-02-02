@@ -1,25 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
     /// TODO:  make the variables private after they start working
-    
-    //* Reference to the enemy animator 
     public Animator enemyAnimController;
 
-    //* Nav mesh agent
     public NavMeshAgent EnemyAgent;
  
-    //* this holds the reference to the current state the enemy is in
-    EnemyBaseState currentState; 
+    EnemyBaseState currentState; //* this holds the reference to the current state the enemy is in
 
-    public float sphereRaidus;
-    public Transform centrePoint;
+    public float sphereRaidus; //* the radius in which the enemy patrols
+    public Transform centrePoint; //* the point around which there is sphere radius
+    [HideInInspector] public bool playerInRange;
+    [HideInInspector] public bool playerLost;
 
-    
     #region EnemyStates
 
     public EnemyIdleState   IdleState   = new EnemyIdleState();
@@ -32,10 +28,10 @@ public class EnemyStateManager : MonoBehaviour
 
     void Start()
     {
-        
-        //*This sets the starting state of the enemy
-        currentState = IdleState;  
 
+        currentState = IdleState;   //*This sets the starting state of the enemy
+        LineOfSight.losInstance.OnPlayerFound +=  OnPlayerFound;
+        LineOfSight.losInstance.OnlostPlayer  +=  OnPlayerLost;
         currentState.EnterState(this);
     }
 
@@ -51,5 +47,16 @@ public class EnemyStateManager : MonoBehaviour
         Enemy.EnterState(this);
     }
 
-    
+    public void OnPlayerFound(object sender, EventArgs e)
+    {
+        Debug.Log("Player found"); //!
+        playerInRange = true;
+
+    }
+
+    public void OnPlayerLost(object sender, EventArgs e)
+    {
+        Debug.Log("Player lost!"); //!
+        playerLost  = true;
+    }
 }

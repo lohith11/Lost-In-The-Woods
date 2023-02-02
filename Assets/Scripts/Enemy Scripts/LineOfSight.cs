@@ -1,16 +1,26 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LineOfSight : MonoBehaviour
 {
+    public static LineOfSight losInstance; //* Singleton
+    public event EventHandler OnPlayerFound;
+    public event EventHandler OnlostPlayer;
     public float viewRadius;
 
+    //* [Header("test")]
+    //* [Space (10)]
     [Range(0,360)]
     public float viewAngle;
     public LayerMask PlayerMask;
     public LayerMask obstacleMask;
     public List<Transform> visbleTargets = new List<Transform>();
+
+    private void Awake() 
+    {
+        losInstance = this;
+    }
 
     private void Update() 
     {
@@ -34,8 +44,13 @@ public class LineOfSight : MonoBehaviour
                 {
                     Debug.Log("Found player!"); //! delete this later
                     // todo raise an event called player found and also add null check
+                    OnPlayerFound?.Invoke(this,EventArgs.Empty);
                     visbleTargets.Add(target);
                 }
+            }
+            else
+            {
+                OnlostPlayer?.Invoke(this,EventArgs.Empty);
             }
         }
     } 
