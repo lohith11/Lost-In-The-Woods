@@ -8,8 +8,17 @@ public class EnemyChaseState : EnemyBaseState
         Debug.Log("Chasing!"); //! delete the debug
     }
 
+
     public override void UpdateState(EnemyStateManager Enemy)
     {
-        throw new System.NotImplementedException();
+        
+
     }
+
+    
+    public override void ExitState(EnemyStateManager Enemy)
+    {
+       
+    }
+
 }

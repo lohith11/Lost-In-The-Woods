@@ -8,9 +8,15 @@ public class EnemyDieState : EnemyBaseState
     {
         Debug.Log("Enemy died"); //!
     }
-
     public override void UpdateState(EnemyStateManager Enemy)
     {
-        throw new System.NotImplementedException();
+        
     }
+
+    public override void ExitState(EnemyStateManager Enemy)
+    {
+        
+    }
+
+
 }

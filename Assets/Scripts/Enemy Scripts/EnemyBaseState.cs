@@ -5,6 +5,7 @@ public abstract class EnemyBaseState
 
     public abstract void UpdateState(EnemyStateManager Enemy);
 
-    //! have exit state here
+    public abstract void ExitState(EnemyStateManager Enemy);
+    
     
 }
