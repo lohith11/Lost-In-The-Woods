@@ -23,5 +23,8 @@ public class EnemyIdleState : EnemyBaseState
         }
     }
 
-    
+    public override void ExitState(EnemyStateManager Enemy)
+    {
+        Enemy.enemyAnimController.SetBool("Idle", false);
+    }
 }

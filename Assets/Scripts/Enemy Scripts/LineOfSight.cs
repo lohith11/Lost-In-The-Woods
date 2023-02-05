@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,10 +25,10 @@ public class LineOfSight : MonoBehaviour
 
     private void Update() 
     {
-        FindVisibleTargets();
+        StartCoroutine(FindVisbleTargets());
     }
 
-    void FindVisibleTargets()
+    IEnumerator FindVisbleTargets()
     {
         visbleTargets.Clear();
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position , viewRadius , PlayerMask); //* collects all the collider data that is in the radius
@@ -43,7 +44,6 @@ public class LineOfSight : MonoBehaviour
                 if(!Physics.Raycast(transform.position, dirToTarget, disToTarget, obstacleMask)) //* checks if we have direct line of sight with the player or not
                 {
                     Debug.Log("Found player!"); //! delete this later
-                    // todo raise an event called player found and also add null check
                     OnPlayerFound?.Invoke(this,EventArgs.Empty);
                     visbleTargets.Add(target);
                 }
@@ -53,7 +53,8 @@ public class LineOfSight : MonoBehaviour
                 OnlostPlayer?.Invoke(this,EventArgs.Empty);
             }
         }
-    } 
+        yield return new WaitForSeconds(5f);
+    }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {

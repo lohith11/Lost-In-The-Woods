@@ -2778,6 +2778,8 @@ MonoBehaviour:
   EnemyAgent: {fileID: 1953830938}
   sphereRaidus: 10
   centrePoint: {fileID: 1880679764}
+  playerInRange: 0
+  playerLost: 0
 --- !u!4 &1953830937
 Transform:
   m_ObjectHideFlags: 0
@@ -3088,7 +3090,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101835214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.15, y: 0.82, z: 6.46}
+  m_LocalPosition: {x: 4.45, y: 0.82, z: 6.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3941,8 +3943,8 @@ GameObject:
   - component: {fileID: 3445666183336229221}
   - component: {fileID: 3445666183336229223}
   - component: {fileID: 3445666183336229224}
-  - component: {fileID: 3445666183336229225}
   - component: {fileID: 3445666183336229226}
+  - component: {fileID: 3445666183336229227}
   m_Layer: 0
   m_Name: Thug boi
   m_TagString: Untagged
@@ -4143,6 +4145,8 @@ MonoBehaviour:
   EnemyAgent: {fileID: 3445666183336229226}
   sphereRaidus: 5
   centrePoint: {fileID: 334425619}
+  playerInRange: 0
+  playerLost: 0
 --- !u!95 &3445666183336229224
 Animator:
   serializedVersion: 4
@@ -4163,19 +4167,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &3445666183336229225
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637604767939208159}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: -1.53, y: 0.82, z: 0.06}
 --- !u!195 &3445666183336229226
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4198,6 +4189,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3445666183336229227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637604767939208159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06efd59f3d6fee94095dc5deb531ef63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 7.05
+  viewAngle: 69
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
+  visbleTargets: []
 --- !u!1 &3567573763241467105
 GameObject:
   m_ObjectHideFlags: 0
