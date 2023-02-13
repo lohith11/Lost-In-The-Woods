@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.15576318, y: -0.013365943, z: -0.0013356099, w: 0.9877031}
-  m_LocalPosition: {x: 0, y: 0.536, z: -0.03000043}
+  m_LocalPosition: {x: 0, y: 0.5, z: -0.03}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRB: {fileID: 0}
+  mouseLook: {fileID: 0}
   playerSpeed: 10
   playerInput: {x: 0, y: 0}
   playerRunSpeed: 25
@@ -507,6 +508,13 @@ MonoBehaviour:
   jumpMovementSpeed: 10
   isJumping: 0
   isGrounded: 0
+  playerCamera: {fileID: 330585546}
+  walkSpeed: 10
+  walkSpeedAmount: 0.05
+  sprintSpeed: 15
+  sprintSpeedAmount: 0.1
+  croucSpeed: 5
+  croucSpeedAmount: 0.025
 --- !u!65 &534096645
 BoxCollider:
   m_ObjectHideFlags: 0

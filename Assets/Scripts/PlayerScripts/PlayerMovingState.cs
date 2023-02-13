@@ -15,6 +15,7 @@ public class PlayerMovingState : PlayerBaseState
     }
     public override void UpdateState()
     {
+        //playerStateMachine.mouseLook.StartCoroutine(playerStateMachine.mouseLook.CameraShakeWhileMoving(0.1f, 0.2f));
         CheckChangeState();
     }
 

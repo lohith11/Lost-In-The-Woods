@@ -14,6 +14,7 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public PlayerRunningState playerRunningState;
     [HideInInspector] public PlayerCrouchState playerCrouchState;
     [HideInInspector] public PlayerJumpState playerJumpState;
+    [HideInInspector] public MouseLook mouseLook;
 
     //Player Walking
     [Header("Player Walking")]
@@ -46,11 +47,25 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isGrounded = true;
     [Space(10)]
 
+    //PlayerCamera Shakes
+    [Header("PlayerCamera Shake")]
+    public Transform playerCamera;
+    private float timer;
+    private float originalPosition;
+    public float walkSpeed;
+    public float walkSpeedAmount;
+    public float sprintSpeed;
+    public float sprintSpeedAmount;
+    public float croucSpeed;
+    public float croucSpeedAmount;
+    [Space(10)]
+
     private PlayerBaseState currentState;
     private PlayerControls playerControls;
 
     private void Awake()
     {
+        originalPosition = playerCamera.transform.localPosition.y;
         playerControls= new PlayerControls();
         
         playerIdleState = new PlayerIdleState(this);
@@ -62,6 +77,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
+        mouseLook = FindObjectOfType<MouseLook>();
         playerRB = GetComponent<Rigidbody>();
 
         SwitchState(playerIdleState);
@@ -111,6 +127,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public  void Update()
     {
+        CameraShake();
         currentState.UpdateState();
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
@@ -142,6 +159,20 @@ public class PlayerStateMachine : MonoBehaviour
         isJumping = context.ReadValueAsButton();
     }
     #endregion
+
+    public void CameraShake()
+    {
+        if (!isGrounded)
+        {
+            return;
+        }
+
+        else if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
+        {
+            timer += Time.deltaTime * (isCrouched ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
+            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (isCrouched ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
+        }
+    }
 
     public void SwitchState(PlayerBaseState state)
     {
