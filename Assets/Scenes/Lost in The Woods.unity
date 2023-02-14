@@ -176,7 +176,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -514,7 +514,8 @@ MonoBehaviour:
   sprintSpeed: 15
   sprintSpeedAmount: 0.1
   croucSpeed: 5
-  croucSpeedAmount: 0.025
+  croucSpeedAmount: 0.03
+  FAVdelay: 0.3
 --- !u!65 &534096645
 BoxCollider:
   m_ObjectHideFlags: 0
