@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class EnemyDieState : EnemyBaseState
 {
-    public override void EnterState(EnemyStateManager Enemy)
+    public EnemyDieState(EnemyStateManager enemy):base(enemy){}
+    public override void EnterState()
     {
         Debug.Log("Enemy died"); //!
     }
-    public override void UpdateState(EnemyStateManager Enemy)
+    public override void UpdateState()
     {
         
     }
 
-    public override void ExitState(EnemyStateManager Enemy)
+    public override void ExitState()
     {
         
     }
