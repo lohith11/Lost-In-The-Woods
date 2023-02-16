@@ -3,36 +3,36 @@ using UnityEngine.AI;
 
 public class EnemyPatrolState : EnemyBaseState
 {
-    public override void EnterState(EnemyStateManager Enemy)
+    public EnemyPatrolState (EnemyStateManager enemy):base(enemy){}
+    public override void EnterState()
     {
-        Enemy.enemyAnimController.SetBool("Patrol", true);
-        Enemy.EnemyAgent.speed = 1.5f;
+        enemyStateManager.enemyAnimController.SetBool("Patrol", true);
+        enemyStateManager.EnemyAgent.speed = 1.5f;
     }
 
 
-    public override void UpdateState(EnemyStateManager Enemy)
+    public override void UpdateState()
     {
-
-        if (Enemy.EnemyAgent.remainingDistance <= Enemy.EnemyAgent.stoppingDistance) //* done with path
+        if (enemyStateManager.EnemyAgent.remainingDistance <= enemyStateManager.EnemyAgent.stoppingDistance) //* done with path
         {
-            Debug.Log("Patroooooooooling"); //!
+            
             Vector3 point;
-            if (RandomPoint(Enemy.centrePoint.position, Enemy.sphereRaidus, out point, Enemy)) //* pass in our centre point and radius of area
+            if (RandomPoint(enemyStateManager.centrePoint.position, enemyStateManager.sphereRaidus, out point)) //* pass in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //* so you can see with gizmos
-                Enemy.EnemyAgent.SetDestination(point);
+                enemyStateManager.EnemyAgent.SetDestination(point);
             }
         }
-        else if (Enemy.playerInRange)
+        else if (enemyStateManager.playerInRange)
         {
-            Enemy.switchState(Enemy.alertState);
-            Debug.Log("Switching the state to alert"); //!
+            enemyStateManager.switchState(enemyStateManager.alertState);
+            
         }
     }
 
 
 
-    bool RandomPoint(Vector3 center, float range, out Vector3 result, EnemyStateManager Enemy)
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
         //* Creates a sphere and assigns a random position to the vec3
         Vector3 randomPoint = center + Random.insideUnitSphere * range;
@@ -50,8 +50,8 @@ public class EnemyPatrolState : EnemyBaseState
         return false;
     }
 
-    public override void ExitState(EnemyStateManager Enemy)
+    public override void ExitState()
     {
-        
+
     }
 }
