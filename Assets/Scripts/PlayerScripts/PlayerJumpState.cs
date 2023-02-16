@@ -34,9 +34,14 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if(playerStateMachine.playerInput.magnitude == 0)
+        if (playerStateMachine.playerInput.magnitude == 0)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
+        }
+
+        else if (playerStateMachine.playerInput.magnitude != 0 && playerStateMachine.isGrounded)
+        {
+            playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
         }
     }
 

@@ -10,6 +10,7 @@ public class PlayerRunningState : PlayerBaseState
     public override void EnterState()
     {
         //Running animation
+        playerStateMachine.CorStarter(80f, playerStateMachine.FAVdelay);
         Debug.Log("Entered Running state");
     }
 
@@ -33,6 +34,7 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void ExitState()
     {
+        playerStateMachine.CorStarter(60f, playerStateMachine.FAVdelay);
         Debug.Log("Exited Running State");
     }
 
