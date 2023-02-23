@@ -3107,11 +3107,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101835214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1edf7f0766d6e3f40bb75e492426ddef, type: 3}
+  m_Script: {fileID: 11500000, guid: f92deb1e02c02a14384742393d43e797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioObj: {fileID: 11400000, guid: adf65cebe0e422a4197341b6e68e25c1, type: 2}
   source: {fileID: 2101835220}
-  soundRange: 500
+  range: 0
 --- !u!82 &2101835220
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3122,7 +3123,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 01f18fe8ff077934b9df338d7333287d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4329,7 +4330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637604767939208159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.96, y: 0.152, z: -1.1}
+  m_LocalPosition: {x: 3.46, y: 0.152, z: 10.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4345,7 +4346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2637604767939208159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7c279f150bd4424a83b08038f149b3d, type: 3}
   m_Name: 
@@ -4427,9 +4428,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2637604767939208159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d00ec95240dee94baec20cd9ecaf82e, type: 3}
+  m_Script: {fileID: 11500000, guid: f3e56046b4312f14c8adce7f819d8e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnSpeed: 120
+  soundCheckInterval: 1
+  hearingRange: 10
 --- !u!1 &3567573763241467105
 GameObject:
   m_ObjectHideFlags: 0

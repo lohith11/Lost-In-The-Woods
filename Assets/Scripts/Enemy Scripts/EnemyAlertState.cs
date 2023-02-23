@@ -12,15 +12,15 @@ public class EnemyAlertState : EnemyBaseState
     //start chase and notify enemies around you if the player is in range for more than 2 sec
     public override void UpdateState()
     {
-        if(enemyStateManager.playerInRange)
-        {
-            _startChaseTimer -= Time.deltaTime;
-        }
-        if(_startChaseTimer <= 0)
-        {
-            enemyStateManager.switchState(enemyStateManager.chaseState);
-            Debug.Log("Switching for chase state!");
-        }
+        // if(enemyStateManager.playerInRange)
+        // {
+        //     _startChaseTimer -= Time.deltaTime;
+        // }
+        // if(_startChaseTimer <= 0)
+        // {
+        //     enemyStateManager.switchState(enemyStateManager.chaseState);
+        //     Debug.Log("Switching for chase state!");
+        // }
 
     
     }

@@ -25,7 +25,7 @@ public class EnemyPatrolState : EnemyBaseState
         }
         else if (enemyStateManager.playerInRange)
         {
-            enemyStateManager.switchState(enemyStateManager.alertState);
+            enemyStateManager.switchState(enemyStateManager.chaseState);
             
         }
     }
@@ -52,6 +52,6 @@ public class EnemyPatrolState : EnemyBaseState
 
     public override void ExitState()
     {
-
+        enemyStateManager.enemyAnimController.SetBool("Patrol", false);
     }
 }
