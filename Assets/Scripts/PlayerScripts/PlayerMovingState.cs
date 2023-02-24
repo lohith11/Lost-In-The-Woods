@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovingState : PlayerBaseState
 {
@@ -10,11 +11,25 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void EnterState()
     {
-        //Moving Animation
+        //playerStateMachine.playerAnimation.Play("Player_FrontWalk");
+        playerStateMachine.playerAnimation.Play("Player_FrontWalk");
         Debug.Log("Entered Moving State");
     }
     public override void UpdateState()
     {
+        if(playerStateMachine.playerInput.y == -1 ) 
+        {
+            playerStateMachine.playerAnimation.Play("Player_BackWalk");
+        }
+        if(playerStateMachine.playerInput.x == 1 ) 
+        {
+            playerStateMachine.playerAnimation.Play("Player_RightWalk");
+        }
+        if(playerStateMachine.playerInput.x == -1 ) 
+        {
+            playerStateMachine.playerAnimation.Play("Player_LeftWalk");
+        }
+        
         //playerStateMachine.mouseLook.StartCoroutine(playerStateMachine.mouseLook.CameraShakeWhileMoving(0.1f, 0.2f));
         CheckChangeState();
     }

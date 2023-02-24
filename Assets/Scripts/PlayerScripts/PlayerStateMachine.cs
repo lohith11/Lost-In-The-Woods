@@ -15,6 +15,7 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public PlayerCrouchState playerCrouchState;
     [HideInInspector] public PlayerJumpState playerJumpState;
     [HideInInspector] public MouseLook mouseLook;
+    [HideInInspector] public Animator playerAnimation;
 
     //Player Walking
     [Header("Player Walking")]
@@ -81,6 +82,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         mouseLook = FindObjectOfType<MouseLook>();
         playerRB = GetComponent<Rigidbody>();
+        playerAnimation = GetComponent<Animator>();
 
         SwitchState(playerIdleState);
     }
