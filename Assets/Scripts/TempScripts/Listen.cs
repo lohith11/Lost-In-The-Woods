@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -22,6 +20,7 @@ public class Listen : MonoBehaviour
         {
             source.clip = audioObj.clip;
             range = audioObj.range;
+            
             if(source.isPlaying)
                 return;
             

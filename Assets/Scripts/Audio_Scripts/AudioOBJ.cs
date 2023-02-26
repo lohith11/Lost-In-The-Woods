@@ -7,4 +7,5 @@ public class AudioOBJ : ScriptableObject
     [Range(1,100)]
     public float range;
     public AudioClip clip;
+     
 }

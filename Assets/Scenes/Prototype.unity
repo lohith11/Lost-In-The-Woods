@@ -662,7 +662,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &366718630
 GameObject:
@@ -982,7 +982,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554742730
 GameObject:
@@ -1493,7 +1493,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1056191760
 MonoBehaviour:
@@ -1556,7 +1556,7 @@ PrefabInstance:
     - target: {fileID: 120027212801473666, guid: 324bf126b14cf2b4c85f2919320ccaae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 120027212801473666, guid: 324bf126b14cf2b4c85f2919320ccaae,
         type: 3}
@@ -2530,6 +2530,75 @@ Transform:
   m_Father: {fileID: 1226310853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1824422507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.872581
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.455
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.0672655
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5215513
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.25312072
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.49262518
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.64902586
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7740521a515c59040826984f6e7c9d30,
+        type: 3}
+      propertyPath: m_Name
+      value: Flashlight 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7740521a515c59040826984f6e7c9d30, type: 3}
 --- !u!1 &1833903500
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,7 +2727,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1880679763
 GameObject:
@@ -2689,7 +2758,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1918775335
 GameObject:
@@ -2777,8 +2846,9 @@ MonoBehaviour:
   enemyAnimController: {fileID: 1953830935}
   EnemyAgent: {fileID: 1953830938}
   sphereRaidus: 6.85
-  centrePoint: {fileID: 1880679764}
+  centerPoint: {fileID: 0}
   playerInRange: 0
+  hearingRange: 10
 --- !u!4 &1953830937
 Transform:
   m_ObjectHideFlags: 0
@@ -2794,7 +2864,7 @@ Transform:
   - {fileID: 24552514}
   - {fileID: 1775834859}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1953830938
 NavMeshAgent:
@@ -3096,7 +3166,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2101835219
 MonoBehaviour:
@@ -3122,7 +3192,8 @@ AudioSource:
   m_GameObject: {fileID: 2101835214}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8786743026710929411, guid: 51a61c00d977d3340ade4de7a866bfc6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3336,7 +3407,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2136963457
 GameObject:
@@ -4337,7 +4408,7 @@ Transform:
   - {fileID: 3915775229630650242}
   - {fileID: 7170053794264947185}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3445666183336229223
 MonoBehaviour:
@@ -4354,8 +4425,9 @@ MonoBehaviour:
   enemyAnimController: {fileID: 3445666183336229224}
   EnemyAgent: {fileID: 3445666183336229228}
   sphereRaidus: 6.85
-  centrePoint: {fileID: 334425619}
+  centerPoint: {fileID: 0}
   playerInRange: 0
+  hearingRange: 10
 --- !u!95 &3445666183336229224
 Animator:
   serializedVersion: 4
