@@ -3,23 +3,27 @@ using UnityEngine;
 public class EnemyAlertState : EnemyBaseState
 {
     public EnemyAlertState (EnemyStateManager enemy):base(enemy){}
-    private float _startChaseTimer = 2f;
     public override void EnterState()
     {
-        
+        enemyStateManager.enemyAnimController.Play("Alert Anim");
     }
 
     //start chase and notify enemies around you if the player is in range for more than 2 sec
     public override void UpdateState()
     {
-        if(enemyStateManager.playerInRange)
+        if(enemyStateManager.PlayerInRange)
         {
-            _startChaseTimer -= Time.deltaTime;
+            enemyStateManager.startChaseTimer -= Time.deltaTime;
         }
-        if(_startChaseTimer <= 0)
+        if(enemyStateManager.startChaseTimer <= 0)
         {
             enemyStateManager.switchState(enemyStateManager.ChaseState);
             Debug.Log("Switching for chase state!"); //!
+        }
+
+        if(enemyStateManager.SoundInRange)
+        {
+            enemyStateManager.transform.position = enemyStateManager.targetPosition; //! should make the enemy stop 0.5f before the target
         }
 
     

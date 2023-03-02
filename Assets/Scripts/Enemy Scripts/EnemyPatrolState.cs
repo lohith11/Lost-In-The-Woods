@@ -7,13 +7,15 @@ public class EnemyPatrolState : EnemyBaseState
     public EnemyPatrolState (EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.SetBool("Patrol", true);
+        enemyStateManager.enemyAnimController.Play("Walking Anim");
         enemyStateManager.EnemyAgent.speed = 1.5f;
     }
 
 
     public override void UpdateState()
     {
+        enemyStateManager.searchForSounds();
+
         if (enemyStateManager.EnemyAgent.remainingDistance <= enemyStateManager.EnemyAgent.stoppingDistance) //* done with path
         {
             Vector3 point;
@@ -23,33 +25,14 @@ public class EnemyPatrolState : EnemyBaseState
                 enemyStateManager.EnemyAgent.SetDestination(point);
             }
         }
-        else if (enemyStateManager.playerInRange)
+        else if (enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
         {
             enemyStateManager.switchState(enemyStateManager.AlertState);
             
         }
     } 
 
-    private IEnumerator CheckForSounds()
-    {
-        while(true)
-        {
-            Collider[] colliders = Physics.OverlapSphere(enemyStateManager.transform.position, enemyStateManager.hearingRange);
-            foreach(Collider collider in colliders)
-            {
-                MakeSound sound = collider.GetComponent<MakeSound>();
-                if(sound != null)
-                {
-                    float distance = Vector3.Distance(enemyStateManager.transform.position, collider.transform.position);
-                    if(distance < sound.soundRange)
-                    {
-                        //* Make the enemy move to the audio location and switch to alert state
-                    }
-                }
-            }
-            yield return new WaitForSeconds(enemyStateManager.soundCheckInterval);
-        }
-    }
+    
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
@@ -71,6 +54,6 @@ public class EnemyPatrolState : EnemyBaseState
 
     public override void ExitState()
     {
-        enemyStateManager.enemyAnimController.SetBool("Patrol", false);
+
     }
 }
