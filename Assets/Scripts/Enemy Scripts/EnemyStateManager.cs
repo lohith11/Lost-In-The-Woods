@@ -1,44 +1,86 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
-    /// TODO:  make the variables private after they start working
+    //* singleton
     public static EnemyStateManager manager;
-    public Animator enemyAnimController;
 
-    public NavMeshAgent EnemyAgent;
- 
-    EnemyBaseState currentState; //* this holds the reference to the current state the enemy is in
+    //* Unity Components 
 
-    public float sphereRaidus; //* the radius in which the enemy patrols
-    public Transform centrePoint; //* the point around which there is sphere radius
-    public bool playerInRange = false;
+    [HideInInspector] public Animator enemyAnimController;
+    [HideInInspector] public NavMeshAgent EnemyAgent;
+    [HideInInspector] public Vector3 targetPosition;
 
+    //* Enemy Attributes
+
+    [Header("Enemy field of view")]
+    [Space(2)]
+
+    public float radius;
+    [Range(0, 360)]
+    public float angle;
+    public GameObject playerRef;
+    public LayerMask targetMask, obstructionMask;
+    public bool playerInRange;
+
+    [Space(10)]
+
+    [Header("Patrol properties")]
+    [Space(2)]
+
+    public float sphereRaidus;    //* The radius in which the enemy patrols
+    public float startChaseTimer = 1.0f;
+    public Transform centerPoint; //* The center point around whcich the patrol shphere is drawn 
+
+    [Space(10)]
+
+    [Header("Hearing Properties")]
+    [Space(2)]
+
+    [Range(10, 50)] public float hearingRange = 10f;
+    public float soundCheckInterval = 1f;
+    private bool soundInRange;
+
+    [Space(10)]
+
+
+    EnemyBaseState currentState;
+
+    public bool SoundInRange { get; private set; }
+    public bool PlayerInRange { get; private set;}
 
     #region EnemyStates
 
-    public EnemyIdleState   IdleState;
+    public EnemyIdleState IdleState;
     public EnemyPatrolState PatrolState;
-    public EnemyChaseState  chaseState;
-    public EnemyDieState    dieState;
-    public EnemyAlertState  alertState;
+    public EnemyChaseState ChaseState;
+    public EnemyDieState DieState;
+    public EnemyAlertState AlertState;
 
     #endregion
+
     void Start()
     {
         manager = this;
-        IdleState   = new EnemyIdleState(this);
+
+        EnemyAgent = GetComponent<NavMeshAgent>();
+        enemyAnimController = GetComponent<Animator>();
+
+        IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
-        chaseState  = new EnemyChaseState(this);
-        dieState    = new EnemyDieState(this);
-        alertState  = new EnemyAlertState(this);
+        ChaseState = new EnemyChaseState(this);
+        DieState = new EnemyDieState(this);
+        AlertState = new EnemyAlertState(this);
 
         switchState(IdleState);
+
+        playerRef = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(FOVRoutine());
     }
 
-    
     void Update()
     {
         currentState.UpdateState();
@@ -51,5 +93,66 @@ public class EnemyStateManager : MonoBehaviour
         Enemy.EnterState();
     }
 
-    
+    public void searchForSounds() => StartCoroutine(CheckForSounds());
+
+    private void FieldOfViewCheck()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+
+        if (rangeChecks.Length != 0)
+        {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    PlayerInRange = true;
+                else
+                    PlayerInRange = false;
+            }
+            else
+                PlayerInRange = false;
+        }
+        else if (PlayerInRange)
+            PlayerInRange = false;
+    }
+
+   
+
+    private IEnumerator CheckForSounds()
+    {
+        while (true)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, hearingRange);
+            foreach (Collider collider in colliders)
+            {
+                MakeSound sound = collider.GetComponent<MakeSound>();
+                if (sound != null)
+                {
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
+                    if (distance < sound.soundRange)
+                    {
+                        SoundInRange = true;
+                        targetPosition = collider.transform.position;
+                    }
+                }
+            }
+            yield return new WaitForSeconds(soundCheckInterval);
+        }
+    }
+
+    private IEnumerator FOVRoutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
+
+        while (true)
+        {
+            yield return wait;
+            FieldOfViewCheck();
+        }
+    }
+
 }

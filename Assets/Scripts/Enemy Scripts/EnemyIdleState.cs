@@ -5,13 +5,10 @@ public class EnemyIdleState : EnemyBaseState
     public EnemyIdleState(EnemyStateManager enemy):base(enemy){}
     private float _idleTimer;
     
-    private void Start() 
-    {
-        _idleTimer = 3f;//Random.Range(2,7);   
-    }
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.SetBool("Idle", true);
+       enemyStateManager.enemyAnimController.Play("Idle");
+       _idleTimer = Random.Range(0f,7f);
     }
 
     public override void UpdateState()
@@ -26,6 +23,6 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void ExitState()
     {
-        enemyStateManager.enemyAnimController.SetBool("Idle", false);
+        
     }
 }

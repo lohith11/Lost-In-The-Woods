@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,31 +7,32 @@ public class EnemyPatrolState : EnemyBaseState
     public EnemyPatrolState (EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.SetBool("Patrol", true);
+        enemyStateManager.enemyAnimController.Play("Walking Anim");
         enemyStateManager.EnemyAgent.speed = 1.5f;
     }
 
 
     public override void UpdateState()
     {
+        enemyStateManager.searchForSounds();
+
         if (enemyStateManager.EnemyAgent.remainingDistance <= enemyStateManager.EnemyAgent.stoppingDistance) //* done with path
         {
-            
             Vector3 point;
-            if (RandomPoint(enemyStateManager.centrePoint.position, enemyStateManager.sphereRaidus, out point)) //* pass in our centre point and radius of area
+            if (RandomPoint(enemyStateManager.centerPoint.position, enemyStateManager.sphereRaidus, out point)) //* pass in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //* so you can see with gizmos
                 enemyStateManager.EnemyAgent.SetDestination(point);
             }
         }
-        else if (enemyStateManager.playerInRange)
+        else if (enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
         {
-            enemyStateManager.switchState(enemyStateManager.alertState);
+            enemyStateManager.switchState(enemyStateManager.AlertState);
             
         }
-    }
+    } 
 
-
+    
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {

@@ -4,9 +4,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager instance;
+    //* Array of sounds from the sounds
     public Sound[] sounds;
 
-    public static AudioManager instance;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void  Play(string name)
+    public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
