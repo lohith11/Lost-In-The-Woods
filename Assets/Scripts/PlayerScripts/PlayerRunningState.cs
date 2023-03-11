@@ -9,7 +9,7 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void EnterState()
     {
-        //Running animation
+        playerStateMachine.playerAnimation.Play("Player_Running");
         playerStateMachine.CorStarter(80f, playerStateMachine.FAVdelay);
         Debug.Log("Entered Running state");
     }
@@ -25,11 +25,8 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        if(playerStateMachine.playerInput.y == 1)
-        {
-            moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerRunSpeed, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerRunSpeed);
-            playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
-        }
+        moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerRunSpeed, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerRunSpeed);
+        playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
     }
 
     public override void ExitState()
@@ -40,14 +37,17 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if(playerStateMachine.playerInput.magnitude != 0 && playerStateMachine.isGrounded)
+        if(!playerStateMachine.isRunning) 
         {
-            playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
-        }
+            if(playerStateMachine.playerInput.magnitude != 0 && playerStateMachine.isGrounded)
+            {
+                playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
+            }
 
-        else if(playerStateMachine.playerInput.magnitude == 0 && playerStateMachine.isGrounded)
-        {
-            playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
+            else if(playerStateMachine.playerInput.magnitude == 0 && playerStateMachine.isGrounded)
+            {
+                playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
+            }
         }
         
     }

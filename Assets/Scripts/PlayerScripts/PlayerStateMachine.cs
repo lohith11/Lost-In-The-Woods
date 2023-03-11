@@ -16,6 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public PlayerJumpState playerJumpState;
     [HideInInspector] public MouseLook mouseLook;
     [HideInInspector] public Animator playerAnimation;
+    [HideInInspector] public Coroutine cor;
 
     //Player Walking
     [Header("Player Walking")]
@@ -61,10 +62,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float croucSpeedAmount;
     [Space(10)]
 
-    public Coroutine cor;
     public float FAVdelay; 
     private PlayerBaseState currentState;
     private PlayerControls playerControls;
+    public Transform cam;
 
     private void Awake()
     {

@@ -11,7 +11,6 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void EnterState()
     {
-        //playerStateMachine.playerAnimation.Play("Player_FrontWalk");
         playerStateMachine.playerAnimation.Play("Player_FrontWalk");
         Debug.Log("Entered Moving State");
     }
