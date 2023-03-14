@@ -19,13 +19,13 @@ public class EnemyPatrolState : EnemyBaseState
         if (enemyStateManager.EnemyAgent.remainingDistance <= enemyStateManager.EnemyAgent.stoppingDistance) //* done with path
         {
             Vector3 point;
-            if (RandomPoint(enemyStateManager.centerPoint.position, enemyStateManager.sphereRaidus, out point)) //* pass in our centre point and radius of area
+            if (RandomPoint(enemyStateManager.centerPoint.position, enemyStateManager.sphereRadius, out point)) //* pass in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //* so you can see with gizmos
                 enemyStateManager.EnemyAgent.SetDestination(point);
             }
         }
-        else if (enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
+        else if(enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
         {
             enemyStateManager.switchState(enemyStateManager.AlertState);
             

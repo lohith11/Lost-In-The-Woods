@@ -2758,14 +2758,7 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Alert Anim'\n\tFrom
-    animation clip 'Chasing Anim'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -2793,12 +2786,19 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
-  playerInRange: 0
-  sphereRaidus: 6.85
+  sphereRadius: 0
   startChaseTimer: 1
   centerPoint: {fileID: 1880679764}
   hearingRange: 10
   soundCheckInterval: 1
+  attackRadius: 0
+  attackSpeed: 0
+  damage: 0
+  timeSinceLastSighting: 0
+  attackCooldown: 2
+  minDistanceToPlayer: 0
+  isAttacking: 0
+  lastknownLocation: {x: 0, y: 0, z: 0}
 --- !u!4 &1953830937
 Transform:
   m_ObjectHideFlags: 0
@@ -3032,7 +3032,6 @@ GameObject:
   - component: {fileID: 2101835216}
   - component: {fileID: 2101835215}
   - component: {fileID: 2101835220}
-  - component: {fileID: 2101835219}
   - component: {fileID: 2101835221}
   m_Layer: 7
   m_Name: Cube
@@ -3112,28 +3111,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101835214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.45, y: 0.82, z: 21.7}
+  m_LocalPosition: {x: 4.45, y: 0.82, z: 32.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2101835219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2101835214}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92deb1e02c02a14384742393d43e797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioObj: {fileID: 11400000, guid: adf65cebe0e422a4197341b6e68e25c1, type: 2}
-  source: {fileID: 2101835220}
-  range: 0
 --- !u!82 &2101835220
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4397,12 +4381,19 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1024
-  playerInRange: 0
-  sphereRaidus: 6.85
-  startChaseTimer: 1
+  sphereRadius: 10
+  startChaseTimer: 3
   centerPoint: {fileID: 334425619}
   hearingRange: 50
   soundCheckInterval: 1
+  attackRadius: 5
+  attackSpeed: 10
+  damage: 69
+  timeSinceLastSighting: 0
+  attackCooldown: 2
+  minDistanceToPlayer: 0
+  isAttacking: 0
+  lastknownLocation: {x: 0, y: 0, z: 0}
 --- !u!95 &3445666183336229224
 Animator:
   serializedVersion: 4
@@ -4416,17 +4407,10 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 27e0252601fe0c048b5a64cfe617fca5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Alert Anim'\n\tFrom
-    animation clip 'Chasing Anim'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
