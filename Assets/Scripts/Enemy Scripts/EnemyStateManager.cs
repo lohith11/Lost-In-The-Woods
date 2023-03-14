@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
+
+    //todo : alert nearby enemies when the player is in attack range
+    //todo : alert nearby enemies when an enemy dies
+    //todo : change speed of enemy based on the state that they are in
+    //todo : health system
     //* singleton
     public static EnemyStateManager manager;
 
@@ -24,15 +29,16 @@ public class EnemyStateManager : MonoBehaviour
     public float angle;
     public GameObject playerRef;
     public LayerMask targetMask, obstructionMask;
-    public bool playerInRange;
+    public bool PlayerInRange { get; private set; }
+    //public bool playerInRange;
 
     [Space(10)]
 
     [Header("Patrol properties")]
     [Space(2)]
 
-    public float sphereRaidus;    //* The radius in which the enemy patrols
-    public float startChaseTimer = 1.0f;
+    public float sphereRadius;    //* The radius in which the enemy patrols
+    public float startChaseTimer;
     public Transform centerPoint; //* The center point around whcich the patrol shphere is drawn 
 
     [Space(10)]
@@ -42,15 +48,27 @@ public class EnemyStateManager : MonoBehaviour
 
     [Range(10, 50)] public float hearingRange = 10f;
     public float soundCheckInterval = 1f;
-    private bool soundInRange;
+    public bool SoundInRange { get; private set; }
+    //private bool soundInRange;
+
+    [Space(10)]
+
+    [Header("Attack Properties")]
+    [Space(2)]
+
+    public float attackRadius;
+    public float attackSpeed;
+    public float damage;
+    public float timeSinceLastSighting;
+    public float attackCooldown = 2f; //* disable this incase you want one hit kill
+    public float minDistanceToPlayer;
+    public bool isAttacking;
+    public Vector3 lastknownLocation;
 
     [Space(10)]
 
 
     EnemyBaseState currentState;
-
-    public bool SoundInRange { get; private set; }
-    public bool PlayerInRange { get; private set;}
 
     #region EnemyStates
 
@@ -84,6 +102,8 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
+        //Debug.Log("Player in range : " + PlayerInRange);
+        Debug.Log("The chase timer is : " + startChaseTimer);
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -120,7 +140,7 @@ public class EnemyStateManager : MonoBehaviour
             PlayerInRange = false;
     }
 
-   
+
 
     private IEnumerator CheckForSounds()
     {
