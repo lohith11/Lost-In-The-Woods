@@ -31,6 +31,6 @@ public class EnemyAlertState : EnemyBaseState
 
     public override void ExitState()
     {
-       
+       enemyStateManager.startChaseTimer = 3.0f;
     }
 }
