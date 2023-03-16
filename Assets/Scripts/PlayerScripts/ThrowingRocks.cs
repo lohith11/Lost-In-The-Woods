@@ -12,7 +12,6 @@ public class ThrowingRocks : MonoBehaviour
     public int totalThrows;
     public float throwCoolDown;
 
-    public KeyCode throwKey = KeyCode.Mouse0;
     public float throwForce;
     public float throwUpwardForce;
     private LineRenderer lineRenderer;
@@ -34,13 +33,12 @@ public class ThrowingRocks : MonoBehaviour
  
     private void Update()
     {
-        if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0)
-        {
-            Throw();
-        }
-
         if (Input.GetKey(KeyCode.Mouse1))
         {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && readyToThrow && totalThrows > 0)
+            {
+                Throw();
+            }
             Projectile();
         }
 

@@ -34,7 +34,7 @@ public class PlayerIdleState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
         }
         
-        else if(playerStateMachine.isCrouched)
+        else if(playerStateMachine.isCrouched && playerStateMachine.isGrounded)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
