@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/NatureManufacture Assets/Forest Environment Dynamic Nature/Demo Scenes/Forest  Main CameraTimeline 1.playable.meta
+guid: 06e755b4c945e084e8ad0b4a5ce26805
+========
 guid: 6a1c075d53c06e84db4e758390faa427
+>>>>>>>> 9b9088399a63beaec8a02fc7e594017d4958a860:Assets/Scripts/PlayerScripts/DialoguesManagerFolder/DialoguesForNPC's.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

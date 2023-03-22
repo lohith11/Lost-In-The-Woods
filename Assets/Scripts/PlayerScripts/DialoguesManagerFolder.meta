@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/NatureManufacture Assets/Forest Environment Dynamic Nature.meta
+guid: e04cc7446dfcc1a41951cb73212e5266
+========
 guid: 845429d17d753b349a9db7710bda286c
+>>>>>>>> 9b9088399a63beaec8a02fc7e594017d4958a860:Assets/Scripts/PlayerScripts/DialoguesManagerFolder.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

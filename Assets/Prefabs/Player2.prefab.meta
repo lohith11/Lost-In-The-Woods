@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/NatureManufacture Assets/Forest Environment Dynamic Nature/Beech Trees/Models/Materials.meta
+guid: 9099a557ef869d5419296c00f1f25189
+folderAsset: yes
+DefaultImporter:
+========
 guid: 2fa59c1ff8b565548b2580090002db5d
 PrefabImporter:
+>>>>>>>> 9b9088399a63beaec8a02fc7e594017d4958a860:Assets/Prefabs/Player2.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

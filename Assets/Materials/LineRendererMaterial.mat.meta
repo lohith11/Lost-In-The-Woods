@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/NatureManufacture Assets/Forest Environment Dynamic Nature/Beech Trees/Models/Materials/M_beech_Tree_00_B_Cross.mat.meta
+guid: f18bd8789e65f1141a6197bc35a37353
+========
 guid: d01d8f56254b2704d98e7f0120a32197
+>>>>>>>> 9b9088399a63beaec8a02fc7e594017d4958a860:Assets/Materials/LineRendererMaterial.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
