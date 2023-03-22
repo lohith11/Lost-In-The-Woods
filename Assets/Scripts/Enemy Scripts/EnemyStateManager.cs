@@ -9,7 +9,10 @@ public class EnemyStateManager : MonoBehaviour
     //todo : alert nearby enemies when the player is in attack range
     //todo : alert nearby enemies when an enemy dies
     //todo : change speed of enemy based on the state that they are in
-    //todo : health system
+    //todo :  make the enemy two shot 
+    //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
+    //todo: make a blend tree for enemy animation 
+    //todo : make the enemy switch to alert state and then change the position 
     //* singleton
     public static EnemyStateManager manager;
 

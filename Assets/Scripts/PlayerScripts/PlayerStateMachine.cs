@@ -165,7 +165,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        isJumping = context.ReadValueAsButton();
+        //!isJumping = context.ReadValueAsButton();
     }
     #endregion
 
