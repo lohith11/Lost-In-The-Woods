@@ -9,7 +9,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState()
     {
         Debug.Log("Entered IdleState");
-        playerStateMachine.playerAnimation.Play("Player_Idle");
+        playerStateMachine.playerAnimation.CrossFade("Player_Idle", 0.1f);
     }
 
     public override void UpdateState()
@@ -34,7 +34,7 @@ public class PlayerIdleState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
         }
         
-        else if(playerStateMachine.isCrouched)
+        else if(playerStateMachine.isCrouched && playerStateMachine.isGrounded)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }

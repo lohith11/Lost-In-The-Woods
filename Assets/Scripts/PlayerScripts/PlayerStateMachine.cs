@@ -16,6 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public PlayerJumpState playerJumpState;
     [HideInInspector] public MouseLook mouseLook;
     [HideInInspector] public Animator playerAnimation;
+    [HideInInspector] public Coroutine cor;
 
     //Player Walking
     [Header("Player Walking")]
@@ -52,7 +53,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("PlayerCamera Shake")]
     public Transform playerCamera;
     private float timer;
-    private float originalPosition;
+    public float originalPosition;
     public float walkSpeed;
     public float walkSpeedAmount;
     public float sprintSpeed;
@@ -61,15 +62,15 @@ public class PlayerStateMachine : MonoBehaviour
     public float croucSpeedAmount;
     [Space(10)]
 
-    public Coroutine cor;
     public float FAVdelay; 
     private PlayerBaseState currentState;
     private PlayerControls playerControls;
+    public Transform headTarget;
 
     private void Awake()
     {
         originalPosition = playerCamera.transform.localPosition.y;
-        playerControls= new PlayerControls();
+        playerControls = new PlayerControls();
         
         playerIdleState = new PlayerIdleState(this);
         playerMovingState = new PlayerMovingState(this);
@@ -129,12 +130,16 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Jump.canceled -= Jump;
     }
 
-    public  void Update()
+    public void Update()
     {
         CameraShake();
         currentState.UpdateState();
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
+    }
+
+    private void LateUpdate()
+    {
     }
 
     public void FixedUpdate()

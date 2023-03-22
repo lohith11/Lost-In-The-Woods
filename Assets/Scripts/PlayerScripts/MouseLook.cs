@@ -28,30 +28,9 @@ public class MouseLook : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -30f, 30f);
+        xRotation = Mathf.Clamp(xRotation, -20f, 20f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerObject.Rotate(Vector3.up * mouseX);
     }
-
-    //public IEnumerator CameraShakeWhileMoving(float duration, float magnitude)
-    //{
-    //    Vector3 originalPos = transform.localPosition;
-
-    //    float elapsed = 0f;
-
-    //    while(elapsed < duration)
-    //    {
-    //        float x = Random.Range(1f, 1f) * magnitude;
-    //        float y = Random.Range(1f, 1f) * magnitude;
-
-    //        transform.localPosition = new Vector3(x, y, originalPos.z);
-
-    //        elapsed += Time.deltaTime;
-
-    //        yield return null;
-    //    }
-
-    //    transform.localPosition = originalPos;
-    //}
 }
