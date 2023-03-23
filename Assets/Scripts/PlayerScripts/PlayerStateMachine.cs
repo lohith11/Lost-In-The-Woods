@@ -22,6 +22,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("Player Walking")]
     public float playerSpeed;
     public Vector2 playerInput;
+    public Vector2 playerRotation;
     [Space(10)]
 
     //Player Running
@@ -64,7 +65,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public float FAVdelay; 
     private PlayerBaseState currentState;
-    private PlayerControls playerControls;
+    public PlayerControls playerControls;
     public Transform headTarget;
 
     private void Awake()
@@ -96,6 +97,10 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Move.performed += Moving;
         playerControls.Player.Move.canceled += Moving;
 
+        playerControls.Player.MouseRotation.started += Rotation;
+        playerControls.Player.MouseRotation.performed += Rotation;
+        playerControls.Player.MouseRotation.canceled += Rotation;
+
         playerControls.Player.Run.started += Running;
         playerControls.Player.Run.performed += Running;
         playerControls.Player.Run.canceled += Running;
@@ -116,6 +121,10 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Move.started -= Moving;
         playerControls.Player.Move.performed -= Moving;
         playerControls.Player.Move.canceled -= Moving;
+
+        playerControls.Player.MouseRotation.started -= Rotation;
+        playerControls.Player.MouseRotation.performed -= Rotation;
+        playerControls.Player.MouseRotation.canceled -= Rotation;
 
         playerControls.Player.Run.started -= Running;
         playerControls.Player.Run.performed -= Running;
@@ -166,6 +175,11 @@ public class PlayerStateMachine : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         isJumping = context.ReadValueAsButton();
+    }
+
+    public void Rotation(InputAction.CallbackContext context)
+    {
+        playerRotation = context.ReadValue<Vector2>();
     }
     #endregion
 

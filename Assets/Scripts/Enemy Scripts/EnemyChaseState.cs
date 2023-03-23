@@ -9,7 +9,7 @@ public class EnemyChaseState : EnemyBaseState
     public EnemyChaseState(EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Chasing Anim");
+        enemyStateManager.enemyAnimController.Play("Chasing_Anim");
         Debug.Log("Entered the chase state"); //! delete the debug
     }
 

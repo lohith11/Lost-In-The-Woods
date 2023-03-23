@@ -7,7 +7,7 @@ public class EnemyPatrolState : EnemyBaseState
     public EnemyPatrolState (EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Walking Anim");
+        enemyStateManager.enemyAnimController.Play("Walking_Anim");
         enemyStateManager.EnemyAgent.speed = 1.5f;
     }
 

@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "MouseRotation",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "e9cf4d1e-64b5-49aa-8b03-2b92e4dbce57",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -151,17 +151,6 @@
                 },
                 {
                     "name": "",
-                    "id": "8f443ebd-fcae-4836-b898-5e63e54b2002",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "MouseRotation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "27d973de-00d1-4991-a248-2a0ec1f6625e",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -207,7 +196,7 @@
                 {
                     "name": "",
                     "id": "84d2c710-ba81-4701-ab9f-ce8cdb918e8d",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -262,6 +251,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
+            "devices": []
         }
     ]
 }

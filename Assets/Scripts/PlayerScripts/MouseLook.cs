@@ -7,18 +7,15 @@ public class MouseLook : MonoBehaviour
     public float mouseSpeed;
     private float xRotation = 0f;
     public Transform playerObject;
-    private float originalPosition = 0f;
-    private float timer;
-    private PlayerStateMachine stateMachine;
+    private PlayerStateMachine playerStateMachine;
 
     private void Start()
     {
-        stateMachine = FindObjectOfType<PlayerStateMachine>();
+        playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()
     {
-        originalPosition = transform.localPosition.y;
         Rotation();
     }
 
@@ -27,10 +24,11 @@ public class MouseLook : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
 
-        xRotation -= mouseY;
+        xRotation -= mouseY + playerStateMachine.playerRotation.y;
         xRotation = Mathf.Clamp(xRotation, -20f, 20f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerObject.Rotate(Vector3.up * playerStateMachine.playerRotation.x);
         playerObject.Rotate(Vector3.up * mouseX);
     }
 }
