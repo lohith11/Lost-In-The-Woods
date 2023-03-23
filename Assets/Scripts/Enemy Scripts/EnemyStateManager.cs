@@ -90,10 +90,10 @@ public class EnemyStateManager : MonoBehaviour
         EnemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
 
-        IdleState = new EnemyIdleState(this);
+        IdleState   = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
         ChaseState = new EnemyChaseState(this);
-        DieState = new EnemyDieState(this);
+        DieState   = new EnemyDieState(this);
         AlertState = new EnemyAlertState(this);
 
         switchState(IdleState);
