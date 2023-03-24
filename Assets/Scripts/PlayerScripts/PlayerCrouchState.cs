@@ -12,8 +12,8 @@ public class PlayerCrouchState : PlayerBaseState
     {
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.1f);
         Debug.Log("Entered Crouched State");
-        playerStateMachine.originalPosition = 1f;
-        playerStateMachine.playerCamera.localPosition = new Vector3(0, 1f, 0.5f);
+        playerStateMachine.originalPosition = 0.8f;
+        playerStateMachine.playerCamera.localPosition = new Vector3(0, 0.8f, 0.5f);
         playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
     }

@@ -3049,6 +3049,11 @@ PrefabInstance:
       propertyPath: mouseSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 7071830402260434319, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7326944505858723069, guid: 2fa59c1ff8b565548b2580090002db5d,
         type: 3}
       propertyPath: m_RootOrder

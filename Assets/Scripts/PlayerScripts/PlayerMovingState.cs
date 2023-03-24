@@ -7,27 +7,34 @@ using UnityEngine.Rendering.PostProcessing;
 public class PlayerMovingState : PlayerBaseState
 {
     private Vector3 moveInput;
+    private int moveX;
+    private int moveY;
+
     public PlayerMovingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
-        playerStateMachine.playerAnimation.Play("Player_FrontWalk");
+        moveX = Animator.StringToHash("MoveX");
+        moveY = Animator.StringToHash("MoveY");
+        playerStateMachine.playerAnimation.SetBool("IsMoving", true);
         Debug.Log("Entered Moving State");
     }
     public override void UpdateState()
     {
-        if(playerStateMachine.playerInput.y == -1 ) 
-        {
-            playerStateMachine.playerAnimation.Play("Player_BackWalk");
-        }
-        if(playerStateMachine.playerInput.x == 1 ) 
-        {
-            playerStateMachine.playerAnimation.Play("Player_RightWalk");
-        }
-        if(playerStateMachine.playerInput.x == -1 ) 
-        {
-            playerStateMachine.playerAnimation.Play("Player_LeftWalk");
-        }
+        playerStateMachine.playerAnimation.SetFloat(moveX, playerStateMachine.playerInput.x);
+        playerStateMachine.playerAnimation.SetFloat(moveY, playerStateMachine.playerInput.y);
+        //if(playerStateMachine.playerInput.y == -1 ) 
+        //{
+        //    playerStateMachine.playerAnimation.Play("Player_BackWalk");
+        //}
+        //if(playerStateMachine.playerInput.x == 1 ) 
+        //{
+        //    playerStateMachine.playerAnimation.Play("Player_RightWalk");
+        //}
+        //if(playerStateMachine.playerInput.x == -1 ) 
+        //{
+        //    playerStateMachine.playerAnimation.Play("Player_LeftWalk");
+        //}
         
         //playerStateMachine.mouseLook.StartCoroutine(playerStateMachine.mouseLook.CameraShakeWhileMoving(0.1f, 0.2f));
         CheckChangeState();
@@ -40,6 +47,7 @@ public class PlayerMovingState : PlayerBaseState
     }
     public override void ExitState() 
     {
+        playerStateMachine.playerAnimation.SetBool("IsMoving", false);
         Debug.Log("Exited Moving State");
     }
     public override void CheckChangeState()
