@@ -17,10 +17,10 @@ public class EnemyChaseState : EnemyBaseState
     public override void UpdateState()
     {   
         float distanceToPlayer = Vector3.Distance(enemyStateManager.transform.position , enemyStateManager.playerRef.transform.position);
-        if(distanceToPlayer <= enemyStateManager.attackRadius)
+        if(distanceToPlayer <= enemyStateManager.attackRadius && enemyStateManager.PlayerInRange)
         {
             Debug.Log("The player is in the attack raneg");
-            AttackPlayer();
+            enemyStateManager.switchState(enemyStateManager.AttackState);
         }
         if(distanceToPlayer > enemyStateManager.attackRadius && enemyStateManager.PlayerInRange)
         {
@@ -43,10 +43,11 @@ public class EnemyChaseState : EnemyBaseState
     void AttackPlayer()
     {
         //enemyStateManager.EnemyAgent.velocity = Vector3.zero;
-        enemyStateManager.EnemyAgent.stoppingDistance = 2f;
+        enemyStateManager.enemyAgent.stoppingDistance = 2f;
         Debug.Log("Attack function called");
         //* play attack anim
         //* deal damage to the player
+        enemyStateManager.enemyAnimController.Play("Attack_Anim");
     }
 
     void ChasePlayer()
@@ -55,7 +56,7 @@ public class EnemyChaseState : EnemyBaseState
         Vector3 directionToPlayer = enemyStateManager.playerRef.transform.position - enemyStateManager.transform.position;
         float distanceToMove = Mathf.Max(directionToPlayer.magnitude - enemyStateManager.minDistanceToPlayer , 0f);
         Vector3 targetPosition = enemyStateManager.transform.position + directionToPlayer.normalized * distanceToMove;
-        enemyStateManager.EnemyAgent.SetDestination(targetPosition);
+        enemyStateManager.enemyAgent.SetDestination(targetPosition);
 
         if(!enemyStateManager.isAttacking)
         {
