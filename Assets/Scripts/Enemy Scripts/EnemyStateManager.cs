@@ -19,10 +19,12 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public Animator enemyAnimController;
     [HideInInspector] public NavMeshAgent enemyAgent;
     [HideInInspector] public Vector3 soundPosition;
+    [HideInInspector] public AnimatorStateInfo stateInfo;
 
     //* Enemy Attributes
 
     public bool isWayPointPatrol;
+    public float stoppingDistance;
 
     [Header("Enemy field of view")]
     [Space(2)]
@@ -61,6 +63,7 @@ public class EnemyStateManager : MonoBehaviour
     public float sphereRadius;    //* The radius in which the enemy patrols
     public float startChaseTimer;
     public Transform centerPoint; //* The center point around whcich the patrol shphere is drawn 
+    public float patrolSpeed;
 
     [Space(10)]
 
@@ -68,6 +71,7 @@ public class EnemyStateManager : MonoBehaviour
     [Space(2)]
     
     public float backToPatrol = 2.0f;
+    public float alertSpeed;
 
     [Space(10)]
 
@@ -75,13 +79,17 @@ public class EnemyStateManager : MonoBehaviour
     [Space(2)]
 
     [Range(1, 7)] public float attackRadius;
-    public float attackSpeed;
+    public float chaseSpeed;
+    public float attackDuration;
+    public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float damage;
     public float timeSinceLastSighting;
-    public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float minDistanceToPlayer;
     public bool isAttacking;
+    private float _attackTimer;
     public Vector3 lastknownLocation;
+    public Transform sphereSpawnPoint;
+    public GameObject spherePrefab;
 
     [Space(10)]
 
@@ -104,6 +112,7 @@ public class EnemyStateManager : MonoBehaviour
 
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
+        stateInfo = enemyAnimController.GetCurrentAnimatorStateInfo(0);
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
@@ -121,6 +130,7 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
+        
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -131,6 +141,7 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
+    public void AttackPlayer() => StartCoroutine(Attack());
 
     private void FieldOfViewCheck()
     {
@@ -156,8 +167,6 @@ public class EnemyStateManager : MonoBehaviour
         else if (PlayerInRange)
             PlayerInRange = false;
     }
-
-
 
     private IEnumerator CheckForSounds()
     {
@@ -191,5 +200,45 @@ public class EnemyStateManager : MonoBehaviour
             FieldOfViewCheck();
         }
     }
+
+    private IEnumerator Attack()
+    {
+        Debug.LogError("Attack Coroutine called");
+        while (isAttacking)
+        {
+            if (_attackTimer <= 0f)
+            {
+                // spawn spear weapon and set its direction towards player
+                GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
+                Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
+                spear.transform.forward = direction;
+
+                // play attack animation
+                //* play the enemy animation here
+
+                //* wait for attack animation to finish
+                yield return new WaitForSeconds(attackDuration);
+
+                //* check if player is within attack range
+                if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
+                {
+                    //* Deal damage to the player here
+                    //* Make a sphere cast from the sphere point and check if there is player -> deal damage
+                    Debug.LogError("Dealing damage to the player");
+                }
+
+                //* reset attack timer and play attack cooldown animation
+                _attackTimer = attackCooldown;
+            }
+            else
+            {
+                // decrease attack timer
+                _attackTimer -= Time.deltaTime;
+            }
+
+            yield return null;
+        }
+    }
+
 
 }

@@ -8,7 +8,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Entered IdleState");
+       // Debug.Log("Entered IdleState");
         playerStateMachine.playerAnimation.CrossFade("Player_Idle", 0.1f);
     }
 
@@ -24,7 +24,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void ExitState() 
     {
-        Debug.Log("Exited IdleState");
+       // Debug.Log("Exited IdleState");
     }
 
     public override void CheckChangeState()

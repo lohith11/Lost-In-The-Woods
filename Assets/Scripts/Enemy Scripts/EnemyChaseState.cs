@@ -9,7 +9,8 @@ public class EnemyChaseState : EnemyBaseState
     public EnemyChaseState(EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Chasing_Anim");
+        
+       enemyStateManager.enemyAnimController.Play("Chasing_Anim");
         Debug.Log("Entered the chase state"); //! delete the debug
     }
 
@@ -19,7 +20,7 @@ public class EnemyChaseState : EnemyBaseState
         float distanceToPlayer = Vector3.Distance(enemyStateManager.transform.position , enemyStateManager.playerRef.transform.position);
         if(distanceToPlayer <= enemyStateManager.attackRadius && enemyStateManager.PlayerInRange)
         {
-            Debug.Log("The player is in the attack raneg");
+           // Debug.Log("The player is in the attack raneg");
             enemyStateManager.switchState(enemyStateManager.AttackState);
         }
         if(distanceToPlayer > enemyStateManager.attackRadius && enemyStateManager.PlayerInRange)
@@ -40,16 +41,6 @@ public class EnemyChaseState : EnemyBaseState
 
     }
 
-    void AttackPlayer()
-    {
-        //enemyStateManager.EnemyAgent.velocity = Vector3.zero;
-        enemyStateManager.enemyAgent.stoppingDistance = 2f;
-        Debug.Log("Attack function called");
-        //* play attack anim
-        //* deal damage to the player
-        enemyStateManager.enemyAnimController.Play("Attack_Anim");
-    }
-
     void ChasePlayer()
     {
         Debug.Log("Chase function called");
@@ -60,7 +51,7 @@ public class EnemyChaseState : EnemyBaseState
 
         if(!enemyStateManager.isAttacking)
         {
-            AttackPlayer();
+            enemyStateManager.switchState(enemyStateManager.AttackState);
         }
     }
     
