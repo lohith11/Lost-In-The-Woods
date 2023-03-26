@@ -19,28 +19,30 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public Coroutine cor;
 
     //Player Walking
-    [Header("Player Walking")]
+    [Header("< Player Walking >")]
+    [Space(5)]
     public float playerSpeed;
     public Vector2 playerInput;
     public Vector2 playerRotation;
     [Space(10)]
 
     //Player Running
-    [Header("Player Running")]
+    [Header("< Player Running >")]
+    [Space(5)]
     public float playerRunSpeed;
     public bool isRunning;
     [Space(10)]
 
     //Player Crouch
-    [Header("Player Crouch")]
-    public Vector3 crouchScale = new Vector3(1f, 0.5f, 1f);
-    public Vector3 playerScale = new Vector3(1f, 1f, 1f);
+    [Header("< Player Crouch >")]
+    [Space(5)]
     public float playerCrouchSpeed;
     public bool isCrouched;
     [Space(10)]
 
     //Player Jump
-    [Header("Player Jump")]
+    [Header("< Player Jump >")]
+    [Space(5)]
     public Transform groundPosition;
     public LayerMask groundLayer;
     public float jumpForce;
@@ -51,7 +53,8 @@ public class PlayerStateMachine : MonoBehaviour
     [Space(10)]
 
     //PlayerCamera Shakes
-    [Header("PlayerCamera Shake")]
+    [Header("< PlayerCamera Shake >")]
+    [Space(5)]
     public Transform playerCamera;
     private float timer;
     public float originalPosition;
@@ -61,8 +64,14 @@ public class PlayerStateMachine : MonoBehaviour
     public float sprintSpeedAmount;
     public float croucSpeed;
     public float croucSpeedAmount;
+
+    [Range(60, 120)]
+    public float FOV;
     [Space(10)]
 
+    public bool isAtttacking;
+    public bool isAiming;
+    public bool isPicking;
     public float FAVdelay; 
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
@@ -111,7 +120,20 @@ public class PlayerStateMachine : MonoBehaviour
 
         playerControls.Player.Jump.started += Jump;
         playerControls.Player.Jump.performed += Jump;
-        playerControls.Player.Jump.canceled += Jump;
+        playerControls.Player.Jump.canceled += Jump;  
+
+        playerControls.Player.Picking.started += PickingRock;
+        playerControls.Player.Picking.performed += PickingRock;
+        playerControls.Player.Picking.canceled += PickingRock; 
+        
+        playerControls.Player.Projectile.started += ProjectileRock;
+        playerControls.Player.Projectile.performed += ProjectileRock;
+        playerControls.Player.Projectile.canceled += ProjectileRock;
+
+        playerControls.Player.Attack.started += Attacking;
+        playerControls.Player.Attack.performed += Attacking;
+        playerControls.Player.Attack.canceled += Attacking;  
+        
     }
 
     private void OnDisable()
@@ -137,6 +159,18 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Jump.started -= Jump;
         playerControls.Player.Jump.performed -= Jump;
         playerControls.Player.Jump.canceled -= Jump;
+
+        playerControls.Player.Picking.started -= PickingRock;
+        playerControls.Player.Picking.performed -= PickingRock;
+        playerControls.Player.Picking.canceled -= PickingRock;
+        
+        playerControls.Player.Projectile.started -= ProjectileRock;
+        playerControls.Player.Projectile.performed -= ProjectileRock;
+        playerControls.Player.Projectile.canceled -= ProjectileRock;
+
+        playerControls.Player.Attack.started -= Attacking;
+        playerControls.Player.Attack.performed -= Attacking;
+        playerControls.Player.Attack.canceled -= Attacking;
     }
 
     public void Update()
@@ -145,10 +179,6 @@ public class PlayerStateMachine : MonoBehaviour
         currentState.UpdateState();
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
-    }
-
-    private void LateUpdate()
-    {
     }
 
     public void FixedUpdate()
@@ -180,6 +210,21 @@ public class PlayerStateMachine : MonoBehaviour
     public void Rotation(InputAction.CallbackContext context)
     {
         playerRotation = context.ReadValue<Vector2>();
+    }
+
+    public void PickingRock(InputAction.CallbackContext context)
+    {
+        isPicking = context.ReadValueAsButton();
+    }
+
+    public void ProjectileRock(InputAction.CallbackContext context)
+    {
+        isAiming = context.ReadValueAsButton();
+    }
+
+    public void Attacking(InputAction.CallbackContext context)
+    {
+        isAtttacking = context.ReadValueAsButton();
     }
     #endregion
 
@@ -229,4 +274,6 @@ public class PlayerStateMachine : MonoBehaviour
         currentState = state;
         currentState.EnterState();
     }
+
+
 }
