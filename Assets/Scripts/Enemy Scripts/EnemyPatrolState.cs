@@ -4,11 +4,16 @@ using UnityEngine.AI;
 
 public class EnemyPatrolState : EnemyBaseState
 {
-    public EnemyPatrolState (EnemyStateManager enemy):base(enemy){}
+    public EnemyPatrolState(EnemyStateManager enemy) : base(enemy) { }
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Walking_Anim");
-        enemyStateManager.EnemyAgent.speed = 1.5f;
+       
+         enemyStateManager.enemyAnimController.Play("Walking_Anim");
+        enemyStateManager.enemyAgent.speed = 1.5f;
+        if(enemyStateManager.isWayPointPatrol)
+        {
+            enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++) % enemyStateManager.waypoints.Length].position;
+        }
     }
 
 
@@ -16,23 +21,35 @@ public class EnemyPatrolState : EnemyBaseState
     {
         enemyStateManager.searchForSounds();
 
-        if (enemyStateManager.EnemyAgent.remainingDistance <= enemyStateManager.EnemyAgent.stoppingDistance) //* done with path
+        if (enemyStateManager.isWayPointPatrol)
         {
-            Vector3 point;
-            if (RandomPoint(enemyStateManager.centerPoint.position, enemyStateManager.sphereRadius, out point)) //* pass in our centre point and radius of area
+            Vector3 directionToWalk = enemyStateManager.nextLocation - enemyStateManager.transform.position;
+            Quaternion rotationToWayPoint = Quaternion.LookRotation(directionToWalk);
+            enemyStateManager.transform.rotation = Quaternion.Slerp(enemyStateManager.transform.rotation, rotationToWayPoint , enemyStateManager.rotationSpeed * Time.deltaTime);
+            if(Vector3.Distance(enemyStateManager.transform.position, enemyStateManager.nextLocation) < 1.0f && !enemyStateManager.PlayerInRange)
             {
-                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //* so you can see with gizmos
-                enemyStateManager.EnemyAgent.SetDestination(point);
+                enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++ ) % enemyStateManager.waypoints.Length].position;
+            }
+            enemyStateManager.enemyAgent.SetDestination(enemyStateManager.nextLocation);
+        }
+        else
+        {
+            if (enemyStateManager.enemyAgent.remainingDistance <= enemyStateManager.enemyAgent.stoppingDistance) //* done with path
+            {
+                Vector3 point;
+                if (RandomPoint(enemyStateManager.centerPoint.position, enemyStateManager.sphereRadius, out point)) //* pass in our centre point and radius of area
+                {
+                    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //* so you can see with gizmos
+                    enemyStateManager.enemyAgent.SetDestination(point);
+                }
             }
         }
-        else if(enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
+
+        if (enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
         {
             enemyStateManager.switchState(enemyStateManager.AlertState);
-            
         }
-    } 
-
-    
+    }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {

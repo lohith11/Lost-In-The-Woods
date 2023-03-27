@@ -12,7 +12,7 @@ public class PlayerMovingState : PlayerBaseState
     public override void EnterState()
     {
         playerStateMachine.playerAnimation.Play("Player_FrontWalk");
-        Debug.Log("Entered Moving State");
+        //Debug.Log("Entered Moving State");
     }
     public override void UpdateState()
     {
@@ -40,7 +40,7 @@ public class PlayerMovingState : PlayerBaseState
     }
     public override void ExitState() 
     {
-        Debug.Log("Exited Moving State");
+       // Debug.Log("Exited Moving State");
     }
     public override void CheckChangeState()
     {

@@ -15,10 +15,13 @@ public class MakeSound : MonoBehaviour
         source.playOnAwake = false;
     }
 
-    //* This is for testing but can implement the same logic where ever required
-    private void Update() 
+    
+    
+
+
+    private void OnCollisionEnter(Collision other) 
     {
-        if(Input.GetKeyDown(KeyCode.Y))
+        if(other.gameObject.tag == "Ground")
         {
             source.clip = audioObj.clip;
             soundRange  = audioObj.range;
@@ -26,7 +29,7 @@ public class MakeSound : MonoBehaviour
             if(source.isPlaying)
                 return;
             source.Play();
-        }   
+        }    
     }
 
 }

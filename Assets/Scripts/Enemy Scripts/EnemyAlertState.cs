@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class EnemyAlertState : EnemyBaseState
 {
-    float _alertSpeed = 2.0f;
     public EnemyAlertState (EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
+       
         enemyStateManager.enemyAnimController.Play("Alert_Anim");
+        //! to make it better add a exclmation point and a small bar on top of the enemy 
     }
 
-    //start chase and notify enemies around you if the player is in range for more than 2 sec
     public override void UpdateState()
     {
         if(enemyStateManager.PlayerInRange)
         {
             enemyStateManager.startChaseTimer -= Time.deltaTime;
+            enemyStateManager.backToPatrol = 2.0f;
         }
         if(enemyStateManager.startChaseTimer <= 0)
         {
@@ -22,10 +23,25 @@ public class EnemyAlertState : EnemyBaseState
             Debug.Log("Switching for chase state!"); //!
         }
 
+        if(!enemyStateManager.PlayerInRange)
+            enemyStateManager.backToPatrol -= Time.deltaTime;
+        if(enemyStateManager.backToPatrol <= 0)
+        {
+            enemyStateManager.switchState(enemyStateManager.PatrolState);
+            if(enemyStateManager.isWayPointPatrol)
+            {
+                enemyStateManager.enemyAgent.SetDestination(enemyStateManager.nextLocation);
+            }
+        }
+
         if(enemyStateManager.SoundInRange)
         {
-           // enemyStateManager.transform.position = enemyStateManager.targetPosition; //! should make the enemy stop 0.5f before the target
-            Vector3.MoveTowards(enemyStateManager.transform.position , enemyStateManager.targetPosition , _alertSpeed * Time.deltaTime);
+            enemyStateManager.enemyAgent.SetDestination(enemyStateManager.soundPosition);
+            enemyStateManager.enemyAnimController.Play("Finding_Anim");
+            if(enemyStateManager.stateInfo.normalizedTime >= 1 && !enemyStateManager.enemyAnimController.IsInTransition(0))
+            {
+               enemyStateManager.enemyAnimController.Play("Alert_Anim");
+            }
         }
 
     
@@ -34,5 +50,6 @@ public class EnemyAlertState : EnemyBaseState
     public override void ExitState()
     {
        enemyStateManager.startChaseTimer = 3.0f;
+       enemyStateManager.backToPatrol = 2.0f;
     }
 }
