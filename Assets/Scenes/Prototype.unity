@@ -3685,9 +3685,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7071830400939834975, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.561
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071830400939834975, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.638
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071830401446636307, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: FOV
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 7071830402260434314, guid: 2fa59c1ff8b565548b2580090002db5d,
         type: 3}
       propertyPath: mouseSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071830402260434319, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: far clip plane
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7326944505858723069, guid: 2fa59c1ff8b565548b2580090002db5d,

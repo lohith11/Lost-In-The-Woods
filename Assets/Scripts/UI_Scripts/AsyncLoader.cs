@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class AsyncLoader : MonoBehaviour
 {
+    [Header("Loading Screen")]
+    [Space(10)]
+
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject mainMenu;
 

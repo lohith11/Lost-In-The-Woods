@@ -80,6 +80,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Picking"",
+                    ""type"": ""Button"",
+                    ""id"": ""379d058a-0d7a-406a-891a-ca84efad56c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Projectile"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1e5f9c0-b196-45a1-a1b6-835c5a930d92"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,7 +236,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""84d2c710-ba81-4701-ab9f-ce8cdb918e8d"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -245,6 +263,50 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1eadd08-875e-420e-8ad8-69a897792a2c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Picking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47a74093-d8ed-4766-9c9b-9eb6658433d1"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Picking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8005d2f7-2fc6-4746-ae81-776207013e25"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Projectile"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c840548-b10e-43e2-928b-5365ddb8bbe0"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Projectile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -289,6 +351,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Picking = m_Player.FindAction("Picking", throwIfNotFound: true);
+        m_Player_Projectile = m_Player.FindAction("Projectile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -354,6 +418,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Picking;
+    private readonly InputAction m_Player_Projectile;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -364,6 +430,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Picking => m_Wrapper.m_Player_Picking;
+        public InputAction @Projectile => m_Wrapper.m_Player_Projectile;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -391,6 +459,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Picking.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPicking;
+                @Picking.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPicking;
+                @Picking.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPicking;
+                @Projectile.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProjectile;
+                @Projectile.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProjectile;
+                @Projectile.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnProjectile;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -413,6 +487,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Picking.started += instance.OnPicking;
+                @Picking.performed += instance.OnPicking;
+                @Picking.canceled += instance.OnPicking;
+                @Projectile.started += instance.OnProjectile;
+                @Projectile.performed += instance.OnProjectile;
+                @Projectile.canceled += instance.OnProjectile;
             }
         }
     }
@@ -452,5 +532,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPicking(InputAction.CallbackContext context);
+        void OnProjectile(InputAction.CallbackContext context);
     }
 }

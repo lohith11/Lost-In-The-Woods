@@ -21,11 +21,13 @@ public class ThrowingRocks : MonoBehaviour
     public float f;
     public int numPoints = 50;
     public float timeBetweenPoints;
+    private PlayerStateMachine playerStateMachine;
 
-    // The physics layers that will cause the line to stop being drawn
+    //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
     void Start()
     {
+        playerStateMachine = GetComponent<PlayerStateMachine>();
         lineRenderer = GetComponent<LineRenderer>();
         readyToThrow = true;
     }
@@ -33,9 +35,9 @@ public class ThrowingRocks : MonoBehaviour
  
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (playerStateMachine.isAiming)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && readyToThrow && totalThrows > 0)
+            if (playerStateMachine.isAtttacking && readyToThrow && totalThrows > 0)
             {
                 Throw();
             }
@@ -98,6 +100,10 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         lineRenderer.SetPositions(points.ToArray());
+    }
+
+    public void PickingRock()
+    {
 
     }
 
