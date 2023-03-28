@@ -7,29 +7,21 @@ using UnityEngine.Rendering.PostProcessing;
 public class PlayerMovingState : PlayerBaseState
 {
     private Vector3 moveInput;
+
+    private int moveX;
+    private int moveY;
     public PlayerMovingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
-        playerStateMachine.playerAnimation.Play("Player_FrontWalk");
-        Debug.Log("Entered Moving State");
+        moveX = Animator.StringToHash("MoveX");
+        moveY = Animator.StringToHash("MoveY");
+        playerStateMachine.playerAnimation.SetBool("isMoving", true);
     }
     public override void UpdateState()
     {
-        if(playerStateMachine.playerInput.y == -1 ) 
-        {
-            playerStateMachine.playerAnimation.Play("Player_BackWalk");
-        }
-        if(playerStateMachine.playerInput.x == 1 ) 
-        {
-            playerStateMachine.playerAnimation.Play("Player_RightWalk");
-        }
-        if(playerStateMachine.playerInput.x == -1 ) 
-        {
-            playerStateMachine.playerAnimation.Play("Player_LeftWalk");
-        }
-        
-        //playerStateMachine.mouseLook.StartCoroutine(playerStateMachine.mouseLook.CameraShakeWhileMoving(0.1f, 0.2f));
+        playerStateMachine.playerAnimation.SetFloat(moveX, playerStateMachine.playerInput.x);
+        playerStateMachine.playerAnimation.SetFloat(moveY, playerStateMachine.playerInput.y);
         CheckChangeState();
     }
 
@@ -40,7 +32,7 @@ public class PlayerMovingState : PlayerBaseState
     }
     public override void ExitState() 
     {
-        Debug.Log("Exited Moving State");
+        playerStateMachine.playerAnimation.SetBool("isMoving", false);
     }
     public override void CheckChangeState()
     {

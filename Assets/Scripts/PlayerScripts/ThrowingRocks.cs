@@ -9,7 +9,7 @@ public class ThrowingRocks : MonoBehaviour
     public Transform attackpoint;
     public GameObject objectThrow;
 
-    public int totalThrows;
+    private int totalThrows;
     public float throwCoolDown;
 
     public float throwForce;
@@ -22,6 +22,13 @@ public class ThrowingRocks : MonoBehaviour
     public int numPoints = 50;
     public float timeBetweenPoints;
     private PlayerStateMachine playerStateMachine;
+
+
+    [Header("< RockPicking >")]
+    public bool isRockPick;
+    public Transform rockInRange;
+    public float rockInRangeRadius;
+    public LayerMask rockLayer;
 
     //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
@@ -100,11 +107,6 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         lineRenderer.SetPositions(points.ToArray());
-    }
-
-    public void PickingRock()
-    {
-
     }
 
     public void ResetThrow()

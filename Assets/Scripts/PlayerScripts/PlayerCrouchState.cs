@@ -6,12 +6,15 @@ using UnityEngine;
 public class PlayerCrouchState : PlayerBaseState
 {
     private Vector3 moveInput;
+    private int CrouchMoveX;
+    private int CrouchMoveY;
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
+        CrouchMoveX = Animator.StringToHash("CrouchMoveX");
+        CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.1f);
-        Debug.Log("Entered Crouched State");
         playerStateMachine.originalPosition = 1f;
         playerStateMachine.playerCamera.localPosition = new Vector3(0, 1f, 0.5f);
         playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
@@ -21,30 +24,15 @@ public class PlayerCrouchState : PlayerBaseState
     public override void UpdateState()
     {
         CheckChangeState();
-
-        if(playerStateMachine.playerInput.y == 1)
+        if(playerStateMachine.playerInput.magnitude != 0)
         {
-            playerStateMachine.playerAnimation.Play("Player_CrouchWalkFarword");
+            playerStateMachine.playerAnimation.SetBool("isCrouching", true);
+            playerStateMachine.playerAnimation.SetFloat(CrouchMoveY, playerStateMachine.playerInput.y);
+            playerStateMachine.playerAnimation.SetFloat(CrouchMoveX, playerStateMachine.playerInput.x);
         }
-
-        if(playerStateMachine.playerInput.y == -1)
+        else
         {
-            playerStateMachine.playerAnimation.Play("Player_CrouchWalkBack");
-        }    
-
-        if(playerStateMachine.playerInput.x == 1)
-        {
-            playerStateMachine.playerAnimation.Play("Player_CrouchWalkRight");
-        }
-
-        if(playerStateMachine.playerInput.x == -1)
-        {
-            playerStateMachine.playerAnimation.Play("Player_CrouchWalkLeft");
-        }
-
-        if(playerStateMachine.playerInput.magnitude == 0)
-        {
-            playerStateMachine.playerAnimation.Play("Player_Crouch");
+            playerStateMachine.playerAnimation.SetBool("isCrouching", false);
         }
     }
 
@@ -60,7 +48,6 @@ public class PlayerCrouchState : PlayerBaseState
         playerStateMachine.playerCamera.localPosition = new Vector3(0, 1.7f, 0.2f);
         playerStateMachine.GetComponent<CapsuleCollider>().height = 1.8f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.9f, 0f);
-        Debug.Log("Exited Crouched State");
     }
 
     public override void CheckChangeState()
