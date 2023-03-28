@@ -16,12 +16,10 @@ public class EnemyAlertState : EnemyBaseState
             enemyStateManager.startChaseTimer -= Time.deltaTime;
             enemyStateManager.backToPatrol = 2.0f;
         }
-        // else if (!enemyStateManager.PlayerInRange)
-        // {
-        //     enemyStateManager.backToPatrol -= Time.deltaTime;
-        // }
-
-        
+        if (!enemyStateManager.PlayerInRange)
+        {
+            enemyStateManager.backToPatrol -= Time.deltaTime;
+        }
 
         else if (enemyStateManager.startChaseTimer <= 0)
         {
@@ -29,13 +27,10 @@ public class EnemyAlertState : EnemyBaseState
             Debug.Log("Switching for chase state!"); //!
         }
 
-        if (enemyStateManager.SoundInRange && !enemyStateManager.PlayerInRange)
-        {
-            enemyStateManager.enemyAgent.SetDestination(enemyStateManager.soundPosition);
-            enemyStateManager.enemyAnimController.Play("Finding_Anim");
-            enemyStateManager.backToPatrol -= Time.deltaTime;
-
-        }
+        // if (enemyStateManager.SoundInRange)
+        // {
+        //     enemyStateManager.switchState(enemyStateManager.SearchState);
+        // }
 
         if (enemyStateManager.backToPatrol <= 0)
         {

@@ -4032,6 +4032,7 @@ MonoBehaviour:
     m_Bits: 0
   hearingRange: 10
   soundCheckInterval: 1
+  searchForPlayer: 1.5
   waypoints: []
   nextLocation: {x: 0, y: 0, z: 0}
   destinationLoop: 0
@@ -4579,7 +4580,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101835214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dc5448078ace9445aac2a979f60ff21, type: 3}
   m_Name: 
@@ -6730,6 +6731,7 @@ MonoBehaviour:
     m_Bits: 1024
   hearingRange: 6.51
   soundCheckInterval: 1
+  searchForPlayer: 1.5
   waypoints:
   - {fileID: 257152994}
   - {fileID: 1457772353}
@@ -9246,7 +9248,7 @@ MonoBehaviour:
   enemyAnimController: {fileID: 3445666183336229224}
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
-  isWayPointPatrol: 1
+  isWayPointPatrol: 0
   stoppingDistance: 2
   radius: 7.15
   angle: 158
@@ -9259,6 +9261,7 @@ MonoBehaviour:
     m_Bits: 1024
   hearingRange: 6.51
   soundCheckInterval: 1
+  searchForPlayer: 2
   waypoints:
   - {fileID: 257152994}
   - {fileID: 1457772353}

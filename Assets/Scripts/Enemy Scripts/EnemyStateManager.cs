@@ -44,6 +44,7 @@ public class EnemyStateManager : MonoBehaviour
     [Range(5, 10)] public float hearingRange = 10f;
     public float soundCheckInterval = 1f;
     public bool SoundInRange { get; private set; }
+    public float searchForPlayer = 1.5f;
 
     [Space(10)]
 
@@ -102,6 +103,7 @@ public class EnemyStateManager : MonoBehaviour
     public EnemyIdleState IdleState;
     public EnemyPatrolState PatrolState;
     public EnemyAlertState AlertState;
+    public EnemySearchingState SearchState;
     public EnemyChaseState ChaseState;
     public EnemyAttackState AttackState;
     public EnemyDieState DieState;
@@ -122,6 +124,7 @@ public class EnemyStateManager : MonoBehaviour
         DieState = new EnemyDieState(this);
         AlertState = new EnemyAlertState(this);
         AttackState = new EnemyAttackState(this);
+        SearchState = new EnemySearchingState(this);
 
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
@@ -131,6 +134,7 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
+        Debug.Log("Sound in range is : " + SoundInRange);
 
     }
 
@@ -143,6 +147,7 @@ public class EnemyStateManager : MonoBehaviour
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
     public void AttackPlayer() => StartCoroutine(Attack());
+    public void SearchForPlayer() => StartCoroutine(GoTosoundLocations());
     private void FieldOfViewCheck()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
@@ -189,6 +194,14 @@ public class EnemyStateManager : MonoBehaviour
             yield return new WaitForSeconds(soundCheckInterval);
         }
     }
+    private IEnumerator GoTosoundLocations()
+    {
+        enemyAgent.SetDestination(soundPosition);
+        enemyAnimController.Play("Finding_Anim");
+        yield return new WaitForSeconds(searchForPlayer);
+        SoundInRange = false;
+        switchState(PatrolState);
+    }
 
     private IEnumerator FOVRoutine()
     {
@@ -202,6 +215,7 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     private IEnumerator Attack()
+
     {
         Debug.LogError("Attack Coroutine called");
         while (isAttacking)
@@ -209,9 +223,9 @@ public class EnemyStateManager : MonoBehaviour
             if (_attackTimer <= 0f)
             {
                 // spawn spear weapon and set its direction towards player
-                GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
+              //  GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
                 Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
-                spear.transform.forward = direction;
+                //spear.transform.forward = direction;
 
                 // play attack animation
                 //* play the enemy animation here

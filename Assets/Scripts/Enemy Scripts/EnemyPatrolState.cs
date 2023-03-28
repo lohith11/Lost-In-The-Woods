@@ -44,9 +44,13 @@ public class EnemyPatrolState : EnemyBaseState
             }
         }
 
-        if (enemyStateManager.PlayerInRange || enemyStateManager.SoundInRange)
+        if (enemyStateManager.PlayerInRange)
         {
             enemyStateManager.switchState(enemyStateManager.AlertState);
+        }
+        else if(enemyStateManager.SoundInRange)
+        {
+            enemyStateManager.switchState(enemyStateManager.SearchState);
         }
     }
 
