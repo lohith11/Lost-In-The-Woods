@@ -7,10 +7,10 @@ public class EnemyPatrolState : EnemyBaseState
     public EnemyPatrolState(EnemyStateManager enemy) : base(enemy) { }
     public override void EnterState()
     {
-       
-         enemyStateManager.enemyAnimController.Play("Walking_Anim");
+        enemyStateManager.searchForSounds();
+        enemyStateManager.enemyAnimController.Play("Walking_Anim");
         enemyStateManager.enemyAgent.speed = 1.5f;
-        if(enemyStateManager.isWayPointPatrol)
+        if (enemyStateManager.isWayPointPatrol)
         {
             enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++) % enemyStateManager.waypoints.Length].position;
         }
@@ -19,16 +19,15 @@ public class EnemyPatrolState : EnemyBaseState
 
     public override void UpdateState()
     {
-        enemyStateManager.searchForSounds();
 
         if (enemyStateManager.isWayPointPatrol)
         {
             Vector3 directionToWalk = enemyStateManager.nextLocation - enemyStateManager.transform.position;
             Quaternion rotationToWayPoint = Quaternion.LookRotation(directionToWalk);
-            enemyStateManager.transform.rotation = Quaternion.Slerp(enemyStateManager.transform.rotation, rotationToWayPoint , enemyStateManager.rotationSpeed * Time.deltaTime);
-            if(Vector3.Distance(enemyStateManager.transform.position, enemyStateManager.nextLocation) < 1.0f && !enemyStateManager.PlayerInRange)
+            enemyStateManager.transform.rotation = Quaternion.Slerp(enemyStateManager.transform.rotation, rotationToWayPoint, enemyStateManager.rotationSpeed * Time.deltaTime);
+            if (Vector3.Distance(enemyStateManager.transform.position, enemyStateManager.nextLocation) < 1.0f && !enemyStateManager.PlayerInRange)
             {
-                enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++ ) % enemyStateManager.waypoints.Length].position;
+                enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++) % enemyStateManager.waypoints.Length].position;
             }
             enemyStateManager.enemyAgent.SetDestination(enemyStateManager.nextLocation);
         }

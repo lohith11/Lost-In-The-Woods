@@ -37,7 +37,7 @@ public class EnemyStateManager : MonoBehaviour
     public bool PlayerInRange { get; private set; }
 
     [Space(10)]
-    
+
     [Header("Hearing Properties")]
     [Space(2)]
 
@@ -49,7 +49,7 @@ public class EnemyStateManager : MonoBehaviour
 
     [Header("Way Point Patrol properties")]
     [Space(2)]
-    
+
     public Transform[] waypoints;
     public Vector3 nextLocation;
     public int destinationLoop;
@@ -69,9 +69,10 @@ public class EnemyStateManager : MonoBehaviour
 
     [Header("Alert properties")]
     [Space(2)]
-    
+
     public float backToPatrol = 2.0f;
     public float alertSpeed;
+
 
     [Space(10)]
 
@@ -108,6 +109,7 @@ public class EnemyStateManager : MonoBehaviour
 
     void Start()
     {
+        
         manager = this;
 
         enemyAgent = GetComponent<NavMeshAgent>();
@@ -121,16 +123,15 @@ public class EnemyStateManager : MonoBehaviour
         AlertState = new EnemyAlertState(this);
         AttackState = new EnemyAttackState(this);
 
-        switchState(IdleState);
-
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+        switchState(IdleState);
     }
 
     void Update()
     {
         currentState.UpdateState();
-        
+
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -142,7 +143,6 @@ public class EnemyStateManager : MonoBehaviour
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
     public void AttackPlayer() => StartCoroutine(Attack());
-
     private void FieldOfViewCheck()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
