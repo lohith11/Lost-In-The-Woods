@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Rock
   m_EditorClassIdentifier: 
   soundName: Rock
-  range: 20
-  clip: {fileID: 8300000, guid: 5b3b189a52cb48249b8c853cc2dce26e, type: 3}
+  range: 14.7
+  clip: {fileID: 8300000, guid: b7e771afbe539e84db2d1591a9a833c8, type: 3}

@@ -9,7 +9,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Entered Jump State");
+        //Debug.Log("Entered Jump State");
         //Jump Animation
         playerStateMachine.playerRB.velocity = new Vector3(playerStateMachine.playerRB.velocity.x, playerStateMachine.jumpForce, playerStateMachine.playerRB.velocity.z);
         /* If you want the player to control in the air uncomment the code below or else leave it */
@@ -29,7 +29,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void ExitState() 
     {
-        Debug.Log("Exited Jump State");
+        //Debug.Log("Exited Jump State");
     }
 
     public override void CheckChangeState()

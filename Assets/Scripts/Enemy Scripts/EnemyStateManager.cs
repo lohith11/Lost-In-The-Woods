@@ -5,24 +5,26 @@ using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
-
-    //todo : alert nearby enemies when the player is in attack range
     //todo : alert nearby enemies when an enemy dies
     //todo : change speed of enemy based on the state that they are in
-    //todo :  make the enemy two shot 
+    //todo : make the enemy two shot for the body and one shot for the head
     //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
-    //todo: make a blend tree for enemy animation 
-    //todo : make the enemy switch to alert state and then change the position 
+    //todo : make a blend tree for enemy animation 
+    //todo :  
+
     //* singleton
     public static EnemyStateManager manager;
 
     //* Unity Components 
-
     [HideInInspector] public Animator enemyAnimController;
-    [HideInInspector] public NavMeshAgent EnemyAgent;
-    [HideInInspector] public Vector3 targetPosition;
+    [HideInInspector] public NavMeshAgent enemyAgent;
+    [HideInInspector] public Vector3 soundPosition;
+    [HideInInspector] public AnimatorStateInfo stateInfo;
 
     //* Enemy Attributes
+
+    public bool isWayPointPatrol;
+    public float stoppingDistance;
 
     [Header("Enemy field of view")]
     [Space(2)]
@@ -33,7 +35,25 @@ public class EnemyStateManager : MonoBehaviour
     public GameObject playerRef;
     public LayerMask targetMask, obstructionMask;
     public bool PlayerInRange { get; private set; }
-    //public bool playerInRange;
+
+    [Space(10)]
+    
+    [Header("Hearing Properties")]
+    [Space(2)]
+
+    [Range(5, 10)] public float hearingRange = 10f;
+    public float soundCheckInterval = 1f;
+    public bool SoundInRange { get; private set; }
+
+    [Space(10)]
+
+    [Header("Way Point Patrol properties")]
+    [Space(2)]
+    
+    public Transform[] waypoints;
+    public Vector3 nextLocation;
+    public int destinationLoop;
+    public float rotationSpeed;
 
     [Space(10)]
 
@@ -43,30 +63,33 @@ public class EnemyStateManager : MonoBehaviour
     public float sphereRadius;    //* The radius in which the enemy patrols
     public float startChaseTimer;
     public Transform centerPoint; //* The center point around whcich the patrol shphere is drawn 
+    public float patrolSpeed;
 
     [Space(10)]
 
-    [Header("Hearing Properties")]
+    [Header("Alert properties")]
     [Space(2)]
-
-    [Range(10, 50)] public float hearingRange = 10f;
-    public float soundCheckInterval = 1f;
-    public bool SoundInRange { get; private set; }
-    //private bool soundInRange;
+    
+    public float backToPatrol = 2.0f;
+    public float alertSpeed;
 
     [Space(10)]
 
     [Header("Attack Properties")]
     [Space(2)]
 
-    public float attackRadius;
-    public float attackSpeed;
+    [Range(1, 7)] public float attackRadius;
+    public float chaseSpeed;
+    public float attackDuration;
+    public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float damage;
     public float timeSinceLastSighting;
-    public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float minDistanceToPlayer;
     public bool isAttacking;
+    private float _attackTimer;
     public Vector3 lastknownLocation;
+    public Transform sphereSpawnPoint;
+    public GameObject spherePrefab;
 
     [Space(10)]
 
@@ -77,24 +100,26 @@ public class EnemyStateManager : MonoBehaviour
 
     public EnemyIdleState IdleState;
     public EnemyPatrolState PatrolState;
-    public EnemyChaseState ChaseState;
-    public EnemyDieState DieState;
     public EnemyAlertState AlertState;
-
+    public EnemyChaseState ChaseState;
+    public EnemyAttackState AttackState;
+    public EnemyDieState DieState;
     #endregion
 
     void Start()
     {
         manager = this;
 
-        EnemyAgent = GetComponent<NavMeshAgent>();
+        enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
+        stateInfo = enemyAnimController.GetCurrentAnimatorStateInfo(0);
 
-        IdleState   = new EnemyIdleState(this);
+        IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
         ChaseState = new EnemyChaseState(this);
-        DieState   = new EnemyDieState(this);
+        DieState = new EnemyDieState(this);
         AlertState = new EnemyAlertState(this);
+        AttackState = new EnemyAttackState(this);
 
         switchState(IdleState);
 
@@ -105,8 +130,7 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
-        //Debug.Log("Player in range : " + PlayerInRange);
-        Debug.Log("The chase timer is : " + startChaseTimer);
+        
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -117,6 +141,7 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
+    public void AttackPlayer() => StartCoroutine(Attack());
 
     private void FieldOfViewCheck()
     {
@@ -143,8 +168,6 @@ public class EnemyStateManager : MonoBehaviour
             PlayerInRange = false;
     }
 
-
-
     private IEnumerator CheckForSounds()
     {
         while (true)
@@ -159,7 +182,7 @@ public class EnemyStateManager : MonoBehaviour
                     if (distance < sound.soundRange)
                     {
                         SoundInRange = true;
-                        targetPosition = collider.transform.position;
+                        soundPosition = collider.transform.position;
                     }
                 }
             }
@@ -177,5 +200,45 @@ public class EnemyStateManager : MonoBehaviour
             FieldOfViewCheck();
         }
     }
+
+    private IEnumerator Attack()
+    {
+        Debug.LogError("Attack Coroutine called");
+        while (isAttacking)
+        {
+            if (_attackTimer <= 0f)
+            {
+                // spawn spear weapon and set its direction towards player
+                GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
+                Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
+                spear.transform.forward = direction;
+
+                // play attack animation
+                //* play the enemy animation here
+
+                //* wait for attack animation to finish
+                yield return new WaitForSeconds(attackDuration);
+
+                //* check if player is within attack range
+                if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
+                {
+                    //* Deal damage to the player here
+                    //* Make a sphere cast from the sphere point and check if there is player -> deal damage
+                    Debug.LogError("Dealing damage to the player");
+                }
+
+                //* reset attack timer and play attack cooldown animation
+                _attackTimer = attackCooldown;
+            }
+            else
+            {
+                // decrease attack timer
+                _attackTimer -= Time.deltaTime;
+            }
+
+            yield return null;
+        }
+    }
+
 
 }
