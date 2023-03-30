@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class EnemyPatrolState : EnemyBaseState
 {
     public EnemyPatrolState(EnemyStateManager enemy) : base(enemy) { }
@@ -22,14 +21,7 @@ public class EnemyPatrolState : EnemyBaseState
 
         if (enemyStateManager.isWayPointPatrol)
         {
-            Vector3 directionToWalk = enemyStateManager.nextLocation - enemyStateManager.transform.position;
-            Quaternion rotationToWayPoint = Quaternion.LookRotation(directionToWalk);
-            enemyStateManager.transform.rotation = Quaternion.Slerp(enemyStateManager.transform.rotation, rotationToWayPoint, enemyStateManager.rotationSpeed * Time.deltaTime);
-            if (Vector3.Distance(enemyStateManager.transform.position, enemyStateManager.nextLocation) < 1.0f && !enemyStateManager.PlayerInRange)
-            {
-                enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++) % enemyStateManager.waypoints.Length].position;
-            }
-            enemyStateManager.enemyAgent.SetDestination(enemyStateManager.nextLocation);
+            WayPointPatrol();
         }
         else
         {
@@ -48,10 +40,15 @@ public class EnemyPatrolState : EnemyBaseState
         {
             enemyStateManager.switchState(enemyStateManager.AlertState);
         }
-        else if(enemyStateManager.SoundInRange)
+        else if (enemyStateManager.SoundInRange)
         {
             enemyStateManager.switchState(enemyStateManager.SearchState);
         }
+    }
+
+    public override void ExitState()
+    {
+
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
@@ -72,8 +69,16 @@ public class EnemyPatrolState : EnemyBaseState
         return false;
     }
 
-    public override void ExitState()
+    private void WayPointPatrol()
     {
 
+        Vector3 directionToWalk = enemyStateManager.nextLocation - enemyStateManager.transform.position;
+        Quaternion rotationToWayPoint = Quaternion.LookRotation(directionToWalk);
+        enemyStateManager.transform.rotation = Quaternion.Slerp(enemyStateManager.transform.rotation, rotationToWayPoint, enemyStateManager.rotationSpeed * Time.deltaTime);
+        if (Vector3.Distance(enemyStateManager.transform.position, enemyStateManager.nextLocation) < 1.0f && !enemyStateManager.PlayerInRange)
+        {
+            enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++) % enemyStateManager.waypoints.Length].position;
+        }
+        enemyStateManager.enemyAgent.SetDestination(enemyStateManager.nextLocation);
     }
 }

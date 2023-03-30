@@ -6,6 +6,8 @@ public class EnemyAlertState : EnemyBaseState
     public override void EnterState()
     {
         enemyStateManager.enemyAnimController.Play("Alert_Anim");
+        enemyStateManager.alertText.enabled = true;
+        enemyStateManager.alertText.text = "Alert!";
         //! to make it better add a exclmation point and a small bar on top of the enemy 
     }
 
@@ -27,10 +29,10 @@ public class EnemyAlertState : EnemyBaseState
             Debug.Log("Switching for chase state!"); //!
         }
 
-        // if (enemyStateManager.SoundInRange)
-        // {
-        //     enemyStateManager.switchState(enemyStateManager.SearchState);
-        // }
+        if (enemyStateManager.SoundInRange)
+        {
+            enemyStateManager.switchState(enemyStateManager.SearchState);
+        }
 
         if (enemyStateManager.backToPatrol <= 0)
         {
@@ -48,5 +50,6 @@ public class EnemyAlertState : EnemyBaseState
     {
         enemyStateManager.startChaseTimer = 3.0f;
         enemyStateManager.backToPatrol = 2.0f;
+        enemyStateManager.alertText.enabled = false;
     }
 }

@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
+
 
 public class EnemyStateManager : MonoBehaviour
 {
@@ -9,8 +12,6 @@ public class EnemyStateManager : MonoBehaviour
     //todo : change speed of enemy based on the state that they are in
     //todo : make the enemy two shot for the body and one shot for the head
     //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
-    //todo : make a blend tree for enemy animation 
-    //todo :  
 
     //* singleton
     public static EnemyStateManager manager;
@@ -73,7 +74,8 @@ public class EnemyStateManager : MonoBehaviour
 
     public float backToPatrol = 2.0f;
     public float alertSpeed;
-
+    public TMP_Text alertText;
+    //* make this into explamation image and a slider 
 
     [Space(10)]
 
@@ -126,6 +128,7 @@ public class EnemyStateManager : MonoBehaviour
         AttackState = new EnemyAttackState(this);
         SearchState = new EnemySearchingState(this);
 
+        alertText.enabled = false;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
         switchState(IdleState);
