@@ -15,10 +15,6 @@ public class MakeSound : MonoBehaviour
         source.playOnAwake = false;
     }
 
-    
-    
-
-
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Ground")
