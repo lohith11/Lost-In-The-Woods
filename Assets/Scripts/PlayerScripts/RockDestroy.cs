@@ -28,6 +28,7 @@ public class RockDestroy : MonoBehaviour
         {
             GetComponent<Rigidbody>().isKinematic = true;
             Destroy(this.gameObject, 3f);
+            
         }
     }
 }
