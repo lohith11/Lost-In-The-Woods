@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
+
 
 public class EnemyStateManager : MonoBehaviour
 {
@@ -9,8 +12,6 @@ public class EnemyStateManager : MonoBehaviour
     //todo : change speed of enemy based on the state that they are in
     //todo : make the enemy two shot for the body and one shot for the head
     //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
-    //todo : make a blend tree for enemy animation 
-    //todo :  
 
     //* singleton
     public static EnemyStateManager manager;
@@ -37,19 +38,20 @@ public class EnemyStateManager : MonoBehaviour
     public bool PlayerInRange { get; private set; }
 
     [Space(10)]
-    
+
     [Header("Hearing Properties")]
     [Space(2)]
 
     [Range(5, 10)] public float hearingRange = 10f;
     public float soundCheckInterval = 1f;
     public bool SoundInRange { get; private set; }
+    public float searchForPlayer = 1.5f;
 
     [Space(10)]
 
     [Header("Way Point Patrol properties")]
     [Space(2)]
-    
+
     public Transform[] waypoints;
     public Vector3 nextLocation;
     public int destinationLoop;
@@ -69,9 +71,11 @@ public class EnemyStateManager : MonoBehaviour
 
     [Header("Alert properties")]
     [Space(2)]
-    
+
     public float backToPatrol = 2.0f;
     public float alertSpeed;
+    public TMP_Text alertText;
+    //* make this into explamation image and a slider 
 
     [Space(10)]
 
@@ -101,6 +105,7 @@ public class EnemyStateManager : MonoBehaviour
     public EnemyIdleState IdleState;
     public EnemyPatrolState PatrolState;
     public EnemyAlertState AlertState;
+    public EnemySearchingState SearchState;
     public EnemyChaseState ChaseState;
     public EnemyAttackState AttackState;
     public EnemyDieState DieState;
@@ -108,6 +113,7 @@ public class EnemyStateManager : MonoBehaviour
 
     void Start()
     {
+        
         manager = this;
 
         enemyAgent = GetComponent<NavMeshAgent>();
@@ -120,17 +126,19 @@ public class EnemyStateManager : MonoBehaviour
         DieState = new EnemyDieState(this);
         AlertState = new EnemyAlertState(this);
         AttackState = new EnemyAttackState(this);
+        SearchState = new EnemySearchingState(this);
 
-        switchState(IdleState);
-
+        alertText.enabled = false;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+        switchState(IdleState);
     }
 
     void Update()
     {
         currentState.UpdateState();
-        
+        Debug.Log("Sound in range is : " + SoundInRange);
+
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -142,7 +150,7 @@ public class EnemyStateManager : MonoBehaviour
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
     public void AttackPlayer() => StartCoroutine(Attack());
-
+    public void SearchForPlayer() => StartCoroutine(GoTosoundLocations());
     private void FieldOfViewCheck()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
@@ -189,6 +197,14 @@ public class EnemyStateManager : MonoBehaviour
             yield return new WaitForSeconds(soundCheckInterval);
         }
     }
+    private IEnumerator GoTosoundLocations()
+    {
+        enemyAgent.SetDestination(soundPosition);
+        enemyAnimController.Play("Finding_Anim");
+        yield return new WaitForSeconds(searchForPlayer);
+        SoundInRange = false;
+        switchState(PatrolState);
+    }
 
     private IEnumerator FOVRoutine()
     {
@@ -202,6 +218,7 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     private IEnumerator Attack()
+
     {
         Debug.LogError("Attack Coroutine called");
         while (isAttacking)
@@ -209,9 +226,9 @@ public class EnemyStateManager : MonoBehaviour
             if (_attackTimer <= 0f)
             {
                 // spawn spear weapon and set its direction towards player
-                GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
+              //  GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
                 Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
-                spear.transform.forward = direction;
+                //spear.transform.forward = direction;
 
                 // play attack animation
                 //* play the enemy animation here

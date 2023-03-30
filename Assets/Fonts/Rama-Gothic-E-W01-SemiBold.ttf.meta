@@ -1,5 +1,6 @@
 fileFormatVersion: 2
-guid: 72d27e090e02e5948871aad42c0bab21
+guid: 6a38e9b1403a36645b73d79a5d05a204
+importerOverride: Noesis.NoesisGUI.Editor::NoesisFontImporter
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,8 +9,7 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontNames:
-  - Rama Gothic E W01
+  fontNames: []
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
