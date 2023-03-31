@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
+public class dealDamageEventArg : EventArgs
+{
+    public float damage;
+}
 public class ThrowingRocks : MonoBehaviour
 {
+    public event EventHandler<dealDamageEventArg> dealDamage;
+
+    [SerializeField]
+    private string headDamage;
+    private string bodyDamage;
+
     [Header("References")]
     public Transform cam;
     public Transform attackpoint;
@@ -128,6 +139,7 @@ public class ThrowingRocks : MonoBehaviour
         lineRenderer.SetPositions(points.ToArray());
     }
 
+    #region Triggers
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Rock"))
@@ -165,9 +177,23 @@ public class ThrowingRocks : MonoBehaviour
             pressRocksText.enabled = false;
         }
     }
+    #endregion
 
     public void ResetThrow()
     {
         readyToThrow = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.name == headDamage)
+        {
+            dealDamage?.Invoke(this, new dealDamageEventArg{ damage = 100 });
+        }
+
+        if(collision.collider.name == bodyDamage)
+        {
+            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
+        }
     }
 }
