@@ -1,14 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
+public class dealDamageEventArg : EventArgs
+{
+    public float damage;
+}
 public class ThrowingRocks : MonoBehaviour
 {
+    public event EventHandler<dealDamageEventArg> dealDamage;
+
+    [SerializeField]
+    private string headDamage;
+    private string bodyDamage;
+
     [Header("References")]
     public Transform cam;
     public Transform attackpoint;
     public GameObject objectThrow;
+    public TMP_Text pressRocksText;
 
+    public int maxRockPickUp;
     private int totalThrows;
     public float throwCoolDown;
 
@@ -17,6 +31,7 @@ public class ThrowingRocks : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private bool readyToThrow;
+    public bool canPickUp;
 
     public float f;
     public int numPoints = 50;
@@ -24,16 +39,17 @@ public class ThrowingRocks : MonoBehaviour
     private PlayerStateMachine playerStateMachine;
 
 
-    [Header("< RockPicking >")]
-    public bool isRockPick;
-    public Transform rockInRange;
-    public float rockInRangeRadius;
-    public LayerMask rockLayer;
+    //[Header("< RockPicking >")]
+    //public bool isRockPick;
+    //public Transform rockInRange;
+    //public float rockInRangeRadius;
+    //public LayerMask rockLayer;
 
     //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
     void Start()
     {
+        canPickUp = true;
         playerStateMachine = GetComponent<PlayerStateMachine>();
         lineRenderer = GetComponent<LineRenderer>();
         readyToThrow = true;
@@ -55,17 +71,31 @@ public class ThrowingRocks : MonoBehaviour
         {
             lineRenderer.enabled = false;
         }
+
+        if(totalThrows >= maxRockPickUp)
+        {
+            canPickUp = false;
+            totalThrows = maxRockPickUp;
+        }
+        else if(totalThrows < maxRockPickUp)
+        {
+            canPickUp = true;
+        }
     }
 
     public void Throw()
     {
         readyToThrow = false;
-
+        
         //Instatiation object
         GameObject projectile = Instantiate(objectThrow, attackpoint.position, cam.rotation);
 
+        projectile.GetComponent<RockDestroy>().isThrown = true;
+
         //Getting RigidBody of that throwable object
         Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+
+        Debug.Log(projectileRB.GetInstanceID());
 
         //Caluculate Direction of that Object
         Vector3 forceDirection = cam.transform.forward;
@@ -109,9 +139,61 @@ public class ThrowingRocks : MonoBehaviour
         lineRenderer.SetPositions(points.ToArray());
     }
 
+    #region Triggers
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Rock"))
+        {
+            pressRocksText.enabled = true;
+            pressRocksText.text = "Press E or Controller Y";
+            if(playerStateMachine.isPicking && canPickUp)
+            {
+                totalThrows++;
+                pressRocksText.enabled = false;
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Rock"))
+        {
+            pressRocksText.enabled = true;
+            pressRocksText.text = "Press E or Controller Y";
+            if (playerStateMachine.isPicking && canPickUp)
+            {
+                totalThrows++;
+                pressRocksText.enabled = false;
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Rock"))
+        {
+            pressRocksText.enabled = false;
+        }
+    }
+    #endregion
+
     public void ResetThrow()
     {
         readyToThrow = true;
     }
-}
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.name == headDamage)
+        {
+            dealDamage?.Invoke(this, new dealDamageEventArg{ damage = 100 });
+        }
+
+        if(collision.collider.name == bodyDamage)
+        {
+            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
+        }
+    }
+}
