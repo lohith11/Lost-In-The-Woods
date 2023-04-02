@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.Animations.Rigging;
 
 
 public class EnemyStateManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public NavMeshAgent enemyAgent;
     [HideInInspector] public Vector3 soundPosition;
     [HideInInspector] public AnimatorStateInfo stateInfo;
+    public RigBuilder builder;
 
     //* Enemy Attributes
 
@@ -47,6 +49,13 @@ public class EnemyStateManager : MonoBehaviour
     public bool SoundInRange { get; private set; }
     public float searchForPlayer = 1.5f;
 
+    [Space(10)]
+
+    [Header("Idle state")]
+    [Space(2)]
+
+    public float idleTimer;
+    
     [Space(10)]
 
     [Header("Way Point Patrol properties")]
@@ -92,7 +101,6 @@ public class EnemyStateManager : MonoBehaviour
     public bool isAttacking;
     private float _attackTimer;
     public Vector3 lastknownLocation;
-    public Transform sphereSpawnPoint;
     public GameObject spherePrefab;
 
     [Space(10)]
@@ -132,13 +140,20 @@ public class EnemyStateManager : MonoBehaviour
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
         switchState(IdleState);
+
+        builder.layers[0].active = false;
+        spherePrefab.SetActive(false);
     }
 
     void Update()
     {
         currentState.UpdateState();
-        Debug.Log("Sound in range is : " + SoundInRange);
-
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            enemyAnimController.enabled = false;
+            switchState(DieState);
+            
+        }
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -227,8 +242,6 @@ public class EnemyStateManager : MonoBehaviour
             {
                 // spawn spear weapon and set its direction towards player
               //  GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
-                Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
-                //spear.transform.forward = direction;
 
                 // play attack animation
                 //* play the enemy animation here
