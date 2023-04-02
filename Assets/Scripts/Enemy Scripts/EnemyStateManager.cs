@@ -10,7 +10,6 @@ using UnityEngine.Animations.Rigging;
 public class EnemyStateManager : MonoBehaviour
 {
     //todo : alert nearby enemies when an enemy dies
-    //todo : change speed of enemy based on the state that they are in
     //todo : make the enemy two shot for the body and one shot for the head
     //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
 
@@ -21,8 +20,8 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public Animator enemyAnimController;
     [HideInInspector] public NavMeshAgent enemyAgent;
     [HideInInspector] public Vector3 soundPosition;
-    [HideInInspector] public AnimatorStateInfo stateInfo;
     public RigBuilder builder;
+    public ThrowingRocks rockThrowing;
 
     //* Enemy Attributes
 
@@ -126,7 +125,6 @@ public class EnemyStateManager : MonoBehaviour
 
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
-        stateInfo = enemyAnimController.GetCurrentAnimatorStateInfo(0);
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
@@ -139,21 +137,19 @@ public class EnemyStateManager : MonoBehaviour
         alertText.enabled = false;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
-        switchState(IdleState);
+        
 
         builder.layers[0].active = false;
         spherePrefab.SetActive(false);
+
+        rockThrowing.dealDamage += TakeDamage;
+
+        switchState(IdleState);
     }
 
     void Update()
     {
         currentState.UpdateState();
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            enemyAnimController.enabled = false;
-            switchState(DieState);
-            
-        }
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -189,6 +185,18 @@ public class EnemyStateManager : MonoBehaviour
         }
         else if (PlayerInRange)
             PlayerInRange = false;
+    }
+
+    public void TakeDamage(object sender , ThrowingRocks.dealDamageEventArg e)
+    {
+        if(e.damage == 100)
+        {
+            switchState(DieState);
+        }
+        else if(e.damage == 50)
+        {
+            switchState(AlertState);
+        }
     }
 
     private IEnumerator CheckForSounds()
@@ -254,7 +262,7 @@ public class EnemyStateManager : MonoBehaviour
                 {
                     //* Deal damage to the player here
                     //* Make a sphere cast from the sphere point and check if there is player -> deal damage
-                    Debug.LogError("Dealing damage to the player");
+                   //! Debug.LogError("Dealing damage to the player");
                 }
 
                 //* reset attack timer and play attack cooldown animation

@@ -3642,7 +3642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues: {fileID: 946265004}
   textSpeed: 0.2
-  dialoguesforNPC: {fileID: 11400000, guid: da641ed7fdf77104bbf59142de8fa7d9, type: 2}
+  dialoguesforNPC: {fileID: 0}
 --- !u!1 &1496512906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4248,6 +4248,16 @@ PrefabInstance:
       propertyPath: FOV
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 7071830401446636318, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: _bodyColliderName
+      value: mixamorig:Spine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071830401446636318, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
+      propertyPath: _headColliderName
+      value: mixamorig:Head
+      objectReference: {fileID: 0}
     - target: {fileID: 7071830402260434314, guid: 2fa59c1ff8b565548b2580090002db5d,
         type: 3}
       propertyPath: mouseSpeed
@@ -4450,6 +4460,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1874844569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7071830401446636318, guid: 2fa59c1ff8b565548b2580090002db5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1818010827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020b78697538d0248a2dc2ff237f5824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1880679763
 GameObject:
   m_ObjectHideFlags: 0
@@ -4568,6 +4590,7 @@ MonoBehaviour:
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
   builder: {fileID: 0}
+  rockThrowing: {fileID: 0}
   isWayPointPatrol: 0
   stoppingDistance: 0
   radius: 0
@@ -7545,6 +7568,7 @@ MonoBehaviour:
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
   builder: {fileID: 0}
+  rockThrowing: {fileID: 0}
   isWayPointPatrol: 1
   stoppingDistance: 2
   radius: 7.15
@@ -10496,6 +10520,7 @@ MonoBehaviour:
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
   builder: {fileID: 8705520285404689822}
+  rockThrowing: {fileID: 1874844569}
   isWayPointPatrol: 0
   stoppingDistance: 2
   radius: 7.15
