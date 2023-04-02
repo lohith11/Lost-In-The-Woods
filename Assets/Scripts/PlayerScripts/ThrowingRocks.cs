@@ -14,7 +14,7 @@ public class ThrowingRocks : MonoBehaviour
 
     [SerializeField]
     private string headDamage;
-    private string bodyDamage;
+    [SerializeField] private string bodyDamage;
 
     [Header("References")]
     public Transform cam;

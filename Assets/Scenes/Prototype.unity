@@ -5198,6 +5198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7071830401446636318, guid: 2fa59c1ff8b565548b2580090002db5d,
         type: 3}
+      propertyPath: headDamage
+      value: mixamorig:Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071830401446636318, guid: 2fa59c1ff8b565548b2580090002db5d,
+        type: 3}
       propertyPath: noRocksText
       value: 
       objectReference: {fileID: 1765089179}
@@ -5625,10 +5630,8 @@ MonoBehaviour:
   enemyAnimController: {fileID: 1953830935}
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
-  rockThrowing: {fileID: 0}
   isWayPointPatrol: 0
   stoppingDistance: 0
-  health: 0
   radius: 0
   angle: 0
   playerRef: {fileID: 0}
@@ -8399,10 +8402,8 @@ MonoBehaviour:
   enemyAnimController: {fileID: 3445666183336229224}
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
-  rockThrowing: {fileID: 0}
   isWayPointPatrol: 1
   stoppingDistance: 2
-  health: 0
   radius: 7.15
   angle: 158
   playerRef: {fileID: 0}
@@ -10932,10 +10933,8 @@ MonoBehaviour:
   enemyAnimController: {fileID: 3445666183336229224}
   enemyAgent: {fileID: 0}
   soundPosition: {x: 0, y: 0, z: 0}
-  rockThrowing: {fileID: 0}
   isWayPointPatrol: 0
   stoppingDistance: 2
-  health: 0
   radius: 7.15
   angle: 158
   playerRef: {fileID: 0}
@@ -10959,12 +10958,12 @@ MonoBehaviour:
   sphereRadius: 10
   startChaseTimer: 3
   centerPoint: {fileID: 334425619}
-  patrolSpeed: 0
+  patrolSpeed: 1
   backToPatrol: 2
-  alertSpeed: 0
+  alertSpeed: 2
   alertText: {fileID: 498597260}
   attackRadius: 4.42
-  chaseSpeed: 0
+  chaseSpeed: 4
   attackDuration: 1
   attackCooldown: 2
   damage: 69
