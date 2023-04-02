@@ -4,7 +4,10 @@ using UnityEngine;
 using TMPro;
 using System;
 
-
+public class dealDamageEventArg : EventArgs
+{
+    public float damage;
+}
 public class ThrowingRocks : MonoBehaviour
 {
     public event EventHandler<dealDamageEventArg> dealDamage;
@@ -73,12 +76,12 @@ public class ThrowingRocks : MonoBehaviour
             lineRenderer.enabled = false;
         }
 
-        if (totalThrows >= maxRockPickUp)
+        if(totalThrows >= maxRockPickUp)
         {
             canPickUp = false;
             totalThrows = maxRockPickUp;
         }
-        else if (totalThrows < maxRockPickUp)
+        else if(totalThrows < maxRockPickUp)
         {
             canPickUp = true;
         }
@@ -87,7 +90,7 @@ public class ThrowingRocks : MonoBehaviour
     public void Throw()
     {
         readyToThrow = false;
-
+        
         //Instatiation object
         GameObject projectile = Instantiate(objectThrow, attackpoint.position, cam.rotation);
 
@@ -143,11 +146,11 @@ public class ThrowingRocks : MonoBehaviour
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Rock"))
+        if(other.CompareTag("Rock"))
         {
             pressRocksText.enabled = true;
             pressRocksText.text = "Press E or Controller Y";
-            if (playerStateMachine.isPicking && canPickUp)
+            if(playerStateMachine.isPicking && canPickUp)
             {
                 totalThrows++;
                 pressRocksText.enabled = false;
