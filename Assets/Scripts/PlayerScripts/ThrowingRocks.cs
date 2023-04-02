@@ -12,9 +12,13 @@ public class ThrowingRocks : MonoBehaviour
 {
     public event EventHandler<dealDamageEventArg> dealDamage;
 
-    [SerializeField]
-    private string headDamage;
-    private string bodyDamage;
+    public class dealDamageEventArg : EventArgs
+    {
+        public float damage;
+    }
+
+    [SerializeField] private string _headColliderName;
+    [SerializeField] private string _bodyColliderName;
 
     [Header("References")]
     public Transform cam;
@@ -55,7 +59,7 @@ public class ThrowingRocks : MonoBehaviour
         readyToThrow = true;
     }
 
- 
+
     private void Update()
     {
         if (playerStateMachine.isAiming)
@@ -108,7 +112,7 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         //Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
-        Vector3 forceToAdd=forceDirection * throwForce;
+        Vector3 forceToAdd = forceDirection * throwForce;
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
@@ -186,14 +190,16 @@ public class ThrowingRocks : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.name == headDamage)
+        if (collision.collider.name == _headColliderName)
         {
-            dealDamage?.Invoke(this, new dealDamageEventArg{ damage = 100 });
+            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
+            Debug.LogError("Hit the head");
         }
 
-        if(collision.collider.name == bodyDamage)
+        if (collision.collider.name == _bodyColliderName)
         {
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
+            Debug.LogError("Hit the booody");
         }
     }
 }

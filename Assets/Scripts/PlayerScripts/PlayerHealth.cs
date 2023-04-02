@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if()
+        
         if(Health <= 0)
         {
             Health = 0;

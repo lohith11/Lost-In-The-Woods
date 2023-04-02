@@ -3,14 +3,11 @@ using UnityEngine;
 public class EnemyChaseState : EnemyBaseState
 {
 
-    //todo : if the player does not in line of sight for 2 sec switch back to alert state 
-
-    //* if attack -> attack function -> spear IK -> spear do damange event -> player health sub to event
     public EnemyChaseState(EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        
-       enemyStateManager.enemyAnimController.Play("Chasing_Anim");
+        enemyStateManager.enemyAnimController.Play("Chasing_Anim");
+        enemyStateManager.enemyAgent.speed = enemyStateManager.chaseSpeed;
         Debug.Log("Entered the chase state"); //! delete the debug
     }
 

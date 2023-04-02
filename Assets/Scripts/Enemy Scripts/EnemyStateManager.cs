@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.Animations.Rigging;
 
 
 public class EnemyStateManager : MonoBehaviour
 {
     //todo : alert nearby enemies when an enemy dies
-    //todo : change speed of enemy based on the state that they are in
     //todo : make the enemy two shot for the body and one shot for the head
     //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
 
@@ -20,7 +20,8 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public Animator enemyAnimController;
     [HideInInspector] public NavMeshAgent enemyAgent;
     [HideInInspector] public Vector3 soundPosition;
-    [HideInInspector] public AnimatorStateInfo stateInfo;
+    public RigBuilder builder;
+    public ThrowingRocks rockThrowing;
 
     //* Enemy Attributes
 
@@ -47,6 +48,13 @@ public class EnemyStateManager : MonoBehaviour
     public bool SoundInRange { get; private set; }
     public float searchForPlayer = 1.5f;
 
+    [Space(10)]
+
+    [Header("Idle state")]
+    [Space(2)]
+
+    public float idleTimer;
+    
     [Space(10)]
 
     [Header("Way Point Patrol properties")]
@@ -92,7 +100,6 @@ public class EnemyStateManager : MonoBehaviour
     public bool isAttacking;
     private float _attackTimer;
     public Vector3 lastknownLocation;
-    public Transform sphereSpawnPoint;
     public GameObject spherePrefab;
 
     [Space(10)]
@@ -118,7 +125,6 @@ public class EnemyStateManager : MonoBehaviour
 
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
-        stateInfo = enemyAnimController.GetCurrentAnimatorStateInfo(0);
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
@@ -131,14 +137,19 @@ public class EnemyStateManager : MonoBehaviour
         alertText.enabled = false;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+        
+
+        builder.layers[0].active = false;
+        spherePrefab.SetActive(false);
+
+        rockThrowing.dealDamage += TakeDamage;
+
         switchState(IdleState);
     }
 
     void Update()
     {
         currentState.UpdateState();
-        Debug.Log("Sound in range is : " + SoundInRange);
-
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -174,6 +185,18 @@ public class EnemyStateManager : MonoBehaviour
         }
         else if (PlayerInRange)
             PlayerInRange = false;
+    }
+
+    public void TakeDamage(object sender , ThrowingRocks.dealDamageEventArg e)
+    {
+        if(e.damage == 100)
+        {
+            switchState(DieState);
+        }
+        else if(e.damage == 50)
+        {
+            switchState(AlertState);
+        }
     }
 
     private IEnumerator CheckForSounds()
@@ -227,8 +250,6 @@ public class EnemyStateManager : MonoBehaviour
             {
                 // spawn spear weapon and set its direction towards player
               //  GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
-                Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
-                //spear.transform.forward = direction;
 
                 // play attack animation
                 //* play the enemy animation here
@@ -241,7 +262,7 @@ public class EnemyStateManager : MonoBehaviour
                 {
                     //* Deal damage to the player here
                     //* Make a sphere cast from the sphere point and check if there is player -> deal damage
-                    Debug.LogError("Dealing damage to the player");
+                   //! Debug.LogError("Dealing damage to the player");
                 }
 
                 //* reset attack timer and play attack cooldown animation
