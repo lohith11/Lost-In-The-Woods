@@ -20,14 +20,12 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public Animator enemyAnimController;
     [HideInInspector] public NavMeshAgent enemyAgent;
     [HideInInspector] public Vector3 soundPosition;
-
-    public ThrowingRocks rockThrowing;
+    [HideInInspector] public AnimatorStateInfo stateInfo;
 
     //* Enemy Attributes
 
     public bool isWayPointPatrol;
     public float stoppingDistance;
-    public float health;
 
     [Header("Enemy field of view")]
     [Space(2)]
@@ -120,6 +118,7 @@ public class EnemyStateManager : MonoBehaviour
 
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
+        stateInfo = enemyAnimController.GetCurrentAnimatorStateInfo(0);
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
@@ -132,8 +131,6 @@ public class EnemyStateManager : MonoBehaviour
         alertText.enabled = false;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
-
-        rockThrowing.dealDamage -= TakeDamage;
         switchState(IdleState);
     }
 
@@ -177,20 +174,6 @@ public class EnemyStateManager : MonoBehaviour
         }
         else if (PlayerInRange)
             PlayerInRange = false;
-    }
-
-    public void TakeDamage(object sender, ThrowingRocks.dealDamageEventArg e)
-    {
-        if(e.damage == 100)
-        {
-            switchState(DieState);
-            health = 0;
-        }
-        else if(e.damage == 50)
-        {
-            switchState(AlertState);
-            health -= 50;
-        }
     }
 
     private IEnumerator CheckForSounds()
