@@ -8,7 +8,7 @@ public class EnemyPatrolState : EnemyBaseState
     {
         enemyStateManager.searchForSounds();
         enemyStateManager.enemyAnimController.Play("Walking_Anim");
-        enemyStateManager.enemyAgent.speed = enemyStateManager.patrolSpeed;
+        enemyStateManager.enemyAgent.speed = 1.5f;
         if (enemyStateManager.isWayPointPatrol)
         {
             enemyStateManager.nextLocation = enemyStateManager.waypoints[(enemyStateManager.destinationLoop++) % enemyStateManager.waypoints.Length].position;
