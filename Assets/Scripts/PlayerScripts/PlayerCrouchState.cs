@@ -8,6 +8,7 @@ public class PlayerCrouchState : PlayerBaseState
     private Vector3 moveInput;
     private int CrouchMoveX;
     private int CrouchMoveY;
+
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
@@ -24,6 +25,10 @@ public class PlayerCrouchState : PlayerBaseState
     public override void UpdateState()
     {
         CheckChangeState();
+    }
+
+    public override void FixedUpdateState()
+    {
         if(playerStateMachine.playerInput.magnitude != 0)
         {
             playerStateMachine.playerAnimation.SetBool("isCrouching", true);
@@ -34,10 +39,6 @@ public class PlayerCrouchState : PlayerBaseState
         {
             playerStateMachine.playerAnimation.SetBool("isCrouching", false);
         }
-    }
-
-    public override void FixedUpdateState()
-    {
         moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerCrouchSpeed, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerCrouchSpeed);
         playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
     }
@@ -52,7 +53,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if (!playerStateMachine.isCrouched)
+        if (playerStateMachine.crouchPressed)
         {
             if (playerStateMachine.playerInput.magnitude == 0)
             {

@@ -226,7 +226,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""8036c32c-2bd6-4ef4-ae5c-b972e388cde7"",
                     ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Hold,Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Crouch"",
