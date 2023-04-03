@@ -10,17 +10,17 @@ public class PlayerRunningState : PlayerBaseState
     public override void EnterState()
     {
         playerStateMachine.playerAnimation.Play("Player_Running");
-        playerStateMachine.CorStarter(80f, playerStateMachine.FAVdelay);
+        playerStateMachine.CorStarter(playerStateMachine.FOV, playerStateMachine.FAVdelay);
        // Debug.Log("Entered Running state");
     }
 
     public override void UpdateState()
     {
         CheckChangeState();
-        if (playerStateMachine.isJumping && playerStateMachine.isGrounded)
-        {
-            playerStateMachine.playerRB.velocity = new Vector3(playerStateMachine.playerRB.velocity.x, playerStateMachine.jumpForce, playerStateMachine.playerRB.velocity.z);
-        }
+        //if (playerStateMachine.isJumping && playerStateMachine.isGrounded)
+        //{
+        //    playerStateMachine.playerRB.velocity = new Vector3(playerStateMachine.playerRB.velocity.x, playerStateMachine.jumpForce, playerStateMachine.playerRB.velocity.z);
+        //}
     }
 
     public override void FixedUpdateState()
@@ -39,12 +39,12 @@ public class PlayerRunningState : PlayerBaseState
     {
         if(!playerStateMachine.isRunning) 
         {
-            if(playerStateMachine.playerInput.magnitude != 0 && playerStateMachine.isGrounded)
+            if(playerStateMachine.playerInput.magnitude != 0)
             {
                 playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
             }
 
-            else if(playerStateMachine.playerInput.magnitude == 0 && playerStateMachine.isGrounded)
+            else if(playerStateMachine.playerInput.magnitude == 0)
             {
                 playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
             }

@@ -46,7 +46,7 @@ public class PlayerMovingState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerRunningState);
         }
 
-        else if (playerStateMachine.isCrouched)
+        else if (playerStateMachine.crouchPressed)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
