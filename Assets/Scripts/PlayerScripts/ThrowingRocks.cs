@@ -4,16 +4,16 @@ using UnityEngine;
 using TMPro;
 using System;
 
-
+public class dealDamageEventArg : EventArgs
+{
+    public float damage;
+}
 public class ThrowingRocks : MonoBehaviour
 {
     public event EventHandler<dealDamageEventArg> dealDamage;
 
-    public class dealDamageEventArg : EventArgs
-    {
-        public float damage;
-    }
-    [SerializeField] private string headDamage;
+    [SerializeField]
+    private string headDamage;
     [SerializeField] private string bodyDamage;
 
     [Header("References")]
@@ -55,7 +55,7 @@ public class ThrowingRocks : MonoBehaviour
         readyToThrow = true;
     }
 
-
+ 
     private void Update()
     {
         if (playerStateMachine.isAiming)
@@ -72,12 +72,12 @@ public class ThrowingRocks : MonoBehaviour
             lineRenderer.enabled = false;
         }
 
-        if (totalThrows >= maxRockPickUp)
+        if(totalThrows >= maxRockPickUp)
         {
             canPickUp = false;
             totalThrows = maxRockPickUp;
         }
-        else if (totalThrows < maxRockPickUp)
+        else if(totalThrows < maxRockPickUp)
         {
             canPickUp = true;
         }
@@ -86,7 +86,7 @@ public class ThrowingRocks : MonoBehaviour
     public void Throw()
     {
         readyToThrow = false;
-
+        
         //Instatiation object
         GameObject projectile = Instantiate(objectThrow, attackpoint.position, cam.rotation);
 
@@ -108,7 +108,7 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         //Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
-        Vector3 forceToAdd = forceDirection * throwForce;
+        Vector3 forceToAdd=forceDirection * throwForce;
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
@@ -142,11 +142,11 @@ public class ThrowingRocks : MonoBehaviour
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Rock"))
+        if(other.CompareTag("Rock"))
         {
             pressRocksText.enabled = true;
             pressRocksText.text = "Press E or Controller Y";
-            if (playerStateMachine.isPicking && canPickUp)
+            if(playerStateMachine.isPicking && canPickUp)
             {
                 totalThrows++;
                 pressRocksText.enabled = false;
@@ -186,12 +186,12 @@ public class ThrowingRocks : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == headDamage)
+        if(collision.collider.name == headDamage)
         {
-            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
+            dealDamage?.Invoke(this, new dealDamageEventArg{ damage = 100 });
         }
 
-        if (collision.collider.name == bodyDamage)
+        if(collision.collider.name == bodyDamage)
         {
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
         }
