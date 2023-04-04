@@ -204,7 +204,7 @@
                     "name": "",
                     "id": "8036c32c-2bd6-4ef4-ae5c-b972e388cde7",
                     "path": "<Keyboard>/leftCtrl",
-                    "interactions": "Hold,Press",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Crouch",

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerCrouchState : PlayerBaseState
 {
     private Vector3 moveInput;
     private int CrouchMoveX;
     private int CrouchMoveY;
+    private float timeElapsed = 0.5f;
 
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
@@ -17,13 +19,14 @@ public class PlayerCrouchState : PlayerBaseState
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.1f);
         playerStateMachine.originalPosition = 1f;
-        playerStateMachine.playerCamera.localPosition = new Vector3(0, 1f, 0.5f);
+        playerStateMachine.playerCamera.localPosition = new Vector3(0, Mathf.Lerp(1.8f, 1f, timeElapsed), 0.5f);//To do making the camera smooth while lerping
         playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
     }
 
     public override void UpdateState()
     {
+        timeElapsed += Time.deltaTime;
         CheckChangeState();
     }
 
@@ -53,7 +56,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if (playerStateMachine.crouchPressed)
+        if (!playerStateMachine.crouchPressed)
         {
             if (playerStateMachine.playerInput.magnitude == 0)
             {

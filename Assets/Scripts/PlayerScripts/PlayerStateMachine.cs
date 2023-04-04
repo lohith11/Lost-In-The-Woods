@@ -37,8 +37,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("< Player Crouch >")]
     [Space(5)]
     public float playerCrouchSpeed;
-  /*  public bool isCrouched;
-    public bool quickExit;*/
+    public bool quickExit;
     public bool crouchPressed;
     [Space(10)]
 
@@ -201,24 +200,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Crouched(InputAction.CallbackContext context)
     {
-        crouchPressed = context.ReadValueAsButton();
-
-     /*   if(context.phase==InputActionPhase.Started)
+        if (context.performed)
         {
-            quickExit = false;
-            Debug.Log("quickExit = " + quickExit);
+            crouchPressed = !crouchPressed;
         }
-
-        else if(context.phase == InputActionPhase.Performed)
-        {
-            quickExit = true;
-            Debug.Log("quickExit = " + quickExit);
-        }
-        else
-        {
-            quickExit = false;
-            Debug.Log("quickExit = " + quickExit);
-        }*/
     }
 
     public void Jump(InputAction.CallbackContext context)

@@ -34,7 +34,7 @@ public class PlayerIdleState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
         }
         
-        else if(playerStateMachine.crouchPressed)
+        else if(playerStateMachine.crouchPressed && !playerStateMachine.quickExit)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
