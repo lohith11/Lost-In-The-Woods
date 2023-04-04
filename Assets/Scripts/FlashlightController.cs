@@ -25,6 +25,17 @@ public class FlashlightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if(_flashLight.enabled) 
+            {
+                _flashLight.enabled = false;
+            }
+            else
+            {
+                _flashLight.enabled = true;
+            }
+        }
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, bigBadLayer);
         if (colliders.Length > 0)
             bigBadInRange = true;
