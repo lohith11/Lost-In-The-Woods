@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
@@ -27,8 +28,9 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerSpeed, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerSpeed);
-        playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
+        moveInput = new Vector3(playerStateMachine.playerInput.x, 0f, playerStateMachine.playerInput.y) * playerStateMachine.playerSpeed * Time.fixedDeltaTime;
+        playerStateMachine.transform.Translate(moveInput);
+        //playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
     }
     public override void ExitState() 
     {
