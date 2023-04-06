@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerCrouchState : PlayerBaseState
 {
     private Vector3 moveInput;
     private int CrouchMoveX;
     private int CrouchMoveY;
+
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
         CrouchMoveX = Animator.StringToHash("CrouchMoveX");
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
-        playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.1f);
+        playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         playerStateMachine.originalPosition = 1f;
-        playerStateMachine.playerCamera.localPosition = new Vector3(0, 1f, 0.5f);
+        playerStateMachine.playerCamera.localPosition = new Vector3(0, 1f, 0.5f);//To do making the camera smooth using lerping
         playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
     }
@@ -24,6 +26,10 @@ public class PlayerCrouchState : PlayerBaseState
     public override void UpdateState()
     {
         CheckChangeState();
+    }
+
+    public override void FixedUpdateState()
+    {
         if(playerStateMachine.playerInput.magnitude != 0)
         {
             playerStateMachine.playerAnimation.SetBool("isCrouching", true);
@@ -33,13 +39,10 @@ public class PlayerCrouchState : PlayerBaseState
         else
         {
             playerStateMachine.playerAnimation.SetBool("isCrouching", false);
+            playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         }
-    }
-
-    public override void FixedUpdateState()
-    {
-        moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerCrouchSpeed, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerCrouchSpeed);
-        playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
+        moveInput = new Vector3(playerStateMachine.playerInput.x, 0f, playerStateMachine.playerInput.y) * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime;
+        playerStateMachine.transform.Translate(moveInput);
     }
 
     public override void ExitState()
@@ -52,7 +55,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if (!playerStateMachine.isCrouched)
+        if (!playerStateMachine.crouchPressed)
         {
             if (playerStateMachine.playerInput.magnitude == 0)
             {

@@ -37,7 +37,8 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("< Player Crouch >")]
     [Space(5)]
     public float playerCrouchSpeed;
-    public bool isCrouched;
+    public bool quickExit;
+    public bool crouchPressed;
     [Space(10)]
 
     //Player Jump
@@ -199,12 +200,15 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Crouched(InputAction.CallbackContext context)
     {
-        isCrouched = context.ReadValueAsButton();
+        if (context.performed)
+        {
+            crouchPressed = !crouchPressed;
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        isJumping = context.ReadValueAsButton();
+        //isJumping = context.ReadValueAsButton();
     }
 
     public void Rotation(InputAction.CallbackContext context)
@@ -237,8 +241,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         else if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
         {
-            timer += Time.deltaTime * (isCrouched ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
-            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (isCrouched ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
+            timer += Time.deltaTime * (crouchPressed ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
+            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
         }
     }
 
