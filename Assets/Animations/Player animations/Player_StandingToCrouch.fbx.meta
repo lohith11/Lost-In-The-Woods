@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: Player_Crouch
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 2
