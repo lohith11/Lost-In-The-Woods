@@ -12,9 +12,8 @@ public class ThrowingRocks : MonoBehaviour
 {
     public event EventHandler<dealDamageEventArg> dealDamage;
 
-    [SerializeField]
-    private string headDamage;
-    [SerializeField] private string bodyDamage;
+    [SerializeField]private string headDamage;
+    [SerializeField]private string bodyDamage;
 
     [Header("References")]
     public Transform cam;
