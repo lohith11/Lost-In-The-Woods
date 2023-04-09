@@ -8,7 +8,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class PlayerMovingState : PlayerBaseState
 {
     private Vector3 moveInput;
-
+    private float currentPosition;
     private int moveX;
     private int moveY;
     public PlayerMovingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
@@ -18,9 +18,16 @@ public class PlayerMovingState : PlayerBaseState
         moveX = Animator.StringToHash("MoveX");
         moveY = Animator.StringToHash("MoveY");
         playerStateMachine.playerAnimation.SetBool("isMoving", true);
+        currentPosition = playerStateMachine.playerCamera.localPosition.y;
     }
     public override void UpdateState()
     {
+        if (Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
+        {
+            currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.standingHeight, 0.1f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.2f);
+            playerStateMachine.originalPosition = currentPosition;
+        }
         playerStateMachine.playerAnimation.SetFloat(moveX, playerStateMachine.playerInput.x);
         playerStateMachine.playerAnimation.SetFloat(moveY, playerStateMachine.playerInput.y);
         CheckChangeState();

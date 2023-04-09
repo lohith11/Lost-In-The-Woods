@@ -9,6 +9,7 @@ public class PlayerCrouchState : PlayerBaseState
     private Vector3 moveInput;
     private int CrouchMoveX;
     private int CrouchMoveY;
+    private float currentPosition;
 
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
@@ -17,14 +18,19 @@ public class PlayerCrouchState : PlayerBaseState
         CrouchMoveX = Animator.StringToHash("CrouchMoveX");
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
-        playerStateMachine.originalPosition = 1f;
-        playerStateMachine.playerCamera.localPosition = new Vector3(0, 1f, 0.5f);//To do making the camera smooth using lerping
+        currentPosition = playerStateMachine.playerCamera.localPosition.y;
         playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
     }
 
     public override void UpdateState()
     {
+        if (Mathf.Abs(playerStateMachine.crouchHeight - currentPosition) > 0.05f)
+        {
+            currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.crouchHeight, 0.1f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.5f);
+            playerStateMachine.originalPosition = currentPosition;
+        }
         CheckChangeState();
     }
 
@@ -47,8 +53,6 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void ExitState()
     {
-        playerStateMachine.originalPosition = 1.7f;
-        playerStateMachine.playerCamera.localPosition = new Vector3(0, 1.7f, 0.2f);
         playerStateMachine.GetComponent<CapsuleCollider>().height = 1.8f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.9f, 0f);
     }
@@ -60,11 +64,6 @@ public class PlayerCrouchState : PlayerBaseState
             if (playerStateMachine.playerInput.magnitude == 0)
             {
                 playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
-            }
-
-            else if(playerStateMachine.playerInput.magnitude != 0)
-            {
-                playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
             }
         }
     }

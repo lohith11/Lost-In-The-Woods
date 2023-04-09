@@ -20,16 +20,21 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     public float healthUpgrade;
     public float Health;
+    private float baseHealth;
 
+    private PlayerStateMachine StateMachine;
 
     private void Start()
     {
+        StateMachine = GetComponent<PlayerStateMachine>();
         Health = maxHealth;
+        baseHealth = maxHealth;
     }
 
     private void Update()
     {
-        
+        maxHealth = baseHealth + (StateMachine.herbs * 10);
+        Health = maxHealth;
         if(Health <= 0)
         {
             Health = 0;
@@ -37,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(Health == 0)
         {
-
+            //DeadState
         }
         HealthVisual();
     }

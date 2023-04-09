@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
+    private float currentPosition;
     public PlayerIdleState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
         //Debug.Log("Entered IdleState");
+        currentPosition = playerStateMachine.playerCamera.localPosition.y;
         playerStateMachine.playerAnimation.CrossFade("Player_Idle", 0.1f);
     }
 
     public override void UpdateState()
     {
+        if(Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
+        {
+            currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.standingHeight, 0.1f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.2f);
+            playerStateMachine.originalPosition = currentPosition; 
+        }
         CheckChangeState();
     }
 

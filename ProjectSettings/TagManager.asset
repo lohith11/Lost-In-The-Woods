@@ -8,6 +8,7 @@ TagManager:
   - EnemyOne
   - Rock
   - Collectable
+  - Herbs
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -70,17 +71,25 @@ public class PlayerStateMachine : MonoBehaviour
     public float FOV;
     [Space(10)]
 
+    [Header("< Player Prefs >")]
+    [Space(5)]
+    public int herbs;
+    public TMP_Text forPickingHerb;
+    public bool canPickHerb;
+    [Space(10)]
+
     public bool isAtttacking;
     public bool isAiming;
     public bool isPicking;
     public float FAVdelay; 
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
-    public Transform headTarget;
+
+    public float standingHeight;
+    public float crouchHeight;
 
     private void Awake()
     {
-        originalPosition = playerCamera.transform.localPosition.y;
         playerControls = new PlayerControls();
         
         playerIdleState = new PlayerIdleState(this);
@@ -92,6 +101,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
+        canPickHerb = true;
+        originalPosition = playerCamera.transform.localPosition.y;
         mouseLook = FindObjectOfType<MouseLook>();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
@@ -99,6 +110,7 @@ public class PlayerStateMachine : MonoBehaviour
         SwitchState(playerIdleState);
     }
 
+    #region Enabling and Disabling Input Controls
     private void OnEnable()
     {
         playerControls.Enable();
@@ -173,6 +185,7 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Attack.performed -= Attacking;
         playerControls.Player.Attack.canceled -= Attacking;
     }
+    #endregion
 
     public void Update()
     {
@@ -232,20 +245,47 @@ public class PlayerStateMachine : MonoBehaviour
     }
     #endregion
 
-    public void CameraShake()
+    #region Triggers
+    private void OnTriggerEnter(Collider other)
     {
-        if (!isGrounded)
+        if (other.CompareTag("Herbs"))
         {
-            return;
-        }
-
-        else if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
-        {
-            timer += Time.deltaTime * (crouchPressed ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
-            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
+            forPickingHerb.enabled = true;
+            forPickingHerb.text = "Press E or Controller Y";
+            if (canPickHerb && isPicking)
+            {
+                herbs++;
+                forPickingHerb.enabled = false;
+                Destroy(other.gameObject);
+            }
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Herbs"))
+        {
+            forPickingHerb.enabled = true;
+            forPickingHerb.text = "Press E or Controller Y";
+            if (canPickHerb && isPicking)
+            {
+                herbs++;
+                forPickingHerb.enabled = false;
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Herbs"))
+        {
+            forPickingHerb.enabled = false;
+        }
+    }
+    #endregion
+
+    #region IEnumerators
     public void CorStarter(float target, float delay)
     {
         if (cor != null)
@@ -271,13 +311,26 @@ public class PlayerStateMachine : MonoBehaviour
         StopCoroutine(cor);
         cor = null;
     }
+    #endregion
 
+    public void CameraShake()
+    {
+        if (!isGrounded)
+        {
+            return;
+        }
+
+        else if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
+        {
+            timer += Time.deltaTime * (crouchPressed ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
+            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
+        }
+    }
+    
     public void SwitchState(PlayerBaseState state)
     {
         currentState?.ExitState();
         currentState = state;
         currentState.EnterState();
     }
-
-
 }
