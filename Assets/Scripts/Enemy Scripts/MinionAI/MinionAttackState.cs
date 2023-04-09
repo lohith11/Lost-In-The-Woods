@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MinionAttackState : MinionBaseState
 {
@@ -8,36 +6,35 @@ public class MinionAttackState : MinionBaseState
     public MinionAttackState(MinionStateManager minion) : base(minion) { }
     public override void EnterState()
     {
-
-        // minionStateManager.startAttack();
-
-        minionStateManager.attackPlayer = true;
-        Debug.Log("Entered attack state");
+        if(minionStateManager.PlayerInRange)
+        {
+            minionStateManager.attackPlayer = true;
+        }
+        if(!minionStateManager.PlayerInRange)
+        {
+            minionStateManager.attackPlayer = false;
+            minionStateManager.switchState(minionStateManager.RoamState);
+            //Debug.Log("Switching to die state");
+        }
+        //Debug.Log("Entered attack state");
     }
 
     public override void UpdateState()
     {
         minionStateManager.minionAgent.transform.position = minionStateManager.playerRef.transform.position;
+        minionStateManager.minionAnim.Play("Minion_Attack");
 
         _goToRoam += Time.deltaTime;
-      //  Debug.Log("The timer is : " + _goToRoam);
         if (minionStateManager.attackPlayer && _goToRoam > 5)
         {
             minionStateManager.switchState(minionStateManager.RoamState);
+            Debug.LogWarning("Going to roaming");
         }
-        // if (_goToRoam > 2)
-        // {
-
-        //     _goToRoam = 0;
-        // }
-
 
     }
 
     public override void ExitState()
     {
-       // Debug.Log("Exit attack state and timer is : " + _goToRoam);
-        // minionStateManager.stopAttack();
         _goToRoam = 0;
     }
 

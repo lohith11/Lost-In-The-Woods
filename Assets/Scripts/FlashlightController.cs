@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlashlightController : MonoBehaviour
 {
+    public GameObject lightObject;
     private Light _flashLight;
     [SerializeField] private float detectionRange = 10f;
     [SerializeField] private float maxIntensity = 500f;
@@ -13,40 +14,41 @@ public class FlashlightController : MonoBehaviour
     [SerializeField] private float maxFlickerIntensity = 1.0f;
     [SerializeField] private LayerMask bigBadLayer;
     public bool bigBadInRange;
-    public bool flashLightTurnedOn;
 
 
     void Start()
     {
-        _flashLight = GetComponent<Light>();
+        _flashLight = lightObject.GetComponent<Light>();
         _flashLight.enabled = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
             if(_flashLight.enabled) 
             {
-                _flashLight.enabled = false;
+                lightObject.SetActive(false);
             }
             else
             {
-                _flashLight.enabled = true;
+                lightObject.SetActive(true);
             }
         }
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, bigBadLayer);
-        if (colliders.Length > 0)
-            bigBadInRange = true;
-        else
-            bigBadInRange = false;
-        if(bigBadInRange)
-            _flashLight.intensity = maxIntensity;
-        else
-            _flashLight.intensity = normalIntensity;
     }
 
+    private void FixedUpdate() 
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, bigBadLayer);
+        if(colliders.Length > 0 && lightObject.activeInHierarchy)
+        {
+            _flashLight.intensity = maxIntensity;
+        }
+        else   
+            _flashLight.intensity = normalIntensity;
+
+
+    }   
 
     void flicker()
     {
@@ -63,10 +65,6 @@ public class FlashlightController : MonoBehaviour
 
 
     }
-
-
-
-   
 
 }
 
