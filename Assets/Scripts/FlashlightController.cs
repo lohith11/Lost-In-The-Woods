@@ -26,11 +26,11 @@ public class FlashlightController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            if(_flashLight.enabled) 
+            if(lightObject.activeInHierarchy) 
             {
                 lightObject.SetActive(false);
             }
-            else
+            else if(!lightObject.activeInHierarchy)
             {
                 lightObject.SetActive(true);
             }
@@ -42,10 +42,10 @@ public class FlashlightController : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange, bigBadLayer);
         if(colliders.Length > 0 && lightObject.activeInHierarchy)
         {
-            _flashLight.intensity = maxIntensity;
+            _flashLight.intensity = Mathf.Lerp(normalIntensity , maxIntensity , 1.0f);
         }
         else   
-            _flashLight.intensity = normalIntensity;
+            _flashLight.intensity = Mathf.Lerp(maxIntensity , normalIntensity , 1.0f);
 
 
     }   

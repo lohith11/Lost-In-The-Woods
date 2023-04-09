@@ -92,7 +92,6 @@ public class EnemyStateManager : MonoBehaviour
     public bool isAttacking;
     private float _attackTimer;
     public Vector3 lastknownLocation;
-    public Transform sphereSpawnPoint;
     public GameObject spherePrefab;
 
     [Space(10)]
@@ -225,12 +224,6 @@ public class EnemyStateManager : MonoBehaviour
         {
             if (_attackTimer <= 0f)
             {
-                // spawn spear weapon and set its direction towards player
-              //  GameObject spear = Instantiate(spherePrefab, sphereSpawnPoint.position, Quaternion.identity);
-                Vector3 direction = (playerRef.transform.position - sphereSpawnPoint.position).normalized;
-                //spear.transform.forward = direction;
-
-                // play attack animation
                 //* play the enemy animation here
 
                 //* wait for attack animation to finish
