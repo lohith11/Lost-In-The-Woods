@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+//* 
 public class MinionStateManager : MonoBehaviour
 {
     public NavMeshAgent minionAgent;
-    public GameObject playerRef;
-    public float sphereRadius;
-    public Vector3 targetLocation;
+    public Animator minionAnim;
+    public Light flashLight;
+    public Transform centerPoint;
+    [Range(0, 10)] public float sphereRadius;
     public bool attackPlayer;
 
+    [Header("Enemy field of view")]
+    [Space(2)]
 
+    public float radius;
+    [Range(0, 360)]
+    public float angle;
+    public GameObject playerRef;
+    public LayerMask targetMask, obstructionMask;
+    public bool PlayerInRange { get; private set; }
+
+    [Space(10)]
 
     MinionBaseState currentState;
 
@@ -29,15 +42,27 @@ public class MinionStateManager : MonoBehaviour
         DieState = new MinionDieState(this);
         RoamState = new MinionRoamState(this);
 
-
         playerRef = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(FOVRoutine());
+        switchState(RoamState);
 
-        switchState(AttackState);
     }
 
     void Update()
     {
+        Debug.Log("Player in range + " + PlayerInRange);
+        if (PlayerInRange && flashLight.intensity == 500)
+        {
+            Debug.Log("Flashlight intensity is : " + flashLight.intensity); //!
+            switchState(DieState);
+        }
+        else if (PlayerInRange && flashLight.intensity == 100)
+        {
+           Debug.Log("Flashlight intensity is : " + flashLight.intensity); //!
+        }
         currentState.UpdateState();
+
+
     }
 
     public void switchState(MinionBaseState minion)
@@ -47,6 +72,43 @@ public class MinionStateManager : MonoBehaviour
         minion.EnterState();
     }
 
+    private void FieldOfViewCheck()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+
+        if (rangeChecks.Length != 0)
+        {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    PlayerInRange = true;
+                else
+                    PlayerInRange = false;
+            }
+            else
+                PlayerInRange = false;
+        }
+        else if (PlayerInRange)
+            PlayerInRange = false;
+    }
+
+    private IEnumerator FOVRoutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
+
+        while (true)
+        {
+            yield return wait;
+            FieldOfViewCheck();
+        }
+    }
+
+    #region Commented code
     // public void startAttack() => StartCoroutine(Attack());
     // public void BackToAttack() => StartCoroutine(Roam());
     // public void stopAttack() => StopCoroutine(Attack());
@@ -81,4 +143,5 @@ public class MinionStateManager : MonoBehaviour
     //     yield return new WaitForSeconds(3f);
     //     switchState(AttackState);
     // }
+    #endregion
 }

@@ -9,7 +9,7 @@ public class EnemyIdleState : EnemyBaseState
     {
         
        enemyStateManager.enemyAnimController.Play("Idle_Anim");
-       _idleTimer = Random.Range(0f,7f);
+       _idleTimer = 2f; //Random.Range(0f,7f);
     }
 
     public override void UpdateState()

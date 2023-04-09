@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +7,6 @@ public class MinionRoamState : MinionBaseState
     public MinionRoamState(MinionStateManager minion) : base(minion) { }
     public override void EnterState()
     {
-        // minionStateManager.BackToAttack();
         minionStateManager.attackPlayer = false;
         Debug.Log("Entered roam state");
     }
@@ -19,34 +16,27 @@ public class MinionRoamState : MinionBaseState
     {
         
         _goToAttack += Time.deltaTime;
-      //  Debug.Log("Go to attack Timer is " + _goToAttack);
         if (!minionStateManager.attackPlayer && _goToAttack > 15)
         {
             minionStateManager.switchState(minionStateManager.AttackState);
         }
-        // if (_goToAttack > 2)
-        // {
-
-        //     _goToAttack = 0;
-        // }
 
         if (minionStateManager.minionAgent.remainingDistance <= minionStateManager.minionAgent.stoppingDistance) //* done with path
         {
             Vector3 point;
-            if (RandomPoint(minionStateManager.playerRef.transform.position, minionStateManager.sphereRadius, out point)) //* pass in our centre point and radius of area
+            if (RandomPoint(minionStateManager.centerPoint.transform.position, minionStateManager.sphereRadius, out point)) //* pass in our centre point and radius of area
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //* so you can see with gizmos
                 minionStateManager.minionAgent.SetDestination(point);
             }
         }
+
+        if(minionStateManager.PlayerInRange)
+        {
+            minionStateManager.switchState(minionStateManager.AttackState);
+        }
     }
 
-    public override void ExitState()
-    {
-        /// minionStateManager.stopRoam();
-        _goToAttack = 0;
-       // Debug.Log("Exited Roam state");
-    }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
@@ -62,6 +52,12 @@ public class MinionRoamState : MinionBaseState
 
         result = Vector3.zero;
         return false;
+    }
+
+    
+    public override void ExitState()
+    {
+        _goToAttack = 0;
     }
 
 }
