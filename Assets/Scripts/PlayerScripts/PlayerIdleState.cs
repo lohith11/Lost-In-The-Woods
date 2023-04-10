@@ -11,7 +11,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState()
     {
         //Debug.Log("Entered IdleState");
-        currentPosition = playerStateMachine.playerCamera.localPosition.y;
+        currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
         playerStateMachine.playerAnimation.CrossFade("Player_Idle", 0.1f);
     }
 
@@ -20,7 +20,7 @@ public class PlayerIdleState : PlayerBaseState
         if(Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.standingHeight, 0.1f);
-            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.2f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.3f);
             playerStateMachine.originalPosition = currentPosition; 
         }
         CheckChangeState();
