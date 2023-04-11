@@ -19,7 +19,7 @@ public class PlayerCrouchState : PlayerBaseState
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
-        playerStateMachine.GetComponent<CapsuleCollider>().height = 0.7f;
+        playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
     }
 
@@ -53,7 +53,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void ExitState()
     {
-        playerStateMachine.GetComponent<CapsuleCollider>().height = 1.65f;
+        playerStateMachine.GetComponent<CapsuleCollider>().height = 1.79f;
         playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.9f, 0f);
     }
 

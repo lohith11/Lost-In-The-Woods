@@ -71,11 +71,28 @@ public class PlayerStateMachine : MonoBehaviour
     public float FOV;
     [Space(10)]
 
+    //Player Prefs
     [Header("< Player Prefs >")]
     [Space(5)]
     public int herbs;
     public TMP_Text forPickingHerb;
     public bool canPickHerb;
+    [Space(10)]
+
+    //Camera Smoothness
+    [Space(5)]
+    [Header("< SmoothCamera Transition >")]
+    public float standingHeight;
+    public float crouchHeight;
+    [Space(10)]
+
+    //PlayerSteping on Obstacles
+    [Space(5)]
+    [Header("< PlayerStep Height >")]
+    public GameObject rayCastUp;
+    public GameObject rayCastDown;
+    public float stepHeight;
+    public float smoothStep;
     [Space(10)]
 
     public bool isAtttacking;
@@ -84,9 +101,11 @@ public class PlayerStateMachine : MonoBehaviour
     public float FAVdelay; 
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
-
-    public float standingHeight;
-    public float crouchHeight;
+    /*[Space(5)]
+    [Header("< Player IK Values >")]
+    [Range(0, 1f)]
+    public float groucdDistance;
+    public LayerMask layerMask;*/
 
     private void Awake()
     {
@@ -103,6 +122,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         canPickHerb = true;
         originalPosition = playerCamera.transform.localPosition.y;
+        rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
         mouseLook = FindObjectOfType<MouseLook>();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
@@ -198,7 +218,46 @@ public class PlayerStateMachine : MonoBehaviour
     public void FixedUpdate()
     {
         currentState.FixedUpdateState();
+        PlayerSteppingUp();
     }
+
+  /*  private void OnAnimatorIK(int layerIndex)
+    {
+        if(playerAnimation)
+        {
+            playerAnimation.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+            playerAnimation.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f); 
+            playerAnimation.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
+            playerAnimation.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
+
+            //Left Leg
+            RaycastHit hit;
+            Ray ray = new Ray(playerAnimation.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down); 
+            if(Physics.Raycast(ray, out hit, groucdDistance + 1f, layerMask))
+            {
+                if(hit.transform.tag=="Ground")
+                {
+                    Vector3 footposition = hit.point;
+                    footposition.y += groucdDistance;
+                    playerAnimation.SetIKPosition(AvatarIKGoal.LeftFoot, footposition);
+                    playerAnimation.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+                }
+            }
+
+            //Right Leg
+            ray = new Ray(playerAnimation.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
+            if (Physics.Raycast(ray, out hit, groucdDistance + 1f, layerMask))
+            {
+                if (hit.transform.tag == "Ground")
+                {
+                    Vector3 footposition = hit.point;
+                    footposition.y += groucdDistance;
+                    playerAnimation.SetIKPosition(AvatarIKGoal.RightFoot, footposition);
+                    playerAnimation.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+                }
+            }
+        }
+    }*/
 
     #region Player Input Controls
     public void Moving(InputAction.CallbackContext context)
@@ -312,6 +371,39 @@ public class PlayerStateMachine : MonoBehaviour
         cor = null;
     }
     #endregion
+
+    public void PlayerSteppingUp()
+    {
+        RaycastHit hitLower;
+        if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(Vector3.forward),out hitLower, 0.1f))
+        {
+            RaycastHit hitUpper;
+            if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
+            {
+                playerRB.position -= new Vector3(0f, -smoothStep, 0f);
+            }
+        }
+
+        RaycastHit hitLower45Degrees;
+        if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(1.5f, 0, 1),out hitLower45Degrees, 0.1f))
+        {
+            RaycastHit hitUpper45Degrees;
+            if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(1.5f, 0, 1f),out hitUpper45Degrees, 0.2f))
+            {
+                playerRB.position -= new Vector3(0f, -smoothStep, 0f);
+            }
+        }
+
+        RaycastHit hitLowerMinusDegrees;
+        if (Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinusDegrees, 0.1f))
+        {
+            RaycastHit hitUpperMinusDegrees;
+            if (!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(-1.5f, 0, 1f), out hitUpperMinusDegrees, 0.2f))
+            {
+                playerRB.position -= new Vector3(0f, -smoothStep, 0f);
+            }
+        }
+    }
 
     public void CameraShake()
     {
