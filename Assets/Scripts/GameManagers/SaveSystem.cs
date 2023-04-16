@@ -11,15 +11,16 @@ public class SaveSystem : MonoBehaviour
 
     private void Awake()
     {
-        saveFolder = Application.persistentDataPath + " " + folderName;
+       
         Init();
     }
 
     public void Init()
     {
-        if (!Directory.Exists(saveFolder))
+        saveFolder = Application.persistentDataPath + "/" + folderName + "/";
+        if (!Directory.Exists(folderName))
         {
-            Directory.CreateDirectory(saveFolder);
+            Directory.CreateDirectory(folderName);
         }
         gameManager = GetComponent<GameManager>();
     }
@@ -28,7 +29,8 @@ public class SaveSystem : MonoBehaviour
     {
         DateTime currentDate = DateTime.Now.Date;
         string saveData = JsonUtility.ToJson(gameManager.playerData);
-        File.WriteAllText(saveFolder + "save_" + currentDate + "." + SAVE_EXTENSION, saveData);
+        File.WriteAllText(saveFolder + string.Concat(currentDate,".json") , saveData);
+       // File.WriteAllText(saveFolder + "save_" + currentDate + "." + SAVE_EXTENSION, saveData);
     }
 
     public PlayerData Load()
