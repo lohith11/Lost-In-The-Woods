@@ -361,6 +361,406 @@ PrefabInstance:
       propertyPath: normalIntensity
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: FOV
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: raycastDown
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: baseStepSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: footStepSound
+      value: 
+      objectReference: {fileID: 129623947}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: crouchStepSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: sprintStepSpeed
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: CheckingForSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.size
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ea11a2d13d536e4e8441a0f5895995c, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 203ac8b6f07070e4f93f1c1a6fff06c3, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ac6649006dbee9e4685752e124111da7, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: f42914d98b070f741b2feee96a2988ee, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: feb62160ad1f8334ab037017b843d162, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 001f691d110d55648871a03f446ffa08, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6478d7fb30f301b4fa8f74d5d1dad094, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: f1547ad8fbfa4f24d83e5a445aee860d, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 47832b56ccba5bc408b1d5aac1871746, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: dirtSound.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d132da7af60f1145a3deb6a8bc42a08, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e001351cd7065543a068386cde4c960, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: c41fb169b2991c247a5466e00faa6639, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 76c66b3ae15685a45a334b0628d1edd1, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: cb9aa4db4b3a12147bf2fe3d88fee270, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e832dbb2c7c9ba4e97fd3005fe850b7, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3af6e561e364a274aa306461461c386b, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 30668cf6c5cbfef478b0812fc59eb646, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: eea9624d96ae191439615ca598fe01fa, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: a45bdfd5056ed1d4d8f667cc2498ca12, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: woodSound.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: ec4bd5988d7de0c41ab2d9959705dd8b, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 551d550ab98e3cc4bb7793e752fe8628, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c0c1f9411026f749bcb3746cd557bec, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 38cb68a2a49e89c46bea091d75b27976, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a62172e6f7275ff4f94c17edc8dfdd0d, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6a0b4267ac8ee8448b619bc9a3bca6d9, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: fc32c6fd07980144996b811e5d1f2971, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 030e6a43a7d08bd4581668d53a9808f4, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 56ea356e65429294f9098ef523fdb70b, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5799109e817d3704889f0499d06a23be, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[10]
+      value: 
+      objectReference: {fileID: 8300000, guid: d3f3cc8ad058cad408e97b1875afec82, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[11]
+      value: 
+      objectReference: {fileID: 8300000, guid: ed546d9af9b4e884cbe8d8047fa8c80a, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[12]
+      value: 
+      objectReference: {fileID: 8300000, guid: ba6466c0db2d12649a51ba73749902d3, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[13]
+      value: 
+      objectReference: {fileID: 8300000, guid: cee5e6c416359ef4cbb722f0cd3a5a14, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[14]
+      value: 
+      objectReference: {fileID: 8300000, guid: be378a7ab9654eb41ab1e85da1701672, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[15]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3a60c89c8456614895e7e11520a19d5, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[16]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f344c93a9337684995c262534fa85f1, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[17]
+      value: 
+      objectReference: {fileID: 8300000, guid: e4f1c11a5b7fd27468ea8b131669f3a5, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[18]
+      value: 
+      objectReference: {fileID: 8300000, guid: 33d23eef6cc170546a3c9ce3c9bef1f4, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[19]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ba5fb80a58d03741b65a691dc434897, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[20]
+      value: 
+      objectReference: {fileID: 8300000, guid: adf6356301a9fc14aaa03c2cfac83816, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[21]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ad92c54c3f49654db8d62382e5f559b, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[22]
+      value: 
+      objectReference: {fileID: 8300000, guid: c73956075c85d384a891d9da3762e5c9, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[23]
+      value: 
+      objectReference: {fileID: 8300000, guid: a9e685e1af34121498a651c484426703, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[24]
+      value: 
+      objectReference: {fileID: 8300000, guid: 09305e4eb78a4cf4ebee70c4b976fa18, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[25]
+      value: 
+      objectReference: {fileID: 8300000, guid: a1d0e2d83ca2030428f1c772f47b9087, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[26]
+      value: 
+      objectReference: {fileID: 8300000, guid: ff032cb5e57bd114ea87189c2ed8b3c9, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[27]
+      value: 
+      objectReference: {fileID: 8300000, guid: ba6029ca248ff2247a1a9ca238be48ff, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[28]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3642dbceb97dc5d419752955421aca54, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[29]
+      value: 
+      objectReference: {fileID: 8300000, guid: b4b126977b28e1d499d8f7f7c580d488, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[30]
+      value: 
+      objectReference: {fileID: 8300000, guid: c79fa9a699dd93647a0729d726adb632, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[31]
+      value: 
+      objectReference: {fileID: 8300000, guid: e41709e0fc1f25449a1e6290e3da9b87, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[32]
+      value: 
+      objectReference: {fileID: 8300000, guid: eb9d0826f01bad94293a3ca6fa1f8427, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[33]
+      value: 
+      objectReference: {fileID: 8300000, guid: a6801ed1ae1ed5648ba823232d0fcdf4, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[34]
+      value: 
+      objectReference: {fileID: 8300000, guid: c98c6b4375d0b1e4193f9e678966559a, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[35]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd26e9057c37e2943993f701a764fc3e, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[36]
+      value: 
+      objectReference: {fileID: 8300000, guid: 326f222e206f8d84bbced6f9d6a0f08e, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[37]
+      value: 
+      objectReference: {fileID: 8300000, guid: fbb8ee09f6d45f54d84383b81ca5a5cd, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[38]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3fb042d8273dfd141955633820660a4f, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[39]
+      value: 
+      objectReference: {fileID: 8300000, guid: eb73ae3e299f426418476df5f1fb0f53, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[40]
+      value: 
+      objectReference: {fileID: 8300000, guid: 553615e2b22e2db44b1e1057668753ab, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[41]
+      value: 
+      objectReference: {fileID: 8300000, guid: 837b2ac0dee4b2e49b7c4229129a2cd2, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[42]
+      value: 
+      objectReference: {fileID: 8300000, guid: 55a810a67df804d4487e8f990523255b, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[43]
+      value: 
+      objectReference: {fileID: 8300000, guid: dffb2ef44d2dd254aa89c2546475cf3c, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[44]
+      value: 
+      objectReference: {fileID: 8300000, guid: 74a0ecc6d5d37bf4f8fe4544dfcd9e8b, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[45]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9133d407969ea654a9589b2169db5382, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[46]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d1a50aa1ed16a645bfc3a480d77712c, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[47]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9cd93e6b4948e0c4abc089546af87c38, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[48]
+      value: 
+      objectReference: {fileID: 8300000, guid: 97b97fae0b55ce141bff2005c510492e, type: 3}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: grassSound.Array.data[49]
+      value: 
+      objectReference: {fileID: 8300000, guid: 96860d4e7cdc1f746906da7b7bc7a388, type: 3}
     - target: {fileID: 170742990409909154, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -409,22 +809,22 @@ PrefabInstance:
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.99864477
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.04381141
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.028093966
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000056728633
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
@@ -663,6 +1063,108 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff216144c506dfb4c81563761d24c37b, type: 3}
+--- !u!1 &129623939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1053824762759538793, guid: a8cc1e01be7e977469ca87fd72490ac6,
+    type: 3}
+  m_PrefabInstance: {fileID: 108101692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &129623947
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129623939}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 5
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &138357611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2314,6 +2816,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1523487550727653400, guid: d138ed11ed04da54892e1c092dcdf61a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FootSteps/Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 1523487550928610848, guid: d138ed11ed04da54892e1c092dcdf61a,
         type: 3}
       propertyPath: m_RootOrder
@@ -2375,6 +2882,26 @@ PrefabInstance:
       value: Pref_Cabin2_A
       objectReference: {fileID: 0}
     - target: {fileID: 1523487550928610851, guid: d138ed11ed04da54892e1c092dcdf61a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FootSteps/Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523487551129527894, guid: d138ed11ed04da54892e1c092dcdf61a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FootSteps/Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523487551529623542, guid: d138ed11ed04da54892e1c092dcdf61a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FootSteps/Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523487551558123352, guid: d138ed11ed04da54892e1c092dcdf61a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FootSteps/Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523487552300634940, guid: d138ed11ed04da54892e1c092dcdf61a,
         type: 3}
       propertyPath: m_TagString
       value: FootSteps/Wood
@@ -2468,7 +2995,7 @@ GameObject:
   - component: {fileID: 653392291}
   m_Layer: 6
   m_Name: Terrain
-  m_TagString: Ground
+  m_TagString: FootSteps/Dirt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

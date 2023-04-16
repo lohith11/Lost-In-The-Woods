@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
@@ -43,14 +42,14 @@ public class PlayerIdleState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
         }
         
-        else if(playerStateMachine.crouchPressed && !playerStateMachine.quickExit)
+        else if(playerStateMachine.crouchPressed)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
 
-        else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
-        {
-            playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
-        }
+        //else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
+        //{
+        //    playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
+        //}
     }
 }
