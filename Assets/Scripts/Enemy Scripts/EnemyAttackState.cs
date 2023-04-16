@@ -6,7 +6,7 @@ public class EnemyAttackState : EnemyBaseState
     public override void EnterState()
     {
         Debug.LogError("Entered attack state");
-        enemyStateManager.enemyAnimController.Play("Attack_Anim");
+        enemyStateManager.enemyAnimController.Play("Torch_Attack");
     }
 
 

@@ -96,6 +96,13 @@ public class EnemyStateManager : MonoBehaviour
 
     [Space(10)]
 
+    [Header("Death properties")]
+    [Space(2)]
+
+    public float detectRange;
+
+    [Space(10)]
+
 
     EnemyBaseState currentState;
 
