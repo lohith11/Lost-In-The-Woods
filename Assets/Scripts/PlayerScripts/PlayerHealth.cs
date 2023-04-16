@@ -17,9 +17,9 @@ public class PlayerHealth : MonoBehaviour
     [Space(10)]
 
 
-    public float maxHealth;
+    public static float maxHealth;
     public float healthUpgrade;
-    public float Health;
+    public static float Health;
     private float baseHealth;
 
     private PlayerStateMachine StateMachine;
@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
     private void Update()
     {
         maxHealth = baseHealth + (StateMachine.herbs * 10);
-        Health = maxHealth;
+       // Health = maxHealth;
         if(Health <= 0)
         {
             Health = 0;

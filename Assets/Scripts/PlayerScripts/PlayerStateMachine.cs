@@ -19,6 +19,7 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector] public MouseLook mouseLook;
     [HideInInspector] public Animator playerAnimation;
     [HideInInspector] public Coroutine cor;
+    public static Vector3 playerCurrentPosition;
 
     //Player Walking
     [Header("< Player Walking >")]
@@ -261,6 +262,8 @@ public class PlayerStateMachine : MonoBehaviour
         }
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
+
+        playerCurrentPosition = this.transform.position;
     }
 
     public void FixedUpdate()
@@ -363,6 +366,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 herbs++;
                 forPickingHerb.enabled = false;
+                PlayerHealth.Health = PlayerHealth.maxHealth;
                 Destroy(other.gameObject);
             }
         }
@@ -378,6 +382,7 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 herbs++;
                 forPickingHerb.enabled = false;
+//PlayerHealth.Health = PlayerHealth.maxHealth;
                 Destroy(other.gameObject);
             }
         }
