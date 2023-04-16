@@ -1965,7 +1965,7 @@ PrefabInstance:
     - target: {fileID: 198624226600509797, guid: f6c8eb5d03486004ea7a7e25c474dbff,
         type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: FootSteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 198624226600509798, guid: f6c8eb5d03486004ea7a7e25c474dbff,
         type: 3}
@@ -2373,6 +2373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pref_Cabin2_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523487550928610851, guid: d138ed11ed04da54892e1c092dcdf61a,
+        type: 3}
+      propertyPath: m_TagString
+      value: FootSteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 1523487552306911342, guid: d138ed11ed04da54892e1c092dcdf61a,
         type: 3}
@@ -5134,7 +5139,7 @@ PrefabInstance:
     - target: {fileID: 2357947704021896276, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: FootSteps/Wood
       objectReference: {fileID: 0}
     - target: {fileID: 2357947704360410614, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}

@@ -434,7 +434,13 @@ public class PlayerStateMachine : MonoBehaviour
 
         if(footStepTimer <= 0)
         {
-            if(Physics.Raycast())
+            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            {
+                switch(hit.collider.tag)
+                {
+
+                }
+            }
         }
 
     }
