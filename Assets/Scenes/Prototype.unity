@@ -2502,6 +2502,25 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!1 &2009769608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4333732142921776913, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+    type: 3}
+  m_PrefabInstance: {fileID: 8275776404445230206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2009769610
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009769608}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.009856145, y: 0.015689526, z: 0.014651299}
+  m_Center: {x: 0.00017046928, y: 0.004077719, z: 0.0010935913}
 --- !u!1 &2036369720
 GameObject:
   m_ObjectHideFlags: 0

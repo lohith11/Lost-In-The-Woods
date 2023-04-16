@@ -37,6 +37,7 @@ public class twinkle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (torchLight && fire)
         {
 			torchLight.transform.position = (torchLight.transform.position*0.7f)+(fire.bounds.center*0.3f);

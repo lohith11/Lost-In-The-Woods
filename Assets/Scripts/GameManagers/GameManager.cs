@@ -22,11 +22,16 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+       if(Input.GetKeyDown(KeyCode.Z))
+        {
+            saveSystem.Save();
+        }
     }
 
     public void SaveGame()
     {
+        playerData.currentRockCount = ThrowingRocks.totalThrows;
+        saveSystem.Save();
         //! get all the details of the player and assign them to the player data script
         //! ask Vicky if he wants auto save or manual save 
     }

@@ -22,7 +22,7 @@ public class ThrowingRocks : MonoBehaviour
     public TMP_Text pressRocksText;
 
     public int maxRockPickUp;
-    public int totalThrows;
+    public static int totalThrows;
     public float throwCoolDown;
 
     public float throwForce;
