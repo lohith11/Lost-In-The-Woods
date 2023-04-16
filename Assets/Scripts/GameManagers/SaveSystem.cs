@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-    private static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
+    private string saveFolder;
+    private string folderName = "Saves";
     private const string SAVE_EXTENSION = ".json";
     private GameManager gameManager;
 
     private void Awake()
     {
+        saveFolder = Application.persistentDataPath + " " + folderName;
         Init();
     }
 
     public void Init()
     {
-        if (!Directory.Exists(SAVE_FOLDER))
+        if (!Directory.Exists(saveFolder))
         {
-            Directory.CreateDirectory(SAVE_FOLDER);
+            Directory.CreateDirectory(saveFolder);
         }
         gameManager = GetComponent<GameManager>();
     }
@@ -26,12 +28,12 @@ public class SaveSystem : MonoBehaviour
     {
         DateTime currentDate = DateTime.Now.Date;
         string saveData = JsonUtility.ToJson(gameManager.playerData);
-        File.WriteAllText(SAVE_FOLDER + "save_" + currentDate + "." + SAVE_EXTENSION, saveData);
+        File.WriteAllText(saveFolder + "save_" + currentDate + "." + SAVE_EXTENSION, saveData);
     }
 
     public PlayerData Load()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(SAVE_FOLDER);
+        DirectoryInfo directoryInfo = new DirectoryInfo(saveFolder);
         //* Get all the save files
         FileInfo[] saveFiles = directoryInfo.GetFiles("*." + SAVE_EXTENSION);
         //* Check for the most recent save

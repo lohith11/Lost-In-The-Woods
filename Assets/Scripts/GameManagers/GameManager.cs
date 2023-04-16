@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEngine;
 
+//TODO make the game restart from last checkpoint when the player dies
 [RequireComponent(typeof(SaveSystem))]
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     {
         saveSystem = GetComponent<SaveSystem>();
     }
+
     void Start()
     {
 
