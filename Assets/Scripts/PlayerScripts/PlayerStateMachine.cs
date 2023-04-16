@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -95,17 +96,26 @@ public class PlayerStateMachine : MonoBehaviour
     public float smoothStep;
     [Space(10)]
 
+    [Space(5)]
+    [Header("< FootSteps Sounds >")]
+    public float baseStepSpeed;
+    public float crouchStepSpeed;
+    public float sprintStepSpeed;
+    public AudioSource footStepSound = default;
+    public AudioSource[] woodSound = default;
+    public AudioSource[] grassSound = default;
+    public AudioSource[] dirtSound = default;
+    private float footStepTimer;
+    private bool useFootstep = true;
+    [Space(10)]
+
     public bool isAtttacking;
     public bool isAiming;
     public bool isPicking;
     public float FAVdelay; 
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
-    /*[Space(5)]
-    [Header("< Player IK Values >")]
-    [Range(0, 1f)]
-    public float groucdDistance;
-    public LayerMask layerMask;*/
+    private float getCurrentOffset => crouchPressed ? baseStepSpeed * crouchStepSpeed : isRunning ? baseStepSpeed * sprintSpeed : baseStepSpeed;
 
     private void Awake()
     {
@@ -124,11 +134,44 @@ public class PlayerStateMachine : MonoBehaviour
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
         mouseLook = FindObjectOfType<MouseLook>();
+        //soundCheck = new TerrainSoundCheck();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
 
         SwitchState(playerIdleState);
     }
+
+    //public void SwapFootSteps(FootSoundCollections collections)
+    //{
+
+    //    for(int i=0;i<collections.footStepSound.Count; i++)
+    //    {
+
+    //    }
+    //}
+
+    //public void ChechkLayers()
+    //{
+    //    RaycastHit hit;
+    //    if(Physics.Raycast(transform.position, Vector3.down, out hit, 3)) 
+    //    {
+    //        if(hit.transform.GetComponent<Terrain>()!=null)
+    //        {
+    //            Terrain terrain = hit.transform.GetComponent<Terrain>();
+    //            if(currentLayer != soundCheck.GetLayerName(transform.position, terrain))
+    //            {
+    //                currentLayer = soundCheck.GetLayerName(transform.position, terrain);
+    //                foreach(FootSoundCollections collections in terrainSoundCollection)
+    //                {
+    //                    if(currentLayer == collections.name)
+    //                    {
+    //                        SwapFootSteps(collections);
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     #region Enabling and Disabling Input Controls
     private void OnEnable()
@@ -212,6 +255,11 @@ public class PlayerStateMachine : MonoBehaviour
         CameraShake();
         currentState.UpdateState();
 
+        if(useFootstep)
+        {
+            HandleFootSteps();
+        }
+
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
     }
 
@@ -221,7 +269,7 @@ public class PlayerStateMachine : MonoBehaviour
         PlayerSteppingUp();
     }
 
-  /*  private void OnAnimatorIK(int layerIndex)
+    /*  private void OnAnimatorIK(int layerIndex)
     {
         if(playerAnimation)
         {
@@ -371,6 +419,25 @@ public class PlayerStateMachine : MonoBehaviour
         cor = null;
     }
     #endregion
+
+    public void HandleFootSteps()
+    {
+        if(!isGrounded)
+        {
+            return;
+        }
+        if(playerInput == Vector2.zero)
+        {
+            return;
+        }
+        footStepTimer -= Time.deltaTime;
+
+        if(footStepTimer <= 0)
+        {
+            if(Physics.Raycast())
+        }
+
+    }
 
     public void PlayerSteppingUp()
     {
