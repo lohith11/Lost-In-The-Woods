@@ -9,6 +9,9 @@ TagManager:
   - Rock
   - Collectable
   - Herbs
+  - FootSteps/Wood
+  - FootSteps/Dirt
+  - FootSteps/Grass
   layers:
   - Default
   - TransparentFX
