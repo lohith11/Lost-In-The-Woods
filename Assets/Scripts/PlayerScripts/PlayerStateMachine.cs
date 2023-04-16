@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using Unity.VisualScripting;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -40,7 +37,6 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("< Player Crouch >")]
     [Space(5)]
     public float playerCrouchSpeed;
-    public bool quickExit;
     public bool crouchPressed;
     [Space(10)]
 
@@ -103,11 +99,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float crouchStepSpeed;
     public float sprintStepSpeed;
     public AudioSource footStepSound = default;
-    public AudioSource[] woodSound = default;
-    public AudioSource[] grassSound = default;
-    public AudioSource[] dirtSound = default;
+    public AudioClip[] woodSound = default;
+    public AudioClip[] grassSound = default;
+    public AudioClip[] dirtSound = default;
     private float footStepTimer;
-    private bool useFootstep = true;
     [Space(10)]
 
     public bool isAtttacking;
@@ -116,7 +111,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float FAVdelay; 
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
-    private float getCurrentOffset => crouchPressed ? baseStepSpeed * crouchStepSpeed : isRunning ? baseStepSpeed * sprintSpeed : baseStepSpeed;
+    private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
     private void Awake()
     {
@@ -135,7 +130,6 @@ public class PlayerStateMachine : MonoBehaviour
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
         mouseLook = FindObjectOfType<MouseLook>();
-        //soundCheck = new TerrainSoundCheck();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
 
@@ -255,11 +249,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         CameraShake();
         currentState.UpdateState();
-
-        if(useFootstep)
-        {
-            HandleFootSteps();
-        }
+        HandleFootSteps();
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
 
@@ -427,11 +417,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void HandleFootSteps()
     {
-        if(!isGrounded)
-        {
-            return;
-        }
-        if(playerInput == Vector2.zero)
+        if(playerInput.magnitude == 0)
         {
             return;
         }
@@ -439,16 +425,28 @@ public class PlayerStateMachine : MonoBehaviour
 
         if(footStepTimer <= 0)
         {
-            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 5))
             {
                 switch(hit.collider.tag)
                 {
-
+                    case "FootSteps/Dirt":
+                        footStepSound.PlayOneShot(dirtSound[Random.Range(0, dirtSound.Length - 1)]);
+                        break;
+                    case "FootSteps/Wood":
+                        footStepSound.PlayOneShot(woodSound[Random.Range(0, woodSound.Length - 1)]);
+                        break;
+                    case "FootSteps/Grass":
+                        footStepSound.PlayOneShot(grassSound[Random.Range(0, grassSound.Length - 1)]);
+                        break;
+                    default:
+                        footStepSound.PlayOneShot(dirtSound[Random.Range(0, dirtSound.Length - 1)]);
+                        break;
                 }
             }
+            footStepTimer = getCurrentOffset;
         }
-
     }
+
 
     public void PlayerSteppingUp()
     {

@@ -60,9 +60,9 @@ public class PlayerMovingState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
 
-        else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
-        {
-            playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
-        }
+        //else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
+        //{
+        //    playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
+        //}
     }
 }
