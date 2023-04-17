@@ -46,7 +46,8 @@ public class PlayerCrouchState : PlayerBaseState
             playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         }
         moveInput = new Vector3(playerStateMachine.playerInput.x, 0f, playerStateMachine.playerInput.y) * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime;
-        playerStateMachine.transform.Translate(moveInput);
+        //playerStateMachine.transform.Translate(moveInput);
+        playerStateMachine.playerRB.velocity=playerStateMachine.transform.TransformDirection(moveInput);
     }
 
     public override void ExitState()
