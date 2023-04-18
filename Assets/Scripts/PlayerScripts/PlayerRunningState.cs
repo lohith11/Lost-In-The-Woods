@@ -25,9 +25,10 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        moveInput = new Vector3(playerStateMachine.playerInput.x, 0f, playerStateMachine.playerInput.y) * playerStateMachine.playerRunSpeed * Time.fixedDeltaTime;
-        //playerStateMachine.transform.Translate(moveInput);
-        playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
+        moveInput = playerStateMachine.transform.right * playerStateMachine.playerInput.x + playerStateMachine.transform.forward * playerStateMachine.playerInput.y;
+        moveInput = moveInput * (Time.fixedDeltaTime * playerStateMachine.playerRunSpeed);
+        playerStateMachine.playerRB.MovePosition(playerStateMachine.transform.position + moveInput);
+        //playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
     }
 
     public override void ExitState()

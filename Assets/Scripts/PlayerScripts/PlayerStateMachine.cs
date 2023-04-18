@@ -6,6 +6,7 @@ using TMPro;
 
 public class PlayerStateMachine : MonoBehaviour
 {
+    //IsGrass and isCrouching enemy won't detect
     //HideInInspector because need to use them in the other states but not be seen in the inspector  
     [HideInInspector] public Rigidbody playerRB;
     [HideInInspector] public PlayerMovingState playerMovingState;
@@ -135,38 +136,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         SwitchState(playerIdleState);
     }
-
-    //public void SwapFootSteps(FootSoundCollections collections)
-    //{
-
-    //    for(int i=0;i<collections.footStepSound.Count; i++)
-    //    {
-
-    //    }
-    //}
-
-    //public void ChechkLayers()
-    //{
-    //    RaycastHit hit;
-    //    if(Physics.Raycast(transform.position, Vector3.down, out hit, 3)) 
-    //    {
-    //        if(hit.transform.GetComponent<Terrain>()!=null)
-    //        {
-    //            Terrain terrain = hit.transform.GetComponent<Terrain>();
-    //            if(currentLayer != soundCheck.GetLayerName(transform.position, terrain))
-    //            {
-    //                currentLayer = soundCheck.GetLayerName(transform.position, terrain);
-    //                foreach(FootSoundCollections collections in terrainSoundCollection)
-    //                {
-    //                    if(currentLayer == collections.name)
-    //                    {
-    //                        SwapFootSteps(collections);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 
     #region Enabling and Disabling Input Controls
     private void OnEnable()
@@ -446,7 +415,6 @@ public class PlayerStateMachine : MonoBehaviour
             footStepTimer = getCurrentOffset;
         }
     }
-
 
     public void PlayerSteppingUp()
     {
