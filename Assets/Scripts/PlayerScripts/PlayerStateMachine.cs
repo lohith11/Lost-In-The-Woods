@@ -100,6 +100,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float crouchStepSpeed;
     public float sprintStepSpeed;
     public AudioSource footStepSound = default;
+    private TerrainDetector terrainDetector;
     public AudioClip[] woodSound = default;
     public AudioClip[] grassSound = default;
     public AudioClip[] dirtSound = default;
@@ -112,6 +113,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float FAVdelay; 
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
+
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
     private void Awake()
@@ -128,6 +130,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void Start()
     {
         canPickHerb = true;
+        terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
         mouseLook = FindObjectOfType<MouseLook>();
@@ -218,7 +221,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         CameraShake();
         currentState.UpdateState();
-        HandleFootSteps();
+        //HandleFootSteps();
+        Step();
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
 
@@ -229,6 +233,37 @@ public class PlayerStateMachine : MonoBehaviour
     {
         currentState.FixedUpdateState();
         PlayerSteppingUp();
+    }
+
+    public void Step()
+    {
+        if(playerInput.magnitude == 0)
+        {
+            return;
+        }
+        footStepTimer -= Time.deltaTime;
+        if(footStepTimer <= 0)
+        {
+            AudioClip clip = GetRandomClip();
+            footStepSound.PlayOneShot(clip);
+            footStepTimer = getCurrentOffset;
+        }
+    }
+
+    private AudioClip GetRandomClip()
+    {
+        int terrainTextureIndex = terrainDetector.GetActiveTerrainTextureIdx(transform.position);
+        switch (terrainTextureIndex)
+        {
+            case 0:
+                return woodSound[UnityEngine.Random.Range(0, woodSound.Length)];
+            case 1:
+                return dirtSound[UnityEngine.Random.Range(0, dirtSound.Length)];
+            case 2:
+                return grassSound[UnityEngine.Random.Range(0, grassSound.Length)];
+            default:
+                return dirtSound[UnityEngine.Random.Range(0, dirtSound.Length)];
+        }
     }
 
     /*  private void OnAnimatorIK(int layerIndex)
@@ -384,7 +419,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
     #endregion
 
-    public void HandleFootSteps()
+   /* public void HandleFootSteps()
     {
         if(playerInput.magnitude == 0)
         {
@@ -414,7 +449,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
             footStepTimer = getCurrentOffset;
         }
-    }
+    }*/
 
     public void PlayerSteppingUp()
     {
