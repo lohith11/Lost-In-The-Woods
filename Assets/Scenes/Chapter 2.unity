@@ -4824,6 +4824,7 @@ GameObject:
   - component: {fileID: 653392293}
   - component: {fileID: 653392292}
   - component: {fileID: 653392291}
+  - component: {fileID: 653392294}
   m_Layer: 6
   m_Name: Terrain
   m_TagString: FootSteps/Dirt
@@ -4891,6 +4892,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &653392294
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653392290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &667019387
 GameObject:
   m_ObjectHideFlags: 0

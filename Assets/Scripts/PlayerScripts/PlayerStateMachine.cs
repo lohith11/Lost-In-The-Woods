@@ -417,10 +417,10 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingHerb.enabled = false;
         }
 
-        if(other.CompareTag("Key"))
+       /* if(other.CompareTag("Key"))
         {
             //Disable the text
-        }
+        }*/
     }
     #endregion
 
