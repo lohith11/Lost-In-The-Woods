@@ -117,6 +117,7 @@ public class ThrowingRocks : MonoBehaviour
 
     private void Projectile()
     {
+        //https://www.youtube.com/watch?v=M9zwnHFPvy4 //reference for aim assist
         lineRenderer.enabled = true;
         lineRenderer.positionCount = (int)numPoints;
         List<Vector3> points = new List<Vector3>();
