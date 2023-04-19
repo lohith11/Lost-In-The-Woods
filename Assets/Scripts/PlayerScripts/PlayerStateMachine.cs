@@ -116,6 +116,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
+    private bool canPickKey = true;
+    private int keyPicked = 0;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -256,13 +259,13 @@ public class PlayerStateMachine : MonoBehaviour
         switch (terrainTextureIndex)
         {
             case 0:
-                return woodSound[UnityEngine.Random.Range(0, woodSound.Length)];
+                return woodSound[Random.Range(0, woodSound.Length)];
             case 1:
-                return dirtSound[UnityEngine.Random.Range(0, dirtSound.Length)];
+                return dirtSound[Random.Range(0, dirtSound.Length)];
             case 2:
-                return grassSound[UnityEngine.Random.Range(0, grassSound.Length)];
+                return grassSound[Random.Range(0, grassSound.Length)];
             default:
-                return dirtSound[UnityEngine.Random.Range(0, dirtSound.Length)];
+                return dirtSound[Random.Range(0, dirtSound.Length)];
         }
     }
 
@@ -364,6 +367,17 @@ public class PlayerStateMachine : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
+
+        if(other.CompareTag("Key"))
+        {
+            //TextFeild
+            if(canPickKey && isPicking)
+            {
+                //text disable
+                keyPicked++;
+                Destroy(other.gameObject);
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -376,7 +390,18 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 herbs++;
                 forPickingHerb.enabled = false;
-//PlayerHealth.Health = PlayerHealth.maxHealth;
+                //PlayerHealth.Health = PlayerHealth.maxHealth;
+                Destroy(other.gameObject);
+            }
+        }
+
+        if (other.CompareTag("Key"))
+        {
+            //TextFeild
+            if (canPickKey && isPicking)
+            {
+                //text disable
+                keyPicked++;
                 Destroy(other.gameObject);
             }
         }
@@ -387,6 +412,11 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = false;
+        }
+
+        if(other.CompareTag("Key"))
+        {
+            //Disable the text
         }
     }
     #endregion
