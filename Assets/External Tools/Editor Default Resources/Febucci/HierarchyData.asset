@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: HierarchyData
   m_EditorClassIdentifier: 
   enabled: 1
+  updateInPlayMode: 1
+  drawActivationToggle: 1
   icons:
     enabled: 1
     aligned: 0
@@ -40,13 +42,13 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0.08}
   separator:
     enabled: 1
-    startString: '>'
-    color: {r: 0, g: 1, b: 1, a: 0.15}
+    startString: '-'
+    color: {r: 1, g: 0.4957481, b: 0, a: 0.15}
   tree:
     enabled: 1
     drawOverlayOnColoredPrefabs: 1
     dividerHeigth: 1
-    baseLevelColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    baseLevelColor: {r: 1, g: 1, b: 1, a: 1}
     branches:
     - overlayColor: {r: 1, g: 0.44, b: 0.97, a: 0.04}
       colors:
