@@ -265,16 +265,17 @@ public class PlayerStateMachine : MonoBehaviour
         switch (terrainTextureIndex)
         {
             case 0:
-                return woodSound[Random.Range(0, woodSound.Length)];
+                return woodSound[Random.Range(0, woodSound.Length -1)];
             case 1:
-                return dirtSound[Random.Range(0, dirtSound.Length)];
+                return dirtSound[Random.Range(0, dirtSound.Length -1)];
             case 2:
-                return grassSound[Random.Range(0, grassSound.Length)];
+                return grassSound[Random.Range(0, grassSound.Length -1)];
             default:
-                return dirtSound[Random.Range(0, dirtSound.Length)];
+                return dirtSound[Random.Range(0, dirtSound.Length -1)];
         }
     }
 
+# region AnimationIK
     /*  private void OnAnimatorIK(int layerIndex)
     {
         if(playerAnimation)
@@ -312,6 +313,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
     }*/
+    #endregion
 
     #region Player Input Controls
     public void Moving(InputAction.CallbackContext context)
@@ -455,6 +457,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
     #endregion
 
+# region handlefeet
    /* public void HandleFootSteps()
     {
         if(playerInput.magnitude == 0)
@@ -486,6 +489,7 @@ public class PlayerStateMachine : MonoBehaviour
             footStepTimer = getCurrentOffset;
         }
     }*/
+    #endregion
 
     public void PlayerSteppingUp()
     {
