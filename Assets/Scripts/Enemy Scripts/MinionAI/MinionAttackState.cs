@@ -27,6 +27,12 @@ public class MinionAttackState : MinionBaseState
         _goToRoam += Time.deltaTime;
         if (minionStateManager.attackPlayer && _goToRoam > 5)
         {
+            minionStateManager.minionAgent.transform.position = minionStateManager.centerPoint.transform.position;
+            //minionStateManager.switchState(minionStateManager.RoamState);
+            //Debug.LogWarning("Going to roaming");
+        }
+        if(!minionStateManager.PlayerInRange)
+        {
             minionStateManager.switchState(minionStateManager.RoamState);
             Debug.LogWarning("Going to roaming");
         }
