@@ -534,6 +534,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 170742989613159739, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
+      propertyPath: m_Height
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159739, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
       propertyPath: m_Radius
       value: 0.3
       objectReference: {fileID: 0}
@@ -569,6 +574,11 @@ PrefabInstance:
       objectReference: {fileID: 129623947}
     - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
+      propertyPath: crouchCollider
+      value: 
+      objectReference: {fileID: 129623955}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
       propertyPath: playerRunSpeed
       value: 4
       objectReference: {fileID: 0}
@@ -587,6 +597,11 @@ PrefabInstance:
       propertyPath: CheckingForSound
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
+        type: 3}
+      propertyPath: standingCollider
+      value: 
+      objectReference: {fileID: 129623951}
     - target: {fileID: 170742989613159741, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: playerCrouchSpeed
@@ -990,17 +1005,17 @@ PrefabInstance:
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 85.269
+      value: -11.67
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.181
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.753578
+      value: 166.28
       objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
@@ -1377,6 +1392,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &129623951 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 170742989613159739, guid: a8cc1e01be7e977469ca87fd72490ac6,
+    type: 3}
+  m_PrefabInstance: {fileID: 108101692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &129623955
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129623939}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.475, z: 0}
 --- !u!4 &134305400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8866275690834973955, guid: ff216144c506dfb4c81563761d24c37b,

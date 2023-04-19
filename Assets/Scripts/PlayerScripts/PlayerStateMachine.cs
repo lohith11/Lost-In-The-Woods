@@ -114,6 +114,9 @@ public class PlayerStateMachine : MonoBehaviour
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
 
+    public CapsuleCollider standingCollider;
+    public CapsuleCollider crouchCollider;
+
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
     private bool canPickKey = true;
@@ -128,10 +131,13 @@ public class PlayerStateMachine : MonoBehaviour
         playerJumpState = new PlayerJumpState(this);
         playerRunningState = new PlayerRunningState(this);
         playerCrouchState = new PlayerCrouchState(this);
+        standingCollider = GetComponent<CapsuleCollider>();
+        crouchCollider = GetComponent<CapsuleCollider>();
     }
 
     public void Start()
     {
+        crouchCollider.enabled = false;
         canPickHerb = true;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
