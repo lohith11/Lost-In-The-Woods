@@ -114,8 +114,7 @@ public class PlayerStateMachine : MonoBehaviour
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
 
-    public CapsuleCollider standingCollider;
-    public CapsuleCollider crouchCollider;
+    public GameObject crouchCollider;
 
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
@@ -131,18 +130,16 @@ public class PlayerStateMachine : MonoBehaviour
         playerJumpState = new PlayerJumpState(this);
         playerRunningState = new PlayerRunningState(this);
         playerCrouchState = new PlayerCrouchState(this);
-        standingCollider = GetComponent<CapsuleCollider>();
-        crouchCollider = GetComponent<CapsuleCollider>();
     }
 
     public void Start()
     {
-        crouchCollider.enabled = false;
         canPickHerb = true;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
         mouseLook = FindObjectOfType<MouseLook>();
+        crouchCollider.SetActive(false);
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
 
@@ -265,13 +262,13 @@ public class PlayerStateMachine : MonoBehaviour
         switch (terrainTextureIndex)
         {
             case 0:
-                return woodSound[Random.Range(0, woodSound.Length)];
+                return woodSound[Random.Range(0, woodSound.Length - 1)];
             case 1:
-                return dirtSound[Random.Range(0, dirtSound.Length)];
+                return dirtSound[Random.Range(0, dirtSound.Length - 1)];
             case 2:
-                return grassSound[Random.Range(0, grassSound.Length)];
+                return grassSound[Random.Range(0, grassSound.Length - 1)];
             default:
-                return dirtSound[Random.Range(0, dirtSound.Length)];
+                return dirtSound[Random.Range(0, dirtSound.Length - 1)];
         }
     }
 
@@ -374,7 +371,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
 
-        if(other.CompareTag("Key"))
+        /*if(other.CompareTag("Key"))
         {
             //TextFeild
             if(canPickKey && isPicking)
@@ -383,7 +380,7 @@ public class PlayerStateMachine : MonoBehaviour
                 keyPicked++;
                 Destroy(other.gameObject);
             }
-        }
+        }*/
     }
 
     private void OnTriggerStay(Collider other)
@@ -401,7 +398,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Key"))
+       /* if (other.CompareTag("Key"))
         {
             //TextFeild
             if (canPickKey && isPicking)
@@ -410,7 +407,7 @@ public class PlayerStateMachine : MonoBehaviour
                 keyPicked++;
                 Destroy(other.gameObject);
             }
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
