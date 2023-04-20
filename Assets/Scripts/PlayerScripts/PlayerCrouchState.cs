@@ -17,21 +17,20 @@ public class PlayerCrouchState : PlayerBaseState
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
-        playerStateMachine.crouchCollider.SetActive(true);
-        playerStateMachine.GetComponent<CapsuleCollider>().isTrigger = true;
+        playerStateMachine.crouchCollider.SetActive(false);
         //playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
         //playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
     }
 
     public override void UpdateState()
     {
+        CheckChangeState();
         if (Mathf.Abs(playerStateMachine.crouchHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.crouchHeight, 0.1f);
             playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.3f);
             playerStateMachine.originalPosition = currentPosition;
         }
-        CheckChangeState();
     }
 
     public override void FixedUpdateState()
@@ -47,15 +46,17 @@ public class PlayerCrouchState : PlayerBaseState
             playerStateMachine.playerAnimation.SetBool("isCrouching", false);
             playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         }
-        moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime);
-        playerStateMachine.transform.Translate(moveInput);
+        moveInput = playerStateMachine.transform.right * playerStateMachine.playerInput.x + playerStateMachine.transform.forward * playerStateMachine.playerInput.y;
+        moveInput = moveInput * (Time.fixedDeltaTime * playerStateMachine.playerCrouchSpeed);
+        playerStateMachine.playerRB.MovePosition(playerStateMachine.transform.position + moveInput);
+        /* moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime);
+         playerStateMachine.transform.Translate(moveInput);*/
         //playerStateMachine.playerRB.velocity=playerStateMachine.transform.TransformDirection(moveInput);
     }
 
     public override void ExitState()
     {
-        playerStateMachine.GetComponent<CapsuleCollider>().isTrigger = false;
-        playerStateMachine.crouchCollider.SetActive(false);
+        playerStateMachine.crouchCollider.SetActive(true);
         //playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.9f, 0f);
         //playerStateMachine.GetComponent<CapsuleCollider>().height = 1.85f;
     }

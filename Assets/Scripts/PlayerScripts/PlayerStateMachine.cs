@@ -139,7 +139,6 @@ public class PlayerStateMachine : MonoBehaviour
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
         mouseLook = FindObjectOfType<MouseLook>();
-        crouchCollider.SetActive(false);
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
 
