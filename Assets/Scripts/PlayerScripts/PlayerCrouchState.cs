@@ -18,8 +18,6 @@ public class PlayerCrouchState : PlayerBaseState
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
         currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
         playerStateMachine.crouchCollider.SetActive(false);
-        //playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.45f, 0f);
-        //playerStateMachine.GetComponent<CapsuleCollider>().height = 0.9f;
     }
 
     public override void UpdateState()
@@ -49,9 +47,6 @@ public class PlayerCrouchState : PlayerBaseState
         moveInput = playerStateMachine.transform.right * playerStateMachine.playerInput.x + playerStateMachine.transform.forward * playerStateMachine.playerInput.y;
         moveInput = moveInput * (Time.fixedDeltaTime * playerStateMachine.playerCrouchSpeed);
         playerStateMachine.playerRB.MovePosition(playerStateMachine.transform.position + moveInput);
-        /* moveInput = new Vector3(playerStateMachine.playerInput.x * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime, playerStateMachine.playerRB.velocity.y, playerStateMachine.playerInput.y * playerStateMachine.playerCrouchSpeed * Time.fixedDeltaTime);
-         playerStateMachine.transform.Translate(moveInput);*/
-        //playerStateMachine.playerRB.velocity=playerStateMachine.transform.TransformDirection(moveInput);
     }
 
     public override void ExitState()

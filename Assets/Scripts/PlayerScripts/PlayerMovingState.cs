@@ -22,6 +22,7 @@ public class PlayerMovingState : PlayerBaseState
     }
     public override void UpdateState()
     {
+        CheckChangeState();
         if (Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.standingHeight, 0.1f);
@@ -30,7 +31,6 @@ public class PlayerMovingState : PlayerBaseState
         }
         playerStateMachine.playerAnimation.SetFloat(moveX, playerStateMachine.playerInput.x);
         playerStateMachine.playerAnimation.SetFloat(moveY, playerStateMachine.playerInput.y);
-        CheckChangeState();
     }
 
     public override void FixedUpdateState()
