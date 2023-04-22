@@ -7,7 +7,7 @@ public class FlashlightController : MonoBehaviour
     public GameObject lightObject;
     private Light _flashLight;
     [SerializeField] private float detectionRange = 10f;
-    [SerializeField] private float maxIntensity = 500f;
+    [SerializeField] public  float maxIntensity = 500f;
     [SerializeField] private float normalIntensity = 100f;
     [SerializeField] private float flickerProbability = 0.1f;
     [SerializeField] private float minFlickerIntensity = 0.5f;
@@ -24,6 +24,7 @@ public class FlashlightController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("The current flashlight intensity is : " + _flashLight.intensity);
         if(Input.GetKeyDown(KeyCode.F))
         {
             if(lightObject.activeInHierarchy) 

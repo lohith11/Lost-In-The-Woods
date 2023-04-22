@@ -8,7 +8,7 @@ public class MinionRoamState : MinionBaseState
     public override void EnterState()
     {
         minionStateManager.attackPlayer = false;
-        Debug.Log("Entered roam state");
+        minionStateManager.minionAnim.Play("Minion_Walk");
     }
 
 

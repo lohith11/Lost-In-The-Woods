@@ -17,12 +17,16 @@ public class MinionAttackState : MinionBaseState
             //Debug.Log("Switching to die state");
         }
         //Debug.Log("Entered attack state");
+        minionStateManager.minionAnim.Play("Minion_Attack");
     }
 
     public override void UpdateState()
     {
-        minionStateManager.minionAgent.transform.position = minionStateManager.playerRef.transform.position;
+        //minionStateManager.minionAgent.transform.position = minionStateManager.minionTPPoint.position;
         minionStateManager.minionAnim.Play("Minion_Attack");
+        minionStateManager.minionAgent.SetDestination(minionStateManager.minionTPPoint.position);
+        minionStateManager.minionAgent.speed = 15f;
+        minionStateManager.transform.LookAt(minionStateManager.playerRef.transform.position);
 
         _goToRoam += Time.deltaTime;
         if (minionStateManager.attackPlayer && _goToRoam > 5)
