@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-//* 
 public class MinionStateManager : MonoBehaviour
 {
-    public bool playerrange;
     public NavMeshAgent minionAgent;
     public Animator minionAnim;
     public Light flashLight;
@@ -46,7 +43,6 @@ public class MinionStateManager : MonoBehaviour
 
     void Start()
     {
-        playerrange = PlayerInRange; //! remove this var after testing
         AttackState = new MinionAttackState(this);
         DieState = new MinionDieState(this);
         RoamState = new MinionRoamState(this);
@@ -60,9 +56,8 @@ public class MinionStateManager : MonoBehaviour
     void Update()
     {
         Debug.Log("The current state is : " + currentState);
-        if (PlayerInRange && flashLight.intensity > 200) //>= FlashlightController.maxIntensity)
+        if (PlayerInRange && flashLight.intensity >= FlashlightController.maxIntensity) //>= FlashlightController.maxIntensity)
         {
-            Debug.Log("Flashlight intensity is : " + flashLight.intensity); //!
             switchState(DieState);
         }
         currentState.UpdateState();

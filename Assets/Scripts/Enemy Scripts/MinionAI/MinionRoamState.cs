@@ -8,13 +8,13 @@ public class MinionRoamState : MinionBaseState
     public override void EnterState()
     {
         minionStateManager.attackPlayer = false;
-        minionStateManager.minionAnim.Play("Minion_Walk");
+        
     }
 
 
     public override void UpdateState()
     {
-        
+        minionStateManager.minionAnim.Play("Minion_Walk");
         _goToAttack += Time.deltaTime;
         if (!minionStateManager.attackPlayer && _goToAttack > 15)
         {

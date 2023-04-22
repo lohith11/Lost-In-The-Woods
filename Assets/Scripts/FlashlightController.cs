@@ -7,8 +7,8 @@ public class FlashlightController : MonoBehaviour
     public GameObject lightObject;
     private Light _flashLight;
     [SerializeField] private float detectionRange = 10f;
-    [SerializeField] public  float maxIntensity = 500f;
-    [SerializeField] private float normalIntensity = 100f;
+    public static float maxIntensity = 100f;
+    [SerializeField] private float normalIntensity;
     [SerializeField] private float flickerProbability = 0.1f;
     [SerializeField] private float minFlickerIntensity = 0.5f;
     [SerializeField] private float maxFlickerIntensity = 1.0f;
