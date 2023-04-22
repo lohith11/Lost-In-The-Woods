@@ -37,7 +37,10 @@ public class ThrowingRocks : MonoBehaviour
     public float timeBetweenPoints;
     private PlayerStateMachine playerStateMachine;
 
-
+    public float distance;
+    public LayerMask enemyLayer;
+    private RaycastHit hit;
+    public float aimSpeed;
     //[Header("< RockPicking >")]
     //public bool isRockPick;
     //public Transform rockInRange;
@@ -54,7 +57,6 @@ public class ThrowingRocks : MonoBehaviour
         readyToThrow = true;
     }
 
- 
     private void Update()
     {
         if (playerStateMachine.isAiming)
@@ -63,6 +65,7 @@ public class ThrowingRocks : MonoBehaviour
             {
                 Throw();
             }
+
             Projectile();
         }
 
@@ -117,7 +120,19 @@ public class ThrowingRocks : MonoBehaviour
 
     private void Projectile()
     {
-        //https://www.youtube.com/watch?v=M9zwnHFPvy4 //reference for aim assist
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyLayer))
+        {
+            Vector3 targetPosition = hit.collider.gameObject.transform.position;
+            targetPosition.y = transform.position.y;
+            //transform.LookAt(targetPosition);
+            Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
+        }
+
+        //To do:- enemy aim lock for head and body seperatly
+ 
+
+
         lineRenderer.enabled = true;
         lineRenderer.positionCount = (int)numPoints;
         List<Vector3> points = new List<Vector3>();
