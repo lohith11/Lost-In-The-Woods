@@ -15,12 +15,6 @@ public class GameManager : MonoBehaviour
         saveSystem = GetComponent<SaveSystem>();
     }
 
-    void Start()
-    {
-
-    }
-
-
     void Update()
     {
 
@@ -41,7 +35,6 @@ public class GameManager : MonoBehaviour
         playerData.maxHealth = PlayerHealth.maxHealth;
         playerData.curentPosition = PlayerStateMachine.playerCurrentPosition;
         saveSystem.Save();
-        //! ask Vicky if he wants auto save or manual save 
     }
 
     public void LoadGame()

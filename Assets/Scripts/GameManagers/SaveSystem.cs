@@ -20,7 +20,6 @@ public class SaveSystem : MonoBehaviour
     }
     public void Init()
     {
-        Debug.Log("START!!");
         saveDir = Application.persistentDataPath + "/" + "Saves" + "/";
         if (!Directory.Exists(saveDir))
         {
@@ -31,7 +30,6 @@ public class SaveSystem : MonoBehaviour
 
     public void Save()
     {
-        Debug.Log("Save called");
         DateTime currentDate = DateTime.Now.Date;
         string jsonData = JsonUtility.ToJson(gameManager.playerData, true);
         File.WriteAllText(saveDir + string.Concat("Save", ".json"), jsonData);
@@ -40,7 +38,6 @@ public class SaveSystem : MonoBehaviour
 
     public PlayerData Load()
     {
-        
         string jsonData = File.ReadAllText(saveDir + string.Concat("Save", ".json"));
         PlayerData playerData = JsonUtility.FromJson<PlayerData>(jsonData);
         return playerData;

@@ -7,10 +7,12 @@ using UnityEngine.AI;
 //* 
 public class MinionStateManager : MonoBehaviour
 {
+    public bool playerrange;
     public NavMeshAgent minionAgent;
     public Animator minionAnim;
     public Light flashLight;
     public Transform centerPoint;
+    public Transform minionTPPoint;
     [Range(0, 10)] public float sphereRadius;
     public bool attackPlayer;
 
@@ -26,6 +28,12 @@ public class MinionStateManager : MonoBehaviour
 
     [Space(10)]
 
+    [Header("Die properties")]
+    [Space(2)]
+
+    public float dieTimer;
+    
+    [Space(2)]
     MinionBaseState currentState;
 
     #region MinionStates
@@ -38,6 +46,7 @@ public class MinionStateManager : MonoBehaviour
 
     void Start()
     {
+        playerrange = PlayerInRange; //! remove this var after testing
         AttackState = new MinionAttackState(this);
         DieState = new MinionDieState(this);
         RoamState = new MinionRoamState(this);
@@ -50,15 +59,11 @@ public class MinionStateManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Player in range + " + PlayerInRange);
-        if (PlayerInRange && flashLight.intensity == 500)
+        Debug.Log("The current state is : " + currentState);
+        if (PlayerInRange && flashLight.intensity > 200) //>= FlashlightController.maxIntensity)
         {
             Debug.Log("Flashlight intensity is : " + flashLight.intensity); //!
             switchState(DieState);
-        }
-        else if (PlayerInRange && flashLight.intensity == 100)
-        {
-           Debug.Log("Flashlight intensity is : " + flashLight.intensity); //!
         }
         currentState.UpdateState();
 
