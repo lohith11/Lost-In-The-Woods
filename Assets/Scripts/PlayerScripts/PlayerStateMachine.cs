@@ -485,35 +485,35 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PlayerSteppingUp()
     {
-        RaycastHit hitLower;
-        if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(Vector3.forward),out hitLower, 0.1f))
-        {
-            RaycastHit hitUpper;
-            if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
-            {
-                playerRB.position -= new Vector3(0f, -smoothStep, 0f);
-            }
-        }
+        //RaycastHit hitLower;
+        //if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(Vector3.forward),out hitLower, 0.1f))
+        //{
+        //    RaycastHit hitUpper;
+        //    if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
+        //    {
+        //        playerRB.position -= new Vector3(0f, -smoothStep, 0f);
+        //    }
+        //}
 
-        RaycastHit hitLower45Degrees;
-        if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(1.5f, 0, 1),out hitLower45Degrees, 0.1f))
-        {
-            RaycastHit hitUpper45Degrees;
-            if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(1.5f, 0, 1f),out hitUpper45Degrees, 0.2f))
-            {
-                playerRB.position -= new Vector3(0f, -smoothStep, 0f);
-            }
-        }
+        //RaycastHit hitLower45Degrees;
+        //if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(1.5f, 0, 1),out hitLower45Degrees, 0.1f))
+        //{
+        //    RaycastHit hitUpper45Degrees;
+        //    if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(1.5f, 0, 1f),out hitUpper45Degrees, 0.2f))
+        //    {
+        //        playerRB.position -= new Vector3(0f, -smoothStep, 0f);
+        //    }
+        //}
 
-        RaycastHit hitLowerMinusDegrees;
-        if (Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinusDegrees, 0.1f))
-        {
-            RaycastHit hitUpperMinusDegrees;
-            if (!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(-1.5f, 0, 1f), out hitUpperMinusDegrees, 0.2f))
-            {
-                playerRB.position -= new Vector3(0f, -smoothStep, 0f);
-            }
-        }
+        //RaycastHit hitLowerMinusDegrees;
+        //if (Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinusDegrees, 0.1f))
+        //{
+        //    RaycastHit hitUpperMinusDegrees;
+        //    if (!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(-1.5f, 0, 1f), out hitUpperMinusDegrees, 0.2f))
+        //    {
+        //        playerRB.position -= new Vector3(0f, -smoothStep, 0f);
+        //    }
+        //}
     }
 
     public void CameraShake()
