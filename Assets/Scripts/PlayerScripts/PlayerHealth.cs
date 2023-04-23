@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-=======
 using System.Collections;
 using System.Collections.Generic;
->>>>>>> Stashed changes
 using UnityEngine;
 using UnityEngine.UI;
 
