@@ -101,9 +101,11 @@ public class PlayerStateMachine : MonoBehaviour
     public float sprintStepSpeed;
     public AudioSource footStepSound = default;
     private TerrainDetector terrainDetector;
-    public AudioClip[] woodSound = default;
-    public AudioClip[] grassSound = default;
-    public AudioClip[] dirtSound = default;
+    public AudioClip[] woodSound;
+    public AudioClip[] grassSound;
+    public AudioClip[] dirtSound;
+    public AudioClip[] mudSound;
+    public AudioClip[] leavesSound;
     private float footStepTimer;
     [Space(10)]
 
@@ -226,7 +228,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         CameraShake();
         currentState.UpdateState();
-        //HandleFootSteps();
         Step();
 
         isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
@@ -261,11 +262,15 @@ public class PlayerStateMachine : MonoBehaviour
         switch (terrainTextureIndex)
         {
             case 0:
-                return woodSound[Random.Range(0, woodSound.Length - 1)];
-            case 1:
                 return dirtSound[Random.Range(0, dirtSound.Length - 1)];
+            case 1:
+                return mudSound[Random.Range(0, mudSound.Length - 1)];
             case 2:
                 return grassSound[Random.Range(0, grassSound.Length - 1)];
+            case 3:
+                return leavesSound[Random.Range(0, leavesSound.Length - 1)];
+            case 4:
+                return woodSound[Random.Range(0, woodSound.Length - 1)];
             default:
                 return dirtSound[Random.Range(0, dirtSound.Length - 1)];
         }
@@ -450,38 +455,6 @@ public class PlayerStateMachine : MonoBehaviour
         cor = null;
     }
     #endregion
-
-   /* public void HandleFootSteps()
-    {
-        if(playerInput.magnitude == 0)
-        {
-            return;
-        }
-        footStepTimer -= Time.deltaTime;
-
-        if(footStepTimer <= 0)
-        {
-            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 5))
-            {
-                switch(hit.collider.tag)
-                {
-                    case "FootSteps/Dirt":
-                        footStepSound.PlayOneShot(dirtSound[Random.Range(0, dirtSound.Length - 1)]);
-                        break;
-                    case "FootSteps/Wood":
-                        footStepSound.PlayOneShot(woodSound[Random.Range(0, woodSound.Length - 1)]);
-                        break;
-                    case "FootSteps/Grass":
-                        footStepSound.PlayOneShot(grassSound[Random.Range(0, grassSound.Length - 1)]);
-                        break;
-                    default:
-                        footStepSound.PlayOneShot(dirtSound[Random.Range(0, dirtSound.Length - 1)]);
-                        break;
-                }
-            }
-            footStepTimer = getCurrentOffset;
-        }
-    }*/
 
     public void PlayerSteppingUp()
     {

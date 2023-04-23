@@ -646,41 +646,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 170742989048283249, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.404
-      objectReference: {fileID: 0}
-    - target: {fileID: 170742989048283249, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 170742989048283249, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 170742989048283249, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 170742989613159728, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: aimSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 170742989613159728, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: distance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 170742989613159728, guid: a8cc1e01be7e977469ca87fd72490ac6,
-        type: 3}
-      propertyPath: enemyLayer.m_Bits
-      value: 8192
-      objectReference: {fileID: 0}
     - target: {fileID: 419996559728095955, guid: a8cc1e01be7e977469ca87fd72490ac6,
         type: 3}
       propertyPath: m_RootOrder
@@ -13786,12 +13751,12 @@ PrefabInstance:
     - target: {fileID: 2357947704021896276, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2357947704021896276, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_TagString
-      value: FootSteps/Wood
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2357947704021896276, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
@@ -13806,12 +13771,12 @@ PrefabInstance:
     - target: {fileID: 2357947704360410614, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2357947704360410614, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_TagString
-      value: FootSteps/Wood
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2357947704360410614, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
@@ -13841,12 +13806,12 @@ PrefabInstance:
     - target: {fileID: 2357947705443458811, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2357947705443458811, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}
       propertyPath: m_TagString
-      value: FootSteps/Wood
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2357947705443458811, guid: e6be380069b54b14d8dacbbdf23c5d45,
         type: 3}

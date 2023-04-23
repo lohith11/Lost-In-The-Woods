@@ -39,13 +39,9 @@ public class ThrowingRocks : MonoBehaviour
 
     public float distance;
     public LayerMask enemyLayer;
+    public LayerMask enemyHeadLayer;
     private RaycastHit hit;
     public float aimSpeed;
-    //[Header("< RockPicking >")]
-    //public bool isRockPick;
-    //public Transform rockInRange;
-    //public float rockInRangeRadius;
-    //public LayerMask rockLayer;
 
     //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
@@ -124,14 +120,17 @@ public class ThrowingRocks : MonoBehaviour
         {
             Vector3 targetPosition = hit.collider.gameObject.transform.position;
             targetPosition.y = transform.position.y;
-            //transform.LookAt(targetPosition);
+            Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
+        } 
+        
+        else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyHeadLayer))
+        {
+            Vector3 targetPosition = hit.collider.gameObject.transform.position;
+            targetPosition.y = transform.position.y;
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
         }
-
-        //To do:- enemy aim lock for head and body seperatly
- 
-
 
         lineRenderer.enabled = true;
         lineRenderer.positionCount = (int)numPoints;
