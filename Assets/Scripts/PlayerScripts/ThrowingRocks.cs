@@ -10,7 +10,7 @@ public class dealDamageEventArg : EventArgs
 }
 public class ThrowingRocks : MonoBehaviour
 {
-    public event EventHandler<dealDamageEventArg> dealDamage;
+    public static event EventHandler<dealDamageEventArg> dealDamage;
 
     [SerializeField]private string headDamage;
     [SerializeField]private string bodyDamage;

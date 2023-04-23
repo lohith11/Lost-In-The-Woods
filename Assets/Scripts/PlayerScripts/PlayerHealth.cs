@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +12,10 @@ public class PlayerHealth : MonoBehaviour
    // public float durationTimer;
     [Space(10)]
 
+    [ShowInInspector]
     public static float maxHealth;
     public float healthUpgrade;
+    [ShowInInspector]
     public static float Health = 70;
     private float baseHealth;
 
