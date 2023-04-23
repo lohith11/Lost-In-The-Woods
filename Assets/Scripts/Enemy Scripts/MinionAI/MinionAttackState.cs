@@ -22,23 +22,25 @@ public class MinionAttackState : MinionBaseState
     public override void UpdateState()
     {
 
-
-        minionStateManager.transform.LookAt(minionStateManager.playerRef.transform.position);
-
         _goToRoam += Time.deltaTime;
-        if (minionStateManager.attackPlayer && _goToRoam > 5)
+
+        if (minionStateManager.PlayerInRange)
+        {
+            minionStateManager.minionAgent.SetDestination(minionStateManager.minionTPPoint.position);
+            minionStateManager.transform.LookAt(minionStateManager.playerRef.transform.position);
+        }
+
+        if (minionStateManager.PlayerInRange && _goToRoam > 5)
         {
             minionStateManager.minionAgent.transform.position = minionStateManager.centerPoint.transform.position;
+            minionStateManager.switchState(minionStateManager.RoamState);
         }
         if (!minionStateManager.PlayerInRange)
         {
             minionStateManager.switchState(minionStateManager.RoamState);
         }
 
-        if (minionStateManager.PlayerInRange)
-        {
-            minionStateManager.minionAgent.SetDestination(minionStateManager.minionTPPoint.position);
-        }
+
 
     }
 

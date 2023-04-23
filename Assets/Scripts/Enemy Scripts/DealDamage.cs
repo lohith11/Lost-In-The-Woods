@@ -1,25 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float range = 2f;
+    [SerializeField] float damage;
+    [SerializeField] LayerMask playerLayer;
+    private void Update()
     {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, playerLayer);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.collider.name == "Playerrr")
+        if (hitColliders.Length > 0)
         {
-            Debug.Log("Hit the player");
+            Debug.Log("Found someting"); //!
+            PlayerHealth player = hitColliders[0].GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                Debug.Log("Ready to deal damage"); //!
+                player.TakeDamage(damage);
+            }
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
+
 }

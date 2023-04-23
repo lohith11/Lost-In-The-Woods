@@ -24,7 +24,7 @@ public class FlashlightController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("The current flashlight intensity is : " + _flashLight.intensity);
+        
         if(Input.GetKeyDown(KeyCode.F))
         {
             if(lightObject.activeInHierarchy) 
