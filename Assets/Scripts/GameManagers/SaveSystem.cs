@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-    private string saveDir;
-    public string folderName = "Saves";
+    private  string saveDir;
     private const string SAVE_EXTENSION = ".json";
     private GameManager gameManager;
+    private string folderName = "Saves";
+
+    public string filePath;
 
     private void Awake()
     {
         Init();
     }
 
-    private void Update()
-    {
-
+    private void Start() {
+        filePath = saveDir + "Save" + ".json";
     }
+
     public void Init()
     {
         saveDir = Application.persistentDataPath + "/" + "Saves" + "/";
@@ -30,7 +32,6 @@ public class SaveSystem : MonoBehaviour
 
     public void Save()
     {
-        DateTime currentDate = DateTime.Now.Date;
         string jsonData = JsonUtility.ToJson(gameManager.playerData, true);
         File.WriteAllText(saveDir + string.Concat("Save", ".json"), jsonData);
 

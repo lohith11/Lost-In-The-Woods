@@ -24,7 +24,7 @@ public class EnemyStateManager : MonoBehaviour
 
     //* Enemy Attributes
 
-    public bool isWayPointPatrol;
+    public bool isWayPointPatrol; //* This changes how the enemy patrols around
     public float stoppingDistance;
 
     [Header("Enemy field of view")]
@@ -92,7 +92,6 @@ public class EnemyStateManager : MonoBehaviour
     public bool isAttacking;
     private float _attackTimer;
     public Vector3 lastknownLocation;
-    public GameObject spherePrefab;
 
     [Space(10)]
 
@@ -115,24 +114,25 @@ public class EnemyStateManager : MonoBehaviour
     public EnemyChaseState ChaseState;
     public EnemyAttackState AttackState;
     public EnemyDieState DieState;
+
     #endregion
 
+    private void Awake()
+    {
+        manager = this;
+    }
     void Start()
     {
-        
-        manager = this;
-
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
-        stateInfo = enemyAnimController.GetCurrentAnimatorStateInfo(0);
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
         ChaseState = new EnemyChaseState(this);
-        DieState = new EnemyDieState(this);
+        SearchState = new EnemySearchingState(this);
         AlertState = new EnemyAlertState(this);
         AttackState = new EnemyAttackState(this);
-        SearchState = new EnemySearchingState(this);
+        DieState = new EnemyDieState(this);
 
         alertText.enabled = false;
         playerRef = GameObject.FindGameObjectWithTag("Player");
@@ -143,8 +143,6 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
-        Debug.Log("Sound in range is : " + SoundInRange);
-
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -239,7 +237,7 @@ public class EnemyStateManager : MonoBehaviour
                 //* check if player is within attack range
                 if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
                 {
-                   
+
                 }
 
                 //* reset attack timer and play attack cooldown animation
