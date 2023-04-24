@@ -238,7 +238,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void FixedUpdate()
     {
         currentState.FixedUpdateState();
-        PlayerSteppingUp();
+        //PlayerSteppingUp();
     }
 
     public void Step()
