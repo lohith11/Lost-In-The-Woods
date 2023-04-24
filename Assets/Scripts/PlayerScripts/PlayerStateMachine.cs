@@ -269,8 +269,8 @@ public class PlayerStateMachine : MonoBehaviour
                 return grassSound[Random.Range(0, grassSound.Length - 1)];
             case 3:
                 return leavesSound[Random.Range(0, leavesSound.Length - 1)];
-            case 4:
-                return woodSound[Random.Range(0, woodSound.Length - 1)];
+            /*case 4:
+                return woodSound[Random.Range(0, woodSound.Length - 1)];*/
             default:
                 return dirtSound[Random.Range(0, dirtSound.Length - 1)];
         }

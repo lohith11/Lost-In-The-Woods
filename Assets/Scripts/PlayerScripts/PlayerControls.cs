@@ -272,7 +272,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Picking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -283,7 +283,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Picking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -294,7 +294,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": """",
                     ""action"": ""Projectile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -305,7 +305,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""Projectile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

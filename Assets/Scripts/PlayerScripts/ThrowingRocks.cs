@@ -51,9 +51,9 @@ public class ThrowingRocks : MonoBehaviour
     {
         lineRendererEndPoint.SetActive(false);
         canPickUp = true;
+        readyToThrow = true;
         playerStateMachine = GetComponent<PlayerStateMachine>();
         lineRenderer = GetComponent<LineRenderer>();
-        readyToThrow = true;
     }
 
     private void Update()
