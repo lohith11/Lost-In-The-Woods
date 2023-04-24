@@ -5,27 +5,49 @@ using UnityEngine;
 public class ToggleColliders : MonoBehaviour
 {
     public GameObject player;
+    public float colliderCheckRange;
     public Collider[] collidersToToggle;
+    private void Start()
+    {
+
+        StartCoroutine(ToggleCollider());
+    }
 
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        
-        // Turn off colliders if the player is within a certain distance
-        if (distanceToPlayer < 5f)
+        // foreach (Collider collider in collidersToToggle)
+        // {
+        //     float distanceToPlayer = Vector3.Distance(player.transform.position, collider.transform.position);
+        //     Debug.Log("Distance to the player is " + distanceToPlayer);
+
+        //     if (distanceToPlayer < 2f)
+        //     {
+        //         collider.enabled = true;
+        //     }
+        //     else
+        //     {
+        //         collider.enabled = false;
+        //     }
+        // }
+
+
+    }
+
+    private IEnumerator ToggleCollider()
+    {
+        while (true)
         {
-            foreach (Collider collider in collidersToToggle)
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, colliderCheckRange);
+            if (colliders.Length > 0)
             {
-                collider.enabled = false;
+                Debug.Log("Found!");
             }
-        }
-        // Turn on colliders if the player is outside of that distance
-        else
-        {
-            foreach (Collider collider in collidersToToggle)
+            foreach (Collider collider in colliders)
             {
                 collider.enabled = true;
+                
             }
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

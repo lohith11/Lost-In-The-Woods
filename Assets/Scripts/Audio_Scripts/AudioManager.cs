@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null) 
+        if (instance == null)
         {
             instance = this;
         }
@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
             s.source.outputAudioMixerGroup = s.mixerGroup;
         }
     }
-    
+
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

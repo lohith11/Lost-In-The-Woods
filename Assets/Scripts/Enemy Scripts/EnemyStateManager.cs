@@ -239,9 +239,7 @@ public class EnemyStateManager : MonoBehaviour
                 //* check if player is within attack range
                 if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
                 {
-                    //* Deal damage to the player here
-                    //* Make a sphere cast from the sphere point and check if there is player -> deal damage
-                    Debug.LogError("Dealing damage to the player");
+                   
                 }
 
                 //* reset attack timer and play attack cooldown animation
