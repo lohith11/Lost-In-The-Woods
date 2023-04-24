@@ -129,7 +129,7 @@ public class ThrowingRocks : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
         } 
         
-        else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyHeadLayer))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyHeadLayer))
         {
             Vector3 targetPosition = hit.collider.gameObject.transform.position;
             targetPosition.y = transform.position.y;
