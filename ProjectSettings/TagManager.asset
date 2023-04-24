@@ -16,7 +16,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EnemyHead
   - Water
   - UI
   - Ground
@@ -27,7 +27,7 @@ TagManager:
   - BigBad
   - Rock
   - Enemy
-  - 
+  - EnemyBody
   - 
   - 
   - 

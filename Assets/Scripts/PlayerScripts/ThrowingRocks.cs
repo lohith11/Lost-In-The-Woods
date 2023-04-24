@@ -15,6 +15,8 @@ public class ThrowingRocks : MonoBehaviour
     [SerializeField]private string headDamage;
     [SerializeField]private string bodyDamage;
 
+    public GameObject lineRendererEndPoint;
+
     [Header("References")]
     public Transform cam;
     public Transform attackpoint;
@@ -47,10 +49,11 @@ public class ThrowingRocks : MonoBehaviour
     public LayerMask CollidableLayers;
     void Start()
     {
+        lineRendererEndPoint.SetActive(false);
         canPickUp = true;
+        readyToThrow = true;
         playerStateMachine = GetComponent<PlayerStateMachine>();
         lineRenderer = GetComponent<LineRenderer>();
-        readyToThrow = true;
     }
 
     private void Update()
@@ -68,6 +71,7 @@ public class ThrowingRocks : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
+            lineRendererEndPoint.SetActive(false);
         }
 
         if(totalThrows >= maxRockPickUp)
@@ -116,6 +120,7 @@ public class ThrowingRocks : MonoBehaviour
 
     private void Projectile()
     {
+        lineRendererEndPoint.SetActive(true);
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyLayer))
         {
             Vector3 targetPosition = hit.collider.gameObject.transform.position;
@@ -124,7 +129,7 @@ public class ThrowingRocks : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
         } 
         
-        else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyHeadLayer))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyHeadLayer))
         {
             Vector3 targetPosition = hit.collider.gameObject.transform.position;
             targetPosition.y = transform.position.y;
@@ -143,9 +148,11 @@ public class ThrowingRocks : MonoBehaviour
             newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / f * t * t;
             points.Add(newPoint);
 
-            if (Physics.OverlapSphere(newPoint, 2, CollidableLayers).Length > 0)
+            if (Physics.OverlapSphere(newPoint, 0.05f, CollidableLayers).Length > 0)
             {
                 lineRenderer.positionCount = points.Count;
+                Vector3 target = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
+                lineRendererEndPoint.transform.position = target;
                 break;
             }
         }
