@@ -14,7 +14,9 @@ public class ThrowingRocks : MonoBehaviour
 
     [SerializeField]private string headDamage;
     [SerializeField]private string bodyDamage;
+
     public GameObject lineRendererEndPoint;
+
     [Header("References")]
     public Transform cam;
     public Transform attackpoint;
@@ -108,7 +110,7 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         //Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
-        Vector3 forceToAdd = forceDirection * throwForce;
+        Vector3 forceToAdd=forceDirection * throwForce;
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
@@ -140,10 +142,10 @@ public class ThrowingRocks : MonoBehaviour
         List<Vector3> points = new List<Vector3>();
         Vector3 startingPosition = attackpoint.position;
         Vector3 startingVelocity = cam.transform.forward * throwForce;
-        for (float i = 0; i < numPoints; i += timeBetweenPoints)
+        for (float t = 0; t < numPoints; t += timeBetweenPoints)
         {
-            Vector3 newPoint = startingPosition + i * startingVelocity;
-            newPoint.y = startingPosition.y + startingVelocity.y * i + Physics.gravity.y / f * i * i;
+            Vector3 newPoint = startingPosition + t * startingVelocity;
+            newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / f * t * t;
             points.Add(newPoint);
 
             if (Physics.OverlapSphere(newPoint, 0.05f, CollidableLayers).Length > 0)
@@ -196,6 +198,12 @@ public class ThrowingRocks : MonoBehaviour
             pressRocksText.enabled = false;
         }
     }
+    #endregion
+
+    public void ResetThrow()
+    {
+        readyToThrow = true;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -209,11 +217,4 @@ public class ThrowingRocks : MonoBehaviour
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
         }
     }
-    #endregion
-
-    public void ResetThrow()
-    {
-        readyToThrow = true;
-    }
-
 }
