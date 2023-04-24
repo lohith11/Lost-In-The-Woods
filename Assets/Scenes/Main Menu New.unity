@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.3529412, g: 0.38431376, b: 0.43921572, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.04
+  m_FogColor: {r: 0.07058824, g: 0.101960786, b: 0.13333334, a: 1}
+  m_FogMode: 2
+  m_FogDensity: 0.08
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 51dd9950d5fd64b42ae186c2a428afa0, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c494c335823f54b52b2e87e1b7a63a23, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1902371103}
-  m_IndirectSpecularColor: {r: 0.0027172526, g: 0.0029358377, b: 0.0030605937, a: 1}
+  m_IndirectSpecularColor: {r: 0.008958812, g: 0.013101446, b: 0.02045097, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,9 +97,9 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 5b4f404c78f90214caafd8709e9382a8,
+  m_LightingDataAsset: {fileID: 112000000, guid: 484c93201c2dd8b4bace815f0e65c276,
     type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: aef7afea88b0e74449f7618a8a938a93,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 12b9cd54d509e544288a6a78e3168117,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -553,8 +553,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57195678}
-  m_LocalRotation: {x: 0.00042469593, y: -0.7156965, z: 0.0004352069, w: 0.69841117}
-  m_LocalPosition: {x: 252.4374, y: 39.82, z: 89.39934}
+  m_LocalRotation: {x: -0.006879412, y: -0.7156827, z: -0.0070500937, w: 0.69835615}
+  m_LocalPosition: {x: 250.49786, y: 38.05, z: 89.35693}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 1.54, z: -5.95}
+  m_FollowOffset: {x: 0, y: -0.23, z: -4.01}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -3715,8 +3715,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634919417}
-  m_LocalRotation: {x: 0.0006080881, y: -0.0012932719, z: 0.00000078638556, w: 0.999999}
-  m_LocalPosition: {x: -0.0000015050173, y: 1.5400009, z: -5.949999}
+  m_LocalRotation: {x: -0.009850379, y: -0.0013229549, z: -0.000013031997, w: 0.99995065}
+  m_LocalPosition: {x: -0.000002346933, y: -0.22999954, z: -4.0100064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8099,8 +8099,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.28627452, g: 0.3764706, b: 0.3764706, a: 1}
+  m_Intensity: 4
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -8143,8 +8143,8 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
+  m_ColorTemperature: 19273
+  m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -8157,14 +8157,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902371102}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.8055008, y: 0.45137823, z: 0.17607781, w: 0.34120786}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 23, y: 140, z: 113}
 --- !u!114 &1902371105
 MonoBehaviour:
   m_ObjectHideFlags: 0
