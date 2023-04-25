@@ -363,7 +363,7 @@ public class PlayerStateMachine : MonoBehaviour
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Herbs"))
+       /* if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = true;
             forPickingHerb.text = "Press E or Controller Y";
@@ -374,7 +374,7 @@ public class PlayerStateMachine : MonoBehaviour
                 PlayerHealth.Health = PlayerHealth.maxHealth;
                 Destroy(other.gameObject);
             }
-        }
+        }*/
 
         if(other.gameObject.CompareTag("ChapterEnd"))
         {
@@ -382,10 +382,11 @@ public class PlayerStateMachine : MonoBehaviour
         }
         if (other.CompareTag("Key"))
         {
-            //TextFeild
+            forPickingHerb.enabled = true;
+            forPickingHerb.text= "Pick Up the Key";
             if (canPickKey && isPicking)
             {
-                //text disable
+                forPickingHerb.enabled = false; 
                 keyPicked++;
                 Destroy(other.gameObject);
             }
@@ -394,7 +395,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Herbs"))
+       /* if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = true;
             forPickingHerb.text = "Press E or Controller Y";
@@ -405,14 +406,15 @@ public class PlayerStateMachine : MonoBehaviour
                 //PlayerHealth.Health = PlayerHealth.maxHealth;
                 Destroy(other.gameObject);
             }
-        }
+        }*/
 
         if (other.CompareTag("Key"))
         {
-            //TextFeild
+            forPickingHerb.enabled = true;
+            forPickingHerb.text = "Pick Up the Key";
             if (canPickKey && isPicking)
             {
-                //text disable
+                forPickingHerb.enabled = false; 
                 keyPicked++;
                 Destroy(other.gameObject);
             }
@@ -421,14 +423,14 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Herbs"))
+        /*if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = false;
-        }
+        }*/
 
-        if (other.CompareTag("Key"))
+        if(other.CompareTag("Key"))
         {
-            //Disable the text
+            forPickingHerb.enabled = false;
         }
     }
     #endregion

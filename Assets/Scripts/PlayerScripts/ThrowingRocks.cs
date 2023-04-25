@@ -4,17 +4,8 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class dealDamageEventArg : EventArgs
-{
-    public float damage;
-}
 public class ThrowingRocks : MonoBehaviour
 {
-    public static event EventHandler<dealDamageEventArg> dealDamage;
-
-    [SerializeField]private string headDamage;
-    [SerializeField]private string bodyDamage;
-
     public GameObject lineRendererEndPoint;
 
     [Header("References")]
@@ -96,8 +87,6 @@ public class ThrowingRocks : MonoBehaviour
 
         //Getting RigidBody of that throwable object
         Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
-
-        Debug.Log(projectileRB.GetInstanceID());
 
         //Caluculate Direction of that Object
         Vector3 forceDirection = cam.transform.forward;
@@ -203,18 +192,5 @@ public class ThrowingRocks : MonoBehaviour
     public void ResetThrow()
     {
         readyToThrow = true;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.name == headDamage)
-        {
-            dealDamage?.Invoke(this, new dealDamageEventArg{ damage = 100 });
-        }
-
-        if(collision.collider.name == bodyDamage)
-        {
-            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
-        }
     }
 }

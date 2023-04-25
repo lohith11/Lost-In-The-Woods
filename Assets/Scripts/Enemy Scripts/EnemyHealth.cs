@@ -9,7 +9,12 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float health;
     void Start()
     {
-        ThrowingRocks.dealDamage += TakeDamage;
+        RockDestroy.dealDamage += TakeDamage;
+    }
+
+    private void Update()
+    {
+        Debug.Log("Health :-" + health);
     }
 
     private void TakeDamage(object sender, dealDamageEventArg e)
