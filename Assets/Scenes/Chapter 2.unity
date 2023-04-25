@@ -3725,6 +3725,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: angle
+      value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: radius
+      value: 8.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -3733,6 +3743,11 @@ PrefabInstance:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 346525612}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: hearingRange
+      value: 7.18
+      objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -5306,6 +5321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: idelTimer
       value: 690
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: idleTimer
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -21255,6 +21275,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: angle
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: radius
+      value: 5.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: idelTimer
       value: 5
       objectReference: {fileID: 0}
@@ -21268,6 +21298,11 @@ PrefabInstance:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 1803859768}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: hearingRange
+      value: 5.81
+      objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -21407,6 +21442,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1763211883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8055116205827538959, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+    type: 3}
+  m_PrefabInstance: {fileID: 1988713449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1765286733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23883,7 +23924,7 @@ PrefabInstance:
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: idleTimer
-      value: 690
+      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -24228,6 +24269,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: angle
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: radius
+      value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: idelTimer
       value: 690
       objectReference: {fileID: 0}
@@ -24246,6 +24297,11 @@ PrefabInstance:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 1220581950}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: hearingRange
+      value: 6.17
+      objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: isWayPointPatrol
@@ -25061,7 +25117,7 @@ PrefabInstance:
         type: 3}
       propertyPath: minionTPPoint
       value: 
-      objectReference: {fileID: 1846629115}
+      objectReference: {fileID: 1763211883}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a17a8174cdd989045b9823916f0a0276, type: 3}
 --- !u!1001 &2050750046
