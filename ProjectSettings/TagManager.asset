@@ -12,6 +12,7 @@ TagManager:
   - FootSteps/Wood
   - FootSteps/Dirt
   - FootSteps/Grass
+  - ChapterEnd
   layers:
   - Default
   - TransparentFX

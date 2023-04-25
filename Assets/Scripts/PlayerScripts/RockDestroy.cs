@@ -31,8 +31,9 @@ public class RockDestroy : MonoBehaviour
             Destroy(this.gameObject, 3f);
             
         }
+        //to do :- visual reprensentation of collectables
         //Save it in player prfs later
-        else if(collision.collider.CompareTag("Collectable"))
+        if(collision.collider.CompareTag("Collectable"))
         {
             collectable++;
             Destroy(this.gameObject);

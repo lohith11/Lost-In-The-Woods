@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -375,6 +376,10 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
 
+        if(other.gameObject.CompareTag("ChapterEnd"))
+        {
+            SceneManager.LoadScene("Chapter 2");
+        }
         /*if(other.CompareTag("Key"))
         {
             //TextFeild
