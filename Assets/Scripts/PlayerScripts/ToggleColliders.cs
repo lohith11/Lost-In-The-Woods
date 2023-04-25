@@ -10,7 +10,7 @@ public class ToggleColliders : MonoBehaviour
     private void Start()
     {
 
-        StartCoroutine(ToggleCollider());
+        //StartCoroutine(ToggleCollider());
     }
 
     void Update()
@@ -33,21 +33,21 @@ public class ToggleColliders : MonoBehaviour
 
     }
 
-    private IEnumerator ToggleCollider()
-    {
-        while (true)
-        {
-            Collider[] colliders = Physics.OverlapSphere(player.transform.position, colliderCheckRange);
-            if (colliders.Length > 0)
-            {
-                Debug.Log("Found!");
-            }
-            foreach (Collider collider in colliders)
-            {
-                collider.enabled = true;
+    // private IEnumerator ToggleCollider()
+    // {
+    //     while (true)
+    //     {
+    //         Collider[] colliders = Physics.OverlapSphere(player.transform.position, colliderCheckRange);
+    //         if (colliders.Length > 0)
+    //         {
+    //             Debug.Log("Found!");
+    //         }
+    //         foreach (Collider collider in colliders)
+    //         {
+    //             collider.enabled = true;
                 
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
+    //         }
+    //         yield return new WaitForSeconds(0.5f);
+    //     }
+    // }
 }

@@ -5,7 +5,8 @@ public class DealDamage : MonoBehaviour
     [SerializeField] float range = 2f;
     [SerializeField] float damage;
     [SerializeField] LayerMask playerLayer;
-    private void Update()
+
+    public void DealDamageToPlayer()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, playerLayer);
 

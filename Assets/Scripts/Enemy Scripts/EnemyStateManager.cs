@@ -81,12 +81,12 @@ public class EnemyStateManager : MonoBehaviour
     [Space(2)]
 
     [Range(1, 7)] public float attackRadius;
+    public float timeSinceLastSighting;
+    public float minDistanceToPlayer;
     public float chaseSpeed;
     public float attackDuration;
     public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float damage;
-    public float timeSinceLastSighting;
-    public float minDistanceToPlayer;
     public bool isAttacking;
     private float _attackTimer;
     public Vector3 lastknownLocation;
@@ -141,6 +141,7 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
+        Debug.Log("UngaBungaBoi current state is :: " + currentState);
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -151,7 +152,23 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
-   // public void AttackPlayer() => StartCoroutine(Attack());
+    public void AttackPlayer()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRadius, targetMask);
+
+        if (hitColliders.Length > 0)
+        {
+            Debug.Log("Found someting"); //!
+            PlayerHealth player = hitColliders[0].GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                Debug.Log("Ready to deal damage"); //!
+                player.TakeDamage(damage);
+            }
+            else if(player == null)
+                Debug.Log("Player not found");
+        }
+    }
     public void SearchForPlayer() => StartCoroutine(GoTosoundLocations());
     private void FieldOfViewCheck()
     {
@@ -218,38 +235,6 @@ public class EnemyStateManager : MonoBehaviour
             FieldOfViewCheck();
         }
     }
-
-    // private IEnumerator Attack()
-
-    // {
-    //     Debug.LogError("Attack Coroutine called");
-    //     while (isAttacking)
-    //     {
-    //         if (_attackTimer <= 0f)
-    //         {
-    //             //* play the enemy animation here
-
-    //             //* wait for attack animation to finish
-    //             yield return new WaitForSeconds(attackDuration);
-
-    //             //* check if player is within attack range
-    //             if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
-    //             {
-
-    //             }
-
-    //             //* reset attack timer and play attack cooldown animation
-    //             _attackTimer = attackCooldown;
-    //         }
-    //         else
-    //         {
-    //             // decrease attack timer
-    //             _attackTimer -= Time.deltaTime;
-    //         }
-
-    //         yield return null;
-    //     }
-    // }
 
 
 }

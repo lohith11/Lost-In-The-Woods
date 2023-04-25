@@ -17,9 +17,7 @@ public class EnemySearchingState : EnemyBaseState
 
     public override void ExitState()
     {
-       
-        
-        Debug.LogError("Exit the state");
+
     }
 }
 

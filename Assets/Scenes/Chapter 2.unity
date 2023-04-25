@@ -10445,35 +10445,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1892121271, guid: c1cb0bebd0b424949aa5fbd0754b4803, type: 3}
-      propertyPath: m_Radius
-      value: 0.017
-      objectReference: {fileID: 0}
-    - target: {fileID: 723195361996603874, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_Height
-      value: 0.07545124
-      objectReference: {fileID: 0}
-    - target: {fileID: 723195361996603874, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.03772537
-      objectReference: {fileID: 0}
-    - target: {fileID: 723195361996603875, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.015
-      objectReference: {fileID: 0}
-    - target: {fileID: 723195361996603876, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4333732142921776913, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: m_Name
@@ -10533,11 +10504,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8312199438597278129, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1cb0bebd0b424949aa5fbd0754b4803, type: 3}
