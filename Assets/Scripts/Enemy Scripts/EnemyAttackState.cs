@@ -5,7 +5,6 @@ public class EnemyAttackState : EnemyBaseState
     public EnemyAttackState (EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        Debug.LogError("Entered attack state");
         enemyStateManager.enemyAnimController.Play("Torch_Attack");
     }
 
@@ -20,7 +19,6 @@ public class EnemyAttackState : EnemyBaseState
         else
         {
            // enemyStateManager.AttackPlayer();
-            //Debug.LogError("Attack player coroutine called");
         }
     }
 

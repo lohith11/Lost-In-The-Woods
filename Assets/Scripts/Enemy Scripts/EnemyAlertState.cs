@@ -27,7 +27,6 @@ public class EnemyAlertState : EnemyBaseState
         else if (enemyStateManager.startChaseTimer <= 0)
         {
             enemyStateManager.switchState(enemyStateManager.ChaseState);
-            Debug.Log("Switching for chase state!"); //!
         }
 
         if (enemyStateManager.SoundInRange)
@@ -39,7 +38,6 @@ public class EnemyAlertState : EnemyBaseState
         {
             if (enemyStateManager.isWayPointPatrol)
             {
-                Debug.Log("Going to patrol state");
                 enemyStateManager.enemyAgent.SetDestination(enemyStateManager.nextLocation);
             }
             enemyStateManager.switchState(enemyStateManager.PatrolState);

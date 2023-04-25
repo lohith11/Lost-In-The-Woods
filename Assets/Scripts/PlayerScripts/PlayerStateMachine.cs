@@ -277,6 +277,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+#region animationIK
     /*  private void OnAnimatorIK(int layerIndex)
     {
         if(playerAnimation)
@@ -314,6 +315,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
     }*/
+    #endregion
 
     #region Player Input Controls
     public void Moving(InputAction.CallbackContext context)
@@ -363,7 +365,7 @@ public class PlayerStateMachine : MonoBehaviour
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
-       /* if (other.CompareTag("Herbs"))
+        if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = true;
             forPickingHerb.text = "Press E or Controller Y";
@@ -374,7 +376,7 @@ public class PlayerStateMachine : MonoBehaviour
                 PlayerHealth.Health = PlayerHealth.maxHealth;
                 Destroy(other.gameObject);
             }
-        }*/
+        }
 
         if(other.gameObject.CompareTag("ChapterEnd"))
         {
@@ -382,55 +384,53 @@ public class PlayerStateMachine : MonoBehaviour
         }
         if (other.CompareTag("Key"))
         {
-            forPickingHerb.enabled = true;
-            forPickingHerb.text= "Pick Up the Key";
+            //TextFeild
             if (canPickKey && isPicking)
             {
-                forPickingHerb.enabled = false; 
+                //text disable
                 keyPicked++;
                 Destroy(other.gameObject);
             }
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-       /* if (other.CompareTag("Herbs"))
-        {
-            forPickingHerb.enabled = true;
-            forPickingHerb.text = "Press E or Controller Y";
-            if (canPickHerb && isPicking)
-            {
-                herbs++;
-                forPickingHerb.enabled = false;
-                //PlayerHealth.Health = PlayerHealth.maxHealth;
-                Destroy(other.gameObject);
-            }
-        }*/
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     // if (other.CompareTag("Herbs"))
+    //     // {
+    //     //     forPickingHerb.enabled = true;
+    //     //     forPickingHerb.text = "Press E or Controller Y";
+    //     //     if (canPickHerb && isPicking)
+    //     //     {
+    //     //         herbs++;
+    //     //         forPickingHerb.enabled = false;
+    //     //         //PlayerHealth.Health = PlayerHealth.maxHealth;
+    //     //         Destroy(other.gameObject);
+    //     //     }
+    //     // }
 
-        if (other.CompareTag("Key"))
-        {
-            forPickingHerb.enabled = true;
-            forPickingHerb.text = "Pick Up the Key";
-            if (canPickKey && isPicking)
-            {
-                forPickingHerb.enabled = false; 
-                keyPicked++;
-                Destroy(other.gameObject);
-            }
-        }
-    }
+    //     if (other.CompareTag("Key"))
+    //     {
+    //         //TextFeild
+    //         if (canPickKey && isPicking)
+    //         {
+    //             //text disable
+    //             keyPicked++;
+    //             Destroy(other.gameObject);
+    //         }
+    //     }
+    // }
 
     private void OnTriggerExit(Collider other)
     {
-        /*if (other.CompareTag("Herbs"))
+        if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = false;
-        }*/
+        }
 
-        if(other.CompareTag("Key"))
+        if (other.CompareTag("Key"))
         {
-            forPickingHerb.enabled = false;
+            //Disable the text
         }
     }
     #endregion
