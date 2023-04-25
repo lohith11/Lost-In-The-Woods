@@ -142,6 +142,10 @@ public class EnemyStateManager : MonoBehaviour
     {
         currentState.UpdateState();
         Debug.Log("UngaBungaBoi current state is :: " + currentState);
+        if(PlayerInRange)
+        {
+            transform.LookAt(transform.position,playerRef.transform.position);
+        }
     }
 
     public void switchState(EnemyBaseState Enemy)
