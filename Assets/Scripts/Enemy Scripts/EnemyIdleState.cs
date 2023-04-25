@@ -20,6 +20,8 @@ public class EnemyIdleState : EnemyBaseState
             enemyStateManager.switchState(enemyStateManager.PatrolState);
             _idleTimer = 0;
         }
+        else if(enemyStateManager.PlayerInRange)
+            enemyStateManager.switchState(enemyStateManager.AlertState);
     }
 
     public override void ExitState()

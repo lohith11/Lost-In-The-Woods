@@ -21,7 +21,7 @@ public class AsyncLoader : MonoBehaviour
 
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
-
+    
     private IEnumerator LoadLevelAsync(int levelToLoad)
     {
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad);
