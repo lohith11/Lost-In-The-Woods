@@ -37,6 +37,12 @@ public class EnemyStateManager : MonoBehaviour
 
     [Space(10)]
 
+    [Header("Idle Properties")]
+    [Space(2)]
+
+    public float idleTimer;
+    [Space(5)]
+
     [Header("Hearing Properties")]
     [Space(2)]
 
