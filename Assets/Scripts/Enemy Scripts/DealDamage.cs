@@ -8,6 +8,7 @@ public class DealDamage : MonoBehaviour
 
     public void DealDamageToPlayer()
     {
+        Debug.LogWarning("Debug calledd");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, playerLayer);
 
         if (hitColliders.Length > 0)
