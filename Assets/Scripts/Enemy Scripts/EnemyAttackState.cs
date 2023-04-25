@@ -19,8 +19,8 @@ public class EnemyAttackState : EnemyBaseState
         }
         else
         {
-            enemyStateManager.AttackPlayer();
-            Debug.LogError("Attack player coroutine called");
+           // enemyStateManager.AttackPlayer();
+            //Debug.LogError("Attack player coroutine called");
         }
     }
 

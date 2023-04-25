@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
-
-
 public class EnemyStateManager : MonoBehaviour
 {
     //todo : alert nearby enemies when an enemy dies
@@ -153,7 +151,7 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
-    public void AttackPlayer() => StartCoroutine(Attack());
+   // public void AttackPlayer() => StartCoroutine(Attack());
     public void SearchForPlayer() => StartCoroutine(GoTosoundLocations());
     private void FieldOfViewCheck()
     {
@@ -221,37 +219,37 @@ public class EnemyStateManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack()
+    // private IEnumerator Attack()
 
-    {
-        Debug.LogError("Attack Coroutine called");
-        while (isAttacking)
-        {
-            if (_attackTimer <= 0f)
-            {
-                //* play the enemy animation here
+    // {
+    //     Debug.LogError("Attack Coroutine called");
+    //     while (isAttacking)
+    //     {
+    //         if (_attackTimer <= 0f)
+    //         {
+    //             //* play the enemy animation here
 
-                //* wait for attack animation to finish
-                yield return new WaitForSeconds(attackDuration);
+    //             //* wait for attack animation to finish
+    //             yield return new WaitForSeconds(attackDuration);
 
-                //* check if player is within attack range
-                if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
-                {
+    //             //* check if player is within attack range
+    //             if (Vector3.Distance(transform.position, playerRef.transform.position) <= attackRadius)
+    //             {
 
-                }
+    //             }
 
-                //* reset attack timer and play attack cooldown animation
-                _attackTimer = attackCooldown;
-            }
-            else
-            {
-                // decrease attack timer
-                _attackTimer -= Time.deltaTime;
-            }
+    //             //* reset attack timer and play attack cooldown animation
+    //             _attackTimer = attackCooldown;
+    //         }
+    //         else
+    //         {
+    //             // decrease attack timer
+    //             _attackTimer -= Time.deltaTime;
+    //         }
 
-            yield return null;
-        }
-    }
+    //         yield return null;
+    //     }
+    // }
 
 
 }
