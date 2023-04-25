@@ -13,10 +13,10 @@ public class PlayerHealth : MonoBehaviour
     [Space(10)]
 
     [ShowInInspector]
-    public static float maxHealth;
+    public static float maxHealth = 100;
     public float healthUpgrade;
     [ShowInInspector]
-    public static float Health = 70;
+    public static float Health;
     private float baseHealth;
 
     private PlayerStateMachine StateMachine;
@@ -32,11 +32,11 @@ public class PlayerHealth : MonoBehaviour
     {
         maxHealth = baseHealth + (StateMachine.herbs * 10);
        // Health = maxHealth;
-        if(Health <= 0)
+       /* if(Health <= 0)
         {
             Health = 0;
-        }
-
+        }*/
+        Debug.Log(Health);
         if(Health == 0)
         {
             //DeadState
