@@ -380,16 +380,16 @@ public class PlayerStateMachine : MonoBehaviour
         {
             SceneManager.LoadScene("Chapter 2");
         }
-        /*if(other.CompareTag("Key"))
+        if (other.CompareTag("Key"))
         {
             //TextFeild
-            if(canPickKey && isPicking)
+            if (canPickKey && isPicking)
             {
                 //text disable
                 keyPicked++;
                 Destroy(other.gameObject);
             }
-        }*/
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -407,7 +407,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
 
-       /* if (other.CompareTag("Key"))
+        if (other.CompareTag("Key"))
         {
             //TextFeild
             if (canPickKey && isPicking)
@@ -416,7 +416,7 @@ public class PlayerStateMachine : MonoBehaviour
                 keyPicked++;
                 Destroy(other.gameObject);
             }
-        }*/
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -426,10 +426,10 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingHerb.enabled = false;
         }
 
-       /* if(other.CompareTag("Key"))
+        if (other.CompareTag("Key"))
         {
             //Disable the text
-        }*/
+        }
     }
     #endregion
 
