@@ -36,7 +36,6 @@ public class PlayerHealth : MonoBehaviour
         {
             Health = 0;
         }*/
-        Debug.Log(Health);
         if(Health == 0)
         {
             //DeadState
