@@ -104,13 +104,13 @@ public class ThrowingRocks : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(cam.position, cam.forward, out hit, 500f))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 500f))
         {
             forceDirection = (hit.point - attackpoint.position).normalized;
         }
 
         //Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
-        Vector3 forceToAdd=forceDirection * throwForce;
+        Vector3 forceToAdd = forceDirection * throwForce;
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
@@ -138,10 +138,10 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         lineRenderer.enabled = true;
-        lineRenderer.positionCount = (int)numPoints;
+        lineRenderer.positionCount = numPoints;
         List<Vector3> points = new List<Vector3>();
         Vector3 startingPosition = attackpoint.position;
-        Vector3 startingVelocity = cam.transform.forward * throwForce;
+        Vector3 startingVelocity = Camera.main.transform.forward * throwForce;
         for (float t = 0; t < numPoints; t += timeBetweenPoints)
         {
             Vector3 newPoint = startingPosition + t * startingVelocity;
