@@ -36,7 +36,7 @@ public class RockDestroy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Ground") || collision.collider.CompareTag("EnemyHead") || collision.collider.CompareTag("EnemyBody"))
+        if(collision.collider.CompareTag("Ground"))
         {
             GetComponent<Rigidbody>().isKinematic = true;
             Destroy(this.gameObject, 3f);
@@ -55,17 +55,19 @@ public class RockDestroy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("EnemyHead"))
+
+        if (other.gameObject.name == "mixamorig:Head")
         {
             Debug.Log("Entering EnemyHead");
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
-            Destroy(this.gameObject, 2f);
+            Destroy(this.gameObject);
         }
 
-        if (other.gameObject.CompareTag("EnemyBody"))
+        if (other.gameObject.name == "UngaBunga_Boi")
         {
             Debug.Log("Entering EnemyBody");
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
+            Destroy(this.gameObject);
         }
     }
 }

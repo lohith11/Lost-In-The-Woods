@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
    
     [SerializeField] float health;
-    void Start()
+    void Awake()
     {
         RockDestroy.dealDamage += TakeDamage;
     }

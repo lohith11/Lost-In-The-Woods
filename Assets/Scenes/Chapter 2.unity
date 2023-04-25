@@ -3730,6 +3730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 346525612}
@@ -3772,6 +3777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -5314,6 +5324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 798084471}
@@ -5336,6 +5351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -12179,6 +12199,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 877806021}
@@ -12191,6 +12216,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -15229,6 +15259,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 1570368633}
@@ -15261,6 +15296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -21265,6 +21305,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 1803859768}
@@ -21312,6 +21357,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -23892,6 +23942,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 58692735}
@@ -23914,6 +23969,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -24243,6 +24303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 1220581950}
@@ -24265,6 +24330,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
@@ -26342,6 +26412,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: chaseSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 896814057}
@@ -26379,6 +26454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UngaBunga_Boi (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
