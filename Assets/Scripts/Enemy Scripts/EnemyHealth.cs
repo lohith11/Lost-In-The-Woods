@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Health :-" + health);
+       
     }
 
     private void TakeDamage(object sender, dealDamageEventArg e)

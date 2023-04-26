@@ -22,6 +22,8 @@ public class EnemyIdleState : EnemyBaseState
         }
         else if(enemyStateManager.PlayerInRange)
             enemyStateManager.switchState(enemyStateManager.AlertState);
+        if(enemyStateManager.SoundInRange)
+            enemyStateManager.switchState(enemyStateManager.SearchState);
     }
 
     public override void ExitState()
