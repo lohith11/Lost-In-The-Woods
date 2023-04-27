@@ -119,10 +119,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     public GameObject crouchCollider;
     private GameObject herbInRange;
+    private GameObject keyInRange;
 
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
-    private bool canPickKey = true;
+    private bool canPickKey = false;
     private int keyPicked = 0;
 
     private void Awake()
@@ -175,6 +176,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         playerControls.Player.Picking.performed += PickingRock;
         playerControls.Player.Picking.performed += HerbsPickUp;
+        playerControls.Player.Picking.performed += KeyPickUp;
 
         playerControls.Player.Projectile.started += ProjectileRock;
         playerControls.Player.Projectile.performed += ProjectileRock;
@@ -212,6 +214,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         playerControls.Player.Picking.performed -= PickingRock;
         playerControls.Player.Picking.performed -= HerbsPickUp;
+        playerControls.Player.Picking.performed -= KeyPickUp;
 
         playerControls.Player.Projectile.started -= ProjectileRock;
         playerControls.Player.Projectile.performed -= ProjectileRock;
@@ -354,6 +357,11 @@ public class PlayerStateMachine : MonoBehaviour
         HerbsPicking();
     }
 
+    public void KeyPickUp(InputAction.CallbackContext context)
+    {
+        KeyPickUp();
+    }
+
     public void ProjectileRock(InputAction.CallbackContext context)
     {
         isAiming = context.ReadValueAsButton();
@@ -382,13 +390,10 @@ public class PlayerStateMachine : MonoBehaviour
         }
         if (other.CompareTag("Key"))
         {
-            //TextFeild
-            if (canPickKey && isPicking)
-            {
-                //text disable
-                keyPicked++;
-                Destroy(other.gameObject);
-            }
+            forPickingHerb.enabled = true;
+            canPickKey = true;
+            forPickingHerb.text = "Press E or Cotroller Y";
+            keyInRange = other.gameObject;
         }
     }
 
@@ -403,7 +408,9 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.CompareTag("Key"))
         {
-            //Disable the text
+            forPickingHerb.enabled = false;
+            canPickKey = false;
+            keyInRange = null;
         }
     }
     #endregion
@@ -435,6 +442,17 @@ public class PlayerStateMachine : MonoBehaviour
         cor = null;
     }
     #endregion
+
+    public void KeyPickUp()
+    {
+        if(canPickKey)
+        {
+            keyPicked ++;
+            forPickingHerb.enabled = false;
+            Destroy(keyInRange);
+            keyInRange = null;
+        }
+    }
 
     public void HerbsPicking()
     {
