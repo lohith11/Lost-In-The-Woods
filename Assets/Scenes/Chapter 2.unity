@@ -9613,7 +9613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &737721986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24842,6 +24842,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Playerrr
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055116205026004159, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+        type: 3}
+      propertyPath: normalIntensity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055116205746231967, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055116205746231967, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 44.37814
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055116205746231967, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+        type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 26.45264
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017d1145b22a58d4c9c51c575d9ecb41, type: 3}
