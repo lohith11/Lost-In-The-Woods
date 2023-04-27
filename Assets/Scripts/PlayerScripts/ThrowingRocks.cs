@@ -36,6 +36,7 @@ public class ThrowingRocks : MonoBehaviour
     private RaycastHit hit;
     public float aimSpeed;
 
+    private GameObject rockInRange;
     //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
     void Start()
@@ -149,6 +150,17 @@ public class ThrowingRocks : MonoBehaviour
         lineRenderer.SetPositions(points.ToArray());
     }
 
+    public void RockPicking()
+    {
+        if(canPickUp)
+        {
+            totalThrows++;
+            pressRocksText.enabled = false;
+            Destroy(rockInRange);
+            rockInRange = null;
+        }
+    }
+
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
@@ -156,27 +168,7 @@ public class ThrowingRocks : MonoBehaviour
         {
             pressRocksText.enabled = true;
             pressRocksText.text = "Press E or Controller Y";
-            if(playerStateMachine.isPicking && canPickUp)
-            {
-                totalThrows++;
-                pressRocksText.enabled = false;
-                Destroy(other.gameObject);
-            }
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Rock"))
-        {
-            pressRocksText.enabled = true;
-            pressRocksText.text = "Press E or Controller Y";
-            if (playerStateMachine.isPicking && canPickUp)
-            {
-                totalThrows++;
-                pressRocksText.enabled = false;
-                Destroy(other.gameObject);
-            }
+            rockInRange = other.gameObject;
         }
     }
 
@@ -185,6 +177,7 @@ public class ThrowingRocks : MonoBehaviour
         if (other.CompareTag("Rock"))
         {
             pressRocksText.enabled = false;
+            rockInRange = null;
         }
     }
     #endregion

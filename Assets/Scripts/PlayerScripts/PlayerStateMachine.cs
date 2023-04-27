@@ -118,6 +118,7 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerControls playerControls;
 
     public GameObject crouchCollider;
+    private GameObject herbInRange;
 
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
@@ -171,12 +172,10 @@ public class PlayerStateMachine : MonoBehaviour
 
         playerControls.Player.Jump.started += Jump;
         playerControls.Player.Jump.performed += Jump;
-        playerControls.Player.Jump.canceled += Jump;  
+        playerControls.Player.Jump.canceled += Jump;
 
-        playerControls.Player.Picking.started += PickingRock;
         playerControls.Player.Picking.performed += PickingRock;
-        playerControls.Player.Picking.canceled += PickingRock; 
-        
+
         playerControls.Player.Projectile.started += ProjectileRock;
         playerControls.Player.Projectile.performed += ProjectileRock;
         playerControls.Player.Projectile.canceled += ProjectileRock;
@@ -214,7 +213,7 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Picking.started -= PickingRock;
         playerControls.Player.Picking.performed -= PickingRock;
         playerControls.Player.Picking.canceled -= PickingRock;
-        
+
         playerControls.Player.Projectile.started -= ProjectileRock;
         playerControls.Player.Projectile.performed -= ProjectileRock;
         playerControls.Player.Projectile.canceled -= ProjectileRock;
@@ -277,7 +276,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-#region animationIK
+    #region animationIK
     /*  private void OnAnimatorIK(int layerIndex)
     {
         if(playerAnimation)
@@ -348,7 +347,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PickingRock(InputAction.CallbackContext context)
     {
-        isPicking = context.ReadValueAsButton();
+        GetComponent<ThrowingRocks>().RockPicking();
+        HerbsPicking();
     }
 
     public void ProjectileRock(InputAction.CallbackContext context)
@@ -369,13 +369,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             forPickingHerb.enabled = true;
             forPickingHerb.text = "Press E or Controller Y";
-            if (canPickHerb && isPicking)
-            {
-                herbs++;
-                forPickingHerb.enabled = false;
-                PlayerHealth.Health = PlayerHealth.maxHealth;
-                Destroy(other.gameObject);
-            }
+            herbInRange = other.gameObject;
         }
 
         if(other.gameObject.CompareTag("ChapterEnd"))
@@ -394,38 +388,12 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     // if (other.CompareTag("Herbs"))
-    //     // {
-    //     //     forPickingHerb.enabled = true;
-    //     //     forPickingHerb.text = "Press E or Controller Y";
-    //     //     if (canPickHerb && isPicking)
-    //     //     {
-    //     //         herbs++;
-    //     //         forPickingHerb.enabled = false;
-    //     //         //PlayerHealth.Health = PlayerHealth.maxHealth;
-    //     //         Destroy(other.gameObject);
-    //     //     }
-    //     // }
-
-    //     if (other.CompareTag("Key"))
-    //     {
-    //         //TextFeild
-    //         if (canPickKey && isPicking)
-    //         {
-    //             //text disable
-    //             keyPicked++;
-    //             Destroy(other.gameObject);
-    //         }
-    //     }
-    // }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = false;
+            herbInRange = null;
         }
 
         if (other.CompareTag("Key"))
@@ -463,6 +431,16 @@ public class PlayerStateMachine : MonoBehaviour
     }
     #endregion
 
+    public void HerbsPicking()
+    {
+        if(canPickHerb) 
+        {
+            herbs++;
+            forPickingHerb.enabled = false;
+            Destroy(herbInRange);
+            herbInRange = null;
+        }
+    }
     public void PlayerSteppingUp()
     {
         //RaycastHit hitLower;
