@@ -76,7 +76,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Space(5)]
     public int herbs;
     public TMP_Text forPickingHerb;
-    public bool canPickHerb;
+    public bool canPickHerb = false;
     [Space(10)]
 
     //Camera Smoothness
@@ -100,7 +100,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float baseStepSpeed;
     public float crouchStepSpeed;
     public float sprintStepSpeed;
-    public AudioSource footStepSound = default;
+    public AudioSource audioSource = default;
     private TerrainDetector terrainDetector;
     public AudioClip[] woodSound;
     public AudioClip[] grassSound;
@@ -138,7 +138,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
-        canPickHerb = true;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
@@ -175,6 +174,7 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Jump.canceled += Jump;
 
         playerControls.Player.Picking.performed += PickingRock;
+        playerControls.Player.Picking.performed += HerbsPickUp;
 
         playerControls.Player.Projectile.started += ProjectileRock;
         playerControls.Player.Projectile.performed += ProjectileRock;
@@ -210,9 +210,8 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Jump.performed -= Jump;
         playerControls.Player.Jump.canceled -= Jump;
 
-        playerControls.Player.Picking.started -= PickingRock;
         playerControls.Player.Picking.performed -= PickingRock;
-        playerControls.Player.Picking.canceled -= PickingRock;
+        playerControls.Player.Picking.performed -= HerbsPickUp;
 
         playerControls.Player.Projectile.started -= ProjectileRock;
         playerControls.Player.Projectile.performed -= ProjectileRock;
@@ -251,7 +250,7 @@ public class PlayerStateMachine : MonoBehaviour
         if(footStepTimer <= 0)
         {
             AudioClip clip = GetRandomClip();
-            footStepSound.PlayOneShot(clip);
+            audioSource.PlayOneShot(clip);
             footStepTimer = getCurrentOffset;
         }
     }
@@ -348,6 +347,10 @@ public class PlayerStateMachine : MonoBehaviour
     public void PickingRock(InputAction.CallbackContext context)
     {
         GetComponent<ThrowingRocks>().RockPicking();
+    }
+
+    public void HerbsPickUp(InputAction.CallbackContext context)
+    {
         HerbsPicking();
     }
 
@@ -368,6 +371,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = true;
+            canPickHerb = true;
             forPickingHerb.text = "Press E or Controller Y";
             herbInRange = other.gameObject;
         }
@@ -393,6 +397,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = false;
+            canPickHerb = false;
             herbInRange = null;
         }
 

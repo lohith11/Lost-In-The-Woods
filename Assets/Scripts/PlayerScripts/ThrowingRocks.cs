@@ -23,7 +23,7 @@ public class ThrowingRocks : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private bool readyToThrow;
-    public bool canPickUp;
+    public bool canPickUp = false;
 
     public float f;
     public int numPoints = 50;
@@ -36,13 +36,13 @@ public class ThrowingRocks : MonoBehaviour
     private RaycastHit hit;
     public float aimSpeed;
 
+    public AudioClip rockPickingSound;
     private GameObject rockInRange;
     //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
     void Start()
     {
         lineRendererEndPoint.SetActive(false);
-        canPickUp = true;
         readyToThrow = true;
         playerStateMachine = GetComponent<PlayerStateMachine>();
         lineRenderer = GetComponent<LineRenderer>();
@@ -154,6 +154,7 @@ public class ThrowingRocks : MonoBehaviour
     {
         if(canPickUp)
         {
+            playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
             totalThrows++;
             pressRocksText.enabled = false;
             Destroy(rockInRange);
@@ -167,6 +168,7 @@ public class ThrowingRocks : MonoBehaviour
         if(other.CompareTag("Rock"))
         {
             pressRocksText.enabled = true;
+            canPickUp = true;
             pressRocksText.text = "Press E or Controller Y";
             rockInRange = other.gameObject;
         }
@@ -177,6 +179,7 @@ public class ThrowingRocks : MonoBehaviour
         if (other.CompareTag("Rock"))
         {
             pressRocksText.enabled = false;
+            canPickUp = false;
             rockInRange = null;
         }
     }
