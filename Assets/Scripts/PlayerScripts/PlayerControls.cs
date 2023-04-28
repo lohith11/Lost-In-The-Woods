@@ -37,6 +37,42 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""DpadLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4e32574-00ec-4662-a5d7-2018a79ad2b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DpadRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""eedf72a3-c869-4b20-9d99-df17fa4c438b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DpadDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f3b5259-51fd-4528-9e74-539b37dc36a9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DpadUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0816fe0-ebed-463a-8a58-ac7b4896cb6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""fe860e15-c56d-4dc0-8449-dc604e4b57e9"",
@@ -309,6 +345,94 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Projectile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdcfe5ef-5629-4f9a-bca3-a6dd443d1416"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4ed879c-c212-48c2-8d0a-8f6fc8a397fc"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6342d15-3d37-4fb4-b6c2-35ff5dd5e42b"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42c41cd1-20c7-4351-9b3d-625659df9178"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49c91b37-69e1-4bbc-98d6-14fd1fbf2569"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2520ce68-f8c2-4cc8-970a-f627440c638a"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eda5f76e-a772-423f-8413-afa82c7a70c2"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbf56525-69cd-4907-815d-c2f66ba6ec79"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DpadLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -346,6 +470,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_DpadLeft = m_Player.FindAction("DpadLeft", throwIfNotFound: true);
+        m_Player_DpadRight = m_Player.FindAction("DpadRight", throwIfNotFound: true);
+        m_Player_DpadDown = m_Player.FindAction("DpadDown", throwIfNotFound: true);
+        m_Player_DpadUp = m_Player.FindAction("DpadUp", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_MouseRotation = m_Player.FindAction("MouseRotation", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
@@ -413,6 +541,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_DpadLeft;
+    private readonly InputAction m_Player_DpadRight;
+    private readonly InputAction m_Player_DpadDown;
+    private readonly InputAction m_Player_DpadUp;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_MouseRotation;
     private readonly InputAction m_Player_Run;
@@ -425,6 +557,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @DpadLeft => m_Wrapper.m_Player_DpadLeft;
+        public InputAction @DpadRight => m_Wrapper.m_Player_DpadRight;
+        public InputAction @DpadDown => m_Wrapper.m_Player_DpadDown;
+        public InputAction @DpadUp => m_Wrapper.m_Player_DpadUp;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @MouseRotation => m_Wrapper.m_Player_MouseRotation;
         public InputAction @Run => m_Wrapper.m_Player_Run;
@@ -444,6 +580,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @DpadLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadLeft;
+                @DpadLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadLeft;
+                @DpadLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadLeft;
+                @DpadRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadRight;
+                @DpadRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadRight;
+                @DpadRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadRight;
+                @DpadDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadDown;
+                @DpadDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadDown;
+                @DpadDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadDown;
+                @DpadUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadUp;
+                @DpadUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadUp;
+                @DpadUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDpadUp;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -472,6 +620,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @DpadLeft.started += instance.OnDpadLeft;
+                @DpadLeft.performed += instance.OnDpadLeft;
+                @DpadLeft.canceled += instance.OnDpadLeft;
+                @DpadRight.started += instance.OnDpadRight;
+                @DpadRight.performed += instance.OnDpadRight;
+                @DpadRight.canceled += instance.OnDpadRight;
+                @DpadDown.started += instance.OnDpadDown;
+                @DpadDown.performed += instance.OnDpadDown;
+                @DpadDown.canceled += instance.OnDpadDown;
+                @DpadUp.started += instance.OnDpadUp;
+                @DpadUp.performed += instance.OnDpadUp;
+                @DpadUp.canceled += instance.OnDpadUp;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -527,6 +687,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnDpadLeft(InputAction.CallbackContext context);
+        void OnDpadRight(InputAction.CallbackContext context);
+        void OnDpadDown(InputAction.CallbackContext context);
+        void OnDpadUp(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnMouseRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
