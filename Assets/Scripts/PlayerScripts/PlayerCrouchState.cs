@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class PlayerCrouchState : PlayerBaseState
     private int CrouchMoveX;
     private int CrouchMoveY;
     private float currentPosition;
+    
 
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
@@ -33,7 +35,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        if(playerStateMachine.playerInput.magnitude != 0)
+        if (playerStateMachine.playerInput.magnitude != 0)
         {
             playerStateMachine.playerAnimation.SetBool("isCrouching", true);
             playerStateMachine.playerAnimation.SetFloat(CrouchMoveY, playerStateMachine.playerInput.y);
@@ -65,10 +67,11 @@ public class PlayerCrouchState : PlayerBaseState
                 playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
             }
 
-            else if(playerStateMachine.playerInput.magnitude != 0) 
+            else if (playerStateMachine.playerInput.magnitude != 0)
             {
                 playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
             }
         }
     }
+
 }

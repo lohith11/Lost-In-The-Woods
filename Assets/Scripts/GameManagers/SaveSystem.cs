@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-    private  string saveDir;
+    private string saveDir;
     private const string SAVE_EXTENSION = ".json";
     private GameManager gameManager;
     private string folderName = "Saves";
 
-    public string filePath;
+    [HideInInspector] public string filePath;
 
     private void Awake()
     {
         Init();
-    }
-
-    private void Start() {
-        filePath = saveDir + "Save" + ".json";
     }
 
     public void Init()
@@ -28,6 +24,11 @@ public class SaveSystem : MonoBehaviour
             Directory.CreateDirectory(saveDir);
         }
         gameManager = GetComponent<GameManager>();
+    }
+
+    private void Start()
+    {
+        filePath = saveDir + "Save" + ".json";
     }
 
     public void Save()

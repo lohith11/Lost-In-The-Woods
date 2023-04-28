@@ -139,6 +139,7 @@ public class EnemyStateManager : MonoBehaviour
         DieState = new EnemyDieState(this);
 
         alertText.enabled = false;
+        PlayerStateMachine.hidePlayer += HidePlayer;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
         switchState(IdleState);
@@ -147,10 +148,11 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
+        Debug.Log("Player in range is : " + PlayerInRange);
         Debug.Log("UngaBungaBoi current state is :: " + currentState);
-        if(PlayerInRange)
+        if (PlayerInRange)
         {
-            transform.LookAt(transform.position,playerRef.transform.position);
+            transform.LookAt(transform.position, playerRef.transform.position);
         }
     }
 
@@ -175,7 +177,7 @@ public class EnemyStateManager : MonoBehaviour
                 Debug.Log("Ready to deal damage"); //!
                 player.TakeDamage(damage);
             }
-            else if(player == null)
+            else if (player == null)
                 Debug.Log("Player not found");
         }
     }
@@ -246,5 +248,8 @@ public class EnemyStateManager : MonoBehaviour
         }
     }
 
-
+    private void HidePlayer(object sender, EventArgs e)
+    {
+        PlayerInRange = false;
+    }
 }
