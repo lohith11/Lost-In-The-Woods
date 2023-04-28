@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 //TODO make the game restart from last checkpoint when the player dies
 //TODO start chapter mid checkpoint End chapter
-[RequireComponent(typeof(SaveSystem)), RequireComponent(typeof(AudioManager)), RequireComponent(typeof(ToggleColliders))]
+[RequireComponent(typeof(SaveSystem)), RequireComponent(typeof(AudioManager))]
 public class GameManager : MonoBehaviour
 {
 

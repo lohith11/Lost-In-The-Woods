@@ -9,11 +9,11 @@ public class MoveRuller : MonoBehaviour
     PadLockEmissionColor _pLockColor;
 
     [HideInInspector]
-    public List <GameObject> _rullers = new List<GameObject>();
+    public List<GameObject> _rullers = new List<GameObject>();
     private int _scroolRuller = 0;
     private int _changeRuller = 0;
     [HideInInspector]
-    public int[] _numberArray = {0,0,0,0};
+    public int[] _numberArray = { 0, 0, 0, 0 };
 
     private int _numberRuller = 0;
 
@@ -37,35 +37,12 @@ public class MoveRuller : MonoBehaviour
     }
     void Update()
     {
-        MoveRulles();
-        RotateRullers();
         _lockPassword.Password();
     }
 
+    #region Inputs To Rotate and Move the Lock
     void MoveRulles()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow)) 
-        {
-            _isActveEmission = true;
-            _changeRuller ++;
-            _numberRuller += 1;
-
-            if (_numberRuller > 3)
-            {
-                _numberRuller = 0;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) 
-        {
-            _isActveEmission = true;
-            _changeRuller --;
-            _numberRuller -= 1;
-
-            if (_numberRuller < 0)
-            {
-                _numberRuller = 3;
-            }
-        }
         _changeRuller = (_changeRuller + _rullers.Count) % _rullers.Count;
 
 
@@ -88,35 +65,76 @@ public class MoveRuller : MonoBehaviour
         }
 
     }
-
-    void RotateRullers()
+    
+    public void MoveRullerRight()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        _isActveEmission = true;
+        _changeRuller++;
+        _numberRuller += 1;
+
+        if (_numberRuller > 3)
         {
-            _isActveEmission = true;
-            _scroolRuller = 36;
-            _rullers[_changeRuller].transform.Rotate(-_scroolRuller, 0, 0, Space.Self);
+            _numberRuller = 0;
+        }
+        MoveRulles();
+    }
 
-            _numberArray[_changeRuller] += 1;
+    public void MoveRullerLeft()
+    {
+        _isActveEmission = true;
+        _changeRuller--;
+        _numberRuller -= 1;
 
-            if (_numberArray[_changeRuller] > 9)
-            {
-                _numberArray[_changeRuller] = 0;
-            }
+        if (_numberRuller < 0)
+        {
+            _numberRuller = 3;
+        }
+        MoveRulles();
+    }
+
+    public void RotateRullersUp()
+    {
+        _isActveEmission = true;
+        _scroolRuller = 36;
+        _rullers[_changeRuller].transform.Rotate(-_scroolRuller, 0, 0, Space.Self);
+
+        _numberArray[_changeRuller] += 1;
+
+        if (_numberArray[_changeRuller] > 9)
+        {
+            _numberArray[_changeRuller] = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+    }
+
+    public void RotateRullerDown()
+    {
+        _isActveEmission = true;
+        _scroolRuller = 36;
+        _rullers[_changeRuller].transform.Rotate(_scroolRuller, 0, 0, Space.Self);
+
+        _numberArray[_changeRuller] -= 1;
+
+        if (_numberArray[_changeRuller] < 0)
         {
-            _isActveEmission = true;
-            _scroolRuller = 36;
-            _rullers[_changeRuller].transform.Rotate(_scroolRuller, 0, 0, Space.Self);
+            _numberArray[_changeRuller] = 9;
+        }
+    }
+    #endregion
 
-            _numberArray[_changeRuller] -= 1;
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerStateMachine>().EnterLockRegion(this);
+        }
+    }
 
-            if (_numberArray[_changeRuller] < 0)
-            {
-                _numberArray[_changeRuller] = 9;
-            }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            other.GetComponent<PlayerStateMachine>().ExitLockRegion(this);
         }
     }
 }
