@@ -9,14 +9,14 @@ using UnityEditor.Rendering;
 
 public class MainMenuUIManager : MonoBehaviour
 {
-    public VolumeProfile[] volumeProfile;
-    private ColorAdjustments colorAdjustments;
-
     public TMP_Text sliderValue;
-    public Slider brightnessSlider;
 
     private int targetFrameRate = 60;
     public TMP_Dropdown dropdown;
+
+    public VolumeProfile volumeProfile;
+    private ColorAdjustments colorAdjustments;
+    public Slider brightnessSlider;
 
     private void Awake()
     {
@@ -26,10 +26,20 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < volumeProfile.Length; i++)
+        if (!volumeProfile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
-            volumeProfile[i].TryGet(out colorAdjustments);
+            Debug.LogError("ColorAdjustments not found in VolumeProfile!");
+            return;
         }
+
+        // Set the initial value of the brightness slider to the current post-exposure value
+        brightnessSlider.value = colorAdjustments.postExposure.value;
+    }
+
+    public void OnBrightnessChanged(float value)
+    {
+        // Set the post-exposure value of the ColorAdjustments component
+        colorAdjustments.postExposure.value = value;
     }
 
     private void Update()
