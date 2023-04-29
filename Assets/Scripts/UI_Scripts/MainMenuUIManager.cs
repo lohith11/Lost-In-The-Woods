@@ -5,10 +5,11 @@ using TMPro;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using UnityEditor.Rendering;
 
 public class MainMenuUIManager : MonoBehaviour
 {
-    public VolumeProfile volumeProfile;
+    public VolumeProfile[] volumeProfile;
     private ColorAdjustments colorAdjustments;
 
     public TMP_Text sliderValue;
@@ -25,7 +26,10 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void Start()
     {
-        volumeProfile.TryGet(out colorAdjustments);
+        for(int i = 0; i < volumeProfile.Length; i++)
+        {
+            volumeProfile[i].TryGet(out colorAdjustments);
+        }
     }
 
     private void Update()
