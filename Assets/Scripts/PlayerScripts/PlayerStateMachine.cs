@@ -129,6 +129,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private bool canPickKey = false;
     private int keyPicked = 0;
+    private MoveRuller moveRuller;
 
     private void Awake()
     {
@@ -531,6 +532,46 @@ public class PlayerStateMachine : MonoBehaviour
             playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
         }
     }
+
+     #region Lock Dpad
+    public void EnterLockRegion(MoveRuller MR)
+    {
+        moveRuller = MR;
+        playerControls.Player.DpadUp.performed += DpadUP;
+        playerControls.Player.DpadDown.performed += DpadDOWN;
+        playerControls.Player.DpadRight.performed += DpadRIGHT;
+        playerControls.Player.DpadLeft.performed += DpadLEFT;
+    }
+
+    public void ExitLockRegion(MoveRuller MR)
+    {
+        moveRuller = null;
+        playerControls.Player.DpadUp.performed -= DpadUP;
+        playerControls.Player.DpadDown.performed -= DpadDOWN;
+        playerControls.Player.DpadRight.performed -= DpadRIGHT;
+        playerControls.Player.DpadLeft.performed -= DpadLEFT;
+    }
+
+    public void DpadUP(InputAction.CallbackContext context)
+    {
+        moveRuller?.RotateRullersUp();
+    }
+
+    public void DpadDOWN(InputAction.CallbackContext context)
+    {
+        moveRuller?.RotateRullerDown();
+    }
+
+    public void DpadRIGHT(InputAction.CallbackContext context)
+    {
+        moveRuller?.MoveRullerRight();
+    }
+
+    public void DpadLEFT(InputAction.CallbackContext context)
+    {
+        moveRuller?.MoveRullerLeft();
+    }
+    #endregion
 
     public void SwitchState(PlayerBaseState state)
     {
