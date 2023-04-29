@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class PlayerStateMachine : MonoBehaviour
 {
+
+    public static event EventHandler hidePlayer;
     //IsGrass and isCrouching enemy won't detect
     //HideInInspector because need to use them in the other states but not be seen in the inspector  
     [HideInInspector] public Rigidbody playerRB;
@@ -113,7 +117,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isAtttacking;
     public bool isAiming;
     public bool isPicking;
-    public float FAVdelay; 
+    public float FAVdelay;
     private PlayerBaseState currentState;
     public PlayerControls playerControls;
 
@@ -130,7 +134,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerControls();
-        
+
         playerIdleState = new PlayerIdleState(this);
         playerMovingState = new PlayerMovingState(this);
         playerJumpState = new PlayerJumpState(this);
@@ -185,8 +189,8 @@ public class PlayerStateMachine : MonoBehaviour
 
         playerControls.Player.Attack.started += Attacking;
         playerControls.Player.Attack.performed += Attacking;
-        playerControls.Player.Attack.canceled += Attacking;  
-        
+        playerControls.Player.Attack.canceled += Attacking;
+
     }
 
     private void OnDisable()
@@ -246,12 +250,12 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Step()
     {
-        if(playerInput.magnitude == 0)
+        if (playerInput.magnitude == 0)
         {
             return;
         }
         footStepTimer -= Time.deltaTime;
-        if(footStepTimer <= 0)
+        if (footStepTimer <= 0)
         {
             AudioClip clip = GetRandomClip();
             audioSource.PlayOneShot(clip);
@@ -385,16 +389,33 @@ public class PlayerStateMachine : MonoBehaviour
             herbInRange = other.gameObject;
         }
 
-        if(other.gameObject.CompareTag("ChapterEnd"))
-        {
-            SceneManager.LoadScene("Chapter 2");
-        }
+        // if(other.gameObject.CompareTag("ChapterEnd"))
+        // {
+        //     SceneManager.LoadScene("Chapter 2");
+        // }
         if (other.CompareTag("Key"))
         {
             forPickingHerb.enabled = true;
             canPickKey = true;
             forPickingHerb.text = "Press E or Cotroller Y";
             keyInRange = other.gameObject;
+        }
+
+        if (other.gameObject.CompareTag("Grass") && crouchPressed)
+        {
+            Debug.Log("Entered");
+            hidePlayer?.Invoke(this, EventArgs.Empty);
+        }
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("Stay");
+        if (other.gameObject.CompareTag("Grass") && crouchPressed)
+        {
+            Debug.Log("Stay");
+            hidePlayer?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -446,9 +467,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void KeyPickUp()
     {
-        if(canPickKey)
+        if (canPickKey)
         {
-            keyPicked ++;
+            keyPicked++;
             forPickingHerb.enabled = false;
             Destroy(keyInRange);
             keyInRange = null;
@@ -457,7 +478,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void HerbsPicking()
     {
-        if(canPickHerb) 
+        if (canPickHerb)
         {
             herbs++;
             forPickingHerb.enabled = false;
@@ -512,7 +533,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    #region Lock Dpad
+     #region Lock Dpad
     public void EnterLockRegion(MoveRuller MR)
     {
         moveRuller = MR;

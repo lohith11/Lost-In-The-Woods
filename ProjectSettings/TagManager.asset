@@ -14,6 +14,7 @@ TagManager:
   - FootSteps/Grass
   - ChapterEnd
   - Key
+  - Grass
   layers:
   - Default
   - TransparentFX
