@@ -536,12 +536,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void CameraShake()
     {
-        if (!isGrounded)
-        {
-            return;
-        }
-
-        else if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
+        if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
         {
             timer += Time.deltaTime * (crouchPressed ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
             playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
