@@ -1,0 +1,11 @@
+Model Information:
+* title:	dragon knight
+* source:	https://sketchfab.com/3d-models/dragon-knight-67ac8f8fa6ff495a8b8e97bd8d2d9191
+* author:	XXBOOMXX (https://sketchfab.com/codyc2228)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "dragon knight" (https://sketchfab.com/3d-models/dragon-knight-67ac8f8fa6ff495a8b8e97bd8d2d9191) by XXBOOMXX (https://sketchfab.com/codyc2228) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
