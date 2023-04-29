@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Barrel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float explosionDelay;
+    [SerializeField] ParticleSystem explosionEffect;
+
+    public void Explode() => StartCoroutine(Explosion());
+
+    IEnumerator Explosion()
     {
-        
+        yield return new WaitForSeconds(explosionDelay);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision other)
     {
-        
+        if(other.gameObject.CompareTag("Rock"))
+            Explode();
     }
-
-    
 }
