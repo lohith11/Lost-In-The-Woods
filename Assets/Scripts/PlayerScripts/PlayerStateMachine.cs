@@ -131,8 +131,6 @@ public class PlayerStateMachine : MonoBehaviour
     private int keyPicked = 0;
     private MoveRuller moveRuller;
 
-    private MoveRuller moveRuller;
-
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -249,48 +247,6 @@ public class PlayerStateMachine : MonoBehaviour
         currentState.FixedUpdateState();
         PlayerSteppingUp();
     }
-
-
-    #region Lock Dpad
-    public void EnterLockRegion(MoveRuller MR)
-    {
-        moveRuller = MR;
-        playerControls.Player.DpadUp.performed += DpadUP;
-        playerControls.Player.DpadDown.performed += DpadDOWN;
-        playerControls.Player.DpadRight.performed += DpadRIGHT;
-        playerControls.Player.DpadLeft.performed += DpadLEFT;
-    }
-
-    public void ExitLockRegion(MoveRuller MR)
-    {
-        moveRuller = null;
-        playerControls.Player.DpadUp.performed -= DpadUP;
-        playerControls.Player.DpadDown.performed -= DpadDOWN;
-        playerControls.Player.DpadRight.performed -= DpadRIGHT;
-        playerControls.Player.DpadLeft.performed -= DpadLEFT;
-    }
-
-    public void DpadUP(InputAction.CallbackContext context)
-    {
-        moveRuller?.RotateRullersUp();
-    }
-
-    public void DpadDOWN(InputAction.CallbackContext context)
-    {
-        moveRuller?.RotateRullerDown();
-    }
-
-    public void DpadRIGHT(InputAction.CallbackContext context)
-    {
-        moveRuller?.MoveRullerRight();
-    }
-
-    public void DpadLEFT(InputAction.CallbackContext context)
-    {
-        moveRuller?.MoveRullerLeft();
-    }
-    #endregion
-
 
     public void Step()
     {
