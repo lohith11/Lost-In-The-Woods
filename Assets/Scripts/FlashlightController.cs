@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class FlashlightController : MonoBehaviour
@@ -7,7 +6,7 @@ public class FlashlightController : MonoBehaviour
     public GameObject lightObject;
     private Light _flashLight;
     [SerializeField] private float detectionRange = 10f;
-    public static float maxIntensity = 100f;
+    [ShowInInspector]public static float maxIntensity = 100f;
     [SerializeField] private float normalIntensity;
     [SerializeField] private float flickerProbability = 0.1f;
     [SerializeField] private float minFlickerIntensity = 0.5f;
@@ -20,6 +19,7 @@ public class FlashlightController : MonoBehaviour
     {
         _flashLight = lightObject.GetComponent<Light>();
         _flashLight.enabled = true;
+        lightObject.SetActive(false);
     }
 
     void Update()
