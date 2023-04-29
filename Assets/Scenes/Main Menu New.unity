@@ -281,15 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d68f51a0a580f4a9599f2e86cb6871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  option1: {fileID: 0}
-  option2: {fileID: 0}
-  option3: {fileID: 0}
-  option4: {fileID: 0}
-  option5: {fileID: 0}
-  option6: {fileID: 0}
   volumeProfile: {fileID: 11400000, guid: b7a8a0ed4e5dc2549bae5617c18f95ff, type: 2}
   sliderValue: {fileID: 606111224}
   brightnessSlider: {fileID: 1480438346}
+  dropdown: {fileID: 445076957}
 --- !u!4 &16898742
 Transform:
   m_ObjectHideFlags: 0
