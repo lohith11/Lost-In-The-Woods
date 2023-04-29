@@ -20,7 +20,7 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void Awake()
     {
-        targetFrameRate = int.Parse(dropdown.options[dropdown.value].text);
+        //targetFrameRate = int.Parse(dropdown.options[dropdown.value].text);
         Application.targetFrameRate = targetFrameRate;
     }
 
