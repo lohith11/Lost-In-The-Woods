@@ -30662,45 +30662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016354, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: playerRunSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016354, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: crouchStepSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016354, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: sprintStepSpeed
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016367, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_Name
       value: Playerrr
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116205026004159, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: normalIntensity
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116205746231967, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116205746231967, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 44.37814
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116205746231967, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 26.45264
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017d1145b22a58d4c9c51c575d9ecb41, type: 3}
