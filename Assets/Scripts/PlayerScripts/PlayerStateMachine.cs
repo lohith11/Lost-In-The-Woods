@@ -114,6 +114,17 @@ public class PlayerStateMachine : MonoBehaviour
     private float footStepTimer;
     [Space(10)]
 
+    [Space(5)]
+    [Header(" < PlayerDodge > ")]
+    [SerializeField] private float dodgeDistance;
+    [SerializeField] private float dodgeDuration;
+    [SerializeField] private float dodgeCooldown;
+    [SerializeField] private float dodgeSpeed;
+
+    private Rigidbody rb;
+    private bool canDodge = true;
+    [Space(10)]
+
     public bool isAtttacking;
     public bool isAiming;
     public bool isPicking;
@@ -244,8 +255,12 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void FixedUpdate()
     {
-        currentState.FixedUpdateState();
+        if (canDodge && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(DoDodge());
+        }
         PlayerSteppingUp();
+        currentState.FixedUpdateState();
     }
 
     public void Step()
@@ -578,5 +593,27 @@ public class PlayerStateMachine : MonoBehaviour
         currentState?.ExitState();
         currentState = state;
         currentState.EnterState();
+    }
+
+    private IEnumerator DoDodge()
+    {
+        canDodge = false;
+        float startTime = Time.time;
+
+        Vector3 startPosition = transform.position;
+        Vector3 dodgeDirection = (transform.right * playerInput.x) * dodgeSpeed + (transform.forward * playerInput.y) * dodgeSpeed;
+        Vector3 dodgeTarget = transform.position + dodgeDirection * dodgeDistance;
+
+        while (Time.time < startTime + dodgeDuration)
+        {
+            float t = (Time.time - startTime) / dodgeDuration;
+            transform.position = Vector3.Lerp(startPosition, dodgeTarget, t);
+            yield return null;
+        }
+
+        transform.position = dodgeTarget;
+        yield return new WaitForSeconds(dodgeCooldown);
+
+        canDodge = true;
     }
 }
