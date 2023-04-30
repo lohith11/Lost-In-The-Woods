@@ -426,7 +426,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Stay");
         if (other.gameObject.CompareTag("Grass") && crouchPressed)
         {
             Debug.Log("Stay");

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FlashlightController : MonoBehaviour
 {
-    public GameObject lightObject;
+    private AudioManager audioManager;
     private Light _flashLight;
     [SerializeField] private float detectionRange = 10f;
     [ShowInInspector]public static float maxIntensity = 100f;
@@ -13,6 +13,7 @@ public class FlashlightController : MonoBehaviour
     [SerializeField] private float maxFlickerIntensity = 1.0f;
     [SerializeField] private LayerMask bigBadLayer;
     public bool bigBadInRange;
+    public GameObject lightObject;
 
 
     void Start()
@@ -20,6 +21,7 @@ public class FlashlightController : MonoBehaviour
         _flashLight = lightObject.GetComponent<Light>();
         _flashLight.enabled = true;
         lightObject.SetActive(false);
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -30,10 +32,13 @@ public class FlashlightController : MonoBehaviour
             if(lightObject.activeInHierarchy) 
             {
                 lightObject.SetActive(false);
+                audioManager.Play("Flashlight Turn On");
+                
             }
             else if(!lightObject.activeInHierarchy)
             {
                 lightObject.SetActive(true);
+                audioManager.Play("Flashlight Turn Off");
             }
         }
     }
