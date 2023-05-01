@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -37,6 +38,10 @@ public class PlayerStateMachine : MonoBehaviour
     [Space(5)]
     public float playerRunSpeed;
     public bool isRunning;
+    public float stamina;
+    public float staminaDepletionRate;
+    public float staminaRegenerationRate;
+    public Image staminaBar;
     [Space(10)]
 
     //Player Crouch
@@ -121,7 +126,6 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private float dodgeCooldown;
     [SerializeField] private float dodgeSpeed;
 
-    private Rigidbody rb;
     private bool canDodge = true;
     [Space(10)]
 
@@ -136,6 +140,7 @@ public class PlayerStateMachine : MonoBehaviour
     private GameObject herbInRange;
     private GameObject keyInRange;
 
+    [HideInInspector] public ThrowingRocks throwingRocks;
     private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
     private bool canPickKey = false;
@@ -158,6 +163,7 @@ public class PlayerStateMachine : MonoBehaviour
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
+        throwingRocks=GetComponent<ThrowingRocks>();
         mouseLook = FindObjectOfType<MouseLook>();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
@@ -244,6 +250,17 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Update()
     {
+        if(currentState == playerRunningState)
+        {
+            stamina -= staminaDepletionRate * Time.deltaTime;
+        }
+        else
+        {
+            stamina += staminaRegenerationRate * Time.deltaTime;
+        }
+        stamina = Mathf.Clamp(stamina, 0f, 100f);
+        staminaBar.fillAmount = stamina/100f;
+
         CameraShake();
         currentState.UpdateState();
         Step();
@@ -538,7 +555,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
         {
             timer += Time.deltaTime * (crouchPressed ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
-            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
+            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning && playerInput.y == 1 ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
         }
     }
 

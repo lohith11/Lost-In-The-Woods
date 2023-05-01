@@ -17,6 +17,7 @@ public class PlayerRunningState : PlayerBaseState
     public override void UpdateState()
     {
         CheckChangeState();
+        //To Do image. RunTime/5
         //if (playerStateMachine.isJumping && playerStateMachine.isGrounded)
         //{
         //    playerStateMachine.playerRB.velocity = new Vector3(playerStateMachine.playerRB.velocity.x, playerStateMachine.jumpForce, playerStateMachine.playerRB.velocity.z);
@@ -39,7 +40,7 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if(!playerStateMachine.isRunning) 
+        if(!playerStateMachine.isRunning || playerStateMachine.stamina <= 0) 
         {
             if(playerStateMachine.playerInput.magnitude != 0)
             {

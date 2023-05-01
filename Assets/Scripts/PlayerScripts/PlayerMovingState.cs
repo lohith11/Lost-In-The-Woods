@@ -6,6 +6,7 @@ public class PlayerMovingState : PlayerBaseState
     private float currentPosition;
     private int moveX;
     private int moveY;
+
     public PlayerMovingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
@@ -48,7 +49,7 @@ public class PlayerMovingState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
         }
 
-        else if(playerStateMachine.isRunning && playerStateMachine.playerInput.y == 1)
+        else if(playerStateMachine.isRunning && playerStateMachine.playerInput.y == 1 && playerStateMachine.stamina > 50)
         {
             playerStateMachine.SwitchState(playerStateMachine.playerRunningState);
         }

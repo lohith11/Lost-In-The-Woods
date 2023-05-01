@@ -9,7 +9,6 @@ public class PlayerCrouchState : PlayerBaseState
     private int CrouchMoveX;
     private int CrouchMoveY;
     private float currentPosition;
-    
 
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
@@ -18,6 +17,7 @@ public class PlayerCrouchState : PlayerBaseState
         CrouchMoveX = Animator.StringToHash("CrouchMoveX");
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
+        playerStateMachine.throwingRocks.attackpoint.localPosition = new Vector3(0.16f, 0.8f, 0.25f);
         currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
         playerStateMachine.crouchCollider.SetActive(false);
     }
@@ -54,6 +54,7 @@ public class PlayerCrouchState : PlayerBaseState
     public override void ExitState()
     {
         playerStateMachine.crouchCollider.SetActive(true);
+        playerStateMachine.throwingRocks.attackpoint.localPosition = new Vector3(0.16f, 1.6f, 0.25f);
         //playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.9f, 0f);
         //playerStateMachine.GetComponent<CapsuleCollider>().height = 1.85f;
     }
