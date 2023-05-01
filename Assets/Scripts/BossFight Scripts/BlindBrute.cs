@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,25 +6,30 @@ using UnityEngine;
 public class BlindBrute : MonoBehaviour
 {
 
-    [SerializeField] float maxHealth;
+    float maxHealth;
     [SerializeField] float health;
     [SerializeField] float damage;
     [SerializeField] float range;
-    // Start is called before the first frame update
+    
     void Start()
     {
-
+        Barrel.explosiveDamage += TakeDamage;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
-    public void TakeDamage()
+    public void DefaultValues()
+    {
+        health = maxHealth;
+    }
+
+    public void TakeDamage(object sender , dealDamageEventArg e)
     {
         Debug.Log("The boss took damage");
+        health -= e.damage;
     }
 
     public void DealDamage()
@@ -34,13 +40,17 @@ public class BlindBrute : MonoBehaviour
     public void AOEAttack()
     {
         Collider[] braziers = Physics.OverlapSphere(transform.position, range);
-        if(braziers.Length > 0)
+        if (braziers.Length > 0)
         {
             Debug.Log("Entered if");
-            foreach(Collider brazier in braziers)
+            foreach (Collider brazier in braziers)
             {
                 Debug.Log("Entered for each");
-                brazier.GetComponent<Brazier>().TurnOff();
+                Brazier brazierComponent = brazier.GetComponent<Brazier>();
+                if (brazierComponent != null)
+                {
+                    brazierComponent.TurnOff();
+                }
             }
         }
     }

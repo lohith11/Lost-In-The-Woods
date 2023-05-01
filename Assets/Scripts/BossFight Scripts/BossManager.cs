@@ -3,7 +3,8 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
     public BlindBrute boss;
-  
+    [SerializeField] Brazier[] braziers;
+
     void Start()
     {
 
@@ -12,9 +13,22 @@ public class BossManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             boss.AOEAttack();
+        }
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            StartBattle();
+        }
+    }
+
+    private void StartBattle()
+    {
+        boss.DefaultValues();
+        foreach (Brazier brazier in braziers)
+        {
+            brazier.TurnOff();
         }
     }
 
