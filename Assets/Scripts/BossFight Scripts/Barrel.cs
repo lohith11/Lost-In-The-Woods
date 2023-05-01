@@ -6,7 +6,6 @@ public class Barrel : MonoBehaviour
 {
     [SerializeField] float explosionDelay;
     [SerializeField] float explosionRange;
-    //[SerializeField] ParticleSystem explosionEffect;
     [SerializeField] LayerMask bossLayer;
     [SerializeField] BossManager boss;
 

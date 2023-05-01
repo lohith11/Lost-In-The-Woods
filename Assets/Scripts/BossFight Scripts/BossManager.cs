@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    [SerializeField] float range;
-    [SerializeField] float health;
-    [SerializeField] float damage;
+    public BlindBrute boss;
+  
     void Start()
     {
 
@@ -15,7 +14,7 @@ public class BossManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.B))
         {
-            AOEAttack();
+            boss.AOEAttack();
         }
     }
 
@@ -27,17 +26,5 @@ public class BossManager : MonoBehaviour
     public void DealDamage()
     {
         Debug.Log("The boss dealt damage");
-    }
-
-    public void AOEAttack()
-    {
-        Collider[] braziers = Physics.OverlapSphere(transform.position, range);
-        if(braziers.Length > 0)
-        {
-            foreach(Collider brazier in braziers)
-            {
-                brazier.GetComponent<Brazier>().TurnOff();
-            }
-        }
     }
 }
