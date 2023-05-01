@@ -100,7 +100,7 @@ public class ThrowingRocks : MonoBehaviour
         }
 
         //Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
-        Vector3 forceToAdd=forceDirection * throwForce;
+        Vector3 forceToAdd = forceDirection * throwForce;
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
@@ -117,14 +117,6 @@ public class ThrowingRocks : MonoBehaviour
             targetPosition.y = transform.position.y;
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
-        } 
-        
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyHeadLayer))
-        {
-            Vector3 targetPosition = hit.collider.gameObject.transform.position;
-            targetPosition.y = transform.position.y;
-            Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
         }
 
         lineRenderer.enabled = true;
@@ -136,6 +128,7 @@ public class ThrowingRocks : MonoBehaviour
         {
             Vector3 newPoint = startingPosition + t * startingVelocity;
             newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / f * t * t;
+
             points.Add(newPoint);
 
             if (Physics.OverlapSphere(newPoint, 0.05f, CollidableLayers).Length > 0)
@@ -154,7 +147,6 @@ public class ThrowingRocks : MonoBehaviour
     {
         if(canPickUp)
         {
-            playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
             totalThrows++;
             pressRocksText.enabled = false;
             Destroy(rockInRange);
@@ -167,6 +159,10 @@ public class ThrowingRocks : MonoBehaviour
     {
         if(other.CompareTag("Rock"))
         {
+            if(totalThrows !=0)
+            {
+                playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
+            }
             pressRocksText.enabled = true;
             canPickUp = true;
             pressRocksText.text = "Press E or Controller Y";

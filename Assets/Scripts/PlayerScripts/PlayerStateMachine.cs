@@ -141,7 +141,7 @@ public class PlayerStateMachine : MonoBehaviour
     private GameObject keyInRange;
 
     [HideInInspector] public ThrowingRocks throwingRocks;
-    private float getCurrentOffset => isRunning ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
+    private float getCurrentOffset => currentState == playerRunningState ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
 
     private bool canPickKey = false;
     private int keyPicked = 0;
@@ -160,6 +160,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
+        staminaBar.enabled = false;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
         rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
@@ -252,11 +253,13 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(currentState == playerRunningState)
         {
+            staminaBar.enabled = true;
             stamina -= staminaDepletionRate * Time.deltaTime;
         }
         else
         {
             stamina += staminaRegenerationRate * Time.deltaTime;
+            staminaBar.enabled = false;
         }
         stamina = Mathf.Clamp(stamina, 0f, 100f);
         staminaBar.fillAmount = stamina/100f;
@@ -490,9 +493,6 @@ public class PlayerStateMachine : MonoBehaviour
             Camera.main.fieldOfView = Mathf.Lerp(start, target, timer / delay);
             yield return null;
         }
-
-        StopCoroutine(cor);
-        cor = null;
     }
     #endregion
 
@@ -554,7 +554,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
         {
-            timer += Time.deltaTime * (crouchPressed ? croucSpeed : isRunning ? sprintSpeed : walkSpeed);
+            timer += Time.deltaTime * (crouchPressed ? croucSpeed : currentState == playerRunningState ? sprintSpeed : walkSpeed);
             playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning && playerInput.y == 1 ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
         }
     }
