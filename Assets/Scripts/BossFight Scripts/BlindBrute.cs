@@ -39,19 +39,21 @@ public class BlindBrute : MonoBehaviour
 
     public void AOEAttack()
     {
-        Collider[] braziers = Physics.OverlapSphere(transform.position, range);
-        if (braziers.Length > 0)
-        {
-            Debug.Log("Entered if");
-            foreach (Collider brazier in braziers)
-            {
-                Debug.Log("Entered for each");
-                Brazier brazierComponent = brazier.GetComponent<Brazier>();
-                if (brazierComponent != null)
-                {
-                    brazierComponent.TurnOff();
-                }
-            }
-        }
+        #region useless 
+        // Collider[] braziers = Physics.OverlapSphere(transform.position, range);
+        // if (braziers.Length > 0)
+        // {
+        //     Debug.Log("Entered if");
+        //     foreach (Collider brazier in braziers)
+        //     {
+        //         Debug.Log("Entered for each");
+        //         Brazier brazierComponent = brazier.GetComponent<Brazier>();
+        //         if (brazierComponent != null)
+        //         {
+        //             brazierComponent.TurnOff();
+        //         }
+        //     }
+        // }
+        #endregion
     }
 }
