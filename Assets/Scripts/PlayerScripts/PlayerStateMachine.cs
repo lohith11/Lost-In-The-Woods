@@ -294,6 +294,7 @@ public class PlayerStateMachine : MonoBehaviour
         currentState.FixedUpdateState();
     }
 
+    #region PlayerSteppingAudio
     public void Step()
     {
         if (playerInput.magnitude == 0)
@@ -328,6 +329,7 @@ public class PlayerStateMachine : MonoBehaviour
                 return dirtSound[Random.Range(0, dirtSound.Length - 1)];
         }
     }
+    #endregion
 
     #region animationIK
     /*  private void OnAnimatorIK(int layerIndex)
@@ -400,22 +402,30 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PickingRock(InputAction.CallbackContext context)
     {
-        GetComponent<ThrowingRocks>().RockPicking();
+        if(context.phase == InputActionPhase.Performed)
+        {
+            GetComponent<ThrowingRocks>().RockPicking();
+        }
     }
 
     public void HerbsPickUp(InputAction.CallbackContext context)
     {
-        HerbsPicking();
+        if(context.phase == InputActionPhase.Performed)
+        {
+            HerbsPicking();
+        }
     }
 
     public void KeyPickUp(InputAction.CallbackContext context)
     {
-        KeyPickUp();
+        if(context.phase == InputActionPhase.Performed)
+        {
+            KeyPickUp();
+        }
     }
 
     public void BarrelIgnite(InputAction.CallbackContext context)
     {
-        BarrelSwitchingOn();
         if(context.phase == InputActionPhase.Performed)
         {
             barrelCoroutine = StartCoroutine(barrel());
@@ -526,19 +536,52 @@ public class PlayerStateMachine : MonoBehaviour
     }
     #endregion
 
+    #region Lock Dpad
+    public void EnterLockRegion(MoveRuller MR)
+    {
+        moveRuller = MR;
+        playerControls.Player.DpadUp.performed += DpadUP;
+        playerControls.Player.DpadDown.performed += DpadDOWN;
+        playerControls.Player.DpadRight.performed += DpadRIGHT;
+        playerControls.Player.DpadLeft.performed += DpadLEFT;
+    }
+
+    public void ExitLockRegion(MoveRuller MR)
+    {
+        moveRuller = null;
+        playerControls.Player.DpadUp.performed -= DpadUP;
+        playerControls.Player.DpadDown.performed -= DpadDOWN;
+        playerControls.Player.DpadRight.performed -= DpadRIGHT;
+        playerControls.Player.DpadLeft.performed -= DpadLEFT;
+    }
+
+    public void DpadUP(InputAction.CallbackContext context)
+    {
+        moveRuller?.RotateRullersUp();
+    }
+
+    public void DpadDOWN(InputAction.CallbackContext context)
+    {
+        moveRuller?.RotateRullerDown();
+    }
+
+    public void DpadRIGHT(InputAction.CallbackContext context)
+    {
+        moveRuller?.MoveRullerRight();
+    }
+
+    public void DpadLEFT(InputAction.CallbackContext context)
+    {
+        moveRuller?.MoveRullerLeft();
+    }
+    #endregion
+
+    #region Interactables 
     public void GrassStay()
     {
         if(inGrass)
         {
             hidePlayer?.Invoke(this, EventArgs.Empty);
-        }
-    }
-
-    public void BarrelSwitchingOn()
-    {
-        if(isBarrel)
-        {
-            //Get the barrel to blast after 5 sec
         }
     }
 
@@ -563,6 +606,24 @@ public class PlayerStateMachine : MonoBehaviour
             herbInRange = null;
         }
     }
+
+    public void BarrelSwitchingOn()
+    {
+        if(isBarrel)
+        {
+            //Get the barrel to blast after 5 sec
+        }
+    }
+
+    public IEnumerator barrel()
+    {
+        Debug.Log("Couritne entered");
+        yield return new WaitForSeconds(3f);
+
+        BarrelSwitchingOn();
+        Debug.Log("Couritien finished");
+    }
+    #endregion
 
     public void PlayerSteppingUp()
     {
@@ -604,53 +665,6 @@ public class PlayerStateMachine : MonoBehaviour
             timer += Time.deltaTime * (crouchPressed ? croucSpeed : currentState == playerRunningState ? sprintSpeed : walkSpeed);
             playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning && playerInput.y == 1 ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
         }
-    }
-
-    #region Lock Dpad
-    public void EnterLockRegion(MoveRuller MR)
-    {
-        moveRuller = MR;
-        playerControls.Player.DpadUp.performed += DpadUP;
-        playerControls.Player.DpadDown.performed += DpadDOWN;
-        playerControls.Player.DpadRight.performed += DpadRIGHT;
-        playerControls.Player.DpadLeft.performed += DpadLEFT;
-    }
-
-    public void ExitLockRegion(MoveRuller MR)
-    {
-        moveRuller = null;
-        playerControls.Player.DpadUp.performed -= DpadUP;
-        playerControls.Player.DpadDown.performed -= DpadDOWN;
-        playerControls.Player.DpadRight.performed -= DpadRIGHT;
-        playerControls.Player.DpadLeft.performed -= DpadLEFT;
-    }
-
-    public void DpadUP(InputAction.CallbackContext context)
-    {
-        moveRuller?.RotateRullersUp();
-    }
-
-    public void DpadDOWN(InputAction.CallbackContext context)
-    {
-        moveRuller?.RotateRullerDown();
-    }
-
-    public void DpadRIGHT(InputAction.CallbackContext context)
-    {
-        moveRuller?.MoveRullerRight();
-    }
-
-    public void DpadLEFT(InputAction.CallbackContext context)
-    {
-        moveRuller?.MoveRullerLeft();
-    }
-    #endregion
-
-    public IEnumerator barrel()
-    {
-        Debug.Log("Couritne entered");
-        yield return new WaitForSeconds(3f);
-        Debug.Log("Couritien finished");
     }
 
     public void SwitchState(PlayerBaseState state)
