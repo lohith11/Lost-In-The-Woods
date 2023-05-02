@@ -146,6 +146,7 @@ public class PlayerStateMachine : MonoBehaviour
     private bool canPickKey = false;
     private int keyPicked = 0;
     private MoveRuller moveRuller;
+    private bool inGrass;
 
     private void Awake()
     {
@@ -439,19 +440,20 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Grass") && crouchPressed)
         {
             Debug.Log("Entered");
-            hidePlayer?.Invoke(this, EventArgs.Empty);
+            inGrass = true;
+            GrassStay();
         }
 
     }
 
-    private void OnTriggerStay(Collider other)
+   /* private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Grass") && crouchPressed)
         {
             Debug.Log("Stay");
             hidePlayer?.Invoke(this, EventArgs.Empty);
         }
-    }
+    }*/
 
     private void OnTriggerExit(Collider other)
     {
@@ -467,6 +469,12 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingHerb.enabled = false;
             canPickKey = false;
             keyInRange = null;
+        }
+
+        if (other.gameObject.CompareTag("Grass") && crouchPressed)
+        {
+            Debug.Log("Exited");
+            inGrass = false;
         }
     }
     #endregion
@@ -495,6 +503,14 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
     #endregion
+
+    public void GrassStay()
+    {
+        if(inGrass)
+        {
+            hidePlayer?.Invoke(this, EventArgs.Empty);
+        }
+    }
 
     public void KeyPickUp()
     {
