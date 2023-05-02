@@ -5,41 +5,44 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("< Health Visual >")]
-    [Space(5)]
-    public Image overlay;
-    public float duration;
-    public float speed;
-    public float durationTimer;
-    [Space(10)]
+    public Image bloodSplatter;
+    public Image BackGroundBlood;
+    public float hurtTimer;
 
     [ShowInInspector]
-    public static float maxHealth = 100;
+    public static float maxHealth = 100f;
     private float healthRegeneration;
     private Coroutine healthRegenerationStart;
     public float healthUpgrade;
     [ShowInInspector]
-    public static float Health;
+    public static float Health = 100f;
     public static float baseHealth;
-
-    private PlayerStateMachine StateMachine;
+    public float healthRegenerationValue;
 
     private void Start()
     {
-        StateMachine = GetComponent<PlayerStateMachine>();
         Health = maxHealth;
         baseHealth = maxHealth;
     }
 
     private void Update()
     {
-        HealthVisual();
+        
+    }
+
+    private void UpdateHealth()
+    {
+        Color splatterAlpha = bloodSplatter.color;
+        splatterAlpha.a = 1 - (Health / maxHealth);
+        bloodSplatter.color = splatterAlpha;
     }
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("Took damage"); //!
+        Debug.Log("Took damage");
         Health -= damage;
+        StartCoroutine(HurtEffect());
+        //UpdateHealth();
         if(Health <= 0)
         {
             PlayerDead();
@@ -62,33 +65,28 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Player Dead");
     }
 
-    public void HealthVisual()
+    private IEnumerator HurtEffect()
     {
-        Health = Mathf.Clamp(Health, 0, maxHealth);
-        if (overlay.color.a > 0)
-        {
-            durationTimer += Time.deltaTime;
-            if (durationTimer > duration)
-            {
-                float Alpha = overlay.color.a;
-                Alpha -= Time.deltaTime * speed;
-                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, Alpha);
-            }
-        }
+        BackGroundBlood.enabled = true;
+        //Audio
+        yield return new WaitForSeconds(hurtTimer);
+        BackGroundBlood.enabled = false;
     }
 
     private IEnumerator HealthRegeneration()
     {
         yield return new WaitForSeconds(3f);
         WaitForSeconds timeToWait = new WaitForSeconds(0.2f);
+
         while(Health < maxHealth)
         {
-            Health += Time.deltaTime;
+            Health += healthRegenerationValue;
             if(Health > maxHealth)
             {
                 Health = maxHealth;
-                yield return timeToWait;
             }
+            yield return timeToWait;
         }
+        healthRegenerationStart = null;
     }
 }
