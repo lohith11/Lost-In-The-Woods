@@ -159,12 +159,13 @@ public class ThrowingRocks : MonoBehaviour
     {
         if(other.CompareTag("Rock"))
         {
-            if(totalThrows !=0)
+            if(totalThrows != 0)
             {
                 playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
             }
             pressRocksText.enabled = true;
             canPickUp = true;
+            playerStateMachine.playerControls.Player.Picking.performed += playerStateMachine.PickingRock;
             pressRocksText.text = "Press E or Controller Y";
             rockInRange = other.gameObject;
         }
@@ -176,6 +177,7 @@ public class ThrowingRocks : MonoBehaviour
         {
             pressRocksText.enabled = false;
             canPickUp = false;
+            playerStateMachine.playerControls.Player.Picking.performed -= playerStateMachine.PickingRock;
             rockInRange = null;
         }
     }
