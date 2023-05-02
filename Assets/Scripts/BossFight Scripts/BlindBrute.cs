@@ -2,23 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BlindBrute : MonoBehaviour
 {
 
-    float maxHealth;
-    [SerializeField] float health;
+    [SerializeField]float maxHealth;
+    public float health;
     [SerializeField] float damage;
     [SerializeField] float range;
-    
+    public NavMeshAgent agent;
+
     void Start()
     {
         Barrel.explosiveDamage += TakeDamage;
+        GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-
+        Debug.Log("Boss current normalized health is : " + GetHealthNormalized());
     }
 
     public void DefaultValues()
@@ -26,9 +29,8 @@ public class BlindBrute : MonoBehaviour
         health = maxHealth;
     }
 
-    public void TakeDamage(object sender , dealDamageEventArg e)
+    public void TakeDamage(object sender, dealDamageEventArg e)
     {
-        Debug.Log("The boss took damage");
         health -= e.damage;
     }
 
@@ -55,5 +57,10 @@ public class BlindBrute : MonoBehaviour
         //     }
         // }
         #endregion
+    }
+
+    public float GetHealthNormalized()
+    {
+        return (float)health / maxHealth;
     }
 }

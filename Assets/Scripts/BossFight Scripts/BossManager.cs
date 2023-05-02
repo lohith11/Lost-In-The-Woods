@@ -2,12 +2,28 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    public BlindBrute boss;
+    public enum Stage
+    {
+        WaitingToStart,
+        Stage_1,
+        Stage_2,
+        Stage_3,
+    }
+
+    private BlindBrute boss;
     [SerializeField] Brazier[] braziers;
 
+    private Stage stage;
+
+    private void Awake()
+    {
+        stage = Stage.WaitingToStart;
+    }
     void Start()
     {
-
+        boss = FindObjectOfType<BlindBrute>();
+        Barrel.explosiveDamage += BossBattle_OnDamaged;
+        StartNextStage();
     }
 
     void Update()
@@ -16,24 +32,80 @@ public class BossManager : MonoBehaviour
         {
             boss.AOEAttack();
         }
-        if(Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.N))
         {
-            StartBattle();
+            RamTowardsBrazier();
+            // StartNextStage();
+            // StartBattle();
         }
+
+        Debug.Log("The current stage is  : " + stage);
     }
 
     private void StartBattle()
     {
-        boss.DefaultValues();
+        //boss.DefaultValues();
         foreach (Brazier brazier in braziers)
         {
             brazier.TurnOff();
         }
     }
 
-    public void TakeDamage()
+    public void BossBattle_OnDamaged(object sender, dealDamageEventArg e)
     {
-        Debug.Log("The boss took damage");
+        switch (stage)
+        {
+            case Stage.Stage_1:
+                if (boss.GetHealthNormalized() <= .75f)
+                {
+                    StartNextStage();
+                }
+                break;
+            case Stage.Stage_2:
+                if (boss.GetHealthNormalized() <= .5f)
+                {
+                    StartNextStage();
+                }
+                break;
+            case Stage.Stage_3:
+                if (boss.GetHealthNormalized() <= .25f)
+                {
+                    StartNextStage();
+                }
+                break;
+        }
+    }
+
+    private void StartNextStage()
+    {
+        switch (stage)
+        {
+            case Stage.WaitingToStart:
+                stage = Stage.Stage_1;
+                break;
+            case Stage.Stage_1:
+                stage = Stage.Stage_2;
+                RamTowardsBrazier();
+                break;
+            case Stage.Stage_2:
+                stage = Stage.Stage_3;
+                RamTowardsBrazier();
+                break;
+            case Stage.Stage_3:
+                RamTowardsBrazier();
+                break;
+        }
+    }
+
+    private void RamTowardsBrazier()
+    {
+        // for (int i = 0; i < braziers.Length - 1; i++)
+        //{
+        //boss.agent.SetDestination(braziers[Random.Range(1, braziers.Length - 1)].transform.position);
+        //}
+        Debug.Log("Array index is : " + Random.Range(0, braziers.Length));
+
+        Debug.Log("Raming towards brazier");
     }
 
     public void DealDamage()
