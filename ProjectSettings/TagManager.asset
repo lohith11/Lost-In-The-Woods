@@ -15,6 +15,7 @@ TagManager:
   - ChapterEnd
   - Key
   - Grass
+  - Barrel
   layers:
   - Default
   - TransparentFX

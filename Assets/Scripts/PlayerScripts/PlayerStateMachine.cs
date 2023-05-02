@@ -7,6 +7,8 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -147,6 +149,8 @@ public class PlayerStateMachine : MonoBehaviour
     private int keyPicked = 0;
     private MoveRuller moveRuller;
     private bool inGrass;
+    public bool isBarrel;
+    private Coroutine barrelCoroutine;
 
     private void Awake()
     {
@@ -202,6 +206,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Picking.performed += HerbsPickUp;
         playerControls.Player.Picking.performed += KeyPickUp;
 
+        playerControls.Player.Picking.performed += BarrelIgnite;
+        playerControls.Player.Picking.canceled += BarrelIgnite;
+
         playerControls.Player.Projectile.started += ProjectileRock;
         playerControls.Player.Projectile.performed += ProjectileRock;
         playerControls.Player.Projectile.canceled += ProjectileRock;
@@ -239,6 +246,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Picking.performed -= PickingRock;
         playerControls.Player.Picking.performed -= HerbsPickUp;
         playerControls.Player.Picking.performed -= KeyPickUp;
+
+        playerControls.Player.Picking.performed -= BarrelIgnite;
+        playerControls.Player.Picking.canceled -= BarrelIgnite;
 
         playerControls.Player.Projectile.started -= ProjectileRock;
         playerControls.Player.Projectile.performed -= ProjectileRock;
@@ -403,6 +413,19 @@ public class PlayerStateMachine : MonoBehaviour
         KeyPickUp();
     }
 
+    public void BarrelIgnite(InputAction.CallbackContext context)
+    {
+        BarrelSwitchingOn();
+        if(context.phase == InputActionPhase.Performed)
+        {
+            barrelCoroutine = StartCoroutine(barrel());
+        }
+        else if(context.phase == InputActionPhase.Canceled)
+        {
+            StopCoroutine(barrelCoroutine);
+        }
+    }
+
     public void ProjectileRock(InputAction.CallbackContext context)
     {
         isAiming = context.ReadValueAsButton();
@@ -425,10 +448,6 @@ public class PlayerStateMachine : MonoBehaviour
             herbInRange = other.gameObject;
         }
 
-        // if(other.gameObject.CompareTag("ChapterEnd"))
-        // {
-        //     SceneManager.LoadScene("Chapter 2");
-        // }
         if (other.CompareTag("Key"))
         {
             forPickingHerb.enabled = true;
@@ -444,16 +463,13 @@ public class PlayerStateMachine : MonoBehaviour
             GrassStay();
         }
 
-    }
-
-   /* private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Grass") && crouchPressed)
+        if(other.gameObject.CompareTag("Barrel"))
         {
-            Debug.Log("Stay");
-            hidePlayer?.Invoke(this, EventArgs.Empty);
+            forPickingHerb.enabled = true;
+            isBarrel = true;
+            forPickingHerb.text = "Hold E or Y";
         }
-    }*/
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -475,6 +491,12 @@ public class PlayerStateMachine : MonoBehaviour
         {
             Debug.Log("Exited");
             inGrass = false;
+        }
+
+        if (other.gameObject.CompareTag("Barrel"))
+        {
+            forPickingHerb.enabled = false;
+            isBarrel = false;
         }
     }
     #endregion
@@ -512,6 +534,14 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    public void BarrelSwitchingOn()
+    {
+        if(isBarrel)
+        {
+            //Get the barrel to blast after 5 sec
+        }
+    }
+
     public void KeyPickUp()
     {
         if (canPickKey)
@@ -533,6 +563,7 @@ public class PlayerStateMachine : MonoBehaviour
             herbInRange = null;
         }
     }
+
     public void PlayerSteppingUp()
     {
         //RaycastHit hitLower;
@@ -575,7 +606,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-     #region Lock Dpad
+    #region Lock Dpad
     public void EnterLockRegion(MoveRuller MR)
     {
         moveRuller = MR;
@@ -614,6 +645,13 @@ public class PlayerStateMachine : MonoBehaviour
         moveRuller?.MoveRullerLeft();
     }
     #endregion
+
+    public IEnumerator barrel()
+    {
+        Debug.Log("Couritne entered");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Couritien finished");
+    }
 
     public void SwitchState(PlayerBaseState state)
     {
