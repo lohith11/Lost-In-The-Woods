@@ -202,13 +202,6 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Jump.performed += Jump;
         playerControls.Player.Jump.canceled += Jump;
 
-        playerControls.Player.Picking.performed += PickingRock;
-        playerControls.Player.Picking.performed += HerbsPickUp;
-        playerControls.Player.Picking.performed += KeyPickUp;
-
-        playerControls.Player.Picking.performed += BarrelIgnite;
-        playerControls.Player.Picking.canceled += BarrelIgnite;
-
         playerControls.Player.Projectile.started += ProjectileRock;
         playerControls.Player.Projectile.performed += ProjectileRock;
         playerControls.Player.Projectile.canceled += ProjectileRock;
@@ -242,13 +235,6 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Jump.started -= Jump;
         playerControls.Player.Jump.performed -= Jump;
         playerControls.Player.Jump.canceled -= Jump;
-
-        playerControls.Player.Picking.performed -= PickingRock;
-        playerControls.Player.Picking.performed -= HerbsPickUp;
-        playerControls.Player.Picking.performed -= KeyPickUp;
-
-        playerControls.Player.Picking.performed -= BarrelIgnite;
-        playerControls.Player.Picking.canceled -= BarrelIgnite;
 
         playerControls.Player.Projectile.started -= ProjectileRock;
         playerControls.Player.Projectile.performed -= ProjectileRock;
@@ -402,26 +388,17 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PickingRock(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-        {
-            GetComponent<ThrowingRocks>().RockPicking();
-        }
+         GetComponent<ThrowingRocks>().RockPicking();
     }
 
     public void HerbsPickUp(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-        {
-            HerbsPicking();
-        }
+        HerbsPicking();
     }
 
     public void KeyPickUp(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-        {
-            KeyPickUp();
-        }
+         KeyPickUp();
     }
 
     public void BarrelIgnite(InputAction.CallbackContext context)
@@ -454,6 +431,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             forPickingHerb.enabled = true;
             canPickHerb = true;
+            playerControls.Player.Picking.performed += HerbsPickUp;
             forPickingHerb.text = "Press E or Controller Y";
             herbInRange = other.gameObject;
         }
@@ -462,6 +440,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             forPickingHerb.enabled = true;
             canPickKey = true;
+            playerControls.Player.Picking.performed += KeyPickUp;
             forPickingHerb.text = "Press E or Cotroller Y";
             keyInRange = other.gameObject;
         }
@@ -477,6 +456,8 @@ public class PlayerStateMachine : MonoBehaviour
         {
             forPickingHerb.enabled = true;
             isBarrel = true;
+            playerControls.Player.Picking.performed += BarrelIgnite;
+            playerControls.Player.Picking.canceled += BarrelIgnite;
             forPickingHerb.text = "Hold E or Y";
         }
     }
@@ -486,7 +467,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.CompareTag("Herbs"))
         {
             forPickingHerb.enabled = false;
-            canPickHerb = false;
+            playerControls.Player.Picking.performed -= HerbsPickUp;
             herbInRange = null;
         }
 
@@ -494,6 +475,7 @@ public class PlayerStateMachine : MonoBehaviour
         {
             forPickingHerb.enabled = false;
             canPickKey = false;
+            playerControls.Player.Picking.performed -= KeyPickUp;
             keyInRange = null;
         }
 
@@ -507,6 +489,8 @@ public class PlayerStateMachine : MonoBehaviour
         {
             forPickingHerb.enabled = false;
             isBarrel = false;
+            playerControls.Player.Picking.performed -= BarrelIgnite;
+            playerControls.Player.Picking.canceled -= BarrelIgnite;
         }
     }
     #endregion
@@ -604,6 +588,8 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingHerb.enabled = false;
             Destroy(herbInRange);
             herbInRange = null;
+            PlayerHealth.maxHealth = PlayerHealth.baseHealth + (herbs * 20);
+            PlayerHealth.Health = PlayerHealth.maxHealth;
         }
     }
 
