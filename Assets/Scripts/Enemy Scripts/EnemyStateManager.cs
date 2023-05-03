@@ -161,8 +161,6 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState();
-        Debug.Log("Player in range is : " + PlayerInRange);
-        Debug.Log("UngaBungaBoi current state is :: " + currentState);
         if (PlayerInRange)
         {
             transform.LookAt(transform.position, playerRef.transform.position);
