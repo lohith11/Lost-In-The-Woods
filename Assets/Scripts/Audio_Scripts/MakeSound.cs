@@ -17,7 +17,7 @@ public class MakeSound : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) 
     {
-        if(other.gameObject.tag == "Ground")
+        if(other.gameObject.CompareTag("Ground"))
         {
             source.clip = audioObj.clip;
             soundRange  = audioObj.range;

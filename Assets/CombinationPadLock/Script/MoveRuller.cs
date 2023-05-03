@@ -122,6 +122,7 @@ public class MoveRuller : MonoBehaviour
     }
     #endregion
 
+    #region Triggers
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -137,4 +138,5 @@ public class MoveRuller : MonoBehaviour
             other.GetComponent<PlayerStateMachine>().ExitLockRegion(this);
         }
     }
+    #endregion
 }

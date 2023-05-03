@@ -19,7 +19,6 @@ public class BossManager : MonoBehaviour
     {
         stage = Stage.WaitingToStart;
     }
-
     void Start()
     {
         boss = FindObjectOfType<BlindBrute>();
@@ -27,18 +26,18 @@ public class BossManager : MonoBehaviour
         StartNextStage();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            boss.AOEAttack();
-        }
-        if (Input.GetKeyDown(KeyCode.N))
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    boss.AOEAttack();
+        //}
+        if (Input.GetKeyDown(KeyCode.M))
         {
             RamTowardsBrazier();
+            // StartNextStage();
+            // StartBattle();
         }
-
-        Debug.Log("The current stage is  : " + stage);
     }
 
     private void StartBattle()
@@ -96,13 +95,15 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    private void RamTowardsBrazier()
+    public void RamTowardsBrazier()
     {
-        boss.agent.speed = 20f;
-        boss.agent.acceleration = 40f;
-        boss.agent.SetDestination(braziers[Random.Range(0, braziers.Length - 1)].transform.position);
+        // for (int i = 0; i < braziers.Length - 1; i++)
+        //{
+        //boss.agent.SetDestination(braziers[Random.Range(1, braziers.Length - 1)].transform.position);
+        //}
         Debug.Log("Array index is : " + Random.Range(0, braziers.Length));
 
+        Debug.Log("Raming towards brazier");
     }
 
     public void DealDamage()

@@ -109,7 +109,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Dodge"",
                     ""type"": ""Button"",
                     ""id"": ""362bff5e-ff70-4632-8e96-419206d1dcfc"",
                     ""expectedControlType"": ""Button"",
@@ -287,7 +287,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Jump"",
+                    ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -298,7 +298,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Jump"",
+                    ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -478,7 +478,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_MouseRotation = m_Player.FindAction("MouseRotation", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Picking = m_Player.FindAction("Picking", throwIfNotFound: true);
         m_Player_Projectile = m_Player.FindAction("Projectile", throwIfNotFound: true);
     }
@@ -549,7 +549,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MouseRotation;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Crouch;
-    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Picking;
     private readonly InputAction m_Player_Projectile;
     public struct PlayerActions
@@ -565,7 +565,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @MouseRotation => m_Wrapper.m_Player_MouseRotation;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Picking => m_Wrapper.m_Player_Picking;
         public InputAction @Projectile => m_Wrapper.m_Player_Projectile;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -604,9 +604,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
-                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Picking.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPicking;
                 @Picking.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPicking;
                 @Picking.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPicking;
@@ -644,9 +644,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
                 @Picking.started += instance.OnPicking;
                 @Picking.performed += instance.OnPicking;
                 @Picking.canceled += instance.OnPicking;
@@ -695,7 +695,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMouseRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
         void OnPicking(InputAction.CallbackContext context);
         void OnProjectile(InputAction.CallbackContext context);
     }
