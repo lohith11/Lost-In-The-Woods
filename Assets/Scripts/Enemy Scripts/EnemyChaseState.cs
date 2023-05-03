@@ -23,7 +23,6 @@ public class EnemyChaseState : EnemyBaseState
         }
         if (distanceToPlayer > enemyStateManager.attackRadius && enemyStateManager.PlayerInRange)
         {
-            Debug.Log("The player is in chase range");
             ChasePlayer();
         }
 
