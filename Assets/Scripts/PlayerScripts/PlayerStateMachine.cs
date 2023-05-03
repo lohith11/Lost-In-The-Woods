@@ -125,7 +125,7 @@ public class PlayerStateMachine : MonoBehaviour
     private GameObject herbInRange;
     private GameObject keyInRange;
 
-    private PlayerBaseState currentState;
+    [HideInInspector]public PlayerBaseState currentState;
     private MoveRuller moveRuller;
     private Coroutine barrelCoroutine;
     #endregion

@@ -30294,7 +30294,7 @@ PrefabInstance:
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8796778
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
@@ -32828,8 +32828,28 @@ PrefabInstance:
       objectReference: {fileID: 896814057}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: detectRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: waypoints.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: runningDetectionRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: walkingDetectionRadius
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
