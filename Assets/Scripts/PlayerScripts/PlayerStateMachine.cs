@@ -12,21 +12,22 @@ using UnityEngine.Rendering;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-
-    public static event EventHandler hidePlayer;
-    //IsGrass and isCrouching enemy won't detect
     //HideInInspector because need to use them in the other states but not be seen in the inspector  
     [HideInInspector] public Rigidbody playerRB;
     [HideInInspector] public PlayerMovingState playerMovingState;
     [HideInInspector] public PlayerIdleState playerIdleState;
+    [HideInInspector] public PlayerDodgeState playerDodgeState;
     [HideInInspector] public PlayerRunningState playerRunningState;
     [HideInInspector] public PlayerCrouchState playerCrouchState;
-    [HideInInspector] public PlayerJumpState playerJumpState;
-    [HideInInspector] public MouseLook mouseLook;
     [HideInInspector] public Animator playerAnimation;
     [HideInInspector] public Coroutine cor;
-    public static Vector3 playerCurrentPosition;
+    [HideInInspector] public PlayerControls playerControls;
+    [HideInInspector] public ThrowingRocks throwingRocks;
 
+    public static Vector3 playerCurrentPosition;
+    public static event EventHandler hidePlayer;
+
+    #region Variables
     //Player Walking
     [Header("< Player Walking >")]
     [Space(5)]
@@ -44,6 +45,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float staminaDepletionRate;
     public float staminaRegenerationRate;
     public Image staminaBar;
+    public float FAVdelay;
+
+    [Range(60, 120)]
+    public float FOV;
     [Space(10)]
 
     //Player Crouch
@@ -51,18 +56,7 @@ public class PlayerStateMachine : MonoBehaviour
     [Space(5)]
     public float playerCrouchSpeed;
     public bool crouchPressed;
-    [Space(10)]
-
-    //Player Jump
-    [Header("< Player Jump >")]
-    [Space(5)]
-    public Transform groundPosition;
-    public LayerMask groundLayer;
-    public float jumpForce;
-    public float groundRadius;
-    public float jumpMovementSpeed;
-    public bool isJumping;
-    public bool isGrounded = true;
+    public GameObject crouchCollider;
     [Space(10)]
 
     //PlayerCamera Shakes
@@ -77,17 +71,6 @@ public class PlayerStateMachine : MonoBehaviour
     public float sprintSpeedAmount;
     public float croucSpeed;
     public float croucSpeedAmount;
-
-    [Range(60, 120)]
-    public float FOV;
-    [Space(10)]
-
-    //Player Prefs
-    [Header("< Player Prefs >")]
-    [Space(5)]
-    public int herbs;
-    public TMP_Text forPickingHerb;
-    public bool canPickHerb = false;
     [Space(10)]
 
     //Camera Smoothness
@@ -95,15 +78,6 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("< SmoothCamera Transition >")]
     public float standingHeight;
     public float crouchHeight;
-    [Space(10)]
-
-    //PlayerSteping on Obstacles
-    [Space(5)]
-    [Header("< PlayerStep Height >")]
-    public GameObject rayCastUp;
-    public GameObject rayCastDown;
-    public float stepHeight;
-    public float smoothStep;
     [Space(10)]
 
     [Space(5)]
@@ -119,38 +93,42 @@ public class PlayerStateMachine : MonoBehaviour
     public AudioClip[] mudSound;
     public AudioClip[] leavesSound;
     private float footStepTimer;
+    private float getCurrentOffset => currentState == playerRunningState ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
     [Space(10)]
 
     [Space(5)]
-    [Header(" < PlayerDodge > ")]
-    [SerializeField] private float dodgeDistance;
-    [SerializeField] private float dodgeDuration;
-    [SerializeField] private float dodgeCooldown;
-    [SerializeField] private float dodgeSpeed;
+    [Header("< PlayerDodge >")]
+    public float dodgeDistance;
+    public float dodgeDuration;
+    public float dodgeCooldown;
+    public float dodgeSpeed;
 
-    private bool canDodge = true;
+    public bool isDodging;
+    public bool canDodge = true;
     [Space(10)]
 
+    [Space(5)]
+    [Header("< Booleans >")]
     public bool isAtttacking;
     public bool isAiming;
     public bool isPicking;
-    public float FAVdelay;
-    private PlayerBaseState currentState;
-    public PlayerControls playerControls;
+    public bool isBarrel;
+    private bool canPickKey = false;
+    public bool canPickHerb = false;
+    private bool inGrass;
+    private int keyPicked = 0;
+    public float barrelIgniteTime;
+    public int herbs;
+    public TMP_Text forPickingHerb;
+    [Space(10)]
 
-    public GameObject crouchCollider;
     private GameObject herbInRange;
     private GameObject keyInRange;
 
-    [HideInInspector] public ThrowingRocks throwingRocks;
-    private float getCurrentOffset => currentState == playerRunningState ? baseStepSpeed * sprintStepSpeed : crouchPressed ? baseStepSpeed * crouchStepSpeed : baseStepSpeed;
-
-    private bool canPickKey = false;
-    private int keyPicked = 0;
+    private PlayerBaseState currentState;
     private MoveRuller moveRuller;
-    private bool inGrass;
-    public bool isBarrel;
     private Coroutine barrelCoroutine;
+    #endregion
 
     private void Awake()
     {
@@ -158,7 +136,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         playerIdleState = new PlayerIdleState(this);
         playerMovingState = new PlayerMovingState(this);
-        playerJumpState = new PlayerJumpState(this);
+        playerDodgeState = new PlayerDodgeState(this);
         playerRunningState = new PlayerRunningState(this);
         playerCrouchState = new PlayerCrouchState(this);
     }
@@ -168,9 +146,7 @@ public class PlayerStateMachine : MonoBehaviour
         staminaBar.enabled = false;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
-        rayCastUp.transform.position = new Vector3(rayCastUp.transform.position.x, stepHeight, rayCastUp.transform.position.z);
-        throwingRocks=GetComponent<ThrowingRocks>();
-        mouseLook = FindObjectOfType<MouseLook>();
+        throwingRocks = GetComponent<ThrowingRocks>();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
 
@@ -198,9 +174,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Crouch.performed += Crouched;
         playerControls.Player.Crouch.canceled += Crouched;
 
-        playerControls.Player.Jump.started += Jump;
-        playerControls.Player.Jump.performed += Jump;
-        playerControls.Player.Jump.canceled += Jump;
+        playerControls.Player.Dodge.started += Dodge;
+        playerControls.Player.Dodge.performed += Dodge;
+        playerControls.Player.Dodge.canceled += Dodge;
 
         playerControls.Player.Projectile.started += ProjectileRock;
         playerControls.Player.Projectile.performed += ProjectileRock;
@@ -232,9 +208,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Crouch.performed -= Crouched;
         playerControls.Player.Crouch.canceled -= Crouched;
 
-        playerControls.Player.Jump.started -= Jump;
-        playerControls.Player.Jump.performed -= Jump;
-        playerControls.Player.Jump.canceled -= Jump;
+        playerControls.Player.Dodge.started -= Dodge;
+        playerControls.Player.Dodge.performed -= Dodge;
+        playerControls.Player.Dodge.canceled -= Dodge;
 
         playerControls.Player.Projectile.started -= ProjectileRock;
         playerControls.Player.Projectile.performed -= ProjectileRock;
@@ -244,117 +220,6 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Attack.performed -= Attacking;
         playerControls.Player.Attack.canceled -= Attacking;
     }
-    #endregion
-
-    public void Update()
-    {
-        if(currentState == playerRunningState)
-        {
-            staminaBar.enabled = true;
-            stamina -= staminaDepletionRate * Time.deltaTime;
-        }
-        else
-        {
-            stamina += staminaRegenerationRate * Time.deltaTime;
-            staminaBar.enabled = false;
-        }
-        stamina = Mathf.Clamp(stamina, 0f, 100f);
-        staminaBar.fillAmount = stamina/100f;
-
-        CameraShake();
-        currentState.UpdateState();
-        Step();
-
-        isGrounded = Physics.CheckSphere(groundPosition.position, groundRadius, groundLayer);
-
-        playerCurrentPosition = this.transform.position;
-    }
-
-    public void FixedUpdate()
-    {
-        if (canDodge && Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(DoDodge());
-        }
-        PlayerSteppingUp();
-        currentState.FixedUpdateState();
-    }
-
-    #region PlayerSteppingAudio
-    public void Step()
-    {
-        if (playerInput.magnitude == 0)
-        {
-            return;
-        }
-        footStepTimer -= Time.deltaTime;
-        if (footStepTimer <= 0)
-        {
-            AudioClip clip = GetRandomClip();
-            audioSource.PlayOneShot(clip);
-            footStepTimer = getCurrentOffset;
-        }
-    }
-
-    private AudioClip GetRandomClip()
-    {
-        int terrainTextureIndex = terrainDetector.GetActiveTerrainTextureIdx(transform.position);
-        switch (terrainTextureIndex)
-        {
-            case 0:
-                return dirtSound[Random.Range(0, dirtSound.Length - 1)];
-            case 1:
-                return mudSound[Random.Range(0, mudSound.Length - 1)];
-            case 2:
-                return grassSound[Random.Range(0, grassSound.Length - 1)];
-            case 3:
-                return leavesSound[Random.Range(0, leavesSound.Length - 1)];
-            /*case 4:
-                return woodSound[Random.Range(0, woodSound.Length - 1)];*/
-            default:
-                return dirtSound[Random.Range(0, dirtSound.Length - 1)];
-        }
-    }
-    #endregion
-
-    #region animationIK
-    /*  private void OnAnimatorIK(int layerIndex)
-    {
-        if(playerAnimation)
-        {
-            playerAnimation.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
-            playerAnimation.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f); 
-            playerAnimation.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
-            playerAnimation.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
-
-            //Left Leg
-            RaycastHit hit;
-            Ray ray = new Ray(playerAnimation.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down); 
-            if(Physics.Raycast(ray, out hit, groucdDistance + 1f, layerMask))
-            {
-                if(hit.transform.tag=="Ground")
-                {
-                    Vector3 footposition = hit.point;
-                    footposition.y += groucdDistance;
-                    playerAnimation.SetIKPosition(AvatarIKGoal.LeftFoot, footposition);
-                    playerAnimation.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
-                }
-            }
-
-            //Right Leg
-            ray = new Ray(playerAnimation.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
-            if (Physics.Raycast(ray, out hit, groucdDistance + 1f, layerMask))
-            {
-                if (hit.transform.tag == "Ground")
-                {
-                    Vector3 footposition = hit.point;
-                    footposition.y += groucdDistance;
-                    playerAnimation.SetIKPosition(AvatarIKGoal.RightFoot, footposition);
-                    playerAnimation.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
-                }
-            }
-        }
-    }*/
     #endregion
 
     #region Player Input Controls
@@ -376,9 +241,9 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    public void Dodge(InputAction.CallbackContext context)
     {
-        //isJumping = context.ReadValueAsButton();
+        isDodging = context.ReadValueAsButton();
     }
 
     public void Rotation(InputAction.CallbackContext context)
@@ -421,6 +286,57 @@ public class PlayerStateMachine : MonoBehaviour
     public void Attacking(InputAction.CallbackContext context)
     {
         isAtttacking = context.ReadValueAsButton();
+    }
+    #endregion
+
+    private void Update()
+    {
+        RunningStaminaBar();
+
+        CameraShake();
+        Step();
+        currentState.UpdateState();
+
+        playerCurrentPosition = this.transform.position;
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdateState();
+    }
+
+    #region PlayerSteppingAudio
+    public void Step()
+    {
+        if (playerInput.magnitude == 0)
+        {
+            return;
+        }
+        footStepTimer -= Time.deltaTime;
+        if (footStepTimer <= 0)
+        {
+            AudioClip clip = GetRandomClip();
+            audioSource.PlayOneShot(clip);
+            footStepTimer = getCurrentOffset;
+        }
+    }
+
+    private AudioClip GetRandomClip()
+    {
+        int terrainTextureIndex = terrainDetector.GetActiveTerrainTextureIdx(transform.position);
+        switch (terrainTextureIndex)
+        {
+            case 0:
+                return dirtSound[Random.Range(0, dirtSound.Length - 1)];
+            case 1:
+                return mudSound[Random.Range(0, mudSound.Length - 1)];
+            case 2:
+                return grassSound[Random.Range(0, grassSound.Length - 1)];
+            case 3:
+                return leavesSound[Random.Range(0, leavesSound.Length - 1)];
+            default:
+                return dirtSound[Random.Range(0, dirtSound.Length - 1)];
+        }
     }
     #endregion
 
@@ -495,72 +411,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
     #endregion
 
-    #region IEnumerators
-    public void CorStarter(float target, float delay)
-    {
-        if (cor != null)
-        {
-            StopCoroutine(cor);
-            cor = null;
-        }
-
-        cor = StartCoroutine(FOVLerper(target, delay));
-    }
-
-    public IEnumerator FOVLerper(float target, float delay)
-    {
-        float timer = 0f;
-        float start = Camera.main.fieldOfView;
-        while (timer <= delay)
-        {
-            timer += Time.deltaTime;
-            Camera.main.fieldOfView = Mathf.Lerp(start, target, timer / delay);
-            yield return null;
-        }
-    }
-    #endregion
-
-    #region Lock Dpad
-    public void EnterLockRegion(MoveRuller MR)
-    {
-        moveRuller = MR;
-        playerControls.Player.DpadUp.performed += DpadUP;
-        playerControls.Player.DpadDown.performed += DpadDOWN;
-        playerControls.Player.DpadRight.performed += DpadRIGHT;
-        playerControls.Player.DpadLeft.performed += DpadLEFT;
-    }
-
-    public void ExitLockRegion(MoveRuller MR)
-    {
-        moveRuller = null;
-        playerControls.Player.DpadUp.performed -= DpadUP;
-        playerControls.Player.DpadDown.performed -= DpadDOWN;
-        playerControls.Player.DpadRight.performed -= DpadRIGHT;
-        playerControls.Player.DpadLeft.performed -= DpadLEFT;
-    }
-
-    public void DpadUP(InputAction.CallbackContext context)
-    {
-        moveRuller?.RotateRullersUp();
-    }
-
-    public void DpadDOWN(InputAction.CallbackContext context)
-    {
-        moveRuller?.RotateRullerDown();
-    }
-
-    public void DpadRIGHT(InputAction.CallbackContext context)
-    {
-        moveRuller?.MoveRullerRight();
-    }
-
-    public void DpadLEFT(InputAction.CallbackContext context)
-    {
-        moveRuller?.MoveRullerLeft();
-    }
-    #endregion
-
-    #region Interactables 
+    #region Interactables
     public void GrassStay()
     {
         if(inGrass)
@@ -604,52 +455,100 @@ public class PlayerStateMachine : MonoBehaviour
     public IEnumerator barrel()
     {
         Debug.Log("Couritne entered");
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(barrelIgniteTime);
 
-        BarrelSwitchingOn();
+        BarrelSwitchingOn();//Access this in barrel script 
         Debug.Log("Couritien finished");
     }
     #endregion
 
-    public void PlayerSteppingUp()
+    #region IEnumerators
+    public void CorStarter(float target, float delay)
     {
-        //RaycastHit hitLower;
-        //if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(Vector3.forward),out hitLower, 0.1f))
-        //{
-        //    RaycastHit hitUpper;
-        //    if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
-        //    {
-        //        playerRB.position -= new Vector3(0f, -smoothStep, 0f);
-        //    }
-        //}
+        if (cor != null)
+        {
+            StopCoroutine(cor);
+            cor = null;
+        }
 
-        //RaycastHit hitLower45Degrees;
-        //if(Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(1.5f, 0, 1),out hitLower45Degrees, 0.1f))
-        //{
-        //    RaycastHit hitUpper45Degrees;
-        //    if(!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(1.5f, 0, 1f),out hitUpper45Degrees, 0.2f))
-        //    {
-        //        playerRB.position -= new Vector3(0f, -smoothStep, 0f);
-        //    }
-        //}
-
-        //RaycastHit hitLowerMinusDegrees;
-        //if (Physics.Raycast(rayCastDown.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinusDegrees, 0.1f))
-        //{
-        //    RaycastHit hitUpperMinusDegrees;
-        //    if (!Physics.Raycast(rayCastUp.transform.position, transform.TransformDirection(-1.5f, 0, 1f), out hitUpperMinusDegrees, 0.2f))
-        //    {
-        //        playerRB.position -= new Vector3(0f, -smoothStep, 0f);
-        //    }
-        //}
+        cor = StartCoroutine(FOVLerper(target, delay));
     }
 
-    public void CameraShake()
+    public IEnumerator FOVLerper(float target, float delay)
+    {
+        float timer = 0f;
+        float start = Camera.main.fieldOfView;
+        while (timer <= delay)
+        {
+            timer += Time.deltaTime;
+            Camera.main.fieldOfView = Mathf.Lerp(start, target, timer / delay);
+            yield return null;
+        }
+    }
+    #endregion
+
+    #region Lock Dpad
+    public void EnterLockRegion(MoveRuller MR)//Calling this functions in MoveRuller which is lockScript
+    {
+        moveRuller = MR;
+        playerControls.Player.DpadUp.performed += DpadUP;
+        playerControls.Player.DpadDown.performed += DpadDOWN;
+        playerControls.Player.DpadRight.performed += DpadRIGHT;
+        playerControls.Player.DpadLeft.performed += DpadLEFT;
+    }
+
+    public void ExitLockRegion(MoveRuller MR)//Calling this functions in MoveRuller which is lockScript
+    {
+        moveRuller = null;
+        playerControls.Player.DpadUp.performed -= DpadUP;
+        playerControls.Player.DpadDown.performed -= DpadDOWN;
+        playerControls.Player.DpadRight.performed -= DpadRIGHT;
+        playerControls.Player.DpadLeft.performed -= DpadLEFT;
+    }
+
+    public void DpadUP(InputAction.CallbackContext context)
+    {
+        moveRuller?.RotateRullersUp();
+    }
+
+    public void DpadDOWN(InputAction.CallbackContext context)
+    {
+        moveRuller?.RotateRullerDown();
+    }
+
+    public void DpadRIGHT(InputAction.CallbackContext context)
+    {
+        moveRuller?.MoveRullerRight();
+    }
+
+    public void DpadLEFT(InputAction.CallbackContext context)
+    {
+        moveRuller?.MoveRullerLeft();
+    }
+    #endregion
+
+    private void RunningStaminaBar()
+    {
+        if (currentState == playerRunningState)
+        {
+            staminaBar.enabled = true;
+            stamina -= staminaDepletionRate * Time.deltaTime;
+        }
+        else
+        {
+            stamina += staminaRegenerationRate * Time.deltaTime;
+            staminaBar.enabled = false;
+        }
+        stamina = Mathf.Clamp(stamina, 0f, 100f);
+        staminaBar.fillAmount = stamina / 100f;
+    }
+
+    private void CameraShake()
     {
         if (Mathf.Abs(playerInput.x) > 0.1f || Mathf.Abs(playerInput.y) > 0.1f)
         {
-            timer += Time.deltaTime * (crouchPressed ? croucSpeed : currentState == playerRunningState ? sprintSpeed : walkSpeed);
-            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (crouchPressed ? croucSpeedAmount : isRunning && playerInput.y == 1 ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
+            timer += Time.deltaTime * (currentState == playerCrouchState ? croucSpeed : currentState == playerRunningState ? sprintSpeed : walkSpeed);
+            playerCamera.transform.localPosition = new Vector3(playerCamera.transform.localPosition.x, originalPosition + Mathf.Sin(timer) * (currentState == playerCrouchState ? croucSpeedAmount : isRunning && playerInput.y == 1 ? sprintSpeedAmount : walkSpeedAmount), playerCamera.transform.localPosition.z);
         }
     }
 
@@ -658,27 +557,5 @@ public class PlayerStateMachine : MonoBehaviour
         currentState?.ExitState();
         currentState = state;
         currentState.EnterState();
-    }
-
-    private IEnumerator DoDodge()
-    {
-        canDodge = false;
-        float startTime = Time.time;
-
-        Vector3 startPosition = transform.position;
-        Vector3 dodgeDirection = (transform.right * playerInput.x) * dodgeSpeed + (transform.forward * playerInput.y) * dodgeSpeed;
-        Vector3 dodgeTarget = transform.position + dodgeDirection * dodgeDistance;
-
-        while (Time.time < startTime + dodgeDuration)
-        {
-            float t = (Time.time - startTime) / dodgeDuration;
-            transform.position = Vector3.Lerp(startPosition, dodgeTarget, t);
-            yield return null;
-        }
-
-        transform.position = dodgeTarget;
-        yield return new WaitForSeconds(dodgeCooldown);
-
-        canDodge = true;
     }
 }

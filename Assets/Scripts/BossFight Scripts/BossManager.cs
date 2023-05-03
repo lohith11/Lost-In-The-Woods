@@ -27,18 +27,16 @@ public class BossManager : MonoBehaviour
         StartNextStage();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            boss.AOEAttack();
-        }
-        if (Input.GetKeyDown(KeyCode.N))
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    boss.AOEAttack();
+        //}
+        if (Input.GetKeyDown(KeyCode.M))
         {
             RamTowardsBrazier();
         }
-
-        Debug.Log("The current stage is  : " + stage);
     }
 
     private void StartBattle()
@@ -96,7 +94,7 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    private void RamTowardsBrazier()
+    public void RamTowardsBrazier()
     {
         boss.agent.speed = 20f;
         boss.agent.acceleration = 40f;

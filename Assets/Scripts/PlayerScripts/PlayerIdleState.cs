@@ -47,6 +47,10 @@ public class PlayerIdleState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
 
+        else if(playerStateMachine.isDodging && playerStateMachine.canDodge)
+        {
+            playerStateMachine.SwitchState(playerStateMachine.playerDodgeState);
+        }
         //else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
         //{
         //    playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
