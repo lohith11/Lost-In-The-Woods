@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Dodge",
                     "type": "Button",
                     "id": "362bff5e-ff70-4632-8e96-419206d1dcfc",
                     "expectedControlType": "Button",
@@ -265,7 +265,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Jump",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -276,7 +276,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Jump",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -34,9 +34,6 @@ public class PlayerMovingState : PlayerBaseState
         moveInput = playerStateMachine.transform.right * playerStateMachine.playerInput.x + playerStateMachine.transform.forward * playerStateMachine.playerInput.y;
         moveInput = moveInput * (Time.fixedDeltaTime * playerStateMachine.playerSpeed);
         playerStateMachine.playerRB.MovePosition(playerStateMachine.transform.position + moveInput);
-        //moveInput = new Vector3(-playerStateMachine.playerInput.x * playerStateMachine.playerSpeed * Time.fixedDeltaTime, playerStateMachine.playerRB.velocity.y, -playerStateMachine.playerInput.y * playerStateMachine.playerSpeed * Time.fixedDeltaTime);
-        //playerStateMachine.transform.Translate(moveInput);
-        //playerStateMachine.playerRB.velocity = playerStateMachine.transform.TransformDirection(moveInput);
     }
     public override void ExitState() 
     {
@@ -59,9 +56,9 @@ public class PlayerMovingState : PlayerBaseState
             playerStateMachine.SwitchState(playerStateMachine.playerCrouchState);
         }
 
-        //else if(playerStateMachine.isJumping && playerStateMachine.isGrounded)
-        //{
-        //    playerStateMachine.SwitchState(playerStateMachine.playerJumpState);
-        //}
+        else if(playerStateMachine.isDodging && playerStateMachine.canDodge)
+        {
+            playerStateMachine.SwitchState(playerStateMachine.playerDodgeState);
+        }
     }
 }

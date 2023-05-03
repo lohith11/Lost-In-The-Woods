@@ -26,20 +26,18 @@ public class BossManager : MonoBehaviour
         StartNextStage();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            boss.AOEAttack();
-        }
-        if (Input.GetKeyDown(KeyCode.N))
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    boss.AOEAttack();
+        //}
+        if (Input.GetKeyDown(KeyCode.M))
         {
             RamTowardsBrazier();
             // StartNextStage();
             // StartBattle();
         }
-
-        Debug.Log("The current stage is  : " + stage);
     }
 
     private void StartBattle()
@@ -97,7 +95,7 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    private void RamTowardsBrazier()
+    public void RamTowardsBrazier()
     {
         // for (int i = 0; i < braziers.Length - 1; i++)
         //{

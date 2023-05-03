@@ -646,7 +646,7 @@ PrefabInstance:
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
@@ -703,26 +703,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Playerrr
       objectReference: {fileID: 0}
-    - target: {fileID: 8055116206163759085, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116206163759085, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116206163759085, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116206163759085, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017d1145b22a58d4c9c51c575d9ecb41, type: 3}
 --- !u!1 &920292551 stripped
@@ -768,7 +748,7 @@ GameObject:
   - component: {fileID: 1254627837}
   - component: {fileID: 1254627836}
   - component: {fileID: 1254627835}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1520040046 stripped
 GameObject:

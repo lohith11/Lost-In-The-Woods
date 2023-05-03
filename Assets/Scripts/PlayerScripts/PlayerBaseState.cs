@@ -8,7 +8,7 @@ public abstract class PlayerBaseState
         this.playerStateMachine = playerStateMachine;
     }
 
-    public abstract void EnterState();//Which checks the state entered or not & what needs to be done while entering the state
+    public abstract void EnterState();//Which checks the state entered or not & what needs to be done while entering the state => works as Start 
 
     public abstract void UpdateState();//Acts as Update
 
