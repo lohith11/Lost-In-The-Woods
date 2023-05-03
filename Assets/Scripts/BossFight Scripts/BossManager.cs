@@ -97,10 +97,10 @@ public class BossManager : MonoBehaviour
 
     public void RamTowardsBrazier()
     {
-        // for (int i = 0; i < braziers.Length - 1; i++)
-        //{
-        //boss.agent.SetDestination(braziers[Random.Range(1, braziers.Length - 1)].transform.position);
-        //}
+        boss.agent.speed = 10f;
+        boss.agent.acceleration = 15f;
+        boss.bossAnimator.Play("Ram");
+        boss.agent.SetDestination(braziers[Random.Range(1, braziers.Length - 1)].transform.position);
         Debug.Log("Array index is : " + Random.Range(0, braziers.Length));
 
         Debug.Log("Raming towards brazier");
