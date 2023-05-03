@@ -83,14 +83,14 @@ public class BossManager : MonoBehaviour
                 break;
             case Stage.Stage_1:
                 stage = Stage.Stage_2;
-                RamTowardsBrazier();
+                boss.MoveAttack();
                 break;
             case Stage.Stage_2:
                 stage = Stage.Stage_3;
                 RamTowardsBrazier();
                 break;
             case Stage.Stage_3:
-                RamTowardsBrazier();
+                boss.AOEAttack();
                 break;
         }
     }

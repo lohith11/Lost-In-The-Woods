@@ -11,10 +11,13 @@ public class Barrel : MonoBehaviour
     [SerializeField] LayerMask bossLayer;
     private void Update()
     {
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R))
         {
+            Debug.Log("R pressed");
             Explode();
         }
+        #endif
     }
 
     public void Explode() => StartCoroutine(Explosion());

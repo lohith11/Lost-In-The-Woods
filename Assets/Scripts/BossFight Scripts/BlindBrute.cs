@@ -13,6 +13,8 @@ public class BlindBrute : MonoBehaviour
     [SerializeField] float range;
     public NavMeshAgent agent;
     public Animator bossAnimator;
+    public GameObject test;
+    public GameObject test1;
 
     void Start()
     {
@@ -47,7 +49,7 @@ public class BlindBrute : MonoBehaviour
 
     public void AOEAttack()
     {
-        #region useless 
+        bossAnimator.Play("Aoe_Attack");
         Collider[] braziers = Physics.OverlapSphere(transform.position, range);
         if (braziers.Length > 0)
         {
@@ -62,11 +64,20 @@ public class BlindBrute : MonoBehaviour
                 }
             }
         }
-        #endregion
     }
 
     public float GetHealthNormalized()
     {
         return (float)health / maxHealth;
+    }
+
+    public void MoveAttack() => StartCoroutine(MoveAndReturn());
+
+    IEnumerator MoveAndReturn()
+    {
+        agent.SetDestination(test.transform.position);
+        yield return new WaitForSeconds(2f);
+
+        agent.SetDestination(test1.transform.position);
     }
 }
