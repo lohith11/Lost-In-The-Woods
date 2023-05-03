@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.ProBuilder.Shapes;
+using System.Linq;
+
 public class EnemyStateManager : MonoBehaviour
 {
     //todo : alert nearby enemies when an enemy dies
@@ -108,6 +111,10 @@ public class EnemyStateManager : MonoBehaviour
 
 
     EnemyBaseState currentState;
+    public float walkingDetectionRadius = 5f;
+    public float runningDetectionRadius = 10f;
+    private SphereCollider detectionCollider;
+    private PlayerStateMachine playerStateMachine;
 
     #region EnemyStates
 
@@ -127,6 +134,7 @@ public class EnemyStateManager : MonoBehaviour
     }
     void Start()
     {
+        playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
 
@@ -142,6 +150,11 @@ public class EnemyStateManager : MonoBehaviour
         PlayerStateMachine.hidePlayer += HidePlayer;
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+
+        detectionCollider = GetComponent<SphereCollider>();
+        detectionCollider.radius = walkingDetectionRadius;
+        detectionCollider.isTrigger = true;
+
         switchState(IdleState);
     }
 
@@ -251,5 +264,66 @@ public class EnemyStateManager : MonoBehaviour
     private void HidePlayer(object sender, EventArgs e)
     {
         PlayerInRange = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AudioSource audioSource = other.GetComponent<AudioSource>();
+            if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
+            {
+                if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = runningDetectionRadius;
+                }
+
+                else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+                else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
+                {
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AudioSource audioSource = other.GetComponent<AudioSource>();
+            if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
+            {
+                if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = runningDetectionRadius;
+                }
+
+                else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+
+                else if(playerStateMachine.currentState==playerStateMachine.playerIdleState)
+                {
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerInRange = false;
+            Debug.Log("Ontrigger Exited");
+        }
     }
 }
