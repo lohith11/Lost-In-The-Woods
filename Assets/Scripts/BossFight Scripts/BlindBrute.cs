@@ -16,8 +16,11 @@ public class BlindBrute : MonoBehaviour
     public GameObject test;
     public GameObject test1;
 
+    [SerializeField] PlayerStateMachine playerStateMachine;
+
     void Start()
     {
+        playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         Barrel.explosiveDamage += TakeDamage;
         GetComponent<NavMeshAgent>();
         GetComponent<Animator>();
@@ -80,4 +83,65 @@ public class BlindBrute : MonoBehaviour
 
         agent.SetDestination(test1.transform.position);
     }
+
+    // void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         AudioSource audioSource = other.GetComponent<AudioSource>();
+    //         if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
+    //         {
+    //             if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
+    //             {
+    //                 PlayerInRange = true;
+    //                 detectionCollider.radius = runningDetectionRadius;
+    //             }
+
+    //             else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
+    //             {
+    //                 PlayerInRange = true;
+    //                 detectionCollider.radius = walkingDetectionRadius;
+    //             }
+    //             else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
+    //             {
+    //                 detectionCollider.radius = walkingDetectionRadius;
+    //             }
+    //         }
+    //     }
+    // }
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         AudioSource audioSource = other.GetComponent<AudioSource>();
+    //         if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
+    //         {
+    //             if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
+    //             {
+    //                 PlayerInRange = true;
+    //                 detectionCollider.radius = runningDetectionRadius;
+    //             }
+
+    //             else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
+    //             {
+    //                 PlayerInRange = true;
+    //                 detectionCollider.radius = walkingDetectionRadius;
+    //             }
+
+    //             else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
+    //             {
+    //                 detectionCollider.radius = walkingDetectionRadius;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         PlayerInRange = false;
+    //         Debug.Log("Ontrigger Exited");
+    //     }
+    // }
 }
