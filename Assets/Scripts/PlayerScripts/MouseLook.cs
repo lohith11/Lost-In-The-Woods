@@ -1,37 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseLook : MonoBehaviour
 {
     public float mouseSpeed;
+    public float controllerSpeed;
     private float xRotation = 0f;
     public Transform playerObject;
-    //public float desiredHeight;
-    private PlayerStateMachine playerStateMachine;
 
     private void Start()
     {
-        playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         Cursor.lockState = CursorLockMode.Locked;
     }
-    private void Update()
+
+    public void Rotation(PlayerInput playerInput, Vector2 rotation)
     {
-        Rotation();
+        switch (playerInput.currentControlScheme)
+        {
+            case "Keyboard": rotation *= (mouseSpeed * Time.deltaTime); break;
+            case "Controller": rotation *= (controllerSpeed * Time.deltaTime); break;
+            default: Debug.LogError($"Control Scheme {playerInput.currentControlScheme} not expected!"); break;
+        }
 
-    }
-
-    public void Rotation()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
-
-        xRotation -= mouseY;
+        xRotation -= rotation.y;
         xRotation = Mathf.Clamp(xRotation, -30f, 30f);
-
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        Vector3 rot = Vector3.up * mouseX;
-        playerObject.Rotate(rot);
+        playerObject.Rotate(Vector3.up * rotation.x);
         //not working for controller we have to fix it
     }
 }

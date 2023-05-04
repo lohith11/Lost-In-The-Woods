@@ -27,6 +27,9 @@ public class PlayerStateMachine : MonoBehaviour
     public static Vector3 playerCurrentPosition;
     public static event EventHandler hidePlayer;
 
+    private MouseLook mouseLookRef;
+    private PlayerInput playerInputRef;
+
     #region Variables
     //Player Walking
     [Header("< Player Walking >")]
@@ -139,6 +142,7 @@ public class PlayerStateMachine : MonoBehaviour
         playerDodgeState = new PlayerDodgeState(this);
         playerRunningState = new PlayerRunningState(this);
         playerCrouchState = new PlayerCrouchState(this);
+
     }
 
     public void Start()
@@ -150,6 +154,8 @@ public class PlayerStateMachine : MonoBehaviour
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
 
+        mouseLookRef = FindObjectOfType<MouseLook>();
+        playerInputRef = FindObjectOfType<PlayerInput>();
         SwitchState(playerIdleState);
     }
 
@@ -162,9 +168,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Move.performed += Moving;
         playerControls.Player.Move.canceled += Moving;
 
-        playerControls.Player.MouseRotation.started += Rotation;
-        playerControls.Player.MouseRotation.performed += Rotation;
-        playerControls.Player.MouseRotation.canceled += Rotation;
+        playerControls.Player.PlayerRotation.started += Rotation;
+        playerControls.Player.PlayerRotation.performed += Rotation;
+        playerControls.Player.PlayerRotation.canceled += Rotation;
 
         playerControls.Player.Run.started += Running;
         playerControls.Player.Run.performed += Running;
@@ -196,9 +202,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Move.performed -= Moving;
         playerControls.Player.Move.canceled -= Moving;
 
-        playerControls.Player.MouseRotation.started -= Rotation;
-        playerControls.Player.MouseRotation.performed -= Rotation;
-        playerControls.Player.MouseRotation.canceled -= Rotation;
+        playerControls.Player.PlayerRotation.started -= Rotation;
+        playerControls.Player.PlayerRotation.performed -= Rotation;
+        playerControls.Player.PlayerRotation.canceled -= Rotation;
 
         playerControls.Player.Run.started -= Running;
         playerControls.Player.Run.performed -= Running;
@@ -249,6 +255,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void Rotation(InputAction.CallbackContext context)
     {
         playerRotation = context.ReadValue<Vector2>();
+        mouseLookRef.Rotation(playerInputRef, playerRotation);
     }
 
     public void PickingRock(InputAction.CallbackContext context)

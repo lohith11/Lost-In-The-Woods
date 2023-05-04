@@ -82,7 +82,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MouseRotation"",
+                    ""name"": ""PlayerRotation"",
                     ""type"": ""Value"",
                     ""id"": ""e9cf4d1e-64b5-49aa-8b03-2b92e4dbce57"",
                     ""expectedControlType"": ""Vector2"",
@@ -232,7 +232,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""MouseRotation"",
+                    ""action"": ""PlayerRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""693ac69c-0297-467b-972a-f0aa636d91f1"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""PlayerRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -459,11 +470,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Mouse"",
-            ""bindingGroup"": ""Mouse"",
-            ""devices"": []
         }
     ]
 }");
@@ -475,7 +481,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_DpadDown = m_Player.FindAction("DpadDown", throwIfNotFound: true);
         m_Player_DpadUp = m_Player.FindAction("DpadUp", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_MouseRotation = m_Player.FindAction("MouseRotation", throwIfNotFound: true);
+        m_Player_PlayerRotation = m_Player.FindAction("PlayerRotation", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
@@ -546,7 +552,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DpadDown;
     private readonly InputAction m_Player_DpadUp;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_MouseRotation;
+    private readonly InputAction m_Player_PlayerRotation;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Dodge;
@@ -562,7 +568,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @DpadDown => m_Wrapper.m_Player_DpadDown;
         public InputAction @DpadUp => m_Wrapper.m_Player_DpadUp;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @MouseRotation => m_Wrapper.m_Player_MouseRotation;
+        public InputAction @PlayerRotation => m_Wrapper.m_Player_PlayerRotation;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
@@ -595,9 +601,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @MouseRotation.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseRotation;
-                @MouseRotation.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseRotation;
-                @MouseRotation.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseRotation;
+                @PlayerRotation.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlayerRotation;
+                @PlayerRotation.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlayerRotation;
+                @PlayerRotation.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlayerRotation;
                 @Run.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
@@ -635,9 +641,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @MouseRotation.started += instance.OnMouseRotation;
-                @MouseRotation.performed += instance.OnMouseRotation;
-                @MouseRotation.canceled += instance.OnMouseRotation;
+                @PlayerRotation.started += instance.OnPlayerRotation;
+                @PlayerRotation.performed += instance.OnPlayerRotation;
+                @PlayerRotation.canceled += instance.OnPlayerRotation;
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
@@ -675,15 +681,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_ControllerSchemeIndex];
         }
     }
-    private int m_MouseSchemeIndex = -1;
-    public InputControlScheme MouseScheme
-    {
-        get
-        {
-            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
-            return asset.controlSchemes[m_MouseSchemeIndex];
-        }
-    }
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -692,7 +689,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDpadDown(InputAction.CallbackContext context);
         void OnDpadUp(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnMouseRotation(InputAction.CallbackContext context);
+        void OnPlayerRotation(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
