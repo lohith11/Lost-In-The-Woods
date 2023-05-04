@@ -25,10 +25,14 @@ public class Barrel : MonoBehaviour
     IEnumerator Explosion()
     {
         yield return new WaitForSeconds(explosionDelay);
+        Debug.Log("Barrel Exploded");
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, bossLayer);
         if (colliders.Length > 0)
         {
-            explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
+            if(explosiveDamage!=null)
+            {
+                explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
+            }
         }
     }
 

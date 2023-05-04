@@ -27,8 +27,6 @@ public class PlayerStateMachine : MonoBehaviour
     public static Vector3 playerCurrentPosition;
     public static event EventHandler hidePlayer;
 
-    private MouseLook mouseLookRef;
-    private PlayerInput playerInputRef;
 
     #region Variables
     //Player Walking
@@ -131,6 +129,9 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector]public PlayerBaseState currentState;
     private MoveRuller moveRuller;
     private Coroutine barrelCoroutine;
+    private MouseLook mouseLookRef;
+    private PlayerInput playerInputRef;
+    private Barrel barrelRef;
     #endregion
 
     private void Awake()
@@ -155,6 +156,7 @@ public class PlayerStateMachine : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
 
         mouseLookRef = FindObjectOfType<MouseLook>();
+        barrelRef = FindObjectOfType<Barrel>();
         playerInputRef = FindObjectOfType<PlayerInput>();
         SwitchState(playerIdleState);
     }
@@ -455,7 +457,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(isBarrel)
         {
-            //Get the barrel to blast after 5 sec
+            barrelRef.Explode();
         }
     }
 

@@ -117,6 +117,7 @@ public class ThrowingRocks : MonoBehaviour
             targetPosition.y = transform.position.y;
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
+            lineRenderer.transform.LookAt(targetPosition);
         }
 
         lineRenderer.enabled = true;
