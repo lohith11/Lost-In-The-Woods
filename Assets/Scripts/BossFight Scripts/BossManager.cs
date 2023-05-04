@@ -12,6 +12,8 @@ public class BossManager : MonoBehaviour
 
     private BlindBrute boss;
     [SerializeField] Brazier[] braziers;
+    [SerializeField] float ramSpeed;
+    [SerializeField] float ramAcceleration;
 
     private Stage stage;
 
@@ -28,15 +30,9 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.B))
-        //{
-        //    boss.AOEAttack();
-        //}
         if (Input.GetKeyDown(KeyCode.M))
         {
             RamTowardsBrazier();
-            // StartNextStage();
-            // StartBattle();
         }
     }
 
@@ -97,17 +93,11 @@ public class BossManager : MonoBehaviour
 
     public void RamTowardsBrazier()
     {
-        boss.agent.speed = 10f;
-        boss.agent.acceleration = 15f;
+        boss.agent.speed = ramSpeed;
+        boss.agent.acceleration = ramAcceleration;
         boss.bossAnimator.Play("Ram");
         boss.agent.SetDestination(braziers[Random.Range(1, braziers.Length - 1)].transform.position);
-        Debug.Log("Array index is : " + Random.Range(0, braziers.Length));
-
         Debug.Log("Raming towards brazier");
     }
 
-    public void DealDamage()
-    {
-        Debug.Log("The boss dealt damage");
-    }
 }

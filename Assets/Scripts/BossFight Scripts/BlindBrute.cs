@@ -7,16 +7,22 @@ using UnityEngine.AI;
 public class BlindBrute : MonoBehaviour
 {
 
-    [SerializeField]float maxHealth;
+    [SerializeField] float maxHealth;
     public float health;
     [SerializeField] float damage;
     [SerializeField] float range;
     public NavMeshAgent agent;
     public Animator bossAnimator;
-    public GameObject test;
-    public GameObject test1;
+    public Transform[] teleportPoints;
+    [SerializeField] float stoppingDistance;
+    [SerializeField] bool PlayerInRange;
+    public float radius;
+    public LayerMask targetMask, obstructionMask;
+    public float angle;
+    public float attackRadius;
 
-    [SerializeField] PlayerStateMachine playerStateMachine;
+
+    public PlayerStateMachine playerStateMachine;
 
     void Start()
     {
@@ -24,15 +30,30 @@ public class BlindBrute : MonoBehaviour
         Barrel.explosiveDamage += TakeDamage;
         GetComponent<NavMeshAgent>();
         GetComponent<Animator>();
+
+        StartCoroutine(FOVRoutine());
     }
 
     void Update()
     {
-        Debug.Log("Boss current normalized health is : " + GetHealthNormalized());
-        if(Input.GetKeyDown(KeyCode.G))
+        Debug.Log("The boss health is : " + health);
+        if (Input.GetKeyDown(KeyCode.G))
         {
             AOEAttack();
         }
+        if(PlayerInRange)
+            transform.LookAt(playerStateMachine.transform.position);
+    }
+
+    private void FixedUpdate()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, playerStateMachine.transform.position);
+        if(PlayerInRange && distanceToPlayer< attackRadius)
+        {
+            SlashAttack();
+        }
+        if(distanceToPlayer > attackRadius)
+            bossAnimator.Play("Idle Anim");
     }
 
     public void DefaultValues()
@@ -50,16 +71,19 @@ public class BlindBrute : MonoBehaviour
         Debug.Log("The boss dealt damage");
     }
 
+    private void SlashAttack()
+    {
+        bossAnimator.Play("Normal_Attack");
+    }
+
     public void AOEAttack()
     {
         bossAnimator.Play("Aoe_Attack");
         Collider[] braziers = Physics.OverlapSphere(transform.position, range);
         if (braziers.Length > 0)
         {
-            Debug.Log("Entered if");
             foreach (Collider brazier in braziers)
             {
-                Debug.Log("Entered for each");
                 Brazier brazierComponent = brazier.GetComponent<Brazier>();
                 if (brazierComponent != null)
                 {
@@ -78,10 +102,52 @@ public class BlindBrute : MonoBehaviour
 
     IEnumerator MoveAndReturn()
     {
-        agent.SetDestination(test.transform.position);
-        yield return new WaitForSeconds(2f);
+        Debug.Log("Move attack called");
+        int targetPosition = UnityEngine.Random.Range(0, teleportPoints.Length);
+        Debug.Log("Target position is : " + targetPosition);
+        agent.SetDestination(teleportPoints[targetPosition].position);
+        bossAnimator.Play("Walk");
+        agent.speed = 25f;
+        yield return new WaitForSeconds(15f);
+        agent.stoppingDistance = stoppingDistance;
+        agent.SetDestination(playerStateMachine.transform.position);
+    }
 
-        agent.SetDestination(test1.transform.position);
+
+    private void FieldOfViewCheck()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+
+        if (rangeChecks.Length != 0)
+        {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    PlayerInRange = true;
+                else
+                    PlayerInRange = false;
+            }
+            else
+                PlayerInRange = false;
+        }
+        else if (PlayerInRange)
+            PlayerInRange = false;
+    }
+
+    private IEnumerator FOVRoutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
+
+        while (true)
+        {
+            yield return wait;
+            FieldOfViewCheck();
+        }
     }
 
     // void OnTriggerEnter(Collider other)

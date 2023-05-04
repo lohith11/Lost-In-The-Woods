@@ -6,17 +6,20 @@ public class FieldOfViewEditor : Editor
 {
     private void OnSceneGUI()
     {
-        EnemyStateManager Smanager = (EnemyStateManager) target;
-        //FieldOfView Smanager = (FieldOfView)target;
+        EnemyStateManager Smanager = (EnemyStateManager)target;
+
         //* Handlees the color of the circle
         Handles.color = Color.white;
 
         //* This draws the circle with the view radius as the angle around the enemy
         Handles.DrawWireArc(Smanager.transform.position, Vector3.up, Vector3.forward, 360, Smanager.radius);
+
         Handles.color = Color.red;
-        Handles.DrawWireArc(Smanager.transform.position, Vector3.up , Vector3.forward , 360 , Smanager.attackRadius);
+        Handles.DrawWireArc(Smanager.transform.position, Vector3.up, Vector3.forward, 360, Smanager.attackRadius);
+
         Handles.color = Color.black;
-        Handles.DrawWireArc(Smanager.transform.position, Vector3.up , Vector3.forward , 360 , Smanager.hearingRange);
+        Handles.DrawWireArc(Smanager.transform.position, Vector3.up, Vector3.forward, 360, Smanager.hearingRange);
+
 
         //* Calculates the angle for the handles 
         Vector3 viewAngle01 = DirectionFromAngle(Smanager.transform.eulerAngles.y, -Smanager.angle / 2);
@@ -27,7 +30,7 @@ public class FieldOfViewEditor : Editor
         Handles.DrawLine(Smanager.transform.position, Smanager.transform.position + viewAngle01 * Smanager.radius);
         Handles.DrawLine(Smanager.transform.position, Smanager.transform.position + viewAngle02 * Smanager.radius);
 
-        
+
         //* This draws a line towards the player
         if (Smanager.playerRef)
         {
@@ -43,5 +46,5 @@ public class FieldOfViewEditor : Editor
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 
-   
+
 }
