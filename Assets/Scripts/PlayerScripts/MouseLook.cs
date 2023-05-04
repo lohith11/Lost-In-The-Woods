@@ -28,6 +28,5 @@ public class MouseLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -30f, 30f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerObject.Rotate(Vector3.up * rotation.x);
-        //not working for controller we have to fix it
     }
 }
