@@ -132,6 +132,7 @@ public class PlayerStateMachine : MonoBehaviour
     private MouseLook mouseLookRef;
     private PlayerInput playerInputRef;
     private Barrel barrelRef;
+    public Image healthPickUpEffect;
     #endregion
 
     private void Awake()
@@ -148,6 +149,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
+        healthPickUpEffect.enabled = false;
         staminaBar.enabled = false;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
@@ -158,6 +160,7 @@ public class PlayerStateMachine : MonoBehaviour
         mouseLookRef = FindObjectOfType<MouseLook>();
         barrelRef = FindObjectOfType<Barrel>();
         playerInputRef = FindObjectOfType<PlayerInput>();
+
         SwitchState(playerIdleState);
     }
 
@@ -268,6 +271,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void HerbsPickUp(InputAction.CallbackContext context)
     {
         HerbsPicking();
+
     }
 
     public void KeyPickUp(InputAction.CallbackContext context)
@@ -442,6 +446,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void HerbsPicking()
     {
+        StartCoroutine(HerbPickUpEffect());
         if (canPickHerb)
         {
             herbs++;
@@ -493,6 +498,13 @@ public class PlayerStateMachine : MonoBehaviour
             Camera.main.fieldOfView = Mathf.Lerp(start, target, timer / delay);
             yield return null;
         }
+    }
+
+    private IEnumerator HerbPickUpEffect()
+    {
+        healthPickUpEffect.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        healthPickUpEffect.enabled = false;
     }
     #endregion
 
