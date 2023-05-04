@@ -308,7 +308,7 @@ public class EnemyStateManager : MonoBehaviour
                     detectionCollider.radius = walkingDetectionRadius;
                 }
 
-                else if(playerStateMachine.currentState==playerStateMachine.playerIdleState)
+                else if(playerStateMachine.currentState == playerStateMachine.playerIdleState)
                 {
                     detectionCollider.radius = walkingDetectionRadius;
                 }

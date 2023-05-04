@@ -5,12 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerDodgeState : PlayerBaseState
 {
-    private bool isDodged;
     public PlayerDodgeState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
-        isDodged = true;
         playerStateMachine.StartCoroutine(DoDodge());
     }
 

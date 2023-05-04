@@ -27,6 +27,7 @@ public class PlayerStateMachine : MonoBehaviour
     public static Vector3 playerCurrentPosition;
     public static event EventHandler hidePlayer;
 
+
     #region Variables
     //Player Walking
     [Header("< Player Walking >")]
@@ -128,6 +129,10 @@ public class PlayerStateMachine : MonoBehaviour
     [HideInInspector]public PlayerBaseState currentState;
     private MoveRuller moveRuller;
     private Coroutine barrelCoroutine;
+    private MouseLook mouseLookRef;
+    private PlayerInput playerInputRef;
+    private Barrel barrelRef;
+    public Image healthPickUpEffect;
     #endregion
 
     private void Awake()
@@ -139,16 +144,22 @@ public class PlayerStateMachine : MonoBehaviour
         playerDodgeState = new PlayerDodgeState(this);
         playerRunningState = new PlayerRunningState(this);
         playerCrouchState = new PlayerCrouchState(this);
+
     }
 
     public void Start()
     {
+        healthPickUpEffect.enabled = false;
         staminaBar.enabled = false;
         terrainDetector = new TerrainDetector();
         originalPosition = playerCamera.transform.localPosition.y;
         throwingRocks = GetComponent<ThrowingRocks>();
         playerRB = GetComponent<Rigidbody>();
         playerAnimation = GetComponent<Animator>();
+
+        mouseLookRef = FindObjectOfType<MouseLook>();
+        barrelRef = FindObjectOfType<Barrel>();
+        playerInputRef = FindObjectOfType<PlayerInput>();
 
         SwitchState(playerIdleState);
     }
@@ -162,9 +173,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Move.performed += Moving;
         playerControls.Player.Move.canceled += Moving;
 
-        playerControls.Player.MouseRotation.started += Rotation;
-        playerControls.Player.MouseRotation.performed += Rotation;
-        playerControls.Player.MouseRotation.canceled += Rotation;
+        playerControls.Player.PlayerRotation.started += Rotation;
+        playerControls.Player.PlayerRotation.performed += Rotation;
+        playerControls.Player.PlayerRotation.canceled += Rotation;
 
         playerControls.Player.Run.started += Running;
         playerControls.Player.Run.performed += Running;
@@ -196,9 +207,9 @@ public class PlayerStateMachine : MonoBehaviour
         playerControls.Player.Move.performed -= Moving;
         playerControls.Player.Move.canceled -= Moving;
 
-        playerControls.Player.MouseRotation.started -= Rotation;
-        playerControls.Player.MouseRotation.performed -= Rotation;
-        playerControls.Player.MouseRotation.canceled -= Rotation;
+        playerControls.Player.PlayerRotation.started -= Rotation;
+        playerControls.Player.PlayerRotation.performed -= Rotation;
+        playerControls.Player.PlayerRotation.canceled -= Rotation;
 
         playerControls.Player.Run.started -= Running;
         playerControls.Player.Run.performed -= Running;
@@ -249,6 +260,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void Rotation(InputAction.CallbackContext context)
     {
         playerRotation = context.ReadValue<Vector2>();
+        mouseLookRef.Rotation(playerInputRef, playerRotation);
     }
 
     public void PickingRock(InputAction.CallbackContext context)
@@ -259,6 +271,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void HerbsPickUp(InputAction.CallbackContext context)
     {
         HerbsPicking();
+
     }
 
     public void KeyPickUp(InputAction.CallbackContext context)
@@ -433,6 +446,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void HerbsPicking()
     {
+        StartCoroutine(HerbPickUpEffect());
         if (canPickHerb)
         {
             herbs++;
@@ -448,7 +462,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(isBarrel)
         {
-            //Get the barrel to blast after 5 sec
+            barrelRef.Explode();
         }
     }
 
@@ -484,6 +498,13 @@ public class PlayerStateMachine : MonoBehaviour
             Camera.main.fieldOfView = Mathf.Lerp(start, target, timer / delay);
             yield return null;
         }
+    }
+
+    private IEnumerator HerbPickUpEffect()
+    {
+        healthPickUpEffect.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        healthPickUpEffect.enabled = false;
     }
     #endregion
 

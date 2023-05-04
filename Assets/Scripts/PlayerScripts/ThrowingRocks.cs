@@ -36,6 +36,7 @@ public class ThrowingRocks : MonoBehaviour
     private RaycastHit hit;
     public float aimSpeed;
 
+    private Vector3 newPoint;
     public AudioClip rockPickingSound;
     private GameObject rockInRange;
     //The physics layers that will cause the line to stop being drawn
@@ -117,16 +118,17 @@ public class ThrowingRocks : MonoBehaviour
             targetPosition.y = transform.position.y;
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
+            lineRendererEndPoint.transform.LookAt(targetPosition);
         }
 
         lineRenderer.enabled = true;
-        lineRenderer.positionCount = (int)numPoints;
+        lineRenderer.positionCount = numPoints;
         List<Vector3> points = new List<Vector3>();
         Vector3 startingPosition = attackpoint.position;
         Vector3 startingVelocity = cam.transform.forward * throwForce;
         for (float t = 0; t < numPoints; t += timeBetweenPoints)
         {
-            Vector3 newPoint = startingPosition + t * startingVelocity;
+            newPoint = startingPosition + t * startingVelocity;
             newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / f * t * t;
 
             points.Add(newPoint);

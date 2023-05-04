@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MouseRotation",
+                    "name": "PlayerRotation",
                     "type": "Value",
                     "id": "e9cf4d1e-64b5-49aa-8b03-2b92e4dbce57",
                     "expectedControlType": "Vector2",
@@ -210,7 +210,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "MouseRotation",
+                    "action": "PlayerRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "693ac69c-0297-467b-972a-f0aa636d91f1",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "PlayerRotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -437,11 +448,6 @@
                     "isOR": false
                 }
             ]
-        },
-        {
-            "name": "Mouse",
-            "bindingGroup": "Mouse",
-            "devices": []
         }
     ]
 }

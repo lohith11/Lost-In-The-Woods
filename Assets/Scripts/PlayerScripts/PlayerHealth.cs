@@ -8,26 +8,30 @@ public class PlayerHealth : MonoBehaviour
     public Image bloodSplatter;
     public Image BackGroundBlood;
     public float hurtTimer;
+    public GameObject deadScreen;
 
     [ShowInInspector]
     public static float maxHealth = 100f;
-    private float healthRegeneration;
     private Coroutine healthRegenerationStart;
     public float healthUpgrade;
     [ShowInInspector]
     public static float Health = 100f;
     public static float baseHealth;
     public float healthRegenerationValue;
-
+    public AudioClip[] playerHurtSound;
+    private AudioSource playerAudioSource;
+    private static bool isPlayerDead;
+    public Transform target;
+    public float smoothFactor;
+    private PlayerStateMachine playerStateMachine;
     private void Start()
     {
+        isPlayerDead = false;
+        deadScreen.SetActive(false);
+        playerAudioSource = GetComponent<AudioSource>();
+        playerStateMachine = GetComponent<PlayerStateMachine>();
         Health = maxHealth;
         baseHealth = maxHealth;
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void UpdateHealth()
@@ -43,11 +47,12 @@ public class PlayerHealth : MonoBehaviour
         Health -= damage;
         StartCoroutine(HurtEffect());
         //UpdateHealth();
-        if(Health <= 0)
+        if (Health <= 0)
         {
+            isPlayerDead = true;
             PlayerDead();
         }
-        else if(healthRegenerationStart != null)
+        else if (healthRegenerationStart != null)
         {
             StopCoroutine(healthRegenerationStart);
         }
@@ -58,17 +63,23 @@ public class PlayerHealth : MonoBehaviour
     public void PlayerDead()
     {
         Health = 0;
-        if(healthRegenerationStart!= null)
+        if (healthRegenerationStart != null)
         {
             StopCoroutine(healthRegenerationStart);
         }
+        StartCoroutine(PlayerDeath());
         Debug.Log("Player Dead");
     }
 
     private IEnumerator HurtEffect()
     {
+        if (isPlayerDead)
+        {
+            yield break;
+        }
         BackGroundBlood.enabled = true;
-        //Audio
+        AudioClip audioClip = playerHurtSound[Random.Range(0, playerHurtSound.Length - 1)];
+        playerAudioSource.PlayOneShot(audioClip);
         yield return new WaitForSeconds(hurtTimer);
         BackGroundBlood.enabled = false;
     }
@@ -78,15 +89,23 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(3f);
         WaitForSeconds timeToWait = new WaitForSeconds(0.2f);
 
-        while(Health < maxHealth)
+        while (Health < maxHealth)
         {
             Health += healthRegenerationValue;
-            if(Health > maxHealth)
+            if (Health > maxHealth)
             {
                 Health = maxHealth;
             }
             yield return timeToWait;
         }
         healthRegenerationStart = null;
+    }
+
+    private IEnumerator PlayerDeath()
+    {
+        playerStateMachine.playerAnimation.Play("Player_Dead");
+        //Camera Movement
+        yield return new WaitForSeconds(3f);
+        deadScreen.SetActive(true);
     }
 }
