@@ -96,7 +96,9 @@ public class BossManager : MonoBehaviour
         boss.agent.speed = ramSpeed;
         boss.agent.acceleration = ramAcceleration;
         boss.bossAnimator.Play("Ram");
-        boss.agent.SetDestination(braziers[Random.Range(1, braziers.Length - 1)].transform.position);
+        int targetBrazier = Random.Range(1, braziers.Length - 1);
+        boss.agent.SetDestination(braziers[targetBrazier].transform.position);
+        braziers[targetBrazier].TurnOff();
         Debug.Log("Raming towards brazier");
     }
 
