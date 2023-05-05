@@ -16,6 +16,8 @@ TagManager:
   - Key
   - Grass
   - Barrel
+  - MainGate
+  - Lock
   layers:
   - Default
   - TransparentFX

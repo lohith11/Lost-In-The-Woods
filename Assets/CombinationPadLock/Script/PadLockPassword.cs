@@ -29,9 +29,10 @@ public class PadLockPassword : MonoBehaviour
                 _moveRull._rullers[i].GetComponent<PadLockEmissionColor>()._isSelect = false;
                 _moveRull._rullers[i].GetComponent<PadLockEmissionColor>().BlinkingMaterial();
                 this.gameObject.SetActive(false);
+                _moveRull.lockCamera.SetActive(false);
+                _moveRull.playerMainCamera.SetActive(true);
                 key.SetActive(true);
             }
-
         }
     }
 }

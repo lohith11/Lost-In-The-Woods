@@ -21,9 +21,8 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip[] playerHurtSound;
     private AudioSource playerAudioSource;
     private static bool isPlayerDead;
-    public Transform target;
-    public float smoothFactor;
     private PlayerStateMachine playerStateMachine;
+    public AudioClip deathSound;
     private void Start()
     {
         isPlayerDead = false;
@@ -73,7 +72,6 @@ public class PlayerHealth : MonoBehaviour
             StopCoroutine(healthRegenerationStart);
         }
         StartCoroutine(PlayerDeath());
-        Debug.Log("Player Dead");
     }
 
     private IEnumerator HurtEffect()
@@ -109,6 +107,8 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator PlayerDeath()
     {
         playerStateMachine.playerAnimation.Play("Player_Dead");
+        playerStateMachine.audioSource.PlayOneShot(deathSound);
+        deathSound = null;
         //Camera Movement
         yield return new WaitForSeconds(3f);
         deadScreen.SetActive(true);

@@ -114,10 +114,10 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isAiming;
     public bool isPicking;
     public bool isBarrel;
-    private bool canPickKey = false;
+    public bool canPickKey = false;
     public bool canPickHerb = false;
     private bool inGrass;
-    private int keyPicked = 0;
+    public int keyPicked = 0;
     public float barrelIgniteTime;
     public int herbs;
     public TMP_Text forPickingHerb;
@@ -132,7 +132,9 @@ public class PlayerStateMachine : MonoBehaviour
     private MouseLook mouseLookRef;
     private PlayerInput playerInputRef;
     private Barrel barrelRef;
+    [HideInInspector] public CapsuleCollider playerCollider;
     public Image healthPickUpEffect;
+    public float rayDistance;
     #endregion
 
     private void Awake()
@@ -155,6 +157,7 @@ public class PlayerStateMachine : MonoBehaviour
         originalPosition = playerCamera.transform.localPosition.y;
         throwingRocks = GetComponent<ThrowingRocks>();
         playerRB = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<CapsuleCollider>();
         playerAnimation = GetComponent<Animator>();
 
         mouseLookRef = FindObjectOfType<MouseLook>();

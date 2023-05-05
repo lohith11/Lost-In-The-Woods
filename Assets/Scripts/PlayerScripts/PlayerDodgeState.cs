@@ -41,18 +41,15 @@ public class PlayerDodgeState : PlayerBaseState
         playerStateMachine.canDodge = false;
         float startTime = Time.time;
 
-        Vector3 startPosition = playerStateMachine.transform.position;
-        Vector3 dodgeDirection = (playerStateMachine.transform.right * playerStateMachine.playerInput.x) * playerStateMachine.dodgeSpeed + (playerStateMachine.transform.forward * playerStateMachine.playerInput.y) * playerStateMachine.dodgeSpeed;
-        Vector3 dodgeTarget = playerStateMachine.transform.position + dodgeDirection * playerStateMachine.dodgeDistance;
-
+        Vector3 dodgeDirection = (playerStateMachine.transform.right * playerStateMachine.playerInput.x) + (playerStateMachine.transform.forward * playerStateMachine.playerInput.y);
+        float t = 0f;
         while (Time.time < startTime + playerStateMachine.dodgeDuration)
         {
-            float t = (Time.time - startTime) / playerStateMachine.dodgeDuration;
-            playerStateMachine.transform.position = Vector3.Lerp(startPosition, dodgeTarget, t);
+            t = (Time.time - startTime) / playerStateMachine.dodgeDuration;
+            playerStateMachine.playerRB.velocity = dodgeDirection * playerStateMachine.dodgeSpeed;/*Vector3.Lerp(playerStateMachine.playerRB.velocity, dodgeDirection * playerStateMachine.dodgeSpeed, t);*/
             yield return null;
         }
 
-        playerStateMachine.transform.position = dodgeTarget;
         CheckChangeState();
         yield return new WaitForSeconds(playerStateMachine.dodgeCooldown);
         playerStateMachine.canDodge = true;

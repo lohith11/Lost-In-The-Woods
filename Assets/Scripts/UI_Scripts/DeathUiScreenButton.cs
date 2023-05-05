@@ -23,7 +23,7 @@ public class DeathUiScreenButton : MonoBehaviour
     {
         if(playerHealthRef != null)
         {
-            SceneManager.LoadScene("Chapter 2");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
