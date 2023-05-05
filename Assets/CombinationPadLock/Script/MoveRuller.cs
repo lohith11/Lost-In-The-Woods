@@ -18,8 +18,8 @@ public class MoveRuller : MonoBehaviour
     private int _numberRuller = 0;
 
     private bool _isActveEmission = false;
-
-
+    public GameObject playerMainCamera;
+    public GameObject lockCamera;
     void Awake()
     {
         _lockPassword = FindObjectOfType<PadLockPassword>();
@@ -127,7 +127,12 @@ public class MoveRuller : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerStateMachine>().EnterLockRegion(this);
+            if (other.GetComponent<PlayerStateMachine>() != null)
+            {
+                other.GetComponent<PlayerStateMachine>().EnterLockRegion(this);
+            }
+            playerMainCamera.SetActive(false);
+            lockCamera.SetActive(true);
         }
     }
 
@@ -135,7 +140,12 @@ public class MoveRuller : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerStateMachine>().ExitLockRegion(this);
+            if(other.GetComponent<PlayerStateMachine>()!=null)
+            {
+                other.GetComponent<PlayerStateMachine>().ExitLockRegion(this);
+            }
+            playerMainCamera.SetActive(true);
+            lockCamera.SetActive(false);
         }
     }
     #endregion
