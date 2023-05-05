@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         playerStateMachine = GetComponent<PlayerStateMachine>();
         Health = maxHealth;
         baseHealth = maxHealth;
+        BlindBrute.bossDamage += TakeDamage;
     }
 
     private void UpdateHealth()
@@ -57,6 +58,10 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthRegenerationStart = StartCoroutine(HealthRegeneration());
+    }
+    public void TakeDamage(object sender , dealDamageEventArg e)
+    {
+        Health -= e.damage;
     }
 
     public void PlayerDead()
