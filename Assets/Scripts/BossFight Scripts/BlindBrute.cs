@@ -24,9 +24,12 @@ public class BlindBrute : MonoBehaviour
     public PlayerHealth playerHealth;
     public GameObject attackPoint;
 
+    public float minDistanceToPlayer;
+
     [Header("Parabolic jump")]
     [Space(5f)]
     //[SerializeField] Transform targetPosition;
+    public float tpRange;
     public float pounceHeight = 15f;
     public float pounceDuration = 3.0f;
     public Transform playerTpPoint;
@@ -54,14 +57,12 @@ public class BlindBrute : MonoBehaviour
         Debug.Log("The boss health is : " + health);
         if (Input.GetKeyDown(KeyCode.G))
         {
-            //AOEAttack();
             MoveAttack();
-            // PounceAttack();
         }
 
         agent.stoppingDistance = stoppingDistance;
-        // if(PlayerInRange)
-        //     transform.LookAt(playerStateMachine.transform.position);
+        if(PlayerInRange)
+            transform.LookAt(playerStateMachine.transform.position);
     }
 
     private void FixedUpdate()
@@ -93,8 +94,8 @@ public class BlindBrute : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.transform.position, attackRadius, targetMask);
         if (hitColliders.Length > 0)
         {
-            if (bossDamage != null)
-            {
+           // if (bossDamage != null)
+           // {
                 // bossDamage.Invoke(this, new dealDamageEventArg { damage = damage });
                 Debug.Log("The boss dealt damage");
                 PlayerHealth playerHealth = hitColliders[0].GetComponent<PlayerHealth>();
@@ -102,7 +103,7 @@ public class BlindBrute : MonoBehaviour
                 {
                     playerHealth.TakeDamage(damage);
                 }
-            }
+           // }
             if (playerHealth == null)
             {
                 Debug.Log("player not found");
@@ -115,7 +116,7 @@ public class BlindBrute : MonoBehaviour
     {
         bossAnimator.Play("Normal_Attack");
         DealDamage(slashDamage);
-
+        Debug.Log("Slash attack called");
     }
 
     public void AOEAttack()
@@ -130,6 +131,8 @@ public class BlindBrute : MonoBehaviour
                 if (brazierComponent != null)
                 {
                     brazierComponent.TurnOff();
+                    agent.stoppingDistance = 2f;
+                    DealDamage(69);
                 }
             }
         }
@@ -154,17 +157,22 @@ public class BlindBrute : MonoBehaviour
 
     private void ChasePlayer()
     {
-
+        Debug.Log("Chase function called");
+       Vector3 directionToPlayer = player.transform.position - transform.position;
+       float distanceToMove = Mathf.Max(directionToPlayer.magnitude - minDistanceToPlayer , 0f);
+       Vector3 targetPosition = transform.position + directionToPlayer.normalized * distanceToMove;
+       agent.SetDestination(targetPosition);
     }
 
     private void PounceAttack()
     {
         Vector3 startPosition = transform.position;
         float startTime = Time.time;
-        StartCoroutine(PounceCoroutine(startPosition, startTime, playerTpPoint.transform));
+        Vector3 randomPoint = player.transform.position + UnityEngine.Random.insideUnitSphere * tpRange;
+        StartCoroutine(PounceCoroutine(startPosition, startTime, randomPoint));
     }
 
-    IEnumerator PounceCoroutine(Vector3 startPosition, float startTime, Transform targetPosition)
+    IEnumerator PounceCoroutine(Vector3 startPosition, float startTime, Vector3 targetPosition)
     {
         float timeElapsed = 0.0f;
 
@@ -172,13 +180,13 @@ public class BlindBrute : MonoBehaviour
         {
             float normalizedTime = timeElapsed / pounceDuration;
             float parabolicTime = 1 - 4 * (normalizedTime - 0.5f) * (normalizedTime - 0.5f);
-            transform.position = Vector3.Lerp(startPosition, targetPosition.position, normalizedTime) + Vector3.up * parabolicTime * pounceHeight;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, normalizedTime) + Vector3.up * parabolicTime * pounceHeight;
 
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = targetPosition.position;
+        transform.position = targetPosition;
     }
 
     private void FieldOfViewCheck()
