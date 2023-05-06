@@ -80458,9 +80458,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.8
-    functionName: SlashAttack
+    functionName: DealDamage
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 20
     intParameter: 0
     messageOptions: 0

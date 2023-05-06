@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using TMPro;
 using UnityEngine.ProBuilder.Shapes;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 public class EnemyStateManager : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class EnemyStateManager : MonoBehaviour
     public float angle;
     public GameObject playerRef;
     public LayerMask targetMask, obstructionMask;
-    public bool PlayerInRange { get; private set; }
+    [ShowInInspector]public bool PlayerInRange { get; private set; }
 
     [Space(10)]
 

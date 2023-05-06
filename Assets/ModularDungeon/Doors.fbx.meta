@@ -1,49 +1,9 @@
 fileFormatVersion: 2
-guid: 9cbaf25086a17cd42a902930a0568483
+guid: 3ec0db7115402b04983b01686c513250
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door1Shader
-    second: {fileID: 2100000, guid: 40c818074c69fef46abaa28d7ac02925, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door2Shader
-    second: {fileID: 2100000, guid: 61d0126d140c61a488cbdf32bdf4d2bd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door3Shader
-    second: {fileID: 2100000, guid: c03d234fc73a3194e917b91a9583f394, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door4Shader
-    second: {fileID: 2100000, guid: 67d1271edf8d25246a53872d52d70737, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door5Shader
-    second: {fileID: 2100000, guid: b1721fa07afede84c8a153634f10f0af, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Stone2Shader
-    second: {fileID: 2100000, guid: eadff9f33f99502479baa3ab806a7dcb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: StoneShader
-    second: {fileID: 2100000, guid: caef25f83215db34ca85cb3bc4252db8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: VaultStoneShader
-    second: {fileID: 2100000, guid: 3fa40c5b4d18b594bb67dad0123a61e6, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: 471910a42e73879458b953bb6c83055b
+guid: 1e2c635b54028484091698f1cf5fb88f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CandleShader
-    second: {fileID: 2100000, guid: 4c3d4ab2dcd14034a841419f917a1545, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LightsAShader
-    second: {fileID: 2100000, guid: d3db83b58aad5cd4cb00be996102fbfa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: LightsBShader
-    second: {fileID: 2100000, guid: cd582fe4ae9d58e4b92ef1fb5f70cf23, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

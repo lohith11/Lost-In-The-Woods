@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: 6945333d61bdd7947aa155c3bb49911f
+guid: e80c13c1f408def409ca887473ab0bdb
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Barrel01Mat
-    second: {fileID: 2100000, guid: d83c31bfd717f834991d95ce4bd5a4a6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Barrel02Mat
-    second: {fileID: 2100000, guid: 17507c07301e3524d912fb5ae15ea89d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Barrel03Mat
-    second: {fileID: 2100000, guid: 7256a95ec12f6684f9c082ff512a06f3, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

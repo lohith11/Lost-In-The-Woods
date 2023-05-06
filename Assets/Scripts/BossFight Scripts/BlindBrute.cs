@@ -36,16 +36,12 @@ public class BlindBrute : MonoBehaviour
     public float pounceDuration = 3.0f;
     public Transform playerTpPoint;
     [Space(2f)]
-
-
-
-
     public PlayerStateMachine playerStateMachine;
     public static EventHandler<dealDamageEventArg> bossDamage;
 
     void Start()
     {
-        player = GameObject.Find("Playerrr");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerStateMachine = player.GetComponent<PlayerStateMachine>();
         Barrel.explosiveDamage += TakeDamage;
         GetComponent<NavMeshAgent>();
@@ -61,7 +57,6 @@ public class BlindBrute : MonoBehaviour
         {
             MoveAttack();
         }
-
         agent.stoppingDistance = stoppingDistance;
         if (PlayerInRange)
             transform.LookAt(playerStateMachine.transform.position);
@@ -76,7 +71,7 @@ public class BlindBrute : MonoBehaviour
         }
         if (distanceToPlayer > attackRadius && PlayerInRange)
         {
-            bossAnimator.Play("Idle Anim");
+            //bossAnimator.Play("Idle Anim");
             ChasePlayer();
         }
     }
@@ -145,7 +140,7 @@ public class BlindBrute : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Debug.Log("Chase function called");
+        bossAnimator.Play("Walk");
         Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToMove = Mathf.Max(directionToPlayer.magnitude - minDistanceToPlayer, 0f);
         Vector3 targetPosition = transform.position + directionToPlayer.normalized * distanceToMove;

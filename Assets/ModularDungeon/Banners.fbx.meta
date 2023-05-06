@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: 7c6ce69499659d54581e77fe9aaaa233
+guid: 027b9c2e9d4364f4a9dc25d0a9f27e3a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BannerPoleShader
-    second: {fileID: 2100000, guid: 75aafdade4811ac4394405c61f2f4a8b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BannerShader
-    second: {fileID: 2100000, guid: 65d2b2b1f4bbef9478a18589c124e442, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
