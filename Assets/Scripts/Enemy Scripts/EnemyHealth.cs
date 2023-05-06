@@ -1,8 +1,9 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public static float health;
+    [ShowInInspector]public static float health = 100;
 
     void Awake()
     {
