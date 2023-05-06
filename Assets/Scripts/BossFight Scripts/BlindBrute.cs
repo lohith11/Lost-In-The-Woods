@@ -25,6 +25,8 @@ public class BlindBrute : MonoBehaviour
     public GameObject attackPoint;
 
     public float minDistanceToPlayer;
+    [SerializeField] bool canAttack = true;
+    [SerializeField] float attackCooldown;
 
     [Header("Parabolic jump")]
     [Space(5f)]
@@ -61,16 +63,16 @@ public class BlindBrute : MonoBehaviour
         }
 
         agent.stoppingDistance = stoppingDistance;
-        if(PlayerInRange)
+        if (PlayerInRange)
             transform.LookAt(playerStateMachine.transform.position);
     }
 
     private void FixedUpdate()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, playerStateMachine.transform.position);
-        if (PlayerInRange && distanceToPlayer < attackRadius)
+        if (distanceToPlayer < attackRadius)
         {
-            SlashAttack();
+            bossAnimator.Play("Normal_Attack");
         }
         if (distanceToPlayer > attackRadius && PlayerInRange)
         {
@@ -91,32 +93,18 @@ public class BlindBrute : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        Collider[] hitColliders = Physics.OverlapSphere(attackPoint.transform.position, attackRadius, targetMask);
-        if (hitColliders.Length > 0)
+        HashSet<Collider> hitColliders = new HashSet<Collider>();
+        Collider[] colliders = Physics.OverlapSphere(attackPoint.transform.position, attackRadius, targetMask);
+        foreach (Collider collider in colliders)
         {
-           // if (bossDamage != null)
-           // {
-                // bossDamage.Invoke(this, new dealDamageEventArg { damage = damage });
-                Debug.Log("The boss dealt damage");
-                PlayerHealth playerHealth = hitColliders[0].GetComponent<PlayerHealth>();
-                if (playerHealth != null)
-                {
-                    playerHealth.TakeDamage(damage);
-                }
-           // }
-            if (playerHealth == null)
+            if (!hitColliders.Contains(collider))
             {
-                Debug.Log("player not found");
+                hitColliders.Add(collider);
+                Debug.Log("The boss dealt damage");
+                bossDamage?.Invoke(this, new dealDamageEventArg { damage = damage });
             }
         }
 
-    }
-
-    private void SlashAttack()
-    {
-        bossAnimator.Play("Normal_Attack");
-        DealDamage(slashDamage);
-        Debug.Log("Slash attack called");
     }
 
     public void AOEAttack()
@@ -132,7 +120,7 @@ public class BlindBrute : MonoBehaviour
                 {
                     brazierComponent.TurnOff();
                     agent.stoppingDistance = 2f;
-                    DealDamage(69);
+                    DealDamage(30);
                 }
             }
         }
@@ -158,10 +146,10 @@ public class BlindBrute : MonoBehaviour
     private void ChasePlayer()
     {
         Debug.Log("Chase function called");
-       Vector3 directionToPlayer = player.transform.position - transform.position;
-       float distanceToMove = Mathf.Max(directionToPlayer.magnitude - minDistanceToPlayer , 0f);
-       Vector3 targetPosition = transform.position + directionToPlayer.normalized * distanceToMove;
-       agent.SetDestination(targetPosition);
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+        float distanceToMove = Mathf.Max(directionToPlayer.magnitude - minDistanceToPlayer, 0f);
+        Vector3 targetPosition = transform.position + directionToPlayer.normalized * distanceToMove;
+        agent.SetDestination(targetPosition);
     }
 
     private void PounceAttack()
