@@ -1,20 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class EnemyHealth : MonoBehaviour
 {
-   
-    [SerializeField] float health;
+    [ShowInInspector]public static float health = 100;
+
     void Awake()
     {
         RockDestroy.dealDamage += TakeDamage;
-    }
-
-    private void Update()
-    {
-       
     }
 
     private void TakeDamage(object sender, dealDamageEventArg e)

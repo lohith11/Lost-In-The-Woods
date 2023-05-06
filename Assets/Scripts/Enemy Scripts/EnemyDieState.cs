@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class EnemyDieState : EnemyBaseState
@@ -8,6 +7,7 @@ public class EnemyDieState : EnemyBaseState
     public override void EnterState()
     {
         AlertEnemies();
+        enemyStateManager.enemyAnimController.enabled = false;
     }
     public override void UpdateState()
     {
