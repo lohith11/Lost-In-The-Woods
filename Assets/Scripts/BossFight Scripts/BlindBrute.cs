@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -61,7 +60,7 @@ public class BlindBrute : MonoBehaviour
         }
 
         agent.stoppingDistance = stoppingDistance;
-        if(PlayerInRange)
+        if (PlayerInRange)
             transform.LookAt(playerStateMachine.transform.position);
     }
 
@@ -94,20 +93,23 @@ public class BlindBrute : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.transform.position, attackRadius, targetMask);
         if (hitColliders.Length > 0)
         {
-           // if (bossDamage != null)
-           // {
-                // bossDamage.Invoke(this, new dealDamageEventArg { damage = damage });
-                Debug.Log("The boss dealt damage");
-                PlayerHealth playerHealth = hitColliders[0].GetComponent<PlayerHealth>();
-                if (playerHealth != null)
-                {
-                    playerHealth.TakeDamage(damage);
-                }
-           // }
-            if (playerHealth == null)
+            // if (bossDamage != null)
+            // {
+            // bossDamage.Invoke(this, new dealDamageEventArg { damage = damage });
+            Debug.Log("The boss dealt damage");
+            for (int i = 0; i < hitColliders.Length - 1; i++)
             {
-                Debug.Log("player not found");
+                hitColliders[i].GetComponent<PlayerHealth>().TakeDamage(damage);
             }
+            //if (playerHealth != null)
+            //{
+            //    playerHealth.TakeDamage(damage);
+            //}
+            //// }
+            //if (playerHealth == null)
+            //{
+            //    Debug.Log("player not found");
+            //}
         }
 
     }
@@ -158,10 +160,10 @@ public class BlindBrute : MonoBehaviour
     private void ChasePlayer()
     {
         Debug.Log("Chase function called");
-       Vector3 directionToPlayer = player.transform.position - transform.position;
-       float distanceToMove = Mathf.Max(directionToPlayer.magnitude - minDistanceToPlayer , 0f);
-       Vector3 targetPosition = transform.position + directionToPlayer.normalized * distanceToMove;
-       agent.SetDestination(targetPosition);
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+        float distanceToMove = Mathf.Max(directionToPlayer.magnitude - minDistanceToPlayer, 0f);
+        Vector3 targetPosition = transform.position + directionToPlayer.normalized * distanceToMove;
+        agent.SetDestination(targetPosition);
     }
 
     private void PounceAttack()

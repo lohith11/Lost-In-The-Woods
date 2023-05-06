@@ -58,6 +58,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float playerCrouchSpeed;
     public bool crouchPressed;
     public GameObject crouchCollider;
+    public AudioClip crouchingAudio;
+    public AudioClip standiingAudio;
     [Space(10)]
 
     //PlayerCamera Shakes

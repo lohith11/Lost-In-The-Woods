@@ -14,6 +14,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void EnterState()
     {
+        playerStateMachine.audioSource.PlayOneShot(playerStateMachine.crouchingAudio);
         CrouchMoveX = Animator.StringToHash("CrouchMoveX");
         CrouchMoveY = Animator.StringToHash("CrouchMoveY");
         playerStateMachine.playerAnimation.CrossFade("Player_Crouch", 0.05f);
@@ -28,7 +29,7 @@ public class PlayerCrouchState : PlayerBaseState
         if (Mathf.Abs(playerStateMachine.crouchHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.crouchHeight, 0.1f);
-            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.3f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0f);
             playerStateMachine.originalPosition = currentPosition;
         }
     }
@@ -65,11 +66,13 @@ public class PlayerCrouchState : PlayerBaseState
         {
             if (playerStateMachine.playerInput.magnitude == 0)
             {
+                playerStateMachine.audioSource.PlayOneShot(playerStateMachine.standiingAudio);
                 playerStateMachine.SwitchState(playerStateMachine.playerIdleState);
             }
 
             else if (playerStateMachine.playerInput.magnitude != 0)
             {
+                playerStateMachine.audioSource.PlayOneShot(playerStateMachine.standiingAudio);
                 playerStateMachine.SwitchState(playerStateMachine.playerMovingState);
             }
         }

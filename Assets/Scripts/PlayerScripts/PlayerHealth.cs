@@ -26,7 +26,10 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         isPlayerDead = false;
-        deadScreen.SetActive(false);
+        if(deadScreen!= null)
+        {
+            deadScreen.SetActive(false);
+        }
         playerAudioSource = GetComponent<AudioSource>();
         playerStateMachine = GetComponent<PlayerStateMachine>();
         Health = maxHealth;
@@ -46,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Took damage");
         Health -= damage;
         StartCoroutine(HurtEffect());
-        //UpdateHealth();
+        UpdateHealth();
         if (Health <= 0)
         {
             isPlayerDead = true;
@@ -95,6 +98,7 @@ public class PlayerHealth : MonoBehaviour
         while (Health < maxHealth)
         {
             Health += healthRegenerationValue;
+            UpdateHealth();
             if (Health > maxHealth)
             {
                 Health = maxHealth;
