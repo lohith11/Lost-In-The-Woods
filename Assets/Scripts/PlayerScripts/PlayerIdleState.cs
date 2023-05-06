@@ -5,18 +5,20 @@ using UnityEngine;
 public class PlayerIdleState : PlayerBaseState
 {
     private float currentPosition;
+    private float heartbeatvolume;
     public PlayerIdleState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
     public override void EnterState()
     {
-        //Debug.Log("Entered IdleState");
+
         currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
         playerStateMachine.playerAnimation.CrossFade("Player_Idle", 0.1f);
     }
 
     public override void UpdateState()
     {
-        if(Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
+        RunningStamina();
+        if (Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.standingHeight, 0.1f);
             playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0f);
@@ -32,7 +34,18 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void ExitState() 
     {
-       // Debug.Log("Exited IdleState");
+        
+    }
+
+    public void RunningStamina()
+    {
+        playerStateMachine.stamina += playerStateMachine.staminaDepletionRate * Time.deltaTime;
+
+        heartbeatvolume = 1f - (playerStateMachine.stamina / 100f);
+        playerStateMachine.heartBeat.GetComponent<AudioSource>().volume = heartbeatvolume;
+
+        playerStateMachine.stamina = Mathf.Clamp(playerStateMachine.stamina, 0f, 100f);
+        playerStateMachine.staminaBar.fillAmount = playerStateMachine.stamina / 100f;
     }
 
     public override void CheckChangeState()
