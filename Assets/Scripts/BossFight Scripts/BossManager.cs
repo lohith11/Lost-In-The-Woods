@@ -38,7 +38,6 @@ public class BossManager : MonoBehaviour
 
     private void StartBattle()
     {
-        //boss.DefaultValues();
         foreach (Brazier brazier in braziers)
         {
             brazier.TurnOff();

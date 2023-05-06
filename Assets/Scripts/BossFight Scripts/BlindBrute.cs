@@ -6,11 +6,10 @@ using UnityEngine.AI;
 
 public class BlindBrute : MonoBehaviour
 {
-
+    public AudioSource audioSource;
     [SerializeField] float maxHealth;
     public float health;
     [SerializeField] float slashDamage;
-    [SerializeField] float range;
     public NavMeshAgent agent;
     public Animator bossAnimator;
     public Transform[] teleportPoints;
@@ -34,6 +33,7 @@ public class BlindBrute : MonoBehaviour
     public float pounceHeight = 15f;
     public float pounceDuration = 3.0f;
     public Transform playerTpPoint;
+    [SerializeField] AudioClip[] audioClips;
     [Space(2f)]
 
     [Header("Audio detection")]
@@ -60,6 +60,8 @@ public class BlindBrute : MonoBehaviour
         detectionCollider = GetComponent<SphereCollider>();
         detectionCollider.radius = walkingDetectionRadius;
         detectionCollider.isTrigger = true;
+
+        audioSource.PlayOneShot(audioClips[0]);
     }
 
     void Update()
@@ -117,7 +119,7 @@ public class BlindBrute : MonoBehaviour
     public void AOEAttack()
     {
         bossAnimator.Play("Aoe_Attack");
-        Collider[] braziers = Physics.OverlapSphere(transform.position, range);
+        Collider[] braziers = Physics.OverlapSphere(transform.position, radius);
         if (braziers.Length > 0)
         {
             foreach (Collider brazier in braziers)
@@ -150,6 +152,14 @@ public class BlindBrute : MonoBehaviour
         PounceAttack();
     }
 
+    private void PounceAttack()
+    {
+        Vector3 startPosition = transform.position;
+        float startTime = Time.time;
+        Vector3 randomPoint = player.transform.position + UnityEngine.Random.insideUnitSphere * tpRange;
+        StartCoroutine(PounceCoroutine(startPosition, startTime, randomPoint));
+    }
+
     private void ChasePlayer()
     {
         bossAnimator.Play("Walk");
@@ -159,13 +169,7 @@ public class BlindBrute : MonoBehaviour
         agent.SetDestination(targetPosition);
     }
 
-    private void PounceAttack()
-    {
-        Vector3 startPosition = transform.position;
-        float startTime = Time.time;
-        Vector3 randomPoint = player.transform.position + UnityEngine.Random.insideUnitSphere * tpRange;
-        StartCoroutine(PounceCoroutine(startPosition, startTime, randomPoint));
-    }
+    
 
     IEnumerator PounceCoroutine(Vector3 startPosition, float startTime, Vector3 targetPosition)
     {
