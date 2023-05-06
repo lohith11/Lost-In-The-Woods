@@ -22,6 +22,7 @@ public class BlindBrute : MonoBehaviour
     public GameObject player;
     public PlayerHealth playerHealth;
     public GameObject attackPoint;
+    public float EnemySpeed;
 
     public float minDistanceToPlayer;
     [SerializeField] bool canAttack = true;
@@ -64,6 +65,7 @@ public class BlindBrute : MonoBehaviour
         detectionCollider.isTrigger = true;
 
         audioSource.PlayOneShot(audioClips[0]);
+        agent.speed = EnemySpeed;
     }
 
     void Update()
