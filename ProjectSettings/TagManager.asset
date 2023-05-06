@@ -18,6 +18,8 @@ TagManager:
   - Barrel
   - MainGate
   - Lock
+  - ChurchDoorClose
+  - ChurchBackDoor
   layers:
   - Default
   - TransparentFX

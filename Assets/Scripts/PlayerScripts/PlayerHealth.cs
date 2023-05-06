@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     private static bool isPlayerDead;
     private PlayerStateMachine playerStateMachine;
     public AudioClip deathSound;
+    public AudioClip heartBeat;
     private void Start()
     {
         isPlayerDead = false;
@@ -39,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateHealth()
     {
+
         Color splatterAlpha = bloodSplatter.color;
         splatterAlpha.a = 1 - (Health / maxHealth);
         bloodSplatter.color = splatterAlpha;
@@ -46,7 +48,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("Took damage");
         Health -= damage;
         StartCoroutine(HurtEffect());
         UpdateHealth();
@@ -64,11 +65,10 @@ public class PlayerHealth : MonoBehaviour
     }
     public void BossDamage(object sender, dealDamageEventArg e)
     {
-        Debug.Log("Boss Damage called");
         Health -= e.damage;
 
         StartCoroutine(HurtEffect());
-        //UpdateHealth();
+        UpdateHealth();
         if (Health <= 0)
         {
             isPlayerDead = true;

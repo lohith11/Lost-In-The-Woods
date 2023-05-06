@@ -28,7 +28,10 @@ public class MaingateOpening : MonoBehaviour
             {
                 if(playerStateMachine.canPickKey)
                 {
-                    anim.Play("MainGateAnimation");
+                    if(anim!=null)
+                    {
+                        anim.Play("MainGateAnimation");
+                    }
                 }
             }
         }
@@ -39,6 +42,7 @@ public class MaingateOpening : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             keyNotPickedText.enabled = false;
+            anim = null;
         }
     }
 }
