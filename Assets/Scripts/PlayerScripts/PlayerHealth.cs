@@ -64,7 +64,6 @@ public class PlayerHealth : MonoBehaviour
     }
     public void BossDamage(object sender, dealDamageEventArg e)
     {
-        Debug.Log("Boss Damage called");
         Health -= e.damage;
 
         StartCoroutine(HurtEffect());
