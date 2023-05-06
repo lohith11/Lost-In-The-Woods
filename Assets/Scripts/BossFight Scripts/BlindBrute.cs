@@ -30,11 +30,19 @@ public class BlindBrute : MonoBehaviour
 
     [Header("Parabolic jump")]
     [Space(5f)]
-    //[SerializeField] Transform targetPosition;
     public float tpRange;
     public float pounceHeight = 15f;
     public float pounceDuration = 3.0f;
     public Transform playerTpPoint;
+    [Space(2f)]
+
+    [Header("Audio detection")]
+    [Space(5f)]
+
+    public SphereCollider detectionCollider;
+    public float walkingDetectionRadius;
+    public float runningDetectionRadius;
+
     [Space(2f)]
     public PlayerStateMachine playerStateMachine;
     public static EventHandler<dealDamageEventArg> bossDamage;
@@ -48,6 +56,10 @@ public class BlindBrute : MonoBehaviour
         GetComponent<Animator>();
 
         StartCoroutine(FOVRoutine());
+
+        detectionCollider = GetComponent<SphereCollider>();
+        detectionCollider.radius = walkingDetectionRadius;
+        detectionCollider.isTrigger = true;
     }
 
     void Update()
@@ -71,7 +83,7 @@ public class BlindBrute : MonoBehaviour
         }
         if (distanceToPlayer > attackRadius && PlayerInRange)
         {
-            //bossAnimator.Play("Idle Anim");
+
             ChasePlayer();
         }
     }
@@ -208,64 +220,64 @@ public class BlindBrute : MonoBehaviour
         }
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("Player"))
-    //     {
-    //         AudioSource audioSource = other.GetComponent<AudioSource>();
-    //         if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
-    //         {
-    //             if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
-    //             {
-    //                 PlayerInRange = true;
-    //                 detectionCollider.radius = runningDetectionRadius;
-    //             }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AudioSource audioSource = other.GetComponent<AudioSource>();
+            if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
+            {
+                if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = runningDetectionRadius;
+                }
 
-    //             else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
-    //             {
-    //                 PlayerInRange = true;
-    //                 detectionCollider.radius = walkingDetectionRadius;
-    //             }
-    //             else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
-    //             {
-    //                 detectionCollider.radius = walkingDetectionRadius;
-    //             }
-    //         }
-    //     }
-    // }
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("Player"))
-    //     {
-    //         AudioSource audioSource = other.GetComponent<AudioSource>();
-    //         if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
-    //         {
-    //             if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
-    //             {
-    //                 PlayerInRange = true;
-    //                 detectionCollider.radius = runningDetectionRadius;
-    //             }
+                else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+                else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
+                {
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AudioSource audioSource = other.GetComponent<AudioSource>();
+            if (audioSource.isPlaying && playerStateMachine.currentState != playerStateMachine.playerCrouchState)
+            {
+                if (playerStateMachine.currentState == playerStateMachine.playerRunningState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = runningDetectionRadius;
+                }
 
-    //             else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
-    //             {
-    //                 PlayerInRange = true;
-    //                 detectionCollider.radius = walkingDetectionRadius;
-    //             }
+                else if (playerStateMachine.currentState == playerStateMachine.playerMovingState)
+                {
+                    PlayerInRange = true;
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
 
-    //             else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
-    //             {
-    //                 detectionCollider.radius = walkingDetectionRadius;
-    //             }
-    //         }
-    //     }
-    // }
+                else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
+                {
+                    detectionCollider.radius = walkingDetectionRadius;
+                }
+            }
+        }
+    }
 
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if (other.gameObject.CompareTag("Player"))
-    //     {
-    //         PlayerInRange = false;
-    //         Debug.Log("Ontrigger Exited");
-    //     }
-    // }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerInRange = false;
+            Debug.Log("Ontrigger Exited");
+        }
+    }
 }
