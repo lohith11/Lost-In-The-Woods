@@ -10,11 +10,6 @@ using Sirenix.OdinInspector;
 
 public class EnemyStateManager : MonoBehaviour
 {
-    //todo : alert nearby enemies when an enemy dies
-    //todo : change speed of enemy based on the state that they are in
-    //todo : make the enemy two shot for the body and one shot for the head
-    //todo : change enemy to alert state when they are hit with the rock in the body (AKA go for the head!)
-
     //* singleton
     public static EnemyStateManager manager;
 
@@ -165,6 +160,11 @@ public class EnemyStateManager : MonoBehaviour
         if (PlayerInRange)
         {
             transform.LookAt(transform.position, playerRef.transform.position);
+        }
+        if(EnemyHealth.health <= 0)
+        {
+            EnemyHealth.health = 0;
+            switchState(DieState);
         }
     }
 

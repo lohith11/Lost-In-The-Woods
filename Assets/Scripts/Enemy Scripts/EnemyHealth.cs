@@ -1,20 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-   
-    [SerializeField] float health;
+    public static float health;
+
     void Awake()
     {
         RockDestroy.dealDamage += TakeDamage;
-    }
-
-    private void Update()
-    {
-       
     }
 
     private void TakeDamage(object sender, dealDamageEventArg e)
