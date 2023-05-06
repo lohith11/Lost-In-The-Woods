@@ -51,19 +51,15 @@ public class RockDestroy : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.gameObject.name == "mixamorig:Head")
+        if (collision.gameObject.name == "mixamorig:Head")
         {
             Debug.Log("Entering EnemyHead");
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
             Destroy(this.gameObject);
         }
 
-        if (other.gameObject.name == "UngaBunga_Boi")
+        if (collision.gameObject.name == "UngaBunga_Boi")
         {
             Debug.Log("Entering EnemyBody");
             dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
