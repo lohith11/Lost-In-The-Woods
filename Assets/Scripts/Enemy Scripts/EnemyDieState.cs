@@ -8,6 +8,7 @@ public class EnemyDieState : EnemyBaseState
     public override void EnterState()
     {
         AlertEnemies();
+        enemyStateManager.enemyAnimController.enabled = false;
     }
     public override void UpdateState()
     {
