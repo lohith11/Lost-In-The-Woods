@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class ThrowingRocks : MonoBehaviour
 {
@@ -32,10 +33,10 @@ public class ThrowingRocks : MonoBehaviour
 
     public float distance;
     public LayerMask enemyLayer;
-    public LayerMask enemyHeadLayer;
     private RaycastHit hit;
     public float aimSpeed;
 
+    public GameObject crossHair;
     private Vector3 newPoint;
     public AudioClip rockPickingSound;
     private GameObject rockInRange;
@@ -43,6 +44,7 @@ public class ThrowingRocks : MonoBehaviour
     public LayerMask CollidableLayers;
     void Start()
     {
+        crossHair.SetActive(false);
         lineRendererEndPoint.SetActive(false);
         readyToThrow = true;
         playerStateMachine = GetComponent<PlayerStateMachine>();
@@ -64,6 +66,7 @@ public class ThrowingRocks : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
+            crossHair.SetActive(false);
             lineRendererEndPoint.SetActive(false);
         }
 
@@ -111,6 +114,7 @@ public class ThrowingRocks : MonoBehaviour
 
     private void Projectile()
     {
+        crossHair.SetActive(true);
         lineRendererEndPoint.SetActive(true);
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyLayer))
         {
@@ -147,6 +151,7 @@ public class ThrowingRocks : MonoBehaviour
 
     public void RockPicking()
     {
+        playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
         if(canPickUp)
         {
             totalThrows++;
@@ -161,10 +166,6 @@ public class ThrowingRocks : MonoBehaviour
     {
         if(other.CompareTag("Rock"))
         {
-            if(totalThrows != 0)
-            {
-                playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
-            }
             pressRocksText.enabled = true;
             canPickUp = true;
             playerStateMachine.playerControls.Player.Picking.performed += playerStateMachine.PickingRock;

@@ -40,7 +40,7 @@ public class PlayerRunningState : PlayerBaseState
 
     public override void CheckChangeState()
     {
-        if(!playerStateMachine.isRunning || playerStateMachine.stamina <= 0) 
+        if(!playerStateMachine.isRunning || playerStateMachine.stamina <= 0 || playerStateMachine.playerInput.magnitude == 0) 
         {
             if(playerStateMachine.playerInput.magnitude != 0)
             {
