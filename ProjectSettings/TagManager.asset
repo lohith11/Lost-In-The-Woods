@@ -18,8 +18,7 @@ TagManager:
   - Barrel
   - MainGate
   - Lock
-  - ChurchDoorClose
-  - ChurchBackDoor
+  - OilPot
   layers:
   - Default
   - TransparentFX

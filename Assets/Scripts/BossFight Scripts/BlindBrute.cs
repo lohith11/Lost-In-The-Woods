@@ -46,12 +46,14 @@ public class BlindBrute : MonoBehaviour
     [Space(2f)]
     public PlayerStateMachine playerStateMachine;
     public static EventHandler<dealDamageEventArg> bossDamage;
+    public bool isOiled;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStateMachine = player.GetComponent<PlayerStateMachine>();
         Barrel.explosiveDamage += TakeDamage;
+        BossManager.rammingDamage += TakeDamage;
         GetComponent<NavMeshAgent>();
         GetComponent<Animator>();
 
@@ -66,7 +68,6 @@ public class BlindBrute : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("The boss health is : " + health);
         if (Input.GetKeyDown(KeyCode.G))
         {
             MoveAttack();
@@ -97,8 +98,10 @@ public class BlindBrute : MonoBehaviour
 
     public void TakeDamage(object sender, dealDamageEventArg e)
     {
+        Debug.Log("Take damage function called");
         health -= e.damage;
     }
+
 
     public void DealDamage(float damage)
     {
@@ -109,7 +112,6 @@ public class BlindBrute : MonoBehaviour
             if (!hitColliders.Contains(collider))
             {
                 hitColliders.Add(collider);
-                Debug.Log("The boss dealt damage");
                 bossDamage?.Invoke(this, new dealDamageEventArg { damage = damage });
             }
         }
@@ -118,6 +120,7 @@ public class BlindBrute : MonoBehaviour
 
     public void AOEAttack()
     {
+        Debug.Log("AOE attack called");
         bossAnimator.Play("Aoe_Attack");
         Collider[] braziers = Physics.OverlapSphere(transform.position, radius);
         if (braziers.Length > 0)
@@ -247,6 +250,10 @@ public class BlindBrute : MonoBehaviour
                     detectionCollider.radius = walkingDetectionRadius;
                 }
             }
+        }
+        if(other.gameObject.CompareTag("OilPot"))
+        {
+            isOiled = true;
         }
     }
     private void OnTriggerStay(Collider other)
