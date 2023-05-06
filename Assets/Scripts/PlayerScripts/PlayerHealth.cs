@@ -23,7 +23,6 @@ public class PlayerHealth : MonoBehaviour
     private static bool isPlayerDead;
     private PlayerStateMachine playerStateMachine;
     public AudioClip deathSound;
-    public AudioClip heartBeat;
     private void Start()
     {
         isPlayerDead = false;

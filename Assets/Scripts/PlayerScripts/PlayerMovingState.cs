@@ -6,6 +6,7 @@ public class PlayerMovingState : PlayerBaseState
     private float currentPosition;
     private int moveX;
     private int moveY;
+    private float heartbeatvolume;
 
     public PlayerMovingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
@@ -18,6 +19,7 @@ public class PlayerMovingState : PlayerBaseState
     }
     public override void UpdateState()
     {
+        RunningStamina();
         CheckChangeState();
         if (Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
         {
@@ -39,6 +41,18 @@ public class PlayerMovingState : PlayerBaseState
     {
         playerStateMachine.playerAnimation.SetBool("isMoving", false);
     }
+
+    public void RunningStamina()
+    {
+        playerStateMachine.stamina += playerStateMachine.staminaDepletionRate * Time.deltaTime;
+
+        heartbeatvolume = 1f - (playerStateMachine.stamina / 100f);
+        playerStateMachine.heartBeat.GetComponent<AudioSource>().volume = heartbeatvolume;
+
+        playerStateMachine.stamina = Mathf.Clamp(playerStateMachine.stamina, 0f, 100f);
+        playerStateMachine.staminaBar.fillAmount = playerStateMachine.stamina / 100f;
+    }
+
     public override void CheckChangeState()
     {
         if(playerStateMachine.playerInput.magnitude == 0)

@@ -47,7 +47,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float staminaRegenerationRate;
     public Image staminaBar;
     public float FAVdelay;
-
+    public GameObject heartBeat;
     [Range(60, 120)]
     public float FOV;
     [Space(10)]
@@ -309,8 +309,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Update()
     {
-        RunningStaminaBar();
-
         CameraShake();
         Step();
         currentState.UpdateState();
@@ -552,22 +550,6 @@ public class PlayerStateMachine : MonoBehaviour
         moveRuller?.MoveRullerLeft();
     }
     #endregion
-
-    private void RunningStaminaBar()
-    {
-        if (currentState == playerRunningState)
-        {
-            staminaBar.enabled = true;
-            stamina -= staminaDepletionRate * Time.deltaTime;
-        }
-        else
-        {
-            stamina += staminaRegenerationRate * Time.deltaTime;
-            staminaBar.enabled = false;
-        }
-        stamina = Mathf.Clamp(stamina, 0f, 100f);
-        staminaBar.fillAmount = stamina / 100f;
-    }
 
     private void CameraShake()
     {

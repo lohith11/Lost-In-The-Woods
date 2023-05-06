@@ -9,6 +9,7 @@ public class PlayerCrouchState : PlayerBaseState
     private int CrouchMoveX;
     private int CrouchMoveY;
     private float currentPosition;
+    private float heartbeatvolume;
 
     public PlayerCrouchState(PlayerStateMachine playerStateMachine) : base(playerStateMachine) { }
 
@@ -25,6 +26,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void UpdateState()
     {
+        RunningStamina();
         CheckChangeState();
         if (Mathf.Abs(playerStateMachine.crouchHeight - currentPosition) > 0.05f)
         {
@@ -56,8 +58,17 @@ public class PlayerCrouchState : PlayerBaseState
     {
         playerStateMachine.crouchCollider.SetActive(true);
         playerStateMachine.throwingRocks.attackpoint.localPosition = new Vector3(0.27f, 1.6f, 0.27f);
-        //playerStateMachine.GetComponent<CapsuleCollider>().center = new Vector3(0f, 0.9f, 0f);
-        //playerStateMachine.GetComponent<CapsuleCollider>().height = 1.85f;
+    }
+
+    public void RunningStamina()
+    {
+        playerStateMachine.stamina += playerStateMachine.staminaDepletionRate * Time.deltaTime;
+
+        heartbeatvolume = 1f - (playerStateMachine.stamina / 100f);
+        playerStateMachine.heartBeat.GetComponent<AudioSource>().volume = heartbeatvolume;
+
+        playerStateMachine.stamina = Mathf.Clamp(playerStateMachine.stamina, 0f, 100f);
+        playerStateMachine.staminaBar.fillAmount = playerStateMachine.stamina / 100f;
     }
 
     public override void CheckChangeState()
