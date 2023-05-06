@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    public static event EventHandler<dealDamageEventArg> rammingDamage;
     public enum Stage
     {
         WaitingToStart,
@@ -42,6 +44,8 @@ public class BossManager : MonoBehaviour
         {
             brazier.TurnOff();
         }
+
+
     }
 
     public void BossBattle_OnDamaged(object sender, dealDamageEventArg e)
@@ -85,6 +89,7 @@ public class BossManager : MonoBehaviour
                 RamTowardsBrazier();
                 break;
             case Stage.Stage_3:
+                Debug.Log("Stage 3 entered");
                 boss.AOEAttack();
                 break;
         }
@@ -92,13 +97,23 @@ public class BossManager : MonoBehaviour
 
     public void RamTowardsBrazier()
     {
+        Debug.Log("Raming towards brazier");
         boss.agent.speed = ramSpeed;
         boss.agent.acceleration = ramAcceleration;
         boss.bossAnimator.Play("Ram");
-        int targetBrazier = Random.Range(1, braziers.Length - 1);
+        int targetBrazier = UnityEngine.Random.Range(1, braziers.Length - 1);
         boss.agent.SetDestination(braziers[targetBrazier].transform.position);
         braziers[targetBrazier].TurnOff();
-        Debug.Log("Raming towards brazier");
+        if (boss.isOiled)
+        {
+            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
+        }
+        else
+        {
+            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 70 });
+        }
+
+
     }
 
 }
