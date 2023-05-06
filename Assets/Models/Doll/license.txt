@@ -1,0 +1,11 @@
+Model Information:
+* title:	Horror Doll
+* source:	https://sketchfab.com/3d-models/horror-doll-5c9c1294796144249021535eea25aef2
+* author:	Lukas Bobor (https://sketchfab.com/LukasBobor)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Horror Doll" (https://sketchfab.com/3d-models/horror-doll-5c9c1294796144249021535eea25aef2) by Lukas Bobor (https://sketchfab.com/LukasBobor) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
