@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         playerStateMachine = GetComponent<PlayerStateMachine>();
         Health = maxHealth;
         baseHealth = maxHealth;
-        BlindBrute.bossDamage += TakeDamage;
+        BlindBrute.bossDamage += BossDamage;
     }
 
     private void UpdateHealth()
@@ -62,9 +62,24 @@ public class PlayerHealth : MonoBehaviour
 
         healthRegenerationStart = StartCoroutine(HealthRegeneration());
     }
-    public void TakeDamage(object sender , dealDamageEventArg e)
+    public void BossDamage(object sender, dealDamageEventArg e)
     {
+        Debug.Log("Boss Damage called");
         Health -= e.damage;
+
+        StartCoroutine(HurtEffect());
+        //UpdateHealth();
+        if (Health <= 0)
+        {
+            isPlayerDead = true;
+            PlayerDead();
+        }
+        else if (healthRegenerationStart != null)
+        {
+            StopCoroutine(healthRegenerationStart);
+        }
+
+        healthRegenerationStart = StartCoroutine(HealthRegeneration());
     }
 
     public void PlayerDead()
