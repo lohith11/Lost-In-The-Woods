@@ -16,15 +16,15 @@ public class EnemyAttackState : EnemyBaseState
         {
             enemyStateManager.switchState(enemyStateManager.ChaseState);
         }
-        else
+        else if (distanceToPlayer < enemyStateManager.attackRadius)
         {
-           // enemyStateManager.AttackPlayer();
+            enemyStateManager.enemyAgent.speed = 0f;
         }
     }
 
     public override void ExitState()
     {
-
+        enemyStateManager.enemyAgent.speed = enemyStateManager.alertSpeed;
     }
 
 }

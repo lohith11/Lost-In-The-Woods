@@ -156,6 +156,7 @@ public class EnemyStateManager : MonoBehaviour
 
     void Update()
     {
+        enemyAgent.stoppingDistance = stoppingDistance;
         currentState.UpdateState();
         if (PlayerInRange)
         {
@@ -182,11 +183,9 @@ public class EnemyStateManager : MonoBehaviour
 
         if (hitColliders.Length > 0)
         {
-            Debug.Log("Found someting"); //!
             PlayerHealth player = hitColliders[0].GetComponent<PlayerHealth>();
             if (player != null)
             {
-                Debug.Log("Ready to deal damage"); //!
                 player.TakeDamage(damage);
             }
             else if (player == null)
@@ -263,6 +262,7 @@ public class EnemyStateManager : MonoBehaviour
     private void HidePlayer(object sender, EventArgs e)
     {
         PlayerInRange = false;
+        SoundInRange = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -322,6 +322,7 @@ public class EnemyStateManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerInRange = false;
+            SoundInRange = false;
             Debug.Log("Ontrigger Exited");
         }
     }
