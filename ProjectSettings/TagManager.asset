@@ -18,6 +18,7 @@ TagManager:
   - Barrel
   - MainGate
   - Lock
+  - OilPot
   layers:
   - Default
   - TransparentFX
