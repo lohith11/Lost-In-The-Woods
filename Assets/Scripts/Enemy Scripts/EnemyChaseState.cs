@@ -16,6 +16,7 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void UpdateState()
     {
+        enemyStateManager.transform.LookAt(enemyStateManager.transform.position, enemyStateManager.playerRef.transform.position);
         float distanceToPlayer = Vector3.Distance(enemyStateManager.transform.position, enemyStateManager.playerRef.transform.position);
         if (distanceToPlayer <= enemyStateManager.attackRadius && enemyStateManager.PlayerInRange)
         {

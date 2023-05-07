@@ -36,9 +36,9 @@ public class Barrel : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Rock"))
-            Explode();
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.gameObject.CompareTag("Rock"))
+    //         Explode();
+    // }
 }

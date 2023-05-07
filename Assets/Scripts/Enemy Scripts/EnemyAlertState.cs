@@ -14,6 +14,7 @@ public class EnemyAlertState : EnemyBaseState
 
     public override void UpdateState()
     {
+        enemyStateManager.transform.LookAt(enemyStateManager.transform.position, enemyStateManager.playerRef.transform.position);
         if (enemyStateManager.PlayerInRange)
         {
             enemyStateManager.startChaseTimer -= Time.deltaTime;
@@ -42,7 +43,7 @@ public class EnemyAlertState : EnemyBaseState
             }
             enemyStateManager.switchState(enemyStateManager.PatrolState);
         }
-        
+
     }
 
     public override void ExitState()
