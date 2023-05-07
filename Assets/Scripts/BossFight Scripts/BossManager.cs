@@ -25,6 +25,7 @@ public class BossManager : MonoBehaviour
     }
     void Start()
     {
+        StartBattle();
         boss = FindObjectOfType<BlindBrute>();
         Barrel.explosiveDamage += BossBattle_OnDamaged;
         StartNextStage();

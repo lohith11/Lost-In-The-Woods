@@ -7,8 +7,6 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
-using Unity.VisualScripting;
-using UnityEngine.Rendering;
 
 public class PlayerStateMachine : MonoBehaviour
 {
@@ -118,6 +116,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool isBarrel;
     public bool canPickKey = false;
     public bool canPickHerb = false;
+    public bool isBrazier;
     private bool inGrass;
     public int keyPicked = 0;
     public float barrelIgniteTime;
@@ -284,6 +283,11 @@ public class PlayerStateMachine : MonoBehaviour
         KeyPickUp();
     }
 
+    public void BrazierIgnite(InputAction.CallbackContext context)
+    {
+        BrazierOn();
+    }
+
     public void BarrelIgnite(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -392,6 +396,15 @@ public class PlayerStateMachine : MonoBehaviour
             playerControls.Player.Picking.canceled += BarrelIgnite;
             forPickingHerb.text = "Hold E or Y";
         }
+
+        if(other.gameObject.CompareTag("Brazier"))
+        {
+            forPickingHerb.enabled = true;
+            isBrazier = true;
+            forPickingHerb.text = "Press E or Controller Y to Ignite";
+            playerControls.Player.Picking.performed += BrazierIgnite;
+            playerControls.Player.Picking.performed += BrazierIgnite;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -424,6 +437,13 @@ public class PlayerStateMachine : MonoBehaviour
             playerControls.Player.Picking.performed -= BarrelIgnite;
             playerControls.Player.Picking.canceled -= BarrelIgnite;
         }
+
+        if (other.gameObject.CompareTag("Brazier"))
+        {
+            forPickingHerb.enabled = false;
+            isBrazier = false;
+            playerControls.Player.Picking.performed -= BrazierIgnite;
+        }
     }
     #endregion
 
@@ -444,6 +464,14 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingHerb.enabled = false;
             Destroy(keyInRange);
             keyInRange = null;
+        }
+    }
+
+    public void BrazierOn()
+    {
+        if(isBrazier)
+        {
+            //Call the turn on Light for Brazier 
         }
     }
 

@@ -132,6 +132,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2005752205}
     m_Modifications:
     - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
+      propertyPath: explosionDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
       propertyPath: explosionRange
       value: 100
       objectReference: {fileID: 0}
@@ -789,12 +793,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &400482351 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3387727401337570529, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
-    type: 3}
-  m_PrefabInstance: {fileID: 670340009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &452315602 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7995985883533845732, guid: 8b41ab1052992114181de4b9d5a7c463,
@@ -819,7 +817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ab3cc7361ccab4b8e8850491d69a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light_FX: {fileID: 400482351}
 --- !u!65 &467385406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -828,7 +825,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467385402}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1184,6 +1181,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brazier (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1123670523122969251, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Brazier
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b24783e1e0d0ac14b92f31b22b9e2da5, type: 3}
 --- !u!1001 &670340009
@@ -1287,6 +1289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Brazier (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123670523122969251, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Brazier
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b24783e1e0d0ac14b92f31b22b9e2da5, type: 3}
@@ -1405,12 +1412,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &734181003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3387727401337570529, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
-    type: 3}
-  m_PrefabInstance: {fileID: 617567238}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &738489549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1418,11 +1419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8055116204553961478, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_RootOrder
@@ -1480,33 +1476,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
-      propertyPath: hurtTimer
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
       propertyPath: deadScreen
       value: 
       objectReference: {fileID: 2059084871}
-    - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: healthRegenerationValue
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: playerHurtSound.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016367, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_Name
       value: Playerrr
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016367, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017d1145b22a58d4c9c51c575d9ecb41, type: 3}
@@ -1625,7 +1601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ab3cc7361ccab4b8e8850491d69a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light_FX: {fileID: 734181003}
 --- !u!65 &920292555
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1634,7 +1609,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920292551}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -2050,7 +2025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1222711316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2319,7 +2294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ab3cc7361ccab4b8e8850491d69a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light_FX: {fileID: 1712478228}
 --- !u!65 &1520040050
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2328,7 +2302,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520040046}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -2654,6 +2628,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Brazier (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1123670523122969251, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Brazier
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b24783e1e0d0ac14b92f31b22b9e2da5, type: 3}
 --- !u!1001 &1709794581
@@ -2770,12 +2749,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8138176
   m_Center: {x: 0.0013770789, y: 0.10765726, z: 0.05625653}
---- !u!1 &1712478228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3387727401337570529, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
-    type: 3}
-  m_PrefabInstance: {fileID: 7902860262879713986}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1715080185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2890,12 +2863,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8138169
   m_Center: {x: 0.0013770392, y: 0.10765723, z: 0.05625654}
---- !u!1 &1728301692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3387727401337570529, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1668629165}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1763453899
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,7 +3075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ab3cc7361ccab4b8e8850491d69a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light_FX: {fileID: 1728301692}
 --- !u!65 &1988257881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3117,7 +3083,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988257877}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -3460,11 +3426,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Death_Screen_Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7995985883533845736, guid: 8b41ab1052992114181de4b9d5a7c463,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b41ab1052992114181de4b9d5a7c463, type: 3}
@@ -3832,6 +3793,11 @@ PrefabInstance:
     - target: {fileID: 1123670523122969251, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
         type: 3}
       propertyPath: m_Name
+      value: Brazier
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123670523122969251, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
+        type: 3}
+      propertyPath: m_TagString
       value: Brazier
       objectReference: {fileID: 0}
     - target: {fileID: 5983614853650462815, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
