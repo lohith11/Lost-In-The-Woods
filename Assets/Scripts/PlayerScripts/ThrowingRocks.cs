@@ -16,6 +16,7 @@ public class ThrowingRocks : MonoBehaviour
     public GameObject pickingThings;
     public TMP_Text rockCount;
     public GameObject potIsthere;
+    public GameObject playerHud;
 
     public int maxRockPickUp;
     [ShowInInspector] public static int totalThrows;
@@ -67,6 +68,7 @@ public class ThrowingRocks : MonoBehaviour
     {
         if (playerStateMachine.isAiming)
         {
+            playerHud.SetActive(true);
             if (playerStateMachine.isAtttacking && readyToThrow && totalThrows > 0)
             {
                 if(!isOilPot)
@@ -86,6 +88,7 @@ public class ThrowingRocks : MonoBehaviour
         {
             lineRenderer.enabled = false;
             crossHair.SetActive(false);
+            playerHud.SetActive(false);
             lineRendererEndPoint.SetActive(false);
         }
 

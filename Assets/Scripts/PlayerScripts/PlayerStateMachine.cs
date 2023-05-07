@@ -117,7 +117,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool canPickKey = false;
     public bool canPickHerb = false;
     public bool isBrazier;
-    private bool inGrass;
+    public bool inGrass;
     public int keyPicked = 0;
     public float barrelIgniteTime;
     public int herbs;
@@ -477,7 +477,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(isBrazier)
         {
-            brazier1.GetComponent<Brazier>().TurnOn(); 
+            brazier1.GetComponent<Brazier>().TurnOn();
         }
     }
 
@@ -501,6 +501,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (isBarrel)
         {
             barrel1.GetComponent<Barrel>().Explode();
+            isBarrel = false;
         }
     }
 
