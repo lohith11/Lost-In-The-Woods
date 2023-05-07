@@ -19,6 +19,9 @@ TagManager:
   - MainGate
   - Lock
   - OilPot
+  - ChurchDoorClose
+  - ChurchBackDoor
+  - Brazier
   layers:
   - Default
   - TransparentFX

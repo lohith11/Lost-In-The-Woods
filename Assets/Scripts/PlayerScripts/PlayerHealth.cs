@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,14 @@ public class PlayerHealth : MonoBehaviour
         baseHealth = maxHealth;
         BlindBrute.bossDamage += BossDamage;
     }
-
+    private void Update()
+    {
+        if(isPlayerDead)
+        {
+            Vector3 campos = Vector3.Lerp(playerStateMachine.playerCamera.localPosition, Vector3.zero, 0.01f);
+            playerStateMachine.playerCamera.localPosition = campos;
+        }
+    }
     private void UpdateHealth()
     {
 
@@ -127,7 +135,7 @@ public class PlayerHealth : MonoBehaviour
         playerStateMachine.playerAnimation.Play("Player_Dead");
         playerStateMachine.audioSource.PlayOneShot(deathSound);
         deathSound = null;
-        //Camera Movement
+
         yield return new WaitForSeconds(3f);
         deadScreen.SetActive(true);
     }
