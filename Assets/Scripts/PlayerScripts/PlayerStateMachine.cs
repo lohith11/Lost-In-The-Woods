@@ -121,7 +121,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int keyPicked = 0;
     public float barrelIgniteTime;
     public int herbs;
-    public TMP_Text forPickingHerb;
+    public TMP_Text forPickingThings;
     [Space(10)]
 
     private GameObject herbInRange;
@@ -365,19 +365,19 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.CompareTag("Herbs"))
         {
-            forPickingHerb.enabled = true;
+            forPickingThings.enabled = true;
             canPickHerb = true;
             playerControls.Player.Picking.performed += HerbsPickUp;
-            forPickingHerb.text = "Press E or Controller Y";
+            forPickingThings.text = "Press E or Controller Y";
             herbInRange = other.gameObject;
         }
 
         if (other.CompareTag("Key"))
         {
-            forPickingHerb.enabled = true;
+            forPickingThings.enabled = true;
             canPickKey = true;
             playerControls.Player.Picking.performed += KeyPickUp;
-            forPickingHerb.text = "Press E or Cotroller Y";
+            forPickingThings.text = "Press E or Cotroller Y";
             keyInRange = other.gameObject;
         }
 
@@ -390,18 +390,18 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("Barrel"))
         {
-            forPickingHerb.enabled = true;
+            forPickingThings.enabled = true;
             isBarrel = true;
             playerControls.Player.Picking.performed += BarrelIgnite;
             playerControls.Player.Picking.canceled += BarrelIgnite;
-            forPickingHerb.text = "Hold E or Y";
+            forPickingThings.text = "Hold E or Y";
         }
 
         if(other.gameObject.CompareTag("Brazier"))
         {
-            forPickingHerb.enabled = true;
+            forPickingThings.enabled = true;
             isBrazier = true;
-            forPickingHerb.text = "Press E or Controller Y to Ignite";
+            forPickingThings.text = "Press E or Controller Y to Ignite";
             playerControls.Player.Picking.performed += BrazierIgnite;
             playerControls.Player.Picking.performed += BrazierIgnite;
         }
@@ -411,14 +411,14 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.CompareTag("Herbs"))
         {
-            forPickingHerb.enabled = false;
+            forPickingThings.enabled = false;
             playerControls.Player.Picking.performed -= HerbsPickUp;
             herbInRange = null;
         }
 
         if (other.CompareTag("Key"))
         {
-            forPickingHerb.enabled = false;
+            forPickingThings.enabled = false;
             canPickKey = false;
             playerControls.Player.Picking.performed -= KeyPickUp;
             keyInRange = null;
@@ -432,7 +432,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("Barrel"))
         {
-            forPickingHerb.enabled = false;
+            forPickingThings.enabled = false;
             isBarrel = false;
             playerControls.Player.Picking.performed -= BarrelIgnite;
             playerControls.Player.Picking.canceled -= BarrelIgnite;
@@ -440,7 +440,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("Brazier"))
         {
-            forPickingHerb.enabled = false;
+            forPickingThings.enabled = false;
             isBrazier = false;
             playerControls.Player.Picking.performed -= BrazierIgnite;
         }
@@ -461,7 +461,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (canPickKey)
         {
             keyPicked++;
-            forPickingHerb.enabled = false;
+            forPickingThings.enabled = false;
             Destroy(keyInRange);
             keyInRange = null;
         }
@@ -481,7 +481,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (canPickHerb)
         {
             herbs++;
-            forPickingHerb.enabled = false;
+            forPickingThings.enabled = false;
             Destroy(herbInRange);
             herbInRange = null;
             PlayerHealth.maxHealth = PlayerHealth.baseHealth + (herbs * 20);
