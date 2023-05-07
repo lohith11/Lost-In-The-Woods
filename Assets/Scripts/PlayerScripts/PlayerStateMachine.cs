@@ -122,6 +122,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float barrelIgniteTime;
     public int herbs;
     public TMP_Text forPickingThings;
+    public AudioClip herbPickUpAudio;
     [Space(10)]
 
     private GameObject herbInRange;
@@ -135,7 +136,6 @@ public class PlayerStateMachine : MonoBehaviour
     private Barrel barrelRef;
     [HideInInspector] public CapsuleCollider playerCollider;
     public Image healthPickUpEffect;
-    public float rayDistance;
     #endregion
 
     private void Awake()
@@ -280,7 +280,6 @@ public class PlayerStateMachine : MonoBehaviour
     public void HerbsPickUp(InputAction.CallbackContext context)
     {
         HerbsPicking();
-
     }
 
     public void KeyPickUp(InputAction.CallbackContext context)
@@ -538,8 +537,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     private IEnumerator HerbPickUpEffect()
     {
+        audioSource.PlayOneShot(herbPickUpAudio);
         healthPickUpEffect.enabled = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         healthPickUpEffect.enabled = false;
     }
     #endregion

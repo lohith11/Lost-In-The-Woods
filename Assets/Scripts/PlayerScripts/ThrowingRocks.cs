@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
-using Microsoft.Unity.VisualStudio.Editor;
 using Sirenix.OdinInspector;
-using System.Xml.Schema;
 
 public class ThrowingRocks : MonoBehaviour
 {
