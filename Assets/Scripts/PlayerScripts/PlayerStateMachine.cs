@@ -136,6 +136,8 @@ public class PlayerStateMachine : MonoBehaviour
     private Barrel barrelRef;
     [HideInInspector] public CapsuleCollider playerCollider;
     public Image healthPickUpEffect;
+    private GameObject barrel1;
+    private GameObject brazier1;
     #endregion
 
     private void Awake()
@@ -399,15 +401,17 @@ public class PlayerStateMachine : MonoBehaviour
             playerControls.Player.Picking.performed += BarrelIgnite;
             playerControls.Player.Picking.canceled += BarrelIgnite;
             forPickingThings.text = "Hold E or Y";
+            barrel1 = other.gameObject;
         }
 
-        if(other.gameObject.CompareTag("Brazier"))
+        if (other.gameObject.CompareTag("Brazier"))
         {
             forPickingThings.enabled = true;
             isBrazier = true;
             forPickingThings.text = "Press E or Controller Y to Ignite";
             playerControls.Player.Picking.performed += BrazierIgnite;
             playerControls.Player.Picking.performed += BrazierIgnite;
+            brazier1 = other.gameObject;
         }
     }
 
@@ -440,6 +444,7 @@ public class PlayerStateMachine : MonoBehaviour
             isBarrel = false;
             playerControls.Player.Picking.performed -= BarrelIgnite;
             playerControls.Player.Picking.canceled -= BarrelIgnite;
+            barrel1 = null;
         }
 
         if (other.gameObject.CompareTag("Brazier"))
@@ -447,6 +452,7 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingThings.enabled = false;
             isBrazier = false;
             playerControls.Player.Picking.performed -= BrazierIgnite;
+            brazier1 = null;
         }
     }
     #endregion
@@ -475,7 +481,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if(isBrazier)
         {
-            //Call the turn on Light for Brazier 
+            brazier1.GetComponent<Brazier>().TurnOn(); 
         }
     }
 
@@ -497,7 +503,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (isBarrel)
         {
-            barrelRef.Explode();
+            barrel1.GetComponent<Barrel>().Explode();
         }
     }
 

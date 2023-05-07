@@ -11,7 +11,7 @@ public class Brazier : MonoBehaviour
     
     void Start()
     {
-
+        TurnOff();
     }
 
     void Update()

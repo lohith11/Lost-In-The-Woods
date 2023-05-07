@@ -33,6 +33,7 @@ public class Barrel : MonoBehaviour
             {
                 explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
             }
+            this.gameObject.SetActive(false);
         }
     }
 
