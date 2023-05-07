@@ -171,6 +171,7 @@ public class EnemyStateManager : MonoBehaviour
         if (PlayerInRange)
         {
             transform.LookAt(transform.position, playerRef.transform.position);
+            
             angle = 346f;
         }
         else
