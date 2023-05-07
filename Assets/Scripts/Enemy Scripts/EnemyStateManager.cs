@@ -32,9 +32,18 @@ public class EnemyStateManager : MonoBehaviour
     public float angle;
     public GameObject playerRef;
     public LayerMask targetMask, obstructionMask;
-    [ShowInInspector]public bool PlayerInRange { get; private set; }
+    [ShowInInspector] public bool PlayerInRange { get; private set; }
 
     [Space(10)]
+
+    [Header("Speed values")]
+    [Space(2)]
+    public float rotationSpeed; //* This handles the rotation speed from one waypoint to the other
+    public float patrolSpeed;
+    public float alertSpeed;
+    public float chaseSpeed;
+
+    [Space(5)]
 
     [Header("Idle Properties")]
     [Space(2)]
@@ -58,7 +67,6 @@ public class EnemyStateManager : MonoBehaviour
     public Transform[] waypoints;
     public Vector3 nextLocation;
     public int destinationLoop;
-    public float rotationSpeed;
 
     [Space(10)]
 
@@ -68,7 +76,6 @@ public class EnemyStateManager : MonoBehaviour
     public float sphereRadius;    //* The radius in which the enemy patrols
     public float startChaseTimer;
     public Transform centerPoint; //* The center point around whcich the patrol shphere is drawn 
-    public float patrolSpeed;
 
     [Space(10)]
 
@@ -76,7 +83,6 @@ public class EnemyStateManager : MonoBehaviour
     [Space(2)]
 
     public float backToPatrol = 2.0f;
-    public float alertSpeed;
     public TMP_Text alertText;
     //* make this into explamation image and a slider 
 
@@ -88,7 +94,6 @@ public class EnemyStateManager : MonoBehaviour
     [Range(1, 7)] public float attackRadius;
     public float timeSinceLastSighting;
     public float minDistanceToPlayer;
-    public float chaseSpeed;
     public float attackDuration;
     public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float damage;
@@ -158,15 +163,21 @@ public class EnemyStateManager : MonoBehaviour
     {
         enemyAgent.stoppingDistance = stoppingDistance;
         currentState.UpdateState();
-        if (PlayerInRange)
-        {
-            transform.LookAt(transform.position, playerRef.transform.position);
-        }
-        if(EnemyHealth.health <= 0)
+        if (EnemyHealth.health <= 0)
         {
             EnemyHealth.health = 0;
             switchState(DieState);
         }
+        if (PlayerInRange)
+        {
+            transform.LookAt(transform.position, playerRef.transform.position);
+            angle = 346f;
+        }
+        else
+        {
+            angle = 177f;
+        }
+
     }
 
     public void switchState(EnemyBaseState Enemy)
@@ -309,7 +320,7 @@ public class EnemyStateManager : MonoBehaviour
                     detectionCollider.radius = walkingDetectionRadius;
                 }
 
-                else if(playerStateMachine.currentState == playerStateMachine.playerIdleState)
+                else if (playerStateMachine.currentState == playerStateMachine.playerIdleState)
                 {
                     detectionCollider.radius = walkingDetectionRadius;
                 }

@@ -64,6 +64,7 @@ public class BlindBrute : MonoBehaviour
         detectionCollider.radius = walkingDetectionRadius;
         detectionCollider.isTrigger = true;
 
+        audioSource.clip = (audioClips[0]);
         audioSource.PlayOneShot(audioClips[0]);
         agent.speed = EnemySpeed;
     }
