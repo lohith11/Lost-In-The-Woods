@@ -128,7 +128,7 @@ public class PlayerStateMachine : MonoBehaviour
     private GameObject herbInRange;
     private GameObject keyInRange;
 
-    [HideInInspector]public PlayerBaseState currentState;
+    [HideInInspector] public PlayerBaseState currentState;
     private MoveRuller moveRuller;
     private Coroutine barrelCoroutine;
     private MouseLook mouseLookRef;
@@ -270,7 +270,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PickingRock(InputAction.CallbackContext context)
     {
-         GetComponent<ThrowingRocks>().RockPicking();
+        GetComponent<ThrowingRocks>().RockPicking();
     }
 
     public void HerbsPickUp(InputAction.CallbackContext context)
@@ -281,16 +281,16 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void KeyPickUp(InputAction.CallbackContext context)
     {
-         KeyPickUp();
+        KeyPickUp();
     }
 
     public void BarrelIgnite(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Performed)
         {
             barrelCoroutine = StartCoroutine(barrel());
         }
-        else if(context.phase == InputActionPhase.Canceled)
+        else if (context.phase == InputActionPhase.Canceled)
         {
             StopCoroutine(barrelCoroutine);
         }
@@ -384,7 +384,7 @@ public class PlayerStateMachine : MonoBehaviour
             GrassStay();
         }
 
-        if(other.gameObject.CompareTag("Barrel"))
+        if (other.gameObject.CompareTag("Barrel"))
         {
             forPickingHerb.enabled = true;
             isBarrel = true;
@@ -430,7 +430,7 @@ public class PlayerStateMachine : MonoBehaviour
     #region Interactables
     public void GrassStay()
     {
-        if(inGrass)
+        if (inGrass)
         {
             hidePlayer?.Invoke(this, EventArgs.Empty);
         }
@@ -463,7 +463,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void BarrelSwitchingOn()
     {
-        if(isBarrel)
+        if (isBarrel)
         {
             barrelRef.Explode();
         }
