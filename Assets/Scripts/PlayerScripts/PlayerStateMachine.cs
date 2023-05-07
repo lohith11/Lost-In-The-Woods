@@ -272,6 +272,11 @@ public class PlayerStateMachine : MonoBehaviour
         GetComponent<ThrowingRocks>().RockPicking();
     }
 
+    public void PickingPot(InputAction.CallbackContext context)
+    {
+        GetComponent<ThrowingRocks>().PotPicking();
+    }
+
     public void HerbsPickUp(InputAction.CallbackContext context)
     {
         HerbsPicking();

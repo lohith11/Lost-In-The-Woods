@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using System;
 using Microsoft.Unity.VisualStudio.Editor;
+using Sirenix.OdinInspector;
+using System.Xml.Schema;
 
 public class ThrowingRocks : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class ThrowingRocks : MonoBehaviour
     public TMP_Text pressRocksText;
 
     public int maxRockPickUp;
-    public static int totalThrows;
+    [ShowInInspector] public static int totalThrows;
     public float throwCoolDown;
 
     public float throwForce;
@@ -40,8 +42,16 @@ public class ThrowingRocks : MonoBehaviour
     private Vector3 newPoint;
     public AudioClip rockPickingSound;
     private GameObject rockInRange;
+    private GameObject potInRange;
     //The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
+
+    [Space(5)]
+    [Header("< PotVariables >")]
+    public bool isOilPot = false;
+    public GameObject oilPot;
+    public bool canPickPot;
+    public float totalPots;
     void Start()
     {
         crossHair.SetActive(false);
@@ -57,7 +67,14 @@ public class ThrowingRocks : MonoBehaviour
         {
             if (playerStateMachine.isAtttacking && readyToThrow && totalThrows > 0)
             {
-                Throw();
+                if(!isOilPot)
+                {
+                    Throw();
+                }
+            }
+            if(playerStateMachine.isAtttacking && isOilPot && totalPots > 0 && readyToThrow)
+            {
+                PotThrow();
             }
 
             Projectile();
@@ -70,6 +87,16 @@ public class ThrowingRocks : MonoBehaviour
             lineRendererEndPoint.SetActive(false);
         }
 
+        if(totalPots >= 1)
+        {
+            canPickPot = false;
+            totalPots = 1;
+        }
+        else if(totalPots < 1)
+        {
+            canPickPot = true;
+        }
+
         if(totalThrows >= maxRockPickUp)
         {
             canPickUp = false;
@@ -79,6 +106,34 @@ public class ThrowingRocks : MonoBehaviour
         {
             canPickUp = true;
         }
+    }
+
+    public void PotThrow() 
+    {
+        GameObject projectile = Instantiate(oilPot, attackpoint.position, cam.rotation);
+
+        //Getting RigidBody of that throwable object
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+        projectileRB.useGravity = true;
+
+        SphereCollider projectileCollider = projectile.GetComponent<SphereCollider>();
+        projectileCollider.isTrigger = false;
+
+        //Caluculate Direction of that Object
+        Vector3 forceDirection = cam.transform.forward;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(cam.position, cam.forward, out hit, 500f))
+        {
+            forceDirection = (hit.point - attackpoint.position).normalized;
+        }
+
+        Vector3 forceToAdd = forceDirection * throwForce;
+        projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
+
+        totalPots--;
+        Invoke(nameof(ResetThrow), throwCoolDown);
     }
 
     public void Throw()
@@ -108,7 +163,6 @@ public class ThrowingRocks : MonoBehaviour
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
-
         Invoke(nameof(ResetThrow), throwCoolDown);
     }
 
@@ -161,6 +215,18 @@ public class ThrowingRocks : MonoBehaviour
         }
     }
 
+    public void PotPicking()
+    {
+        if(canPickPot)
+        {
+            totalPots++;
+            isOilPot = true;
+            pressRocksText.enabled = false;
+            Destroy(potInRange);
+            potInRange = null;
+        }
+    }
+
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
@@ -171,6 +237,15 @@ public class ThrowingRocks : MonoBehaviour
             playerStateMachine.playerControls.Player.Picking.performed += playerStateMachine.PickingRock;
             pressRocksText.text = "Press E or Controller Y";
             rockInRange = other.gameObject;
+        }
+
+        if(other.gameObject.CompareTag("OilPot"))
+        {
+            pressRocksText.enabled = true;
+            canPickPot = true;
+            playerStateMachine.playerControls.Player.Picking.performed += playerStateMachine.PickingPot;
+            pressRocksText.text = "Press E or Controller Y";
+            potInRange = other.gameObject;
         }
     }
 
@@ -183,11 +258,20 @@ public class ThrowingRocks : MonoBehaviour
             playerStateMachine.playerControls.Player.Picking.performed -= playerStateMachine.PickingRock;
             rockInRange = null;
         }
+
+        if (other.gameObject.CompareTag("OilPot"))
+        {
+            pressRocksText.enabled = false;
+            canPickPot = false;
+            playerStateMachine.playerControls.Player.Picking.performed -= playerStateMachine.PickingPot;
+            potInRange = null;
+        }
     }
     #endregion
 
     public void ResetThrow()
     {
         readyToThrow = true;
+        isOilPot = false;
     }
 }
