@@ -29,11 +29,11 @@ public class Barrel : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, bossLayer);
         if (colliders.Length > 0)
         {
-            if(explosiveDamage!=null)
+            if(explosiveDamage != null)
             {
                 explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
             }
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 

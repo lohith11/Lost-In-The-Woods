@@ -300,7 +300,8 @@ public class PlayerStateMachine : MonoBehaviour
         {
             barrelCoroutine = StartCoroutine(barrel());
         }
-        else if (context.phase == InputActionPhase.Canceled)
+
+        if (context.phase == InputActionPhase.Canceled)
         {
             StopCoroutine(barrelCoroutine);
         }
@@ -444,7 +445,6 @@ public class PlayerStateMachine : MonoBehaviour
             isBarrel = false;
             playerControls.Player.Picking.performed -= BarrelIgnite;
             playerControls.Player.Picking.canceled -= BarrelIgnite;
-            barrel1 = null;
         }
 
         if (other.gameObject.CompareTag("Brazier"))
@@ -452,7 +452,6 @@ public class PlayerStateMachine : MonoBehaviour
             forPickingThings.enabled = false;
             isBrazier = false;
             playerControls.Player.Picking.performed -= BrazierIgnite;
-            brazier1 = null;
         }
     }
     #endregion

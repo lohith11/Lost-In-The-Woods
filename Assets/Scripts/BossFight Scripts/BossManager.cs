@@ -45,8 +45,6 @@ public class BossManager : MonoBehaviour
         {
             brazier.TurnOff();
         }
-
-
     }
 
     public void BossBattle_OnDamaged(object sender, dealDamageEventArg e)
