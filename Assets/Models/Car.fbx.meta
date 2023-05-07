@@ -1,0 +1,729 @@
+fileFormatVersion: 2
+guid: cfda1e7b37aa8b341a3c4851ed48feba
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: -6135767467637331134
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -2340889605406705079
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 8321562391348190669
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 3284552038977165626
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -5935128984874863892
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 1532072808560662823
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -6678413516132320067
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -8330617287050893526
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -3583983837788582149
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: 6398430923172001292
+    second: "\u041A\u043E\u0440\u043F\u0443\u0441|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 1201922743445072421
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -8062750474038949389
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -8100992198109980629
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -679819020048030311
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 7145284946108370200
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 1350292329753252764
+    second: "\u0414\u0432\u0435\u0440\u044C|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 4382689016787331233
+    second: "\u0414\u0432\u0435\u0440\u044C|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 5853752842337635365
+    second: "\u0414\u0432\u0435\u0440\u044C|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -7229718559675341904
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -2014537118666774217
+    second: "\u0414\u0432\u0435\u0440\u044C|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 247412034698361241
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -8326850099746314267
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 3622022893647771405
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 5388850618940154901
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -5723952674471893620
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 4713132365351755552
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 8573371734624604748
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 9209223105397409859
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 345533874132154137
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -6612195334692784435
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: -6913020349396501322
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -1152459654276889016
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -2380427364325173908
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -8410633448505955302
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -7583110722704326275
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -3327010210621128437
+    second: "\u041A\u0430\u043F\u043E\u0442|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 6752778854595588350
+    second: "\u041A\u0430\u043F\u043E\u0442|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -155328632642792873
+    second: "\u041A\u0430\u043F\u043E\u0442|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -4143474628918081957
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -6253818904353578638
+    second: "\u041A\u0430\u043F\u043E\u0442|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 8963959847844882326
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 216870949204783244
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -5439728328922096936
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 8120031944149107489
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -603964410741921554
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 8733585512530996492
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -7257663245525897279
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 3757452638558165881
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -6302530447476050135
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: 2435680314200462634
+    second: "\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043A|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: -4840540688430039521
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 3185012984205997661
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -2759265813707427584
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -2702752698309742431
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 5252422770488118915
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 1357009949316744093
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -6290100018767823832
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -8036419664796550660
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -7032228137007670029
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -7939960096463182072
+    second: "\u0420\u0435\u0437\u0438\u043D\u043A\u0430.001|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 683022810878040529
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 8244208773152513708
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 8085004100402467860
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 3514472121719645808
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -4034922317585512849
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 1031190925881400161
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -4673096603275660521
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -2226669061218989681
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -7364034880597084478
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -8848867551975273143
+    second: "\u0420\u0435\u0448\u0451\u0442\u043A\u0430|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 1650987894566367718
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -3446417996508525967
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 1768882852744581991
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 1002656211875216568
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 3289655721462466637
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -6654251179872621859
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 1579766072370346492
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 8408411064509736361
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -4346775901411417882
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -681516298560188692
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 6527910922886226568
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -5772614689290247494
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -6071980837119856855
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -5246803914531963529
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 7667533235181034225
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -20409775487050084
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 2683728345820600671
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -2365141632635396684
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 1624794975472329628
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -4795327761694482025
+    second: "\u0411\u0430\u043C\u043F\u0435\u0440.001|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: -3292541167826771572
+    second: "\u0420\u0430\u043C\u0430|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -3220858915408202513
+    second: "\u0420\u0430\u043C\u0430|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 2848267268776790913
+    second: "\u0420\u0430\u043C\u0430|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -8951946145766023889
+    second: "\u0420\u0430\u043C\u0430|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -199880271889807077
+    second: "\u0420\u0430\u043C\u0430|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -1432268560946668356
+    second: "\u0420\u0430\u043C\u0430|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -610855718115491815
+    second: "\u0420\u0430\u043C\u0430|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -5063438306630153891
+    second: "\u0420\u0430\u043C\u0430|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -1381003083046547853
+    second: "\u0420\u0430\u043C\u0430|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -2908786567942284796
+    second: "\u0420\u0430\u043C\u0430|\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 652537228139817752
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 3398052799139836297
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -304120731892284802
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 8238413218748377850
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -5586920869395895948
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -1015640926147957287
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -8767944186931776341
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 7089888776625626888
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 2296262762940503562
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: 5132726742804969418
+    second: "\u041B\u043E\u0431\u043E\u0432\u043E\u0435 \u043E\u043A\u043D\u043E|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 1535078102204316663
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 6418274748222721191
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -4242526195961344281
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -4182886928812792139
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 4809589025902497412
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -2236714082012580227
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -301775380046845121
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 8673342858393659875
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 66039435556540822
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -1254485452285906748
+    second: "\u0411\u043E\u043A\u043E\u0432\u043E\u0435 \u0441\u0442\u0435\u043A\u043B\u043E.001|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: -2766921653313295783
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -5083184296672364724
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 4796159272907603791
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -7112030286820518994
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 2047071961806103939
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -6020107000261075553
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -8211031905313152582
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 7320502993131489165
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 3729716967788643020
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: 5748254275752718011
+    second: "\u0421\u0442\u0435\u043A\u043B\u043E \u043E\u043A\u043D\u0430|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 3726003075317892134
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -3861575575917330374
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 5412517276974537131
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 996567135336480724
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 1660549911370370025
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -6734450345921058169
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 3956359272539058861
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 6551278834839462184
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -2410202866981206469
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: 284875130814115807
+    second: "\u0437\u0430\u0434\u043D\u0435\u0435 \u0441\u0442\u0435\u043A\u043B\u043E|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: -6918169162827938620
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 3905987353720654815
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: 3497952746893872286
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 8426766997149752212
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: -187498151271231039
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 2730006673635701494
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 6854842783356000465
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -892376149529797242
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: -5626938834095687658
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -4524704184957026118
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: 6761531431761448580
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: 4037784360255968696
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -436983599026061149
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: 2047356745656697720
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 3051891822760741843
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: 624198207712450107
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: 8541704035244647949
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: -5812039613166255933
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 3467584840994278875
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: 1753522350793694988
+    second: "\u041A\u043E\u043B\u0435\u0441\u043E.001|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  - first:
+      74: -9109650265581713848
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0411\u0430\u0433\u0430\u0436\u043D\u0438\u043AAction"
+  - first:
+      74: -3731777527143014563
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0411\u0430\u043C\u043F\u0435\u0440Action"
+  - first:
+      74: -7921107760931134871
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0411\u043E\u043A\u043E\u0432\u043E\u0435
+      \u0441\u0442\u0435\u043A\u043B\u043E.001Action"
+  - first:
+      74: -5507722757665493021
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0414\u0432\u0435\u0440\u044CAction"
+  - first:
+      74: 3322816214763521154
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0417\u0435\u0440\u043A\u0430\u043B\u043EAction"
+  - first:
+      74: -5509564800206498590
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u041A\u0430\u043F\u043E\u0442Action"
+  - first:
+      74: -3483580673190234234
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u041A\u043E\u043B\u0435\u0441\u043E.001Action"
+  - first:
+      74: 2744710284853834836
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u041A\u043E\u043B\u0435\u0441\u043EAction"
+  - first:
+      74: 7635931665942453178
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0420\u0435\u0448\u0451\u0442\u043A\u0430Action"
+  - first:
+      74: -575780937866339620
+    second: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E|\u0421\u0442\u0435\u043A\u043B\u043E
+      \u043E\u043A\u043D\u0430Action"
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: ae23dca8b9cbc064cb262f66b87a7743, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: fd87ec141147da640848dbca2372f51f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: a7efe0f16476bae4aad9ad691d88f039, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wind
+    second: {fileID: 2100000, guid: a7b1f89c5b2a0244fac82816a148c367, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: thabrik
+    second: {fileID: 2100000, guid: 0455c02d29944d94ba26e423378cb921, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0411\u0435\u0434\u043E\u043D \u041A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435"
+    second: {fileID: 2100000, guid: 7f3ff3a46ba6f3944b0f77cc60cb7652, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0411\u0435\u0434\u043E\u043D \u041A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435.001"
+    second: {fileID: 2100000, guid: 60c8181249e1b334b82db017e44e3a55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0411\u0435\u0434\u043E\u043D \u041A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435.002"
+    second: {fileID: 2100000, guid: 7e2213f34c8c6ce45a54fb9ebed37b1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0411\u0435\u0434\u043E\u043D \u041A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435.003"
+    second: {fileID: 2100000, guid: 3ef1f40daaf07ea4e9e256d3468781eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0411\u0435\u0434\u043E\u043D \u041A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435.004"
+    second: {fileID: 2100000, guid: e4dff61332319f94f9a7517a48277014, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0411\u0435\u0434\u043E\u043D \u041A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435.005"
+    second: {fileID: 2100000, guid: 87f866ec329d9014cb5077e9172bd756, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u041A\u043E\u0440\u043F\u0443\u0441"
+    second: {fileID: 2100000, guid: 6675d97f9caae094796117802b127d7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0421\u0438\u0434\u0435\u043D\u044C\u0435"
+    second: {fileID: 2100000, guid: d1d6ceddb05ef0d4091f9b40a12849bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0421\u0442\u0435\u043A\u043B\u043E"
+    second: {fileID: 2100000, guid: a268b98f26fe74e45b59a5e0d1c55974, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0422\u0440\u0443\u0431\u0430"
+    second: {fileID: 2100000, guid: 8c527a740992b0d4398846af633a7731, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u0422\u0440\u0443\u0431\u0430.001"
+    second: {fileID: 2100000, guid: e331d3e1cb1b91046bdba5555d0d6ead, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
