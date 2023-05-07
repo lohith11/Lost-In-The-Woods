@@ -121,7 +121,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int keyPicked = 0;
     public float barrelIgniteTime;
     public int herbs;
-    public TMP_Text forPickingThings;
+    public GameObject pickingThings;
     public AudioClip herbPickUpAudio;
     [Space(10)]
 
@@ -133,7 +133,6 @@ public class PlayerStateMachine : MonoBehaviour
     private Coroutine barrelCoroutine;
     private MouseLook mouseLookRef;
     private PlayerInput playerInputRef;
-    private Barrel barrelRef;
     [HideInInspector] public CapsuleCollider playerCollider;
     public Image healthPickUpEffect;
     private GameObject barrel1;
@@ -154,6 +153,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
+        pickingThings.SetActive(false);
         healthPickUpEffect.enabled = false;
         staminaBar.enabled = false;
         terrainDetector = new TerrainDetector();
@@ -164,7 +164,6 @@ public class PlayerStateMachine : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
 
         mouseLookRef = FindObjectOfType<MouseLook>();
-        barrelRef = FindObjectOfType<Barrel>();
         playerInputRef = FindObjectOfType<PlayerInput>();
 
         SwitchState(playerIdleState);
@@ -372,19 +371,17 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.CompareTag("Herbs"))
         {
-            forPickingThings.enabled = true;
+            pickingThings.SetActive(true);
             canPickHerb = true;
             playerControls.Player.Picking.performed += HerbsPickUp;
-            forPickingThings.text = "Press E or Controller Y";
             herbInRange = other.gameObject;
         }
 
         if (other.CompareTag("Key"))
         {
-            forPickingThings.enabled = true;
+            pickingThings.SetActive(true);
             canPickKey = true;
             playerControls.Player.Picking.performed += KeyPickUp;
-            forPickingThings.text = "Press E or Cotroller Y";
             keyInRange = other.gameObject;
         }
 
@@ -397,19 +394,17 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("Barrel"))
         {
-            forPickingThings.enabled = true;
+            pickingThings.SetActive(true);
             isBarrel = true;
             playerControls.Player.Picking.performed += BarrelIgnite;
             playerControls.Player.Picking.canceled += BarrelIgnite;
-            forPickingThings.text = "Hold E or Y";
             barrel1 = other.gameObject;
         }
 
         if (other.gameObject.CompareTag("Brazier"))
         {
-            forPickingThings.enabled = true;
+            pickingThings.SetActive(true);
             isBrazier = true;
-            forPickingThings.text = "Press E or Controller Y to Ignite";
             playerControls.Player.Picking.performed += BrazierIgnite;
             playerControls.Player.Picking.performed += BrazierIgnite;
             brazier1 = other.gameObject;
@@ -420,14 +415,15 @@ public class PlayerStateMachine : MonoBehaviour
     {
         if (other.CompareTag("Herbs"))
         {
-            forPickingThings.enabled = false;
+            pickingThings.SetActive(false);
+            canPickHerb = false;
             playerControls.Player.Picking.performed -= HerbsPickUp;
             herbInRange = null;
         }
 
         if (other.CompareTag("Key"))
         {
-            forPickingThings.enabled = false;
+            pickingThings.SetActive(false);
             canPickKey = false;
             playerControls.Player.Picking.performed -= KeyPickUp;
             keyInRange = null;
@@ -441,7 +437,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("Barrel"))
         {
-            forPickingThings.enabled = false;
+            pickingThings.SetActive(false);
             isBarrel = false;
             playerControls.Player.Picking.performed -= BarrelIgnite;
             playerControls.Player.Picking.canceled -= BarrelIgnite;
@@ -449,7 +445,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (other.gameObject.CompareTag("Brazier"))
         {
-            forPickingThings.enabled = false;
+            pickingThings.SetActive(false);
             isBrazier = false;
             playerControls.Player.Picking.performed -= BrazierIgnite;
         }
@@ -470,9 +466,10 @@ public class PlayerStateMachine : MonoBehaviour
         if (canPickKey)
         {
             keyPicked++;
-            forPickingThings.enabled = false;
+            pickingThings.SetActive(false);
             Destroy(keyInRange);
             keyInRange = null;
+            canPickKey = false;
         }
     }
 
@@ -490,11 +487,12 @@ public class PlayerStateMachine : MonoBehaviour
         if (canPickHerb)
         {
             herbs++;
-            forPickingThings.enabled = false;
+            pickingThings.SetActive(false);
             Destroy(herbInRange);
             herbInRange = null;
             PlayerHealth.maxHealth = PlayerHealth.baseHealth + (herbs * 20);
             PlayerHealth.Health = PlayerHealth.maxHealth;
+            canPickHerb = false;
         }
     }
 

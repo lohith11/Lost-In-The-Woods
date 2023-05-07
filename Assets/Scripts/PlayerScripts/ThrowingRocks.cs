@@ -13,7 +13,9 @@ public class ThrowingRocks : MonoBehaviour
     public Transform cam;
     public Transform attackpoint;
     public GameObject objectThrow;
-    public TMP_Text pressRocksText;
+    public GameObject pickingThings;
+    public TMP_Text rockCount;
+    public GameObject potIsthere;
 
     public int maxRockPickUp;
     [ShowInInspector] public static int totalThrows;
@@ -24,7 +26,7 @@ public class ThrowingRocks : MonoBehaviour
     private LineRenderer lineRenderer;
 
     private bool readyToThrow;
-    public bool canPickUp = false;
+    public bool canPickUp;
 
     public float f;
     public int numPoints = 50;
@@ -49,9 +51,11 @@ public class ThrowingRocks : MonoBehaviour
     public bool isOilPot = false;
     public GameObject oilPot;
     public bool canPickPot;
-    public float totalPots;
+    public int totalPots;
     void Start()
     {
+        potIsthere.SetActive(false);
+        pickingThings.SetActive(false);
         crossHair.SetActive(false);
         lineRendererEndPoint.SetActive(false);
         readyToThrow = true;
@@ -90,19 +94,11 @@ public class ThrowingRocks : MonoBehaviour
             canPickPot = false;
             totalPots = 1;
         }
-        else if(totalPots < 1)
-        {
-            canPickPot = true;
-        }
 
         if(totalThrows >= maxRockPickUp)
         {
             canPickUp = false;
             totalThrows = maxRockPickUp;
-        }
-        else if(totalThrows < maxRockPickUp)
-        {
-            canPickUp = true;
         }
     }
 
@@ -131,6 +127,7 @@ public class ThrowingRocks : MonoBehaviour
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalPots--;
+        potIsthere.SetActive(false);
         Invoke(nameof(ResetThrow), throwCoolDown);
     }
 
@@ -161,6 +158,7 @@ public class ThrowingRocks : MonoBehaviour
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
         totalThrows--;
+        rockCount.text = totalThrows.ToString();
         Invoke(nameof(ResetThrow), throwCoolDown);
     }
 
@@ -203,13 +201,15 @@ public class ThrowingRocks : MonoBehaviour
 
     public void RockPicking()
     {
-        playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
         if(canPickUp)
         {
+            playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
             totalThrows++;
-            pressRocksText.enabled = false;
+            rockCount.text = totalThrows.ToString();
+            pickingThings.SetActive(false);
             Destroy(rockInRange);
             rockInRange = null;
+            canPickUp = false;
         }
     }
 
@@ -219,9 +219,11 @@ public class ThrowingRocks : MonoBehaviour
         {
             totalPots++;
             isOilPot = true;
-            pressRocksText.enabled = false;
+            potIsthere.SetActive(true);
+            pickingThings.SetActive(false);
             Destroy(potInRange);
             potInRange = null;
+            canPickPot = false;
         }
     }
 
@@ -230,19 +232,17 @@ public class ThrowingRocks : MonoBehaviour
     {
         if(other.CompareTag("Rock"))
         {
-            pressRocksText.enabled = true;
+            pickingThings.SetActive(true);
             canPickUp = true;
             playerStateMachine.playerControls.Player.Picking.performed += playerStateMachine.PickingRock;
-            pressRocksText.text = "Press E or Controller Y";
             rockInRange = other.gameObject;
         }
 
         if(other.gameObject.CompareTag("OilPot"))
         {
-            pressRocksText.enabled = true;
+            pickingThings.SetActive(true);
             canPickPot = true;
             playerStateMachine.playerControls.Player.Picking.performed += playerStateMachine.PickingPot;
-            pressRocksText.text = "Press E or Controller Y";
             potInRange = other.gameObject;
         }
     }
@@ -251,7 +251,7 @@ public class ThrowingRocks : MonoBehaviour
     {
         if (other.CompareTag("Rock"))
         {
-            pressRocksText.enabled = false;
+            pickingThings.SetActive(false);
             canPickUp = false;
             playerStateMachine.playerControls.Player.Picking.performed -= playerStateMachine.PickingRock;
             rockInRange = null;
@@ -259,7 +259,7 @@ public class ThrowingRocks : MonoBehaviour
 
         if (other.gameObject.CompareTag("OilPot"))
         {
-            pressRocksText.enabled = false;
+            pickingThings.SetActive(false);
             canPickPot = false;
             playerStateMachine.playerControls.Player.Picking.performed -= playerStateMachine.PickingPot;
             potInRange = null;
