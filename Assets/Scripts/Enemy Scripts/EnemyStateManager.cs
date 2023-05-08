@@ -160,8 +160,6 @@ public class EnemyStateManager : MonoBehaviour
         detectionCollider.isTrigger = true;
 
         switchState(IdleState);
-
-
     }
 
     void Update()
