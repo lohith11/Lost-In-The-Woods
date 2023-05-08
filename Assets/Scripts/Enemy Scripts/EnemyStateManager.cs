@@ -19,6 +19,7 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public Vector3 soundPosition;
     [HideInInspector] public AnimatorStateInfo stateInfo;
     [HideInInspector] public AudioSource enemyAudioSource;
+    [HideInInspector] public EnemyHealth enemyHealth;
     public AudioClip[] enemySounds;
 
     //* Enemy Attributes
@@ -138,6 +139,7 @@ public class EnemyStateManager : MonoBehaviour
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
         enemyAudioSource = GetComponent<AudioSource>();
+        enemyHealth = GetComponent<EnemyHealth>();
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
@@ -165,7 +167,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         enemyAgent.stoppingDistance = stoppingDistance;
         currentState.UpdateState();
-        if (EnemyHealth.health <= 0)
+        if (enemyHealth.health <= 0)
         {
             PlayerInRange = false;
             switchState(DieState);

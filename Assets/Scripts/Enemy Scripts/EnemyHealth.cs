@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [ShowInInspector]public static float health = 100;
+    public float health = 100;
 
     void Awake()
     {
