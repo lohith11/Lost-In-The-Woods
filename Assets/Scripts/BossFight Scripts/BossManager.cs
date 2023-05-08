@@ -116,11 +116,11 @@ public class BossManager : MonoBehaviour
         braziers[targetBrazier].TurnOff();
         if (boss.isOiled)
         {
-            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
+            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 40 });
         }
         else
         {
-            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 70 });
+            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 30 });
         }
 
         boss.PlayerInRange = true;

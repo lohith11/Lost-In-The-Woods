@@ -269,6 +269,7 @@ public class BlindBrute : MonoBehaviour
         if (other.gameObject.CompareTag("OilPot"))
         {
             isOiled = true;
+            health -= 5;
         }
     }
     private void OnTriggerStay(Collider other)
