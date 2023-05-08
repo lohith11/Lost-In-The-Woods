@@ -7,6 +7,7 @@ public class SaveSystem : MonoBehaviour
     private string saveDir;
     private const string SAVE_EXTENSION = ".json";
     private GameManager gameManager;
+    private SaveDataManager saveDataManager;
     private string folderName = "Saves";
 
     [HideInInspector] public string filePath;
@@ -23,7 +24,8 @@ public class SaveSystem : MonoBehaviour
         {
             Directory.CreateDirectory(saveDir);
         }
-        gameManager = GetComponent<GameManager>();
+        //gameManager = GetComponent<GameManager>();
+        saveDataManager = GetComponent<SaveDataManager>();
     }
 
     private void Start()
@@ -33,7 +35,7 @@ public class SaveSystem : MonoBehaviour
 
     public void Save()
     {
-        string jsonData = JsonUtility.ToJson(gameManager.playerData, true);
+        string jsonData = JsonUtility.ToJson(saveDataManager.playerData, true);
         File.WriteAllText(saveDir + string.Concat("Save", ".json"), jsonData);
 
     }
