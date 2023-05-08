@@ -50,7 +50,6 @@ public class SaveDataManager : MonoBehaviour
     }
     public void Respawn(object sender , EventArgs e)
     {
-        Debug.Log("Respawn event recieved");
         LoadGame();
     }
     public void NewGame()

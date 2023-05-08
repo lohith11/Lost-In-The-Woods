@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!1001 &36623005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18003,11 +18004,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UngaBunga_Boi
       objectReference: {fileID: 0}
-    - target: {fileID: 6314805484491178276, guid: c1cb0bebd0b424949aa5fbd0754b4803,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 6694990679237024670, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: m_RootOrder
@@ -19597,7 +19593,7 @@ MonoBehaviour:
     curentPosition: {x: 0, y: 0, z: 0}
     currentHealth: 0
     maxHealth: 0
-  saveDataManager: {fileID: 1109705250}
+  saveDataManager: {fileID: 0}
 --- !u!114 &1057367255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19618,13 +19614,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057367253}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 74.58205, y: -0.84543514, z: 38.808712}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1164038408}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1057367257
 MonoBehaviour:
@@ -20368,74 +20364,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107326845}
   m_CullTransparentMesh: 1
---- !u!1 &1109705247
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1109705248}
-  - component: {fileID: 1109705250}
-  - component: {fileID: 1109705249}
-  m_Layer: 0
-  m_Name: SaveDataManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1109705248
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109705247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1164038408}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1109705249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109705247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25a77e7a95ccfe24a87697b361c4ecdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  filePath: 
---- !u!114 &1109705250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109705247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcab7fc0baf3ac54e851bb76f5a4639d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultChapter: 1
-  defaultRockCount: 0
-  defaultHealth: 100
-  defaultMaxHealth: 100
-  playerData:
-    currentChapter: 0
-    currentRockCount: 0
-    curentPosition: {x: 0, y: 0, z: 0}
-    currentHealth: 0
-    maxHealth: 0
 --- !u!4 &1111595212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b2db04363402831458a55ca9c7a4b151,
@@ -21529,39 +21457,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1549038243}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1164038407
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1164038408}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1164038408
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164038407}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.58205, y: -0.84543514, z: 38.808712}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1057367256}
-  - {fileID: 1109705248}
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1165392292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28029,6 +27924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!4 &1541036857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4255811633335080, guid: 3850e8506da960449b32ccdadb2677f4,
@@ -30029,6 +29925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!4 &1650107244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 36d2636b6965d754d8bbf1705661c796,
@@ -33300,6 +33197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!1001 &1810332587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37554,21 +37452,6 @@ PrefabInstance:
       propertyPath: breath
       value: 
       objectReference: {fileID: 8300000, guid: 726ddd1a3307ebb4c960482eaf90150d, type: 3}
-    - target: {fileID: 8055116204556016355, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: maxRockPickUp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016355, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: throwCoolDown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116204556016355, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: enemyLayer.m_Bits
-      value: 16384
-      objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: deadScreen
@@ -40332,6 +40215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!1001 &2126771285
 PrefabInstance:
   m_ObjectHideFlags: 0
