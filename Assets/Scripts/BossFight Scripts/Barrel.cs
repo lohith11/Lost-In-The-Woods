@@ -9,6 +9,12 @@ public class Barrel : MonoBehaviour
     [SerializeField] float explosionDelay;
     [SerializeField] float explosionRange;
     [SerializeField] LayerMask bossLayer;
+    public GameObject fire;
+
+    private void Start()
+    {
+        fire.SetActive(false);
+    }
     private void Update()
     {
         #if UNITY_EDITOR
@@ -24,6 +30,7 @@ public class Barrel : MonoBehaviour
 
     IEnumerator Explosion()
     {
+        fire.SetActive(true);
         yield return new WaitForSeconds(explosionDelay);
         Debug.Log("Barrel Exploded");
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange, bossLayer);

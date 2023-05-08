@@ -125,6 +125,7 @@ public class PlayerStateMachine : MonoBehaviour
     public int herbs;
     public GameObject pickingThings;
     public AudioClip herbPickUpAudio;
+    public AudioClip breath;
     [Space(10)]
 
     private GameObject herbInRange;
