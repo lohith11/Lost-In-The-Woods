@@ -5476,6 +5476,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: idleTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -11465,7 +11470,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1439300646}
-  - {fileID: 1230499192}
   m_Father: {fileID: 0}
   m_RootOrder: 141
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22396,51 +22400,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1323259872}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1230499191
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1230499192}
-  - component: {fileID: 1230499193}
-  m_Layer: 0
-  m_Name: Grass_Collider (1)
-  m_TagString: Grass
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1230499192
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230499191}
-  m_LocalRotation: {x: -0, y: 0.99997056, z: -0, w: -0.007678492}
-  m_LocalPosition: {x: -1.02, y: 0, z: -1.94}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 626476578}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180.88, z: 0}
---- !u!65 &1230499193
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230499191}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.328259, y: 1, z: 12.100608}
-  m_Center: {x: 1.1494927, y: 0, z: -1.7215567}
 --- !u!4 &1231206049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 48aab90d7099e38428e69512f29b7c60,
@@ -25863,8 +25822,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16.897388, y: 1, z: 8.397816}
-  m_Center: {x: 5.4340525, y: 0, z: 0.1298447}
+  m_Size: {x: 18.248528, y: 1, z: 8.397816}
+  m_Center: {x: 4.758496, y: 0, z: 0.12984465}
 --- !u!4 &1439300646
 Transform:
   m_ObjectHideFlags: 0
@@ -31385,6 +31344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: idleTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -36768,11 +36732,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Playerrr
-      objectReference: {fileID: 0}
-    - target: {fileID: 8055116206163759081, guid: 017d1145b22a58d4c9c51c575d9ecb41,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017d1145b22a58d4c9c51c575d9ecb41, type: 3}
