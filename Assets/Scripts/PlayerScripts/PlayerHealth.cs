@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
     public float healthRegenerationValue;
     public AudioClip[] playerHurtSound;
     private AudioSource playerAudioSource;
-    private static bool isPlayerDead;
+    public static bool isPlayerDead;
     private PlayerStateMachine playerStateMachine;
     public AudioClip deathSound;
     private void Start()

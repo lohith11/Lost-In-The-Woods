@@ -155,6 +155,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Start()
     {
+        if (PlayerHealth.isPlayerDead)
+        {
+            return;
+        }
         pickingThings.SetActive(false);
         healthPickUpEffect.enabled = false;
         staminaBar.enabled = false;
@@ -167,7 +171,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         mouseLookRef = FindObjectOfType<MouseLook>();
         playerInputRef = FindObjectOfType<PlayerInput>();
-
         SwitchState(playerIdleState);
     }
 
@@ -326,6 +329,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerHealth.isPlayerDead)
+        {
+            playerControls.Disable();
+        }
         CameraShake();
         Step();
         currentState.UpdateState();

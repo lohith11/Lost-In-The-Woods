@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using System;
 using Sirenix.OdinInspector;
-using UnityEngine.Rendering;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class ThrowingRocks : MonoBehaviour
 {
@@ -73,12 +70,12 @@ public class ThrowingRocks : MonoBehaviour
             playerHud.SetActive(true);
             if (playerStateMachine.isAtttacking && readyToThrow && totalThrows > 0)
             {
-                if(!isOilPot)
+                if (!isOilPot)
                 {
                     Throw();
                 }
             }
-            if(playerStateMachine.isAtttacking && isOilPot && totalPots > 0 && readyToThrow)
+            if (playerStateMachine.isAtttacking && isOilPot && totalPots > 0 && readyToThrow)
             {
                 PotThrow();
             }
@@ -89,26 +86,27 @@ public class ThrowingRocks : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
-            crossHair.SetActive(false);
             playerHud.SetActive(false);
             lineRendererEndPoint.SetActive(false);
         }
 
-        if(totalPots >= 1)
+        if (totalPots >= 1)
         {
             canPickPot = false;
             totalPots = 1;
         }
 
-        if(totalThrows >= maxRockPickUp)
+        if (totalThrows >= maxRockPickUp)
         {
             canPickUp = false;
             totalThrows = maxRockPickUp;
         }
     }
 
-    public void PotThrow() 
+    public void PotThrow()
     {
+        readyToThrow = false;
+
         GameObject projectile = Instantiate(oilPot, attackpoint.position, cam.rotation);
 
         //Getting RigidBody of that throwable object
@@ -139,7 +137,7 @@ public class ThrowingRocks : MonoBehaviour
     public void Throw()
     {
         readyToThrow = false;
-        
+
         //Instatiation object
         GameObject projectile = Instantiate(objectThrow, attackpoint.position, cam.rotation);
 
@@ -155,10 +153,16 @@ public class ThrowingRocks : MonoBehaviour
 
         if (Physics.Raycast(cam.position, cam.forward, out hit, 500f))
         {
-            forceDirection = (hit.point - attackpoint.position).normalized;
+            if (hit.collider.gameObject.layer == enemyLayer) // if aim is locked on enemy
+            {
+                forceDirection = (hit.collider.gameObject.transform.position - attackpoint.position).normalized;
+            }
+            else // if aim is not locked on enemy
+            {
+                forceDirection = cam.transform.forward;
+            }
         }
 
-        //Vector3 forceToAdd = forceDirection * throwForce + transform.up * throwUpwardForce;
         Vector3 forceToAdd = forceDirection * throwForce;
         projectileRB.AddForce(forceToAdd, ForceMode.Impulse);
 
@@ -169,45 +173,53 @@ public class ThrowingRocks : MonoBehaviour
 
     private void Projectile()
     {
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = numPoints;
-        crossHair.SetActive(true);
-        lineRendererEndPoint.SetActive(true);
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyLayer))
         {
+            // If aiming at an enemy, hide the line renderer
+            lineRenderer.enabled = false;
+            lineRendererEndPoint.SetActive(false);
+            crossHair.SetActive(true);
+
             Vector3 targetPosition = hit.collider.gameObject.transform.position;
             targetPosition.y = transform.position.y;
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed);
         }
-
-        List<Vector3> points = new List<Vector3>();
-        Vector3 startingPosition = attackpoint.position;
-        Vector3 startingVelocity = cam.transform.forward * throwForce;
-        for (float t = 0; t < numPoints; t += timeBetweenPoints)
+        else
         {
-            newPoint = startingPosition + t * startingVelocity;
-            newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / f * t * t;
+            // If not aiming at an enemy, show the line renderer
+            lineRenderer.enabled = true;
+            lineRendererEndPoint.SetActive(true);
+            crossHair.SetActive(false);
+            lineRenderer.positionCount = numPoints;
 
-            points.Add(newPoint);
-
-            if (Physics.OverlapSphere(newPoint, 0.01f, CollidableLayers).Length > 0)
+            List<Vector3> points = new List<Vector3>();
+            Vector3 startingPosition = attackpoint.position;
+            Vector3 startingVelocity = cam.transform.forward * throwForce;
+            for (float t = 0; t < numPoints; t += timeBetweenPoints)
             {
-                lineRenderer.positionCount = points.Count;
-                Vector3 target = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-                lineRendererEndPoint.transform.localPosition = target;
-                break;
+                newPoint = startingPosition + t * startingVelocity;
+                newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / f * t * t;
+
+                points.Add(newPoint);
+
+                if (Physics.OverlapSphere(newPoint, 0.01f, CollidableLayers).Length > 0)
+                {
+                    lineRenderer.positionCount = points.Count;
+                    Vector3 target = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
+                    lineRendererEndPoint.transform.localPosition = target;
+                    break;
+                }
             }
+
+            lineRenderer.SetPositions(points.ToArray());
         }
-
-        lineRenderer.SetPositions(points.ToArray());
-
     }
 
     public void RockPicking()
     {
-        if(canPickUp)
+        if (canPickUp)
         {
             playerStateMachine.audioSource.PlayOneShot(rockPickingSound);
             totalThrows++;
@@ -221,7 +233,7 @@ public class ThrowingRocks : MonoBehaviour
 
     public void PotPicking()
     {
-        if(canPickPot)
+        if (canPickPot)
         {
             totalPots++;
             isOilPot = true;
@@ -236,7 +248,7 @@ public class ThrowingRocks : MonoBehaviour
     #region Triggers
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Rock"))
+        if (other.CompareTag("Rock"))
         {
             pickingThings.SetActive(true);
             canPickUp = true;
@@ -244,7 +256,7 @@ public class ThrowingRocks : MonoBehaviour
             rockInRange = other.gameObject;
         }
 
-        if(other.gameObject.CompareTag("OilPot"))
+        if (other.gameObject.CompareTag("OilPot"))
         {
             pickingThings.SetActive(true);
             canPickPot = true;
