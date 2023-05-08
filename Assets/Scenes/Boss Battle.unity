@@ -2967,7 +2967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1222711316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4249,7 +4249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
       propertyPath: explosionRange
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4802294825628324767, guid: b6ffb8f7ec202524791dfdab37a1ae8f,
         type: 3}
@@ -4693,7 +4693,7 @@ PrefabInstance:
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: attackRadius
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
@@ -4705,6 +4705,11 @@ PrefabInstance:
       propertyPath: pounceHeight
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
+        type: 3}
+      propertyPath: healthFillBar
+      value: 
+      objectReference: {fileID: 1162211683}
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: playerTpPoint
@@ -4738,12 +4743,12 @@ PrefabInstance:
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: runningDetectionRadius
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: walkingDetectionRadius
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
@@ -4775,6 +4780,21 @@ PrefabInstance:
       propertyPath: teleportPoints.Array.data[5]
       value: 
       objectReference: {fileID: 1137799577}
+    - target: {fileID: 5089932811517653474, guid: 395dd30fc561800458732c4cda7fd90a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.153173
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089932811517653474, guid: 395dd30fc561800458732c4cda7fd90a,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.2306697
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089932811517653474, guid: 395dd30fc561800458732c4cda7fd90a,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 1.3224533e-10
+      objectReference: {fileID: 0}
     - target: {fileID: 5359982010114557160, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: m_Name
@@ -4796,6 +4816,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8786743026710929411, guid: 51a61c00d977d3340ade4de7a866bfc6,
         type: 2}
+    - target: {fileID: 5866666021932770645, guid: 395dd30fc561800458732c4cda7fd90a,
+        type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395dd30fc561800458732c4cda7fd90a, type: 3}
 --- !u!4 &5790948187835190606 stripped
