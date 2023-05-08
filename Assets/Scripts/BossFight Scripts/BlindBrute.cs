@@ -74,8 +74,9 @@ public class BlindBrute : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Health is : " + health + "Boss normalized health is : " + GetHealthNormalized());
         healthFillBar.fillAmount = health / 300;
-        if(health <= 0)
+        if (health <= 0)
         {
             health = 0;
             endBossBattle?.Invoke(this, EventArgs.Empty);
@@ -183,7 +184,7 @@ public class BlindBrute : MonoBehaviour
         agent.SetDestination(targetPosition);
     }
 
-    
+
 
     IEnumerator PounceCoroutine(Vector3 startPosition, float startTime, Vector3 targetPosition)
     {
@@ -262,7 +263,7 @@ public class BlindBrute : MonoBehaviour
                 }
             }
         }
-        if(other.gameObject.CompareTag("OilPot"))
+        if (other.gameObject.CompareTag("OilPot"))
         {
             isOiled = true;
         }
