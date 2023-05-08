@@ -26,6 +26,7 @@ public class EnemyStateManager : MonoBehaviour
 
     public bool isWayPointPatrol; //* This changes how the enemy patrols around
     public float stoppingDistance;
+    public float health;
 
     [Header("Enemy field of view")]
     [Space(2)]
@@ -167,7 +168,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         enemyAgent.stoppingDistance = stoppingDistance;
         currentState.UpdateState();
-        if (enemyHealth.health <= 0)
+        if (health <= 0)
         {
             PlayerInRange = false;
             switchState(DieState);
@@ -184,7 +185,6 @@ public class EnemyStateManager : MonoBehaviour
             enemyAgent.stoppingDistance = 0f;
         }
 
-        Debug.Log("Player in range : " + PlayerInRange);
     }
 
     public void switchState(EnemyBaseState Enemy)

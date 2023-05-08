@@ -10,11 +10,6 @@ public class dealDamageEventArg : EventArgs
 
 public class RockDestroy : MonoBehaviour
 {
-    public static event EventHandler<dealDamageEventArg> dealDamage;
-
-    [SerializeField] private string headDamage;
-    [SerializeField] private string bodyDamage;
-
     private Rigidbody rb;
     private BoxCollider bc;
     public int collectable = 0;
@@ -28,7 +23,7 @@ public class RockDestroy : MonoBehaviour
 
     private void Start()
     {
-        if(!isThrown)
+        if (!isThrown)
         {
             rb.useGravity = false;
             bc.isTrigger = true;
@@ -36,11 +31,11 @@ public class RockDestroy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground"))
         {
             GetComponent<Rigidbody>().isKinematic = true;
             Destroy(this.gameObject, 3f);
-            
+
         }
 
         //to do :- visual reprensentation of collectables
@@ -52,17 +47,9 @@ public class RockDestroy : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.name == "mixamorig:Head")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Entering EnemyHead");
-            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 100 });
-            Destroy(this.gameObject);
-        }
-
-        if (collision.gameObject.name == "UngaBunga_Boi")
-        {
-            Debug.Log("Entering EnemyBody");
-            dealDamage?.Invoke(this, new dealDamageEventArg { damage = 50 });
+            collision.gameObject.GetComponent<EnemyStateManager>().health -= 50;
             Destroy(this.gameObject);
         }
     }

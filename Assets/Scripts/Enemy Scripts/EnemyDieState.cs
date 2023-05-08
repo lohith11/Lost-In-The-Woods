@@ -6,8 +6,8 @@ public class EnemyDieState : EnemyBaseState
     public EnemyDieState(EnemyStateManager enemy) : base(enemy) { }
     public override void EnterState()
     {
+        Debug.Log("Die state");
         AlertEnemies();
-        //enemyStateManager.enemyAnimController.enabled = false;
         enemyStateManager.enemyAnimController.CrossFade("Death_Anim", 0.2f);
         enemyStateManager.enemyHealth.health = 0;
 
@@ -29,10 +29,9 @@ public class EnemyDieState : EnemyBaseState
         foreach (Collider enemies in nearEnemies)
         {
             var enemyManager = enemies.GetComponent<EnemyStateManager>();
-            if (enemyManager != null)
+            if (nearEnemies.Length > 0)
             {
                 enemyManager.switchState(enemyManager.AlertState);
-                Debug.Log("Alert enemies");
             }
         }
     }
