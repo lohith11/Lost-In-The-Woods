@@ -7,11 +7,12 @@ using UnityEngine;
 public class Brazier : MonoBehaviour
 {
     [SerializeField] GameObject light_FX;
-    bool isPermanentOff;
+    public static int lightUpBrazierCount;
+
     
     void Start()
     {
-        TurnOff();
+        //TurnOff();
     }
 
     void Update()
@@ -22,10 +23,16 @@ public class Brazier : MonoBehaviour
     public void TurnOn()
     {
         light_FX.SetActive(true);
+        lightUpBrazierCount++;
     }
 
     public void TurnOff()
     {
         light_FX.SetActive(false);
+    }
+
+    public bool IsTurnedOn()
+    {
+       return light_FX.activeSelf;
     }
 }
