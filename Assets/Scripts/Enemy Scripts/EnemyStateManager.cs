@@ -181,8 +181,8 @@ public class EnemyStateManager : MonoBehaviour
         }
         else
         {
-            angle = 177f;
-            enemyAgent.stoppingDistance = 0f;
+             angle = 177f;
+            enemyAgent.stoppingDistance = 0f;     
         }
 
     }
