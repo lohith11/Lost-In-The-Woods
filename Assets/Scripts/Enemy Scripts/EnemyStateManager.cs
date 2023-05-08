@@ -18,6 +18,8 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public NavMeshAgent enemyAgent;
     [HideInInspector] public Vector3 soundPosition;
     [HideInInspector] public AnimatorStateInfo stateInfo;
+    [HideInInspector] public AudioSource enemyAudioSource;
+    public AudioClip[] enemySounds;
 
     //* Enemy Attributes
 
@@ -84,8 +86,8 @@ public class EnemyStateManager : MonoBehaviour
 
     public float backToPatrol = 2.0f;
     public TMP_Text alertText;
-    //* make this into explamation image and a slider 
-
+    public Image alertEffectSprite;
+    [SerializeField] private float alertEffectTimer;
     [Space(10)]
 
     [Header("Attack Properties")]
@@ -94,11 +96,8 @@ public class EnemyStateManager : MonoBehaviour
     [Range(1, 7)] public float attackRadius;
     public float timeSinceLastSighting;
     public float minDistanceToPlayer;
-    public float attackDuration;
-    public float attackCooldown = 2f; //* disable this incase you want one hit kill
     public float damage;
     public bool isAttacking;
-    private float _attackTimer;
     public Vector3 lastknownLocation;
 
     [Space(10)]
@@ -138,6 +137,7 @@ public class EnemyStateManager : MonoBehaviour
         playerStateMachine = FindObjectOfType<PlayerStateMachine>();
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimController = GetComponent<Animator>();
+        enemyAudioSource = GetComponent<AudioSource>();
 
         IdleState = new EnemyIdleState(this);
         PatrolState = new EnemyPatrolState(this);
@@ -193,22 +193,8 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     public void searchForSounds() => StartCoroutine(CheckForSounds());
-    public void AttackPlayer()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRadius, targetMask);
-
-        if (hitColliders.Length > 0)
-        {
-            PlayerHealth player = hitColliders[0].GetComponent<PlayerHealth>();
-            if (player != null)
-            {
-                player.TakeDamage(damage);
-            }
-            else if (player == null)
-                Debug.Log("Player not found");
-        }
-    }
     public void SearchForPlayer() => StartCoroutine(GoTosoundLocations());
+    public void PlayAlertEffect() => StartCoroutine(AlertEffect());
     private void FieldOfViewCheck()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
@@ -232,6 +218,12 @@ public class EnemyStateManager : MonoBehaviour
         }
         else if (PlayerInRange)
             PlayerInRange = false;
+    }
+    private void HidePlayer(object sender, EventArgs e)
+    {
+        PlayerInRange = false;
+        SoundInRange = false;
+
     }
 
     private IEnumerator CheckForSounds()
@@ -275,10 +267,14 @@ public class EnemyStateManager : MonoBehaviour
         }
     }
 
-    private void HidePlayer(object sender, EventArgs e)
+    private IEnumerator AlertEffect()
     {
-        PlayerInRange = false;
-        SoundInRange = false;
+        alertEffectSprite.enabled = true;
+        AudioClip audioClip = enemySounds[0];
+        enemyAudioSource.PlayOneShot(audioClip);
+        yield return new WaitForSeconds(alertEffectTimer);
+        alertEffectSprite.enabled = false;
+
     }
 
     void OnTriggerEnter(Collider other)

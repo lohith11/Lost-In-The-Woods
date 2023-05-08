@@ -9,7 +9,7 @@ public class EnemyAlertState : EnemyBaseState
         enemyStateManager.alertText.enabled = true;
         enemyStateManager.alertText.text = "Alert!";
         enemyStateManager.enemyAgent.speed = enemyStateManager.alertSpeed;
-        //! to make it better add a exclmation point and a small bar on top of the enemy 
+        enemyStateManager.PlayAlertEffect();
     }
 
     public override void UpdateState()

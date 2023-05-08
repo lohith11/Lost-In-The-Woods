@@ -53,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         bloodSplatter.color = splatterAlpha;
     }
 
+
     public void TakeDamage(float damage)
     {
         Health -= damage;
