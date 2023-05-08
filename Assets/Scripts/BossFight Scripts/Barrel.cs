@@ -8,6 +8,7 @@ public class Barrel : MonoBehaviour
     public static event EventHandler<dealDamageEventArg> explosiveDamage;
     [SerializeField] float explosionDelay;
     [SerializeField] float explosionRange;
+    [SerializeField] float explosionDamage;
     [SerializeField] LayerMask bossLayer;
     public GameObject fire;
 
@@ -19,7 +20,7 @@ public class Barrel : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
+            explosiveDamage.Invoke(this, new dealDamageEventArg { damage = explosionDamage });
         }
     }
 
@@ -35,7 +36,7 @@ public class Barrel : MonoBehaviour
         {
             if(explosiveDamage != null)
             {
-                explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
+                explosiveDamage.Invoke(this, new dealDamageEventArg { damage = explosionDamage });
             }
             gameObject.SetActive(false);
         }
