@@ -31,7 +31,7 @@ public class PlayerCrouchState : PlayerBaseState
         if (Mathf.Abs(playerStateMachine.crouchHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.crouchHeight, 0.1f);
-            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.3f);
             playerStateMachine.originalPosition = currentPosition;
         }
     }

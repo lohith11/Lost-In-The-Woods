@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using Sirenix.OdinInspector;
+using UnityEngine.Rendering;
 
 public class ThrowingRocks : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class ThrowingRocks : MonoBehaviour
     public GameObject oilPot;
     public bool canPickPot;
     public int totalPots;
+
     void Start()
     {
         potIsthere.SetActive(false);
@@ -167,19 +169,19 @@ public class ThrowingRocks : MonoBehaviour
 
     private void Projectile()
     {
+        lineRenderer.enabled = true;
+        lineRenderer.positionCount = numPoints;
         crossHair.SetActive(true);
         lineRendererEndPoint.SetActive(true);
+
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, distance, enemyLayer))
         {
             Vector3 targetPosition = hit.collider.gameObject.transform.position;
             targetPosition.y = transform.position.y;
             Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
-            lineRendererEndPoint.transform.LookAt(targetPosition);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, aimSpeed);
         }
 
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = numPoints;
         List<Vector3> points = new List<Vector3>();
         Vector3 startingPosition = attackpoint.position;
         Vector3 startingVelocity = cam.transform.forward * throwForce;
@@ -190,16 +192,17 @@ public class ThrowingRocks : MonoBehaviour
 
             points.Add(newPoint);
 
-            if (Physics.OverlapSphere(newPoint, 0.05f, CollidableLayers).Length > 0)
+            if (Physics.OverlapSphere(newPoint, 0.01f, CollidableLayers).Length > 0)
             {
                 lineRenderer.positionCount = points.Count;
                 Vector3 target = lineRenderer.GetPosition(lineRenderer.positionCount - 1);
-                lineRendererEndPoint.transform.position = target;
+                lineRendererEndPoint.transform.localPosition = target;
                 break;
             }
         }
 
         lineRenderer.SetPositions(points.ToArray());
+
     }
 
     public void RockPicking()

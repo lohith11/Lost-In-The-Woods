@@ -24,7 +24,7 @@ public class PlayerMovingState : PlayerBaseState
         if (Mathf.Abs(playerStateMachine.standingHeight - currentPosition) > 0.05f)
         {
             currentPosition = Mathf.Lerp(currentPosition, playerStateMachine.standingHeight, 0.1f);
-            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0f);
+            playerStateMachine.playerCamera.localPosition = new Vector3(0, currentPosition, 0.2f);
             playerStateMachine.originalPosition = currentPosition;
         }
         playerStateMachine.playerAnimation.SetFloat(moveX, playerStateMachine.playerInput.x);

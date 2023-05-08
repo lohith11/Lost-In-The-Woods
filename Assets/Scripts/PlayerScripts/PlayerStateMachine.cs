@@ -26,7 +26,6 @@ public class PlayerStateMachine : MonoBehaviour
     public static event EventHandler hidePlayer;
     public static event EventHandler levelEnd;
 
-
     #region Variables
     //Player Walking
     [Header("< Player Walking >")]
