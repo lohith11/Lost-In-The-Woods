@@ -17,11 +17,11 @@ public class JumpScareSounds : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+   /* private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            jumpScareAudios = null;
+
         }
-    }
+    }*/
 }
