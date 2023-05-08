@@ -44,11 +44,6 @@ public class PlayerHealth : MonoBehaviour
             Vector3 campos = Vector3.Lerp(playerStateMachine.playerCamera.localPosition, Vector3.zero, 0.01f);
             playerStateMachine.playerCamera.localPosition = campos;
         }
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            Health = 0;
-           PlayerDead();
-        }
     }
     private void UpdateHealth()
     {
