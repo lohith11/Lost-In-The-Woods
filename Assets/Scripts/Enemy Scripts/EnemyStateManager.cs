@@ -173,12 +173,13 @@ public class EnemyStateManager : MonoBehaviour
         if (PlayerInRange)
         {
             transform.LookAt(transform.position, playerRef.transform.position);
-            enemyAgent.stoppingDistance = 2f;
+            enemyAgent.stoppingDistance = stoppingDistance;
             angle = 346f;
         }
         else
         {
             angle = 177f;
+            enemyAgent.stoppingDistance = 0f;
         }
 
         Debug.Log("Player in range : " + PlayerInRange);
@@ -257,7 +258,7 @@ public class EnemyStateManager : MonoBehaviour
     private IEnumerator GoTosoundLocations()
     {
         enemyAgent.SetDestination(soundPosition);
-        enemyAnimController.Play("Finding_Anim");
+        enemyAnimController.CrossFade("Finding_Anim", 0.1f);
         yield return new WaitForSeconds(searchForPlayer);
         SoundInRange = false;
         switchState(PatrolState);

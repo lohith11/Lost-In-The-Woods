@@ -5,7 +5,7 @@ public class EnemyAttackState : EnemyBaseState
     public EnemyAttackState (EnemyStateManager enemy):base(enemy){}
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Torch_Attack");
+        enemyStateManager.enemyAnimController.CrossFade("Torch_Attack", 0.05f);
     }
 
 

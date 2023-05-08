@@ -395,7 +395,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Grass") && crouchPressed)
         {
             Debug.Log("Entered");
-            hidePlayer?.Invoke(this, EventArgs.Empty);
+           hidePlayer?.Invoke(this, EventArgs.Empty);
         }
 
         if (other.gameObject.CompareTag("Barrel"))

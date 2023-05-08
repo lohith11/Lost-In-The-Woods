@@ -9,7 +9,7 @@ public class EnemyChaseState : EnemyBaseState
     public EnemyChaseState(EnemyStateManager enemy) : base(enemy) { }
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Chasing_Anim");
+        enemyStateManager.enemyAnimController.CrossFade("Chasing_Anim", 0.05f);
         enemyStateManager.enemyAgent.speed = enemyStateManager.chaseSpeed;
     }
 

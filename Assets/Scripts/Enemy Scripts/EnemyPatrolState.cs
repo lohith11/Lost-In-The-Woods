@@ -7,7 +7,7 @@ public class EnemyPatrolState : EnemyBaseState
     public override void EnterState()
     {
         enemyStateManager.searchForSounds();
-        enemyStateManager.enemyAnimController.Play("Walking_Anim");
+        enemyStateManager.enemyAnimController.CrossFade("Walking_Anim", 0.05f);
         //enemyStateManager.enemyAgent.speed = 1.5f;
         enemyStateManager.enemyAgent.speed = enemyStateManager.patrolSpeed;
         if (enemyStateManager.isWayPointPatrol)

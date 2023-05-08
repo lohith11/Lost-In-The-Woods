@@ -345,11 +345,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: IdleBunga
       objectReference: {fileID: 0}
-    - target: {fileID: 3672573060251433214, guid: fa9336398f9ec154d9e07c77c0d7c4e0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3672573060251433215, guid: fa9336398f9ec154d9e07c77c0d7c4e0,
         type: 3}
       propertyPath: m_RootOrder
@@ -405,11 +400,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4106957287146678223, guid: fa9336398f9ec154d9e07c77c0d7c4e0,
+    - target: {fileID: 8282751522530587294, guid: fa9336398f9ec154d9e07c77c0d7c4e0,
         type: 3}
-      propertyPath: centerPoint
+      propertyPath: playerHealth
       value: 
-      objectReference: {fileID: 1663611825}
+      objectReference: {fileID: 1487722734}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa9336398f9ec154d9e07c77c0d7c4e0, type: 3}
 --- !u!1001 &192682580
@@ -479,6 +474,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockPickUp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2385162915222341866, guid: 6db583b507da29a48bd163059e9c2388,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6db583b507da29a48bd163059e9c2388, type: 3}
 --- !u!4 &197607563 stripped
@@ -528,7 +528,6 @@ MonoBehaviour:
     type: 3}
   mainMenu: {fileID: 0}
   loadingSlider: {fileID: 0}
-  endPoint: {fileID: 0}
   endLevel:
     m_PersistentCalls:
       m_Calls: []
@@ -917,6 +916,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RockPickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2385162915222341866, guid: 6db583b507da29a48bd163059e9c2388,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6db583b507da29a48bd163059e9c2388, type: 3}
@@ -1657,6 +1661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Playerrr
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055116206163759084, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+        type: 3}
+      propertyPath: mouseSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017d1145b22a58d4c9c51c575d9ecb41, type: 3}
@@ -2412,6 +2421,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487722734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+    type: 3}
+  m_PrefabInstance: {fileID: 738489549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954362a966524084f950f3cfe6398652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1520040048 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1520040048, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
@@ -3859,7 +3880,7 @@ PrefabInstance:
     - target: {fileID: 5359982010114557160, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021932770644, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}

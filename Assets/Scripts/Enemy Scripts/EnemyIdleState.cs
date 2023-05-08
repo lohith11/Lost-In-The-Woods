@@ -8,7 +8,7 @@ public class EnemyIdleState : EnemyBaseState
     public override void EnterState()
     {
         _idleTimer = enemyStateManager.idleTimer;
-       enemyStateManager.enemyAnimController.Play("Idle_Anim");
+       enemyStateManager.enemyAnimController.CrossFade("Idle_Anim", 0.1f);
     }
 
     public override void UpdateState()

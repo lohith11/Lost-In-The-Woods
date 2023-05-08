@@ -5,7 +5,7 @@ public class EnemyAlertState : EnemyBaseState
     public EnemyAlertState(EnemyStateManager enemy) : base(enemy) { }
     public override void EnterState()
     {
-        enemyStateManager.enemyAnimController.Play("Walking_Anim");
+        enemyStateManager.enemyAnimController.CrossFade("Walking_Anim" ,0.05f);
         enemyStateManager.alertText.enabled = true;
         enemyStateManager.alertText.text = "Alert!";
         enemyStateManager.enemyAgent.speed = enemyStateManager.alertSpeed;
