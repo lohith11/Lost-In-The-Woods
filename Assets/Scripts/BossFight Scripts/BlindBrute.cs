@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class BlindBrute : MonoBehaviour
 {
+    public static EventHandler<dealDamageEventArg> bossDamage;
+    public static EventHandler endBossBattle;
     public AudioSource audioSource;
     [SerializeField] float maxHealth;
     public float health;
@@ -46,7 +48,6 @@ public class BlindBrute : MonoBehaviour
 
     [Space(2f)]
     public PlayerStateMachine playerStateMachine;
-    public static EventHandler<dealDamageEventArg> bossDamage;
     public bool isOiled;
 
     void Start()
@@ -71,9 +72,14 @@ public class BlindBrute : MonoBehaviour
 
     void Update()
     {
+        if(health <= 0)
+        {
+            health = 0;
+            endBossBattle?.Invoke(this, EventArgs.Empty);
+        }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            MoveAttack();
+            health = 0;
         }
         agent.stoppingDistance = stoppingDistance;
         if (PlayerInRange)
@@ -104,7 +110,6 @@ public class BlindBrute : MonoBehaviour
         Debug.Log("Take damage function called");
         health -= e.damage;
     }
-
 
     public void DealDamage(float damage)
     {

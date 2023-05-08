@@ -1,9 +1,11 @@
+using System;
 using System.IO;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 //TODO make the game restart from last checkpoint when the player dies
 //TODO start chapter mid checkpoint End chapter
@@ -26,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject mainMenu;
-
     [SerializeField] private Slider loadingSlider;
 
     [Space(5)]
@@ -34,7 +35,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] BoxCollider endPoint;
     public UnityEvent endLevel;
     public PlayerData playerData;
-
     private SaveSystem saveSystem;
 
     private void Awake()
@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+       // loadingScreen.SetActive(false);
         StartGame();
+        BlindBrute.endBossBattle += EndBattle;
     }
     void Update()
     {
@@ -57,6 +59,14 @@ public class GameManager : MonoBehaviour
             LoadGame();
         }
     }
+
+    private void EndBattle(object sender , EventArgs e )
+    {
+        Debug.Log("Battle ended from game manager");
+        loadingScreen.SetActive(true);
+    }
+
+    #region PlayerData
     private void StartGame()
     {
         bool newSave = File.Exists(saveSystem.filePath);
@@ -90,6 +100,8 @@ public class GameManager : MonoBehaviour
     {
         playerData = saveSystem.Load();
     }
+
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {

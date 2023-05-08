@@ -10,6 +10,7 @@ public class BossManager : MonoBehaviour
         Stage_1,
         Stage_2,
         Stage_3,
+        EndBattle,
     }
 
     private BlindBrute boss;
@@ -28,6 +29,7 @@ public class BossManager : MonoBehaviour
         StartBattle();
         boss = FindObjectOfType<BlindBrute>();
         Barrel.explosiveDamage += BossBattle_OnDamaged;
+        BlindBrute.endBossBattle += EndBattle;
         StartNextStage();
     }
 
@@ -70,6 +72,11 @@ public class BossManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    private void EndBattle(object sender, EventArgs e)
+    {
+        Debug.Log("Battle ended!");
     }
 
     private void StartNextStage()
