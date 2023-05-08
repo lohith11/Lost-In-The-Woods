@@ -19415,10 +19415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a5c37d91cb554d85a6a413c3ae7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultChapter: 1
-  defaultRockCount: 0
-  defaultHealth: 100
-  defaultMaxHealth: 100
   loadingScreen: {fileID: 0}
   mainMenu: {fileID: 0}
   loadingSlider: {fileID: 0}
@@ -19431,6 +19427,7 @@ MonoBehaviour:
     curentPosition: {x: 0, y: 0, z: 0}
     currentHealth: 0
     maxHealth: 0
+  saveDataManager: {fileID: 0}
 --- !u!114 &1057367255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36770,6 +36767,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.001
       objectReference: {fileID: 0}
+    - target: {fileID: 8055116204556016354, guid: 017d1145b22a58d4c9c51c575d9ecb41,
+        type: 3}
+      propertyPath: breath
+      value: 
+      objectReference: {fileID: 8300000, guid: 726ddd1a3307ebb4c960482eaf90150d, type: 3}
     - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: deadScreen

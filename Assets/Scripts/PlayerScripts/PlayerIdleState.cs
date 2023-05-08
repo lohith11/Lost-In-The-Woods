@@ -10,6 +10,10 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
+        if(playerStateMachine.stamina < 20)
+        {
+            playerStateMachine.audioSource.PlayOneShot(playerStateMachine.breath);
+        }
         currentPosition = playerStateMachine.playerCamera.transform.localPosition.y;
         playerStateMachine.playerAnimation.CrossFade("Player_Idle", 0.1f);
     }
