@@ -5625,6 +5625,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: waypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -17825,6 +17830,11 @@ PrefabInstance:
       objectReference: {fileID: 877806021}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: alertEffectTimer
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: alertEffectSprite
       value: 
       objectReference: {fileID: 1097031419}
@@ -23223,6 +23233,11 @@ PrefabInstance:
       propertyPath: stoppingDistance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -31682,6 +31697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: waypoints.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -36720,52 +36740,52 @@ PrefabInstance:
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.247
+      value: 89.876
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.526
+      value: 1.112
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 49.473
+      value: 26.678
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.71910626
+      value: 0.74506885
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0002948745
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6949001
+      value: -0.6669876
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00030183446
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.048
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -88.039
+      value: -83.67
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016354, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
@@ -39868,6 +39888,11 @@ PrefabInstance:
       propertyPath: isWayPointPatrol
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: playerLayer.m_Bits
