@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     private void EndBattle(object sender , EventArgs e )
     {
         Debug.Log("Battle ended from game manager");
-        loadingScreen.SetActive(true);
+        endLevel?.Invoke();
     }
 
     #region PlayerData
