@@ -23,6 +23,7 @@ TagManager:
   - ChurchBackDoor
   - Brazier
   - SaveGame
+  - JumpScare
   layers:
   - Default
   - TransparentFX
