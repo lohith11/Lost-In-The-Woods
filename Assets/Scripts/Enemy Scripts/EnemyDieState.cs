@@ -7,7 +7,6 @@ public class EnemyDieState : EnemyBaseState
     public override void EnterState()
     {
         AlertEnemies();
-        //enemyStateManager.enemyAnimController.enabled = false;
         enemyStateManager.enemyAnimController.CrossFade("Death_Anim", 0.2f);
         enemyStateManager.enemyHealth.health = 0;
 
@@ -32,7 +31,6 @@ public class EnemyDieState : EnemyBaseState
             if (enemyManager != null)
             {
                 enemyManager.switchState(enemyManager.AlertState);
-                Debug.Log("Alert enemies");
             }
         }
     }
