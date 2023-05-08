@@ -167,7 +167,7 @@ public class EnemyStateManager : MonoBehaviour
         currentState.UpdateState();
         if (EnemyHealth.health <= 0)
         {
-            EnemyHealth.health = 0;
+            PlayerInRange = false;
             switchState(DieState);
         }
         if (PlayerInRange)
