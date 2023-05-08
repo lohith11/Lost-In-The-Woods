@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BlindBrute : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class BlindBrute : MonoBehaviour
     public GameObject attackPoint;
     public float EnemySpeed;
 
+    public Image healthFillBar;
     public float minDistanceToPlayer;
     [SerializeField] bool canAttack = true;
     [SerializeField] float attackCooldown;
@@ -72,6 +74,7 @@ public class BlindBrute : MonoBehaviour
 
     void Update()
     {
+        healthFillBar.fillAmount = health / 300;
         if(health <= 0)
         {
             health = 0;

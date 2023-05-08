@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!1001 &36623005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27814,6 +27815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!4 &1541036857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4255811633335080, guid: 3850e8506da960449b32ccdadb2677f4,
@@ -29814,6 +29816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!4 &1650107244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 36d2636b6965d754d8bbf1705661c796,
@@ -33100,6 +33103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!1001 &1810332587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40236,6 +40240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229698677dd8e424088e18443c243549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpScareAudios: {fileID: 0}
 --- !u!1001 &2126771285
 PrefabInstance:
   m_ObjectHideFlags: 0
