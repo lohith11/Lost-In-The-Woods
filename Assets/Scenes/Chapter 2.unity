@@ -5625,6 +5625,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: waypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -17825,6 +17830,11 @@ PrefabInstance:
       objectReference: {fileID: 877806021}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: alertEffectTimer
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: alertEffectSprite
       value: 
       objectReference: {fileID: 1097031419}
@@ -19415,10 +19425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a5c37d91cb554d85a6a413c3ae7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultChapter: 1
-  defaultRockCount: 0
-  defaultHealth: 100
-  defaultMaxHealth: 100
   loadingScreen: {fileID: 0}
   mainMenu: {fileID: 0}
   loadingSlider: {fileID: 0}
@@ -19431,6 +19437,7 @@ MonoBehaviour:
     curentPosition: {x: 0, y: 0, z: 0}
     currentHealth: 0
     maxHealth: 0
+  saveDataManager: {fileID: 0}
 --- !u!114 &1057367255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23226,6 +23233,11 @@ PrefabInstance:
       propertyPath: stoppingDistance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: waypoints.Array.size
@@ -31685,6 +31697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
       propertyPath: waypoints.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -36723,52 +36740,52 @@ PrefabInstance:
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.247
+      value: 89.876
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.526
+      value: 1.112
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 49.473
+      value: 26.678
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.71910626
+      value: 0.74506885
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0002948745
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6949001
+      value: -0.6669876
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00030183446
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.048
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -88.039
+      value: -83.67
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016353, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8055116204556016358, guid: 017d1145b22a58d4c9c51c575d9ecb41,
         type: 3}
@@ -39866,6 +39883,11 @@ PrefabInstance:
       propertyPath: isWayPointPatrol
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
+        type: 3}
+      propertyPath: alertEffectSprite
+      value: 
+      objectReference: {fileID: 1097031419}
     - target: {fileID: 723195361996603877, guid: c1cb0bebd0b424949aa5fbd0754b4803,
         type: 3}
       propertyPath: playerLayer.m_Bits
