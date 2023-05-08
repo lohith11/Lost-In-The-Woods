@@ -112,12 +112,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void LoadLevelButtons(int levelToLoad)
+    public void LoadLevelButtons()
     {
         mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
 
-        StartCoroutine(LoadLevelAsync(levelToLoad));
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextLevel = currentIndex + 1;
+        StartCoroutine(LoadLevelAsync(nextLevel));
     }
 
     private IEnumerator LoadLevelAsync(int levelToLoad)

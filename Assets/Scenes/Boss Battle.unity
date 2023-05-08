@@ -531,7 +531,19 @@ MonoBehaviour:
   endPoint: {fileID: 0}
   endLevel:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 483649947}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   playerData:
     currentChapter: 0
     currentRockCount: 0
@@ -1010,6 +1022,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 347837992760651801, guid: b24783e1e0d0ac14b92f31b22b9e2da5,
     type: 3}
   m_PrefabInstance: {fileID: 670340009}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &483649947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6566599945181865292, guid: df12da59f460d8e42b7bf789510915e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6566599944843152599}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &555316108 stripped
 MonoBehaviour:
