@@ -1,3 +1,5 @@
+using System;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +9,7 @@ using UnityEngine.UI;
 public class DeathUiScreenButton : MonoBehaviour
 {
     private PlayerHealth playerHealthRef;
+    public static event EventHandler respawnEvent;
     private void Start()
     {
         playerHealthRef = FindObjectOfType<PlayerHealth>();
@@ -23,7 +26,8 @@ public class DeathUiScreenButton : MonoBehaviour
     {
         if(playerHealthRef != null)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            respawnEvent?.Invoke(this, EventArgs.Empty);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

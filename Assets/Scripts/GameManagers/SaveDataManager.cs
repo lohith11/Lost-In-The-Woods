@@ -28,6 +28,7 @@ public class SaveDataManager : MonoBehaviour
     void Start()
     {
         PlayerStateMachine.saveGame += SaveData;
+        DeathUiScreenButton.respawnEvent += Respawn;
     }
 
     void Update()
@@ -46,6 +47,10 @@ public class SaveDataManager : MonoBehaviour
     {
         Debug.Log("Save game event recieved");
         SaveGame();
+    }
+    public void Respawn(object sender , EventArgs e)
+    {
+        LoadGame();
     }
     public void NewGame()
     {
@@ -78,6 +83,10 @@ public class SaveDataManager : MonoBehaviour
     public void LoadGame()
     {
         playerData = saveSystem.Load();
+        SceneManager.LoadScene(playerData.currentChapter);
+        PlayerStateMachine.playerCurrentPosition = playerData.curentPosition;
+        ThrowingRocks.totalThrows = playerData.currentRockCount;
+        PlayerHealth.Health = playerData.currentHealth;
     }
 
 }

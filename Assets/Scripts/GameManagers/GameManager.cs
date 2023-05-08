@@ -6,8 +6,6 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//TODO make the game restart from last checkpoint when the player dies
-//TODO start chapter mid checkpoint End chapter
 [RequireComponent(typeof(SaveSystem)), RequireComponent(typeof(AudioManager))]
 public class GameManager : MonoBehaviour
 {
@@ -31,29 +29,17 @@ public class GameManager : MonoBehaviour
         BlindBrute.endBossBattle += EndBattle;
         PlayerStateMachine.levelEnd += LoadNextLevel;
     }
-    void Update()
-    {
-        
-       
-    }
-
     private void EndBattle(object sender , EventArgs e )
     {
         Debug.Log("Battle ended from game manager");
         endLevel?.Invoke();
     }
 
-    #region PlayerData
     private void StartGame()
     {
         saveDataManager.StartGame();
     }
-    public void Respawn()
-    {
-        saveDataManager.LoadGame();
-    }
 
-    #endregion
 
     private void LoadNextLevel(object sender , EventArgs e)
     {

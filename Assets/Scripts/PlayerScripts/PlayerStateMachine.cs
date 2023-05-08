@@ -337,7 +337,7 @@ public class PlayerStateMachine : MonoBehaviour
         Step();
         currentState.UpdateState();
 
-        playerCurrentPosition = this.transform.position;
+        playerCurrentPosition = this.transform.localPosition;
     }
 
     private void FixedUpdate()
