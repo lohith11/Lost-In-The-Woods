@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         StartGame();
         BlindBrute.endBossBattle += EndBattle;
         PlayerStateMachine.levelEnd += LoadNextLevel;
+        PlayerStateMachine.saveGame += SaveData;
     }
     void Update()
     {
@@ -58,12 +59,19 @@ public class GameManager : MonoBehaviour
         {
             LoadGame();
         }
+       
     }
 
     private void EndBattle(object sender , EventArgs e )
     {
         Debug.Log("Battle ended from game manager");
         endLevel?.Invoke();
+    }
+
+    private void SaveData(object sender , EventArgs e)
+    {
+        Debug.Log("Save game event recieved");
+        SaveGame();
     }
 
     #region PlayerData
@@ -87,7 +95,7 @@ public class GameManager : MonoBehaviour
     }
     private void SaveGame()
     {
-
+        Debug.Log("Save game called");
         playerData.currentChapter = SceneManager.GetActiveScene().buildIndex;
         playerData.currentRockCount = ThrowingRocks.totalThrows;
         playerData.currentHealth = PlayerHealth.Health;

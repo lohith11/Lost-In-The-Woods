@@ -22,6 +22,7 @@ TagManager:
   - ChurchDoorClose
   - ChurchBackDoor
   - Brazier
+  - SaveGame
   layers:
   - Default
   - TransparentFX

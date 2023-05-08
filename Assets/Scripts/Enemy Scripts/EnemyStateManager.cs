@@ -173,7 +173,7 @@ public class EnemyStateManager : MonoBehaviour
         if (PlayerInRange)
         {
             transform.LookAt(transform.position, playerRef.transform.position);
-            
+            enemyAgent.stoppingDistance = 2f;
             angle = 346f;
         }
         else
