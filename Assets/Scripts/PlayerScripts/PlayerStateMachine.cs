@@ -25,6 +25,7 @@ public class PlayerStateMachine : MonoBehaviour
     public static Vector3 playerCurrentPosition;
     public static event EventHandler hidePlayer;
     public static event EventHandler levelEnd;
+    public static event EventHandler saveGame;
 
 
     #region Variables
@@ -119,6 +120,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool canPickHerb = false;
     public bool isBrazier;
     public bool inGrass;
+    public bool isSaveGame;
     public int keyPicked = 0;
     public float barrelIgniteTime;
     public int herbs;
@@ -294,6 +296,11 @@ public class PlayerStateMachine : MonoBehaviour
         BrazierOn();
     }
 
+    public void SaveGame(InputAction.CallbackContext context)
+    {
+        SavingGame();
+    }
+
     public void BarrelIgnite(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -410,9 +417,16 @@ public class PlayerStateMachine : MonoBehaviour
             brazier1 = other.gameObject;
         }
 
-        if(other.gameObject.CompareTag("ChapterEnd"))
+        if (other.gameObject.CompareTag("ChapterEnd"))
         {
             levelEnd?.Invoke(this, EventArgs.Empty);
+        }
+
+        if (other.gameObject.CompareTag("SaveGame"))
+        {
+            pickingThings.SetActive(true);
+            isSaveGame = true;
+            playerControls.Player.Picking.performed += SaveGame;
         }
     }
 
@@ -462,6 +476,12 @@ public class PlayerStateMachine : MonoBehaviour
             isBrazier = false;
             playerControls.Player.Picking.performed -= BrazierIgnite;
         }
+        if (other.gameObject.CompareTag("SaveGame"))
+        {
+            pickingThings.SetActive(false);
+            isSaveGame = false;
+            playerControls.Player.Picking.performed -= SaveGame;
+        }
     }
     #endregion
 
@@ -481,7 +501,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void BrazierOn()
     {
-        if(isBrazier)
+        if (isBrazier)
         {
             brazier1.GetComponent<Brazier>().TurnOn();
         }
@@ -518,6 +538,15 @@ public class PlayerStateMachine : MonoBehaviour
 
         BarrelSwitchingOn();//Access this in barrel script 
         Debug.Log("Couritien finished");
+    }
+
+    public void SavingGame()
+    {
+        if(isSaveGame)
+        {
+            Debug.Log("Is save game called");
+            saveGame?.Invoke(this, EventArgs.Empty);
+        }
     }
     #endregion
 
