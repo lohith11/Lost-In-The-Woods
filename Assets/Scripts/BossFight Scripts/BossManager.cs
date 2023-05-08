@@ -74,10 +74,12 @@ public class BossManager : MonoBehaviour
                 break;
         }
     }
-
+//0.833 0.66 0.5 
     private void EndBattle(object sender, EventArgs e)
     {
         Debug.Log("Battle ended!");
+        boss.bossAnimator.Play("Death_Anim");
+        boss.GetComponent<BlindBrute>().enabled = false;
     }
 
     private void StartNextStage()
@@ -104,6 +106,7 @@ public class BossManager : MonoBehaviour
 
     public void RamTowardsBrazier()
     {
+        boss.PlayerInRange = false;
         Debug.Log("Raming towards brazier");
         boss.agent.speed = ramSpeed;
         boss.agent.acceleration = ramAcceleration;
@@ -119,6 +122,8 @@ public class BossManager : MonoBehaviour
         {
             rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 70 });
         }
+
+        boss.PlayerInRange = true;
 
 
     }

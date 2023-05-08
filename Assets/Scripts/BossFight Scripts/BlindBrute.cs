@@ -17,7 +17,7 @@ public class BlindBrute : MonoBehaviour
     public Animator bossAnimator;
     public Transform[] teleportPoints;
     [SerializeField] float stoppingDistance;
-    [SerializeField] bool PlayerInRange;
+   public  bool PlayerInRange;
     public float radius;
     public LayerMask targetMask, obstructionMask;
     public float angle;
@@ -74,6 +74,7 @@ public class BlindBrute : MonoBehaviour
 
     void Update()
     {
+        
         Debug.Log("Health is : " + health + "Boss normalized health is : " + GetHealthNormalized());
         healthFillBar.fillAmount = health / 300;
         if (health <= 0)
@@ -159,6 +160,7 @@ public class BlindBrute : MonoBehaviour
 
     IEnumerator MoveAndReturn()
     {
+        PlayerInRange = false;
         Debug.Log("Move attack called");
         int targetPosition = UnityEngine.Random.Range(0, teleportPoints.Length);
         agent.SetDestination(teleportPoints[targetPosition].position);
@@ -173,6 +175,7 @@ public class BlindBrute : MonoBehaviour
         float startTime = Time.time;
         Vector3 randomPoint = player.transform.position + UnityEngine.Random.insideUnitSphere * tpRange;
         StartCoroutine(PounceCoroutine(startPosition, startTime, randomPoint));
+        PlayerInRange = true;
     }
 
     private void ChasePlayer()

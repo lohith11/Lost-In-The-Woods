@@ -232,6 +232,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2005752205}
     m_Modifications:
+    - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
+      propertyPath: explosionDelay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4802294825628324767, guid: b6ffb8f7ec202524791dfdab37a1ae8f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1123,7 +1127,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
       propertyPath: explosionDelay
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4802294825628324767, guid: b6ffb8f7ec202524791dfdab37a1ae8f,
         type: 3}
@@ -4115,7 +4119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
       propertyPath: explosionDelay
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4802294825628324767, guid: b6ffb8f7ec202524791dfdab37a1ae8f,
         type: 3}
@@ -4385,7 +4389,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
       propertyPath: explosionDelay
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 79352127, guid: b6ffb8f7ec202524791dfdab37a1ae8f, type: 3}
       propertyPath: explosionRange
@@ -4883,12 +4887,12 @@ PrefabInstance:
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: runningDetectionRadius
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
       propertyPath: walkingDetectionRadius
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5089932811517653473, guid: 395dd30fc561800458732c4cda7fd90a,
         type: 3}
