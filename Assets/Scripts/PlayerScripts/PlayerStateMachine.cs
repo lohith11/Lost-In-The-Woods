@@ -388,8 +388,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Grass") && crouchPressed)
         {
             Debug.Log("Entered");
-            inGrass = true;
-            GrassStay();
+            hidePlayer?.Invoke(this, EventArgs.Empty);
         }
 
         if (other.gameObject.CompareTag("Barrel"))
@@ -408,6 +407,14 @@ public class PlayerStateMachine : MonoBehaviour
             playerControls.Player.Picking.performed += BrazierIgnite;
             playerControls.Player.Picking.performed += BrazierIgnite;
             brazier1 = other.gameObject;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Grass") && crouchPressed)
+        {
+            hidePlayer?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -453,13 +460,6 @@ public class PlayerStateMachine : MonoBehaviour
     #endregion
 
     #region Interactables
-    public void GrassStay()
-    {
-        if (inGrass)
-        {
-            hidePlayer?.Invoke(this, EventArgs.Empty);
-        }
-    }
 
     public void KeyPickUp()
     {

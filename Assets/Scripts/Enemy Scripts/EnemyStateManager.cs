@@ -157,6 +157,8 @@ public class EnemyStateManager : MonoBehaviour
         detectionCollider.isTrigger = true;
 
         switchState(IdleState);
+
+
     }
 
     void Update()
@@ -179,6 +181,7 @@ public class EnemyStateManager : MonoBehaviour
             angle = 177f;
         }
 
+        Debug.Log("Player in range : " + PlayerInRange);
     }
 
     public void switchState(EnemyBaseState Enemy)
