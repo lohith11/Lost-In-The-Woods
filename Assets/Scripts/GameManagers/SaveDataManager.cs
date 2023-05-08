@@ -83,10 +83,10 @@ public class SaveDataManager : MonoBehaviour
     public void LoadGame()
     {
         playerData = saveSystem.Load();
-        SceneManager.LoadScene(playerData.currentChapter);
-        PlayerStateMachine.playerCurrentPosition = playerData.curentPosition;
-        ThrowingRocks.totalThrows = playerData.currentRockCount;
-        PlayerHealth.Health = playerData.currentHealth;
+        // SceneManager.LoadScene(playerData.currentChapter);
+        // PlayerStateMachine.playerCurrentPosition = playerData.curentPosition;
+        // ThrowingRocks.totalThrows = playerData.currentRockCount;
+        // PlayerHealth.Health = playerData.currentHealth;
     }
 
 }

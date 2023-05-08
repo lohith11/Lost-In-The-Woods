@@ -13,7 +13,8 @@ public class BossManager : MonoBehaviour
         EndBattle,
     }
 
-    private BlindBrute boss;
+    int numTurnedOn = 0;
+    public BlindBrute boss;
     [SerializeField] Brazier[] braziers;
     [SerializeField] float ramSpeed;
     [SerializeField] float ramAcceleration;
@@ -27,7 +28,7 @@ public class BossManager : MonoBehaviour
     void Start()
     {
         StartBattle();
-        boss = FindObjectOfType<BlindBrute>();
+        //boss = FindObjectOfType<BlindBrute>();
         Barrel.explosiveDamage += BossBattle_OnDamaged;
         BlindBrute.endBossBattle += EndBattle;
         StartNextStage();
@@ -35,9 +36,9 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Brazier.lightUpBrazierCount >= 4)
         {
-            RamTowardsBrazier();
+            boss.gameObject.SetActive(true);
         }
     }
 

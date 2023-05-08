@@ -43,10 +43,4 @@ public class Barrel : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
-    // private void OnCollisionEnter(Collision other)
-    // {
-    //     if (other.gameObject.CompareTag("Rock"))
-    //         Explode();
-    // }
 }
