@@ -24,6 +24,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     public static Vector3 playerCurrentPosition;
     public static event EventHandler hidePlayer;
+    public static event EventHandler levelEnd;
 
 
     #region Variables
@@ -407,6 +408,11 @@ public class PlayerStateMachine : MonoBehaviour
             playerControls.Player.Picking.performed += BrazierIgnite;
             playerControls.Player.Picking.performed += BrazierIgnite;
             brazier1 = other.gameObject;
+        }
+
+        if(other.gameObject.CompareTag("ChapterEnd"))
+        {
+            levelEnd?.Invoke(this, EventArgs.Empty);
         }
     }
 

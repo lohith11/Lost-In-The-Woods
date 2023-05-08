@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     [Space(5)]
 
-    [SerializeField] BoxCollider endPoint;
     public UnityEvent endLevel;
     public PlayerData playerData;
     private SaveSystem saveSystem;
@@ -47,6 +46,7 @@ public class GameManager : MonoBehaviour
        // loadingScreen.SetActive(false);
         StartGame();
         BlindBrute.endBossBattle += EndBattle;
+        PlayerStateMachine.levelEnd += LoadNextLevel;
     }
     void Update()
     {
@@ -103,12 +103,9 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    private void OnTriggerEnter(Collider other)
+    private void LoadNextLevel(object sender , EventArgs e)
     {
-        if(other.gameObject.CompareTag("Player"))
-        {
-            endLevel?.Invoke();
-        }
+        LoadLevelButtons(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 
