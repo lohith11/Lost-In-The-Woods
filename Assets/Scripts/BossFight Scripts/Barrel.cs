@@ -17,13 +17,10 @@ public class Barrel : MonoBehaviour
     }
     private void Update()
     {
-        #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("R pressed");
-            Explode();
+            explosiveDamage.Invoke(this, new dealDamageEventArg { damage = 50 });
         }
-        #endif
     }
 
     public void Explode() => StartCoroutine(Explosion());
