@@ -75,12 +75,13 @@ public class BlindBrute : MonoBehaviour
     void Update()
     {
         
-        Debug.Log("Health is : " + health + "Boss normalized health is : " + GetHealthNormalized());
+        //Debug.Log("Health is : " + health + "Boss normalized health is : " + GetHealthNormalized());
         healthFillBar.fillAmount = health / 300;
         if (health <= 0)
         {
             health = 0;
             endBossBattle?.Invoke(this, EventArgs.Empty);
+            this.gameObject.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.G))
         {

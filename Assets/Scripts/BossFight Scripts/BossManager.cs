@@ -31,6 +31,7 @@ public class BossManager : MonoBehaviour
         //boss = FindObjectOfType<BlindBrute>();
         Barrel.explosiveDamage += BossBattle_OnDamaged;
         BlindBrute.endBossBattle += EndBattle;
+        rammingDamage += BossBattle_OnDamaged;
         StartNextStage();
     }
 
@@ -40,6 +41,7 @@ public class BossManager : MonoBehaviour
         {
             boss.gameObject.SetActive(true);
         }
+        Debug.Log("cuurent stage : " + stage);
     }
 
     private void StartBattle()
@@ -77,8 +79,8 @@ public class BossManager : MonoBehaviour
 //0.833 0.66 0.5 
     private void EndBattle(object sender, EventArgs e)
     {
-        Debug.Log("Battle ended!");
         boss.bossAnimator.Play("Death_Anim");
+        boss.gameObject.SetActive(false);
         boss.GetComponent<BlindBrute>().enabled = false;
     }
 
@@ -98,7 +100,6 @@ public class BossManager : MonoBehaviour
                 RamTowardsBrazier();
                 break;
             case Stage.Stage_3:
-                Debug.Log("Stage 3 entered");
                 boss.AOEAttack();
                 break;
         }
@@ -114,14 +115,14 @@ public class BossManager : MonoBehaviour
         int targetBrazier = UnityEngine.Random.Range(1, braziers.Length - 1);
         boss.agent.SetDestination(braziers[targetBrazier].transform.position);
         braziers[targetBrazier].TurnOff();
-        if (boss.isOiled)
-        {
-            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 40 });
-        }
-        else
-        {
-            rammingDamage?.Invoke(this, new dealDamageEventArg { damage = 30 });
-        }
+        // if (boss.isOiled)
+        // {
+        //     boss.health -= 40;
+        // }
+        // else
+        // {
+        //     boss.health -= 30;
+        // }
 
         boss.PlayerInRange = true;
 

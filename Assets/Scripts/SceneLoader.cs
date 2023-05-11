@@ -7,9 +7,11 @@ using System;
 
 public class SceneLoader : MonoBehaviour
 {
-    public UnityEvent endLevel; 
+    public UnityEvent endLevel;
+    [SerializeField] BoxCollider endtrigger;
     private void Start()
     {
+        endtrigger = GetComponent<BoxCollider>();
         BlindBrute.endBossBattle += EndBattle;
     }
     [SerializeField] private GameObject loadingScreen;
@@ -22,10 +24,14 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("Battle ended from game manager");
         endLevel?.Invoke();
     }
-    public void LoadLevelButtons(int levelToLoad)
+    public void LoadLevelButtons()
     {
-        mainMenu.SetActive(false);
-        loadingScreen.SetActive(true);
+        int levelToLoad = SceneManager.GetActiveScene().buildIndex + 1;
+        if (mainMenu != null || loadingScreen != null)
+        {
+            mainMenu.SetActive(false);
+            loadingScreen.SetActive(true);
+        }
 
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
@@ -39,6 +45,14 @@ public class SceneLoader : MonoBehaviour
             float progressValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
             loadingSlider.value = progressValue;
             yield return null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            endLevel?.Invoke();
         }
     }
 }

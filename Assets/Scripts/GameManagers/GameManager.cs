@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(SaveSystem)), RequireComponent(typeof(AudioManager))]
+[RequireComponent(typeof(AudioManager))]
 public class GameManager : MonoBehaviour
 {
     [Header("Loading Screen")]
@@ -17,10 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider loadingSlider;
 
     [Space(5)]
-
-    public UnityEvent endLevel;
     public PlayerData playerData;
     public SaveDataManager saveDataManager;
+    public SceneLoader sceneLoader;
 
     private void Start()
     {
@@ -31,8 +30,7 @@ public class GameManager : MonoBehaviour
     }
     private void EndBattle(object sender , EventArgs e )
     {
-        Debug.Log("Battle ended from game manager");
-        endLevel?.Invoke();
+        sceneLoader.endLevel?.Invoke();
     }
 
     private void StartGame()
